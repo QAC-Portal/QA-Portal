@@ -16,6 +16,8 @@ import { SubmitConfirmDialogComponent } from './view-cv/submit-confirm-dialog/su
 import { ViewCvService } from './view-cv/services/view-cv.service';
 import { ViewCvStateManagerService } from './view-cv/services/view-cv-state-manager.service';
 import { ViewCvPageDataService } from './view-cv/services/view-cv-page-data.service';
+import { WorkExperienceComponent } from './controls/work-experience/work-experience.component';
+import { QualificationsComponent } from './controls/qualifications/qualifications.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ViewCvPageDataService } from './view-cv/services/view-cv-page-data.serv
     CvSearchComponent,
     CvCardBaseComponent,
     SubmitConfirmDialogComponent,
-    CvCardBaseComponent
+    CvCardBaseComponent,
+    WorkExperienceComponent,
+    QualificationsComponent
   ],
   imports: [
     QaCommonModule,

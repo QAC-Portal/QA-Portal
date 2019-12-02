@@ -1,51 +1,87 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {DEFAULT_CV, ICvModel} from '../_common/models/qac-cv-db.model';
-import {ViewCvService} from './services/view-cv.service';
-import {CvCardBaseComponent} from '../cv-card-base/cv-card-base.component';
-import {IFeedback} from '../_common/models/feedback.model';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {MAT_DATE_LOCALE, MatDialog} from '@angular/material';
-import {SubmitConfirmDialogComponent} from './submit-confirm-dialog/submit-confirm-dialog.component';
-import {QaErrorHandlerService} from '../../../../portal-core/src/app/_common/services/qa-error-handler.service';
-import {UserSkillsModel} from '../_common/models/user-skills.model';
-import {TRAINING_ADMIN_ROLE} from '../../../../portal-core/src/app/_common/models/portal-constants';
-import {ADMIN_CV_SEARCH_URL} from '../_common/models/cv.constants';
+import { Component, OnInit, Output } from '@angular/core';
+import { DEFAULT_CV, ICvModel } from '../_common/models/qac-cv-db.model';
+import { ViewCvService } from './services/view-cv.service';
+import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
+import { IFeedback } from '../_common/models/feedback.model';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { MAT_DATE_LOCALE, MatDialog, MatChipInputEvent } from '@angular/material';
+import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
+import { QaErrorHandlerService } from '../../../../portal-core/src/app/_common/services/qa-error-handler.service';
+import { UserSkillsModel } from '../_common/models/user-skills.model';
+import { TRAINING_ADMIN_ROLE } from '../../../../portal-core/src/app/_common/models/portal-constants';
+import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 import {
   ViewCvStateManagerService
 } from './services/view-cv-state-manager.service';
-import {ViewCvPageDataService} from './services/view-cv-page-data.service';
-import {Observable} from 'rxjs';
-import {APPROVED_STATUS, FAILED_REVIEW_STATUS, FOR_REVIEW_STATUS, IN_PROGRESS_STATUS} from './models/view-cv.constants';
+import { ViewCvPageDataService } from './services/view-cv-page-data.service';
+import { Observable } from 'rxjs';
+import { APPROVED_STATUS, FAILED_REVIEW_STATUS, FOR_REVIEW_STATUS, IN_PROGRESS_STATUS } from './models/view-cv.constants';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ENTER } from '@angular/cdk/keycodes';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-view-cv',
   templateUrl: './view-cv.component.html',
   styleUrls: ['./view-cv.component.scss'],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ]
 })
 export class ViewCvComponent implements OnInit {
 
+  // Component state
+  useExistingCvAsTemplate = true;
+  isTraineeView = true;
+  loadingData = true;
   @Output() public canComment = false;
-
   @Output() public canEdit = true;
 
-  useExistingCvAsTemplate = true;
-
-  isTraineeView = true;
-
-  loadingData = true;
-
-  qualificationFeedbackIndex: number;
-
-  workExperienceFeedbackIndex: number;
-
+  // CV data
   public cvData: ICvModel;
+  public cvForm: FormGroup;
 
-  public workExperienceFeedback = [];
-
+  // Feedback data
+  qualificationFeedbackIndex: number;
+  workExperienceFeedbackIndex: number;
+  otherWorkExperienceFeedbackIndex: number;
   public qualificationFeedback = [];
+  public workExperienceFeedback = [];
+  public otherWorkExperienceFeedback = [];
+
+  // Misc.
+  readonly separatorKeysCodes: number[] = [ENTER];
+  public skillCategories = [
+    {
+      label: 'Programming Languages',
+      key: 'programmingLanguages'
+    },
+    {
+      label: 'IDEs',
+      key: 'ides'
+    },
+    {
+      label: 'Operating Systems',
+      key: 'operatingSystems'
+    },
+    {
+      label: 'Devops',
+      key: 'devops'
+    },
+    {
+      label: 'Databases',
+      key: 'databases'
+    },
+    {
+      label: 'Cloud Platforms',
+      key: 'platforms'
+    },
+    {
+      label: 'Other',
+      key: 'other'
+    },
+  ];
+
 
   constructor(
     private cvService: ViewCvService,
@@ -54,7 +90,28 @@ export class ViewCvComponent implements OnInit {
     private errorHandlerService: QaErrorHandlerService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog) {
+    public dialog: MatDialog
+  ) {
+    const fb = new FormBuilder();
+    this.cvForm = fb.group({
+      firstName: ['', Validators.required],
+      surname: ['', Validators.required],
+      profile: fb.group({ profileDetails: ['', [Validators.required, Validators.maxLength(1800)]] }),
+      skills: fb.group({
+        programmingLanguages: [[]],
+        ides: [[]],
+        operatingSystems: [[]],
+        devops: [[]],
+        databases: [[]],
+        platforms: [[]],
+        other: [[]]
+      }),
+      hobbies: fb.group({ hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]] }),
+      allQualifications: [[]],
+      allWorkExperience: [[]],
+      otherWorkExperience: [[]],
+      sourceControlLink: ['']
+    });
   }
 
   ngOnInit() {
@@ -64,6 +121,17 @@ export class ViewCvComponent implements OnInit {
     } else {
       this.initialiseCvPageForAdmin();
     }
+
+    this.cvForm.valueChanges.subscribe(v => {
+      this.cvData = _.merge(
+        this.cvData,
+        {
+          ...v,
+          allSkills: [v.skills]
+        }
+      );
+      console.log(this.cvData);
+    });
   }
 
   openDialog(): void {
@@ -110,9 +178,17 @@ export class ViewCvComponent implements OnInit {
     this.cvUpdatedByAdmin(FAILED_REVIEW_STATUS);
   }
 
-  onWorkExperienceFeedbackClick({index}: { index: number }, expCard: CvCardBaseComponent): void {
+
+  // Feedback drawer handlers
+  onWorkExperienceFeedbackClick({ index }: { index: number }, expCard: CvCardBaseComponent): void {
     this.workExperienceFeedbackIndex = index;
     this.workExperienceFeedback = this.cvData.allWorkExperience[index].workExperienceFeedback;
+    expCard.drawer.open();
+  }
+
+  onOtherWorkExperienceFeedbackClick({ index }: { index: number }, expCard: CvCardBaseComponent): void {
+    this.workExperienceFeedbackIndex = index;
+    this.otherWorkExperienceFeedback = this.cvData.otherWorkExperience[index].workExperienceFeedback;
     expCard.drawer.open();
   }
 
@@ -120,7 +196,11 @@ export class ViewCvComponent implements OnInit {
     this.cvData.allWorkExperience[this.workExperienceFeedbackIndex].workExperienceFeedback = feedback;
   }
 
-  onQualificationFeedbackClick({index}: { index: number }, qualCard: CvCardBaseComponent): void {
+  onOtherWorkExperienceFeedbackChange(feedback: IFeedback[]): void {
+    this.cvData.otherWorkExperience[this.otherWorkExperienceFeedbackIndex].workExperienceFeedback = feedback;
+  }
+
+  onQualificationFeedbackClick({ index }: { index: number }, qualCard: CvCardBaseComponent): void {
     this.qualificationFeedbackIndex = index;
     this.qualificationFeedback = this.cvData.allQualifications[index].qualificationFeedback;
     qualCard.drawer.open();
@@ -137,7 +217,8 @@ export class ViewCvComponent implements OnInit {
   private initialiseCvPageForTrainee() {
     this.cvService.getCurrentCvForTrainee().subscribe(
       (cv) => {
-        this.cvData = {...DEFAULT_CV, ...cv};    // use spread operator to merge blank default Cv with returned CV
+        this.cvData = { ...DEFAULT_CV, ...cv };    // use spread operator to merge blank default Cv with returned CV
+        this.cvForm.patchValue({ ...this.cvData, skills: this.cvData.allSkills[0] });
         if (this.noExistingCvForTrainee(cv)) {
           this.initialiseBlankCvForTrainee();
         } else {
@@ -167,6 +248,7 @@ export class ViewCvComponent implements OnInit {
         this.cvService.getCvForId(paramMap.get('id')).subscribe(
           (response) => {
             this.cvData = response;
+            this.cvForm.patchValue({ ...this.cvData, skills: this.cvData.allSkills[0] });
             this.refreshPageStatus();
           },
           (error) => {
@@ -238,6 +320,11 @@ export class ViewCvComponent implements OnInit {
 
   private setPageEditStatus(): void {
     this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
+    if(this.canEdit) {
+      this.cvForm.enable();
+    } else {
+      this.cvForm.disable();
+    }
   }
 
   private setCommentStatus() {
@@ -245,4 +332,24 @@ export class ViewCvComponent implements OnInit {
       this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
     }
   }
+
+
+
+
+  public removeSkill(category, value): void {
+    this.cvForm.patchValue({
+      skills: { [category]: this.cvForm.value.skills[category].filter(v => v !== value) }
+    });
+  }
+
+  public addSkill(category, { value, input }: MatChipInputEvent): void {
+    if (value) {
+      this.cvForm.patchValue({
+        skills: { [category]: [...this.cvForm.value.skills[category] || [], value] }
+      });
+    }
+    input.value = '';
+  }
+
+
 }

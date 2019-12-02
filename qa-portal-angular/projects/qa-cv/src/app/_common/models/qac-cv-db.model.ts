@@ -18,6 +18,7 @@ export interface ICvModel {
     allSkills: ISkills[];
     allQualifications: IQualification[];
     allWorkExperience: IWorkExperience[];
+    otherWorkExperience: IWorkExperience[];
     hobbies: IHobbies;
 }
 

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {ICvModel} from '../../_common/models/qac-cv-db.model';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ICvModel } from '../../_common/models/qac-cv-db.model';
 import {
   APPLICATION_PDF_CONTENT_TYPE, GENERATE_CV_URL,
   GET_CURRENT_CV_URL,
@@ -9,13 +9,14 @@ import {
   GET_SKILLS_FOR_TRAINEE_URL,
   SAVE_CV_DATA_URL
 } from '../../_common/models/cv.constants';
-import {take} from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Injectable()
 export class ViewCvService {
 
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient) {
@@ -45,7 +46,7 @@ export class ViewCvService {
       responseType: 'arraybuffer' as 'json'
     };
     return this.http.post<any>(GENERATE_CV_URL, cv, httpOptions).subscribe((response) => {
-      const file = new Blob([response], {type: APPLICATION_PDF_CONTENT_TYPE});
+      const file = new Blob([response], { type: APPLICATION_PDF_CONTENT_TYPE });
       const fileURL = URL.createObjectURL(file);
       window.open(fileURL, '_blank');
     });

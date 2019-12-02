@@ -11,19 +11,19 @@ export class TechnologyService {
   constructor(private qaHttp: QaHttpService) { }
 
   public getAllCategories(): Observable<TechnologyCategoryModel[]> {
-    return this.qaHttp.get({ref: 'GET_ALL_TECHNOLOGY_CATEGORIES'});
+    return this.qaHttp.get({ ref: 'GET_ALL_TECHNOLOGY_CATEGORIES' });
   }
 
   public getCategoryById(id: string | number): Observable<TechnologyCategoryModel> {
-    return this.qaHttp.get({ref: 'GET_ALL_TECHNOLOGY_CATEGORY_BY_ID', params: {id: id.toString()}});
+    return this.qaHttp.get({ ref: 'GET_ALL_TECHNOLOGY_CATEGORY_BY_ID', params: { id: id.toString() } });
   }
 
   public saveCategory(category: TechnologyCategoryModel): Observable<TechnologyCategoryModel> {
-    return this.qaHttp.put({ref: 'SAVE_TECHNOLOGY_CATEGORY'}, category);
+    return this.qaHttp.put({ ref: 'SAVE_TECHNOLOGY_CATEGORY' }, category);
   }
 
   public addCategory(category: TechnologyCategoryModel): Observable<TechnologyCategoryModel> {
-    return this.qaHttp.post({ref: 'CREATE_TECHNOLOGY_CATEGORY'}, category);
+    return this.qaHttp.post({ ref: 'CREATE_TECHNOLOGY_CATEGORY' }, category);
   }
 
 }

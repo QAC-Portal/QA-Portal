@@ -198,7 +198,7 @@ public class CvPdfGeneratorImpl implements CvPdfGenerator {
         bodyTitle(paragraph, SECTION_HEADER_PROFILE, kranaFatB);
         paragraph.setLineSpacing(1.5f);
         paragraph.addMarkup(
-                "{color:" + ColourScheme.QA_GREY.value +"}" + cvVersion.getProfile().getProfileDetails() + "\n\n\n",
+                "{color:" + ColourScheme.QA_GREY.value +"}" + cvVersion.getProfile().getProfileDetails() + "\n\n",
                 FontSize.BODY_CONTENT.value, montserrat, montserratBold, montserrat, montserrat);
         // Work Experience - QA
         bodyTitle(paragraph, SECTION_HEADER_WORK_EXPERIENCE, kranaFatB);
