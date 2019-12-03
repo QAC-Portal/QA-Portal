@@ -18,8 +18,10 @@ export interface Endpoints {
   GET_FEEDBACK_HISTORY_FOR_TRAINER_URL: string;
   GET_FEEDBACK_FOR_COURSE_URL: string;
   GET_FEEDBACK_FOR_ID_URL: string;
+  PORTAL_APPLICATIONS_API: string;
   GET_COHORT_BY_ID: string;
   GET_ALL_COURSES: string;
+  GET_COURSE_HISTORY: string;
   GET_TRAINERS_AVAILABLE_FOR_COHORT: string;
   SAVE_COHORT: string;
   GET_COURSE_BY_ID: string;
@@ -51,6 +53,13 @@ export interface Endpoints {
   SAVE_ROLE: string;
   CREATE_ROLE: string;
   GET_AVAILABLE_TRAINEES_BY_COHORT_ID: string;
+  GET_ALL_USERS_URL: string;
+  DELETE_USERS_URL : string;
+  UPDATE_USERS_URL : string;
+  CREATE_USER_URL: string;
+  UPDATE_USER_URL: string;
+  GET_COHORTS_URL: string;
+  GET_USER_BY_USERNAME_URL:string;
 }
 
 export const endpoints: Endpoints = {
@@ -70,8 +79,10 @@ export const endpoints: Endpoints = {
   GET_FEEDBACK_HISTORY_FOR_TRAINER_URL : 'feedback-api/feedback/trainer',
   GET_FEEDBACK_FOR_COURSE_URL : 'feedback-api/feedback/course/',
   GET_FEEDBACK_FOR_ID_URL : 'feedback-api/feedback/',
+  GET_COURSE_HISTORY: '/feedback-api/evaluation/trainer',
   GET_COHORT_BY_ID: 'cohort-api/cohort/:id',
   GET_ALL_COURSES: 'cohort-api/courses',
+  PORTAL_APPLICATIONS_API: 'portal-application-api/portal/applications',
   GET_TRAINERS_AVAILABLE_FOR_COHORT: 'cohort-api/manage/users/trainers',
   SAVE_COHORT: 'cohort-api/manage/cohort',
   GET_COURSE_BY_ID: '/cohort-api/course/:id',
@@ -102,7 +113,14 @@ export const endpoints: Endpoints = {
   GET_ROLE_BY_ID: '/portal-application-api/role/:id',
   SAVE_ROLE: '/portal-application-api/manage/role',
   CREATE_ROLE: '/portal-application-api/manage/role',
-  GET_AVAILABLE_TRAINEES_BY_COHORT_ID: '/cohort-api/manage/users/available-trainees/cohort/:id'
+  GET_AVAILABLE_TRAINEES_BY_COHORT_ID: '/cohort-api/manage/users/available-trainees/cohort/:id',
+  GET_ALL_USERS_URL : 'cohort-api/manage/users',
+  DELETE_USERS_URL : 'cohort-api/manage/users/delete',
+  UPDATE_USERS_URL : 'cohort-api/manage/users',
+  CREATE_USER_URL : 'cohort-api/manage/user',
+  UPDATE_USER_URL : 'cohort-api/manage/user',
+  GET_COHORTS_URL : 'cohort-api/cohorts',
+  GET_USER_BY_USERNAME_URL: 'cohort-api/manage/user/:username'
 };
 
 export type EndpointRef = keyof Endpoints;

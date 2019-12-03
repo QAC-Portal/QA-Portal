@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { PortalApplicationProjectsModel } from '../models/portal-application-projects.model';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { QaHttpService } from './qa-http.service';
 
 /**
  * ApplicationService provides top-level application services.
@@ -19,7 +20,7 @@ export class ApplicationService {
   public currentApplication$ = new BehaviorSubject<PortalApplicationProjectsModel>(null);
 
   constructor(
-    private httpClient: HttpClient,
+    private qaHttp: QaHttpService,
     private router: Router) { }
 
   /**
@@ -45,6 +46,6 @@ export class ApplicationService {
 
   /** Fetches all available portal applications for the current user. */
   private getAllPortalApplications(): Observable<PortalApplicationProjectsModel[]> {
-    return this.httpClient.get<PortalApplicationProjectsModel[]>(PORTAL_APPLICATIONS_API);
+    return this.qaHttp.get<PortalApplicationProjectsModel[]>({ ref: 'PORTAL_APPLICATIONS_API'});
   }
 }
