@@ -95,7 +95,23 @@ public class CvManagementService {
     }
 
     // CV Search operations
-    public List<CvVersion>  cvSearch(CvSearchCriteria criteria){
-        return this.cvSearchOperation.findByCriteria(criteria);
+    public List<CvVersion>  cvSearch(String cohort, String status, String tech, String name){
+    	
+    	CvSearchCriteria c = new CvSearchCriteria("","","","");
+        // decode the query string
+        if (cohort != null && !cohort.isEmpty()) {
+            c.setCohort(cohort);
+        }
+        if (status != null && !status.isEmpty()) {
+            c.setCvStatus(status);
+        }
+        if (tech != null && !tech.isEmpty()) {
+            c.setTechnology(tech);
+        }
+        if (name != null && !name.isEmpty()) {
+            c.setFullName(name);
+        }
+    	
+        return this.cvSearchOperation.findByCriteria(c);
     }
 }
