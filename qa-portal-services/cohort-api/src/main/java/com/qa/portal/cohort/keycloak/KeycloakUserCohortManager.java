@@ -91,7 +91,6 @@ public class KeycloakUserCohortManager {
     }
 
     private RoleRepresentation getCohortRole(String cohortName) {
-    	System.out.println(cohortName);
         return keycloakAdminClient.getRealm().roles().list().stream()
                 .filter(r -> r.getName().equals(getCohortRoleName(cohortName)))
                 .findFirst()
