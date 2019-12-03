@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 import { Observable } from 'rxjs';
 import {
   CREATE_EVALUATION_FORM_URL,
@@ -12,17 +12,17 @@ import {IFormService} from './iform.service';
 @Injectable()
 export class EvaluationService implements IFormService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private qaHttp: QaHttpService) { }
 
   public getForm(cohortCourseId: string): Observable<IFormModel> {
-    return this.httpClient.get<IFormModel>(GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL + cohortCourseId);
+    return this.qaHttp.get<IFormModel>({ ref: 'GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL'} + cohortCourseId);
   }
 
   public createForm(formModel: IFormModel): Observable<IFormModel> {
-    return this.httpClient.post<IFormModel>(CREATE_EVALUATION_FORM_URL, formModel);
+    return this.qaHttp.post<IFormModel>({ ref: 'CREATE_EVALUATION_FORM_URL'}, formModel);
   }
 
   public updateForm(formModel: IFormModel): Observable<IFormModel> {
-    return this.httpClient.put<IFormModel>(UPDATE_EVALUATION_FORM_URL, formModel);
+    return this.qaHttp.put<IFormModel>({ ref: 'UPDATE_EVALUATION_FORM_URL'}, formModel);
   }
 }

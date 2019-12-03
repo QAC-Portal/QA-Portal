@@ -1,5 +1,23 @@
+import { FORM_TYPE_PLACEHOLDER } from '../app/_common/models/portal-constants';
+
 
 export interface Endpoints {
+  GET_FORM_TYPE: string;
+  SEND_EVAL_RESPONSE: string;
+  GET_TRAINER_EVALUATION_SUMMARY: string;
+  GET_COHORT_COURSES_FOR_TRAINER :string;
+  GET_TRAINEE_EVALUATION_SUMMARY_URL: string;
+  GET_EVALUATION_FORMS_FOR_TRAINEE_URL: string;
+  GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL: string;
+  GET_EVALUATION_FORM_FOR_ID_URL: string;
+  GET_EVALUATION_FORMS_FOR_COHORT_COURSE_URL: string;
+  CREATE_EVALUATION_FORM_URL: string;
+  UPDATE_EVALUATION_FORM_URL: string;
+  CREATE_FEEDBACK_FORM_URL: string;
+  UPDATE_FEEDBACK_FORM_URL: string;
+  GET_FEEDBACK_HISTORY_FOR_TRAINER_URL: string;
+  GET_FEEDBACK_FOR_COURSE_URL: string;
+  GET_FEEDBACK_FOR_ID_URL: string;
   GET_COHORT_BY_ID: string;
   GET_ALL_COURSES: string;
   GET_TRAINERS_AVAILABLE_FOR_COHORT: string;
@@ -36,6 +54,22 @@ export interface Endpoints {
 }
 
 export const endpoints: Endpoints = {
+  GET_FORM_TYPE: 'form-api/form/' + FORM_TYPE_PLACEHOLDER + '/categories',
+  SEND_EVAL_RESPONSE: 'feedback-api/feedback',
+  GET_TRAINER_EVALUATION_SUMMARY: 'feedback-api/evaluation/course/',
+  GET_COHORT_COURSES_FOR_TRAINER : '/feedback-api/evaluation/trainer',
+  GET_TRAINEE_EVALUATION_SUMMARY_URL : 'feedback-api/evaluation/trainee/summary',
+  GET_EVALUATION_FORMS_FOR_TRAINEE_URL : 'feedback-api/evaluation/trainee',
+  GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL : 'feedback-api/evaluation/trainee/course/',
+  GET_EVALUATION_FORM_FOR_ID_URL : 'feedback-api/evaluation/',
+  GET_EVALUATION_FORMS_FOR_COHORT_COURSE_URL : 'feedback-api/evaluation/course/',
+  CREATE_EVALUATION_FORM_URL : 'feedback-api/evaluation',
+  UPDATE_EVALUATION_FORM_URL : 'feedback-api/evaluation',
+  CREATE_FEEDBACK_FORM_URL : 'feedback-api/feedback',
+  UPDATE_FEEDBACK_FORM_URL : 'feedback-api/feedback',
+  GET_FEEDBACK_HISTORY_FOR_TRAINER_URL : 'feedback-api/feedback/trainer',
+  GET_FEEDBACK_FOR_COURSE_URL : 'feedback-api/feedback/course/',
+  GET_FEEDBACK_FOR_ID_URL : 'feedback-api/feedback/',
   GET_COHORT_BY_ID: 'cohort-api/cohort/:id',
   GET_ALL_COURSES: 'cohort-api/courses',
   GET_TRAINERS_AVAILABLE_FOR_COHORT: 'cohort-api/manage/users/trainers',

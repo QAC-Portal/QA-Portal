@@ -1,10 +1,12 @@
+//File to bo removed
+
 // TODO  - TO BE REMOVED
 import {FORM_TYPE_PLACEHOLDER} from '../../../../../portal-core/src/app/_common/models/portal-constants';
 
 export const GET_FORM_TYPE = 'form-api/form/' + FORM_TYPE_PLACEHOLDER + '/categories';
 
 export const SEND_EVAL_RESPONSE = 'feedback-api/feedback';
-// TODO - END OF TO BE REMOVED
+
 
 // EVALUATION FORM URLS
 
@@ -47,3 +49,5 @@ export const GET_FEEDBACK_FOR_COURSE_URL = 'feedback-api/feedback/course/';
 
 // Add the Cohort Course Feedback Id to the end of the url
 export const GET_FEEDBACK_FOR_ID_URL = 'feedback-api/feedback/';
+
+// TODO - END OF TO BE REMOVED
