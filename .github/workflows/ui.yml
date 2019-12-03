@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         working-directory: ./qa-portal-angular
         run: npm install
+      - name: Test Common Project
+        working-directory: ./qa-portal-angular
+        run: npm run test -- --project qa-common
       - name: Build
         working-directory: ./qa-portal-angular
         run: npm run build -- --prod
