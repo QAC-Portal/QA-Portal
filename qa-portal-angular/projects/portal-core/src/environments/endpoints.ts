@@ -86,6 +86,7 @@ export interface Endpoints {
   GET_SELF_REFLECTION_API: string;
   GET_SELF_REFLECTIONS_BY_STATUS_API: string;
   GET_TRAINEE_URL: string;
+  GET_ALL_FEEDBACK_API: string;
 }
 
 export const endpoints: Endpoints = {
@@ -109,6 +110,8 @@ export const endpoints: Endpoints = {
   GET_USER_API_TRAINEES_FOR_REVIEW: 'self-reflection-api/reflection/cohort/trainees/review/:cohortId',
   GET_SELF_REFLECTION_SUMMARY: '/self-reflection-api/reflection/summary',
   
+
+
 
   USER_API : 'cohort-api/user',
   USER_API_TRAINEES :'cohort-api/cohort/trainees/',
@@ -141,14 +144,9 @@ export const endpoints: Endpoints = {
   GET_ALL_TECHNOLOGY_CATEGORY_BY_ID: 'cohort-api/technology/category/:id',
   GET_ALL_LOCATIONS: '/cohort-api/locations',
   GET_LOCATION_BY_ID: '/cohort-api/location/:id',
-
-
   
- 
+  GET_ALL_FEEDBACK_API : 'course-feedback-api/question-feedback',
   
-  
-
-
   GET_CV_FOR_ID_URL: 'cv-api/cv/:id',
   GET_CURRENT_CV_URL: 'cv-api/cv/trainee/current',
   GENERATE_CV_URL : 'cv-api/cv/generated',
