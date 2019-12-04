@@ -60,12 +60,22 @@ export interface Endpoints {
   UPDATE_USER_URL: string;
   GET_COHORTS_URL: string;
   GET_USER_BY_USERNAME_URL:string;
+  GET_CV_FOR_ID_URL: string;
+  GET_SKILLS_FOR_TRAINEE_URL: string;
+  GET_CURRENT_CV_URL: string;
+  GENERATE_CV_URL: string;
+  SAVE_CV_DATA_URL: string;
 }
 
 export const endpoints: Endpoints = {
+  GET_CV_FOR_ID_URL: 'cv-api/cv/:id',
+  GET_SKILLS_FOR_TRAINEE_URL: 'cohort-api/user/trainee/skills',
+  GET_CURRENT_CV_URL: 'cv-api/cv/trainee/current',
+  GENERATE_CV_URL : 'cv-api/cv/generated',
+  SAVE_CV_DATA_URL: 'cv-api/cv',
   GET_FORM_TYPE: 'form-api/form/' + FORM_TYPE_PLACEHOLDER + '/categories',
   SEND_EVAL_RESPONSE: 'feedback-api/feedback',
-  GET_TRAINER_EVALUATION_SUMMARY: 'feedback-api/evaluation/course/',
+  GET_TRAINER_EVALUATION_SUMMARY: 'feedback-api/evaluation/course/:courseId',
   GET_COHORT_COURSES_FOR_TRAINER : '/feedback-api/evaluation/trainer',
   GET_TRAINEE_EVALUATION_SUMMARY_URL : 'feedback-api/evaluation/trainee/summary',
   GET_EVALUATION_FORMS_FOR_TRAINEE_URL : 'feedback-api/evaluation/trainee',

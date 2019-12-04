@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { CVSearchModel } from '../models/cv-search-model';
 import { catchError } from 'rxjs/operators';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
 @Injectable()
 export class CVSearchHistoryService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private qahttp: QaHttpService) { }
 
     private searchUrl = 'cv-api/cv/search';  // URL to cv-api
 
@@ -43,7 +43,7 @@ export class CVSearchHistoryService {
             params.set('status', status);
         }
 
-        return this.http.get<CVSearchModel[]>(`${this.searchUrl}?${params.toString()}`).pipe(
+        return this.qahttp.get<CVSearchModel[]>(`${this.searchUrl}?${params.toString()}`).pipe(
             catchError(this.handleError<CVSearchModel[]>('searchCVs', []))
         );
     }

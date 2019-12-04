@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { PORTAL_APPLICATIONS_API } from '../models/portal-constants';
-import { HttpClient } from '@angular/common/http';
 import { PortalApplicationProjectsModel } from '../models/portal-application-projects.model';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';

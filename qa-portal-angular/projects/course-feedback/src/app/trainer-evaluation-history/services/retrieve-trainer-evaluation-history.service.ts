@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+
 import {Observable} from 'rxjs';
 import {TrainerCourseHistoryModel} from '../models/trainer-course.history.model';
-import {GET_COHORT_COURSES_FOR_TRAINER} from '../../_common/models/course-feedback.constants';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
 @Injectable()
 export class RetrieveTrainerEvaluationHistoryService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private qaHttp: QaHttpService) { }
 
   getEvalHistory(): Observable<TrainerCourseHistoryModel> {
-    return this.httpClient.get<TrainerCourseHistoryModel>(GET_COHORT_COURSES_FOR_TRAINER);
+    return this.qaHttp.get<TrainerCourseHistoryModel>({ref: 'GET_COHORT_COURSES_FOR_TRAINER'});
   }
 }
