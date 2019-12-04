@@ -12,7 +12,7 @@
   </mat-card-subtitle>
 
   <mat-card-content>
-    <app-cohort-table [cohortSummaryData]="(cohortSummary$ | async)"></app-cohort-table>
+    <app-cohort-table (shownCohortsChange)="cohortsToShow($event)" [cohortSummaryData]="(cohortSummary$ | async)"></app-cohort-table>
   </mat-card-content>
 
   <mat-card-subtitle style="color: #0060B9; margin-top: 20px;">
@@ -20,6 +20,6 @@
   </mat-card-subtitle>
 
   <mat-card-content>
-    <app-cohort-chart [cohortSummaryData]="(cohortSummary$ | async)"></app-cohort-chart>
+    <app-cohort-chart [cohortsForGraph]="cohortsForGraph"></app-cohort-chart>
   </mat-card-content>
 </mat-card>
