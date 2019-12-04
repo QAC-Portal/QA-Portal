@@ -10,7 +10,7 @@ import { MockFormService } from '../_mocks/form.service.mock';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { MockQaErrorHandlerService } from 'projects/portal-core/src/app/_mocks/qa-error-handler.service.mock';
 
-fdescribe('FormManagementComponent', () => {
+describe('FormManagementComponent', () => {
   let component: FormManagementComponent;
   let fixture: ComponentFixture<FormManagementComponent>;
 
