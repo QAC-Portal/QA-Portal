@@ -87,6 +87,7 @@ export interface Endpoints {
   GET_SELF_REFLECTIONS_BY_STATUS_API: string;
   GET_TRAINEE_URL: string;
   GET_ALL_FEEDBACK_API: string;
+  CV_SEARCH_URL: string;
 }
 
 export const endpoints: Endpoints = {
@@ -170,8 +171,8 @@ export const endpoints: Endpoints = {
   GET_COURSE_HISTORY: '/feedback-api/evaluation/trainer',
   GET_TRAINEE_EVALUATION_SUMMARY_URL : 'feedback-api/evaluation/trainee/summary',
   GET_EVALUATION_FORMS_FOR_TRAINEE_URL : 'feedback-api/evaluation/trainee',
-  GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL : 'feedback-api/evaluation/trainee/course/:courseId',
-  GET_EVALUATION_FORMS_FOR_COHORT_COURSE_URL : 'feedback-api/evaluation/course/:courseId',
+  GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL : 'feedback-api/evaluation/trainee/course/:cohortCourseId',
+  GET_EVALUATION_FORMS_FOR_COHORT_COURSE_URL : 'feedback-api/evaluation/course/:cohortCourseId',
   GET_FEEDBACK_HISTORY_FOR_TRAINER_URL : 'feedback-api/feedback/trainer',
   GET_FEEDBACK_FOR_COURSE_URL : 'feedback-api/feedback/course/:courseId',
   GET_FEEDBACK_FOR_ID_URL : 'feedback-api/feedback/:id',
@@ -190,6 +191,9 @@ export const endpoints: Endpoints = {
   GET_ROLE_BY_ID: '/portal-application-api/role/:id',
   SAVE_ROLE: '/portal-application-api/manage/role',
   CREATE_ROLE: '/portal-application-api/manage/role',
+
+  CV_SEARCH_URL :'cv-api/cv/search',
+
 };
 
 export type EndpointRef = keyof Endpoints;

@@ -34,9 +34,6 @@ export class ViewCvService {
   }
 
   displayPdf(cv: ICvModel) {
-    // const httpOptions = {
-    //   responseType: 'arraybuffer' as 'json'
-    // };
     return this.qaHttp.post<any>({ ref: 'GENERATE_CV_URL'}, cv).subscribe((response) => {
       const file = new Blob([response], {type: APPLICATION_PDF_CONTENT_TYPE});
       const fileURL = URL.createObjectURL(file);

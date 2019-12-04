@@ -28,22 +28,8 @@ export class CVSearchHistoryService {
     }
 
     /* GET cvs whose name contains search term */
-    searchCVs(name: string, cohort: string = '', tech: string = '', status: string = ''): Observable<CVSearchModel[]> {
-        const params = new URLSearchParams();
-        if (name) {
-            params.set('name', name);
-        }
-        if (cohort) {
-            params.set('cohort', cohort);
-        }
-        if (tech) {
-            params.set('tech', tech);
-        }
-        if (status) {
-            params.set('status', status);
-        }
-
-        return this.qahttp.get<CVSearchModel[]>(`${this.searchUrl}?${params.toString()}`).pipe(
+    searchCVs(params: { name: string, cohort: string, tech: string, status: string }): Observable<CVSearchModel[]> {
+        return this.qahttp.get<CVSearchModel[]>({ ref: 'CV_SEARCH_URL' }, { params }).pipe(
             catchError(this.handleError<CVSearchModel[]>('searchCVs', []))
         );
     }

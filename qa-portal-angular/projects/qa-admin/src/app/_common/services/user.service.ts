@@ -10,17 +10,12 @@ import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-
   providedIn: 'root'
 })
 export class UserService {
-//TO DO REMOVE
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
-//END OF TO DO
   constructor(
     private qaHttp: QaHttpService) {
   }
 
   getAllUsers(): Observable<UserDetailsModel[]> {
-    return this.qaHttp.get<UserDetailsModel[]>({ ref: 'GET_ALL_USERS_URL'}, this.httpOptions).pipe(
+    return this.qaHttp.get<UserDetailsModel[]>({ ref: 'GET_ALL_USERS_URL'}).pipe(
       take(1)
     );
   }
@@ -36,18 +31,18 @@ export class UserService {
     user.email = user.userName;
     userDetails.user = user;
     userDetails.roleNames = [user.role];
-    return this.qaHttp.post<UserModel>({ ref: 'CREATE_USER_URL'}, userDetails, this.httpOptions).pipe(
+    return this.qaHttp.post<UserModel>({ ref: 'CREATE_USER_URL'}, userDetails).pipe(
       take(1)
     );
   }
 
   updateUser(user: UserDetailsModel): Observable<UserDetailsModel> {
-    return this.qaHttp.put<UserDetailsModel>({ ref: 'UPDATE_USER_URL'}, user, this.httpOptions).pipe(
+    return this.qaHttp.put<UserDetailsModel>({ ref: 'UPDATE_USER_URL'}, user).pipe(
       take(1)
     );
   }
 
   getUserByUsername(username: string): Observable<UserDetailsModel> {
-    return this.qaHttp.get<UserDetailsModel>({ ref: 'GET_USER_BY_USERNAME_URL' , params: { username: username.toString() } }, this.httpOptions).pipe(take(1));
+    return this.qaHttp.get<UserDetailsModel>({ ref: 'GET_USER_BY_USERNAME_URL' , params: { username: username.toString() } }).pipe(take(1));
   }
 }
