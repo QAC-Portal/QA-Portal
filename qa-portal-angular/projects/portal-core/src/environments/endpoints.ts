@@ -75,19 +75,44 @@ export interface Endpoints {
   GET_SELF_REFLECTION_TRAINEE_BY_ID: string;
   SAVE_REFLECTION_FORM:string;
   GET_FORM_TYPE_QUESTIONS:string;
+  REFLECTION_QUESTION_API: string;
+  SELF_REFLECTION_QUESTION_API: string;
+  USER_API: string;
+  USER_API_TRAINEES: string;
+  USER_API_TRAINEES_FOR_REVIEW: string;
+  GET_ALL_RATED_QUESTIONS_API: string;
+  GET_ALL_SELF_REFLECTIONS_API: string;
+  CREATE_SELF_REFLECTION_QUESTIONS_API:string;
+  GET_SELF_REFLECTION_API: string;
+  GET_SELF_REFLECTIONS_BY_STATUS_API: string;
+  GET_TRAINEE_URL: string;
 }
 
 export const endpoints: Endpoints = {
 
+  SELF_REFLECTION_QUESTION_API : 'self-reflection-api/question',
   UPDATE_SELF_REFLECTION_API: 'self-reflection-api/reflection',
   SAVE_REFLECTION_FORM: 'self-reflection-api/reflection',
   CREATE_SELF_REFLECTION_API: 'self-reflection-api/reflection/',
+  
+  GET_ALL_SELF_REFLECTIONS_API : 'self-reflection-api/reflections',
+  GET_SELF_REFLECTION_API : 'self-reflection-api/reflection',
+  REFLECTION_QUESTION_API : 'self-reflection-api/reflection-question',
+  CREATE_SELF_REFLECTION_QUESTIONS_API : 'self-reflection-api/reflection-question',
+  GET_ALL_RATED_QUESTIONS_API : 'self-reflection-api/reflection-question/questions',
   GET_SELF_REFLECTION_API_BY_ID: 'self-reflection-api/reflection/:id',
   GET_ALL_FORM_USER_SELF_REFLECTION_API: 'self-reflection-api/reflection/trainee',
   GET_SELF_REFLECTIONS_FOR_TRAINEE_API: 'self-reflection-api/reflection/trainee',
   GET_SELF_REFLECTION_TRAINEE_BY_ID:'self-reflection-api/reflection/trainee/:traineeId',
+  GET_SELF_REFLECTIONS_BY_STATUS_API : 'self-reflection-api/reflection/trainee/status',
+  USER_API_TRAINEES_FOR_REVIEW : 'self-reflection-api/reflection/cohort/trainees/review/',
   GET_USER_API_TRAINEES_FOR_REVIEW: 'self-reflection-api/reflection/cohort/trainees/review/:cohortId',
   GET_SELF_REFLECTION_SUMMARY: '/self-reflection-api/reflection/summary',
+  
+
+  USER_API : 'cohort-api/user',
+  USER_API_TRAINEES :'cohort-api/cohort/trainees/',
+  GET_TRAINEE_URL : 'cohort-api/user/trainee/',
   GET_TRAINEE_COHORT_URL: '/cohort-api/user/trainee/cohort',
   GET_SKILLS_FOR_TRAINEE_URL: 'cohort-api/user/trainee/skills',
   GET_USER_API_COHORTS: 'cohort-api/user/trainer/cohorts',
@@ -102,6 +127,7 @@ export const endpoints: Endpoints = {
   SAVE_COURSE: 'cohort-api/manage/course',
   SAVE_LOCATION: '/cohort-api/manage/location',
   CREATE_LOCATION: '/cohort-api/manage/location',
+  
   GET_AVAILABLE_TRAINEES_BY_COHORT_ID: '/cohort-api/manage/users/available-trainees/cohort/:id',
   GET_ALL_USERS_URL : 'cohort-api/manage/users',
   UPDATE_USERS_URL : 'cohort-api/manage/users',
@@ -115,6 +141,13 @@ export const endpoints: Endpoints = {
   GET_ALL_TECHNOLOGY_CATEGORY_BY_ID: 'cohort-api/technology/category/:id',
   GET_ALL_LOCATIONS: '/cohort-api/locations',
   GET_LOCATION_BY_ID: '/cohort-api/location/:id',
+
+
+  
+ 
+  
+  
+
 
   GET_CV_FOR_ID_URL: 'cv-api/cv/:id',
   GET_CURRENT_CV_URL: 'cv-api/cv/trainee/current',
@@ -131,7 +164,7 @@ export const endpoints: Endpoints = {
   SEND_EVAL_RESPONSE: 'feedback-api/feedback',
   CREATE_FEEDBACK_FORM_URL : 'feedback-api/feedback',
   UPDATE_FEEDBACK_FORM_URL : 'feedback-api/feedback',
-  GET_EVALUATION_FORM_FOR_ID_URL : 'feedback-api/evaluation/',
+  GET_EVALUATION_FORM_FOR_ID_URL : 'feedback-api/evaluation/:courseId',
   CREATE_EVALUATION_FORM_URL : 'feedback-api/evaluation',
   UPDATE_EVALUATION_FORM_URL : 'feedback-api/evaluation',
   GET_TRAINER_EVALUATION_SUMMARY: 'feedback-api/evaluation/course/:courseId',
@@ -139,11 +172,11 @@ export const endpoints: Endpoints = {
   GET_COURSE_HISTORY: '/feedback-api/evaluation/trainer',
   GET_TRAINEE_EVALUATION_SUMMARY_URL : 'feedback-api/evaluation/trainee/summary',
   GET_EVALUATION_FORMS_FOR_TRAINEE_URL : 'feedback-api/evaluation/trainee',
-  GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL : 'feedback-api/evaluation/trainee/course/',
-  GET_EVALUATION_FORMS_FOR_COHORT_COURSE_URL : 'feedback-api/evaluation/course/',
+  GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL : 'feedback-api/evaluation/trainee/course/:courseId',
+  GET_EVALUATION_FORMS_FOR_COHORT_COURSE_URL : 'feedback-api/evaluation/course/:courseId',
   GET_FEEDBACK_HISTORY_FOR_TRAINER_URL : 'feedback-api/feedback/trainer',
-  GET_FEEDBACK_FOR_COURSE_URL : 'feedback-api/feedback/course/',
-  GET_FEEDBACK_FOR_ID_URL : 'feedback-api/feedback/',
+  GET_FEEDBACK_FOR_COURSE_URL : 'feedback-api/feedback/course/:courseId',
+  GET_FEEDBACK_FOR_ID_URL : 'feedback-api/feedback/:id',
 
   PORTAL_APPLICATIONS_API: 'portal-application-api/portal/applications',
   GET_ALL_APPLICATIONS: '/portal-application-api/manage/portal/applications',
@@ -158,7 +191,7 @@ export const endpoints: Endpoints = {
   GET_ALL_ROLE_NAMES: '/portal-application-api/manage/roles/names',
   GET_ROLE_BY_ID: '/portal-application-api/role/:id',
   SAVE_ROLE: '/portal-application-api/manage/role',
-  CREATE_ROLE: '/portal-application-api/manage/role'
+  CREATE_ROLE: '/portal-application-api/manage/role',
 };
 
 export type EndpointRef = keyof Endpoints;
