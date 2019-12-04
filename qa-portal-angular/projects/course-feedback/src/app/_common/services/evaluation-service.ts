@@ -10,14 +10,14 @@ export class EvaluationService implements IFormService {
   constructor(private qaHttp: QaHttpService) { }
 
   public getForm(cohortCourseId: string): Observable<IFormModel> {
-    return this.qaHttp.get<IFormModel>({ ref: 'GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL', params : {cohortCourseId} });
+    return this.qaHttp.get<IFormModel>({ ref: 'GET_EVALUATION_FOR_TRAINEE_AND_COURSE', params : {cohortCourseId} });
   }
 
   public createForm(formModel: IFormModel): Observable<IFormModel> {
-    return this.qaHttp.post<IFormModel>({ ref: 'CREATE_EVALUATION_FORM_URL'}, formModel);
+    return this.qaHttp.post<IFormModel>({ ref: 'CREATE_EVALUATION_FORM'}, formModel);
   }
 
   public updateForm(formModel: IFormModel): Observable<IFormModel> {
-    return this.qaHttp.put<IFormModel>({ ref: 'UPDATE_EVALUATION_FORM_URL'}, formModel);
+    return this.qaHttp.put<IFormModel>({ ref: 'UPDATE_EVALUATION_FORM'}, formModel);
   }
 }

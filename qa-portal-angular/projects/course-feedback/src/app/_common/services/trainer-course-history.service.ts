@@ -9,6 +9,6 @@ export class TrainerCourseHistoryService {
   constructor(private qaHttp: QaHttpService) { }
 
   getCourseHistory(): Observable<TrainerCourseHistoryModel> {
-    return this.qaHttp.get<TrainerCourseHistoryModel>({ ref: 'GET_COURSE_HISTORY'});
+    return this.qaHttp.get<TrainerCourseHistoryModel>({ ref: 'GET_COHORT_COURSES_FOR_TRAINER'});
   }
 }

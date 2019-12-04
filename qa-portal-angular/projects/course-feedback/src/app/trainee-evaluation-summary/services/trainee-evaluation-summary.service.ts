@@ -9,6 +9,6 @@ export class TraineeEvaluationSummaryService {
   constructor(private qaHttp: QaHttpService) {}
 
   public getTraineeEvaluationSummary(): Observable<TraineeEvaluationSummaryModel> {
-    return this.qaHttp.get<TraineeEvaluationSummaryModel>({ ref: 'GET_TRAINEE_EVALUATION_SUMMARY_URL'});
+    return this.qaHttp.get<TraineeEvaluationSummaryModel>({ ref: 'GET_TRAINEE_EVALUATION_SUMMARY'});
   }
 }

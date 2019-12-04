@@ -9,8 +9,6 @@ export class CVSearchHistoryService {
 
     constructor(private qahttp: QaHttpService) { }
 
-    private searchUrl = 'cv-api/cv/search';  // URL to cv-api
-
     /**
      * Handle Http operation that failed.
      * Let the app continue.
@@ -29,7 +27,7 @@ export class CVSearchHistoryService {
 
     /* GET cvs whose name contains search term */
     searchCVs(params: { name: string, cohort: string, tech: string, status: string }): Observable<CVSearchModel[]> {
-        return this.qahttp.get<CVSearchModel[]>({ ref: 'CV_SEARCH_URL' }, { params }).pipe(
+        return this.qahttp.get<CVSearchModel[]>({ ref: 'CV_SEARCH' }, { params }).pipe(
             catchError(this.handleError<CVSearchModel[]>('searchCVs', []))
         );
     }

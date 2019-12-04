@@ -11,7 +11,7 @@ export class CohortTraineesService {
   }
 
   getCohort(): Observable<QaCohortModel> {
-    return this.qaHttp.get<QaCohortModel>({ ref: 'GET_TRAINEE_COHORT_URL'});
+    return this.qaHttp.get<QaCohortModel>({ ref: 'GET_TRAINEE_COHORT'});
   }
 
   getCohorts(): Observable<QaCohortModel[]> {

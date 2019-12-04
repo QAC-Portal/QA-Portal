@@ -3,22 +3,21 @@ export interface Endpoints {
   SEND_EVAL_RESPONSE: string;
   GET_TRAINER_EVALUATION_SUMMARY: string;
   GET_COHORT_COURSES_FOR_TRAINER :string;
-  GET_TRAINEE_EVALUATION_SUMMARY_URL: string;
-  GET_EVALUATION_FORMS_FOR_TRAINEE_URL: string;
-  GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL: string;
-  GET_EVALUATION_FORM_FOR_ID_URL: string;
-  GET_EVALUATION_FORMS_FOR_COHORT_COURSE_URL: string;
-  CREATE_EVALUATION_FORM_URL: string;
-  UPDATE_EVALUATION_FORM_URL: string;
-  CREATE_FEEDBACK_FORM_URL: string;
-  UPDATE_FEEDBACK_FORM_URL: string;
-  GET_FEEDBACK_HISTORY_FOR_TRAINER_URL: string;
-  GET_FEEDBACK_FOR_COURSE_URL: string;
-  GET_FEEDBACK_FOR_ID_URL: string;
+  GET_TRAINEE_EVALUATION_SUMMARY: string;
+  GET_EVALUATION_FORMS_FOR_TRAINEE: string;
+  GET_EVALUATION_FOR_TRAINEE_AND_COURSE: string;
+  GET_EVALUATION_FORM_FOR_ID: string;
+  GET_EVALUATION_FORMS_FOR_COHORT_COURSE: string;
+  CREATE_EVALUATION_FORM: string;
+  UPDATE_EVALUATION_FORM: string;
+  CREATE_FEEDBACK_FORM: string;
+  UPDATE_FEEDBACK_FORM: string;
+  GET_FEEDBACK_HISTORY_FOR_TRAINER: string;
+  GET_FEEDBACK_FOR_COURSE: string;
+  GET_FEEDBACK_FOR_ID: string;
   PORTAL_APPLICATIONS_API: string;
   GET_COHORT_BY_ID: string;
   GET_ALL_COURSES: string;
-  GET_COURSE_HISTORY: string;
   GET_TRAINERS_AVAILABLE_FOR_COHORT: string;
   SAVE_COHORT: string;
   GET_COURSE_BY_ID: string;
@@ -50,20 +49,20 @@ export interface Endpoints {
   SAVE_ROLE: string;
   CREATE_ROLE: string;
   GET_AVAILABLE_TRAINEES_BY_COHORT_ID: string;
-  GET_ALL_USERS_URL: string;
-  DELETE_USERS_URL : string;
-  UPDATE_USERS_URL : string;
-  CREATE_USER_URL: string;
-  UPDATE_USER_URL: string;
-  GET_COHORTS_URL: string;
-  GET_USER_BY_USERNAME_URL:string;
-  GET_CV_FOR_ID_URL: string;
-  GET_SKILLS_FOR_TRAINEE_URL: string;
-  GET_CURRENT_CV_URL: string;
-  GENERATE_CV_URL: string;
-  SAVE_CV_DATA_URL: string;
+  GET_ALL_USERS: string;
+  DELETE_USERS : string;
+  UPDATE_USERS : string;
+  CREATE_USER: string;
+  UPDATE_USER: string;
+  GET_COHORTS: string;
+  GET_USER_BY_USERNAME:string;
+  GET_CV_FOR_ID: string;
+  GET_SKILLS_FOR_TRAINEE: string;
+  GET_CURRENT_CV: string;
+  GENERATE_CV: string;
+  SAVE_CV_DATA: string;
   GET_SELF_REFLECTION_SUMMARY: string;
-  GET_TRAINEE_COHORT_URL: string;
+  GET_TRAINEE_COHORT: string;
   GET_USER_API_COHORTS: string;
   GET_USER_API_TRAINEES: string;
   GET_USER_API_TRAINEES_FOR_REVIEW: string;
@@ -74,7 +73,6 @@ export interface Endpoints {
   GET_SELF_REFLECTION_TRAINEE_BY_ID: string;
   SAVE_REFLECTION_FORM:string;
   GET_FORM_TYPE_QUESTIONS:string;
-  REFLECTION_QUESTION_API: string;
   SELF_REFLECTION_QUESTION_API: string;
   USER_API: string;
   USER_API_TRAINEES: string;
@@ -84,9 +82,10 @@ export interface Endpoints {
   CREATE_SELF_REFLECTION_QUESTIONS_API:string;
   GET_SELF_REFLECTION_API: string;
   GET_SELF_REFLECTIONS_BY_STATUS_API: string;
-  GET_TRAINEE_URL: string;
+  GET_TRAINEE: string;
   GET_ALL_FEEDBACK_API: string;
-  CV_SEARCH_URL: string;
+  CV_SEARCH: string;
+  CREATE_COURSE: string;
 }
 
 export const endpoints: Endpoints = {
@@ -112,30 +111,31 @@ export const endpoints: Endpoints = {
 
 
   USER_API : 'cohort-api/user',
-  USER_API_TRAINEES :'cohort-api/cohort/trainees/',
-  GET_TRAINEE_URL : 'cohort-api/user/trainee/',
-  GET_TRAINEE_COHORT_URL: '/cohort-api/user/trainee/cohort',
-  GET_SKILLS_FOR_TRAINEE_URL: 'cohort-api/user/trainee/skills',
+  GET_TRAINEE : 'cohort-api/user/trainee/',
+  GET_TRAINEE_COHORT: '/cohort-api/user/trainee/cohort',
+  GET_SKILLS_FOR_TRAINEE: 'cohort-api/user/trainee/skills',
   GET_USER_API_COHORTS: 'cohort-api/user/trainer/cohorts',
-  GET_COHORTS_URL : 'cohort-api/cohorts',
-  GET_USER_API_TRAINEES: 'cohort-api/cohort/trainees/:id',
+  GET_COHORTS : 'cohort-api/cohorts',
   GET_COHORT_BY_ID: 'cohort-api/cohort/:id',
+  USER_API_TRAINEES :'cohort-api/cohort/trainees/',
+  GET_USER_API_TRAINEES: 'cohort-api/cohort/trainees/:id',
   GET_ALL_COURSES: 'cohort-api/courses',
   GET_COURSE_BY_ID: '/cohort-api/course/:id',
   GET_TRAINERS_AVAILABLE_FOR_COHORT: 'cohort-api/manage/users/trainers',
   CREATE_COHORT: 'cohort-api/manage/cohort',
   SAVE_COHORT: 'cohort-api/manage/cohort',
   SAVE_COURSE: 'cohort-api/manage/course',
+  CREATE_COURSE: 'cohort-api/manage/course',
   SAVE_LOCATION: '/cohort-api/manage/location',
   CREATE_LOCATION: '/cohort-api/manage/location',
   
   GET_AVAILABLE_TRAINEES_BY_COHORT_ID: '/cohort-api/manage/users/available-trainees/cohort/:id',
-  GET_ALL_USERS_URL : 'cohort-api/manage/users',
-  UPDATE_USERS_URL : 'cohort-api/manage/users',
-  DELETE_USERS_URL : 'cohort-api/manage/users/delete',
-  CREATE_USER_URL : 'cohort-api/manage/user',
-  UPDATE_USER_URL : 'cohort-api/manage/user',
-  GET_USER_BY_USERNAME_URL: 'cohort-api/manage/user/:username',
+  GET_ALL_USERS : 'cohort-api/manage/users',
+  UPDATE_USERS : 'cohort-api/manage/users',
+  DELETE_USERS : 'cohort-api/manage/users/delete',
+  CREATE_USER : 'cohort-api/manage/user',
+  UPDATE_USER : 'cohort-api/manage/user',
+  GET_USER_BY_USERNAME: 'cohort-api/manage/user/:username',
   SAVE_TECHNOLOGY_CATEGORY: 'cohort-api/manage/technology/category',
   CREATE_TECHNOLOGY_CATEGORY: 'cohort-api/manage/technology/category',
   GET_ALL_TECHNOLOGY_CATEGORIES: 'cohort-api/technology/categories',
@@ -145,10 +145,10 @@ export const endpoints: Endpoints = {
   
   GET_ALL_FEEDBACK_API : 'course-feedback-api/question-feedback',
   
-  GET_CV_FOR_ID_URL: 'cv-api/cv/:id',
-  GET_CURRENT_CV_URL: 'cv-api/cv/trainee/current',
-  GENERATE_CV_URL : 'cv-api/cv/generated',
-  SAVE_CV_DATA_URL: 'cv-api/cv',
+  GET_CV_FOR_ID: 'cv-api/cv/:id',
+  GET_CURRENT_CV: 'cv-api/cv/trainee/current',
+  GENERATE_CV : 'cv-api/cv/generated',
+  SAVE_CV_DATA: 'cv-api/cv',
 
   GET_FORM_TYPE: 'form-api/form/:formType/categories',
   GET_ALL_FORMS: '/form-api/forms',
@@ -158,21 +158,20 @@ export const endpoints: Endpoints = {
   SAVE_FORM: '/form-api/manage/form',
 
   SEND_EVAL_RESPONSE: 'feedback-api/feedback',
-  CREATE_FEEDBACK_FORM_URL : 'feedback-api/feedback',
-  UPDATE_FEEDBACK_FORM_URL : 'feedback-api/feedback',
-  GET_EVALUATION_FORM_FOR_ID_URL : 'feedback-api/evaluation/:courseId',
-  CREATE_EVALUATION_FORM_URL : 'feedback-api/evaluation',
-  UPDATE_EVALUATION_FORM_URL : 'feedback-api/evaluation',
+  CREATE_FEEDBACK_FORM : 'feedback-api/feedback',
+  UPDATE_FEEDBACK_FORM : 'feedback-api/feedback',
+  GET_EVALUATION_FORM_FOR_ID : 'feedback-api/evaluation/:courseId',
+  CREATE_EVALUATION_FORM : 'feedback-api/evaluation',
+  UPDATE_EVALUATION_FORM : 'feedback-api/evaluation',
   GET_TRAINER_EVALUATION_SUMMARY: 'feedback-api/evaluation/course/:courseId',
   GET_COHORT_COURSES_FOR_TRAINER : '/feedback-api/evaluation/trainer',
-  GET_COURSE_HISTORY: '/feedback-api/evaluation/trainer',
-  GET_TRAINEE_EVALUATION_SUMMARY_URL : 'feedback-api/evaluation/trainee/summary',
-  GET_EVALUATION_FORMS_FOR_TRAINEE_URL : 'feedback-api/evaluation/trainee',
-  GET_EVALUATION_FOR_TRAINEE_AND_COURSE_URL : 'feedback-api/evaluation/trainee/course/:cohortCourseId',
-  GET_EVALUATION_FORMS_FOR_COHORT_COURSE_URL : 'feedback-api/evaluation/course/:cohortCourseId',
-  GET_FEEDBACK_HISTORY_FOR_TRAINER_URL : 'feedback-api/feedback/trainer',
-  GET_FEEDBACK_FOR_COURSE_URL : 'feedback-api/feedback/course/:courseId',
-  GET_FEEDBACK_FOR_ID_URL : 'feedback-api/feedback/:id',
+  GET_TRAINEE_EVALUATION_SUMMARY : 'feedback-api/evaluation/trainee/summary',
+  GET_EVALUATION_FORMS_FOR_TRAINEE : 'feedback-api/evaluation/trainee',
+  GET_EVALUATION_FOR_TRAINEE_AND_COURSE : 'feedback-api/evaluation/trainee/course/:cohortCourseId',
+  GET_EVALUATION_FORMS_FOR_COHORT_COURSE : 'feedback-api/evaluation/course/:cohortCourseId',
+  GET_FEEDBACK_HISTORY_FOR_TRAINER : 'feedback-api/feedback/trainer',
+  GET_FEEDBACK_FOR_COURSE : 'feedback-api/feedback/course/:courseId',
+  GET_FEEDBACK_FOR_ID : 'feedback-api/feedback/:id',
 
   PORTAL_APPLICATIONS_API: 'portal-application-api/portal/applications',
   GET_ALL_APPLICATIONS: '/portal-application-api/manage/portal/applications',
@@ -189,7 +188,7 @@ export const endpoints: Endpoints = {
   SAVE_ROLE: '/portal-application-api/manage/role',
   CREATE_ROLE: '/portal-application-api/manage/role',
 
-  CV_SEARCH_URL :'cv-api/cv/search',
+  CV_SEARCH :'cv-api/cv/search',
 
 };
 

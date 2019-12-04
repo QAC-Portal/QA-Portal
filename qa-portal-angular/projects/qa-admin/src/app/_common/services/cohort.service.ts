@@ -14,7 +14,7 @@ export class CohortService {
   constructor(private qaHttp: QaHttpService) { }
 
   public searchCohorts(search: string): Observable<CohortModel[]> {
-    return this.qaHttp.get<CohortModel[]>({ ref: 'GET_COHORTS_URL'}).pipe(
+    return this.qaHttp.get<CohortModel[]>({ ref: 'GET_COHORTS'}).pipe(
       take(1)
     );
   }
