@@ -73,7 +73,7 @@ export class CohortChartComponent implements OnInit, OnChanges {
   private random_rgba() {
     const o = Math.round;
     const r = Math.random;
-    const s = 255;
+    const s = 200;
     return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
   }
 }
