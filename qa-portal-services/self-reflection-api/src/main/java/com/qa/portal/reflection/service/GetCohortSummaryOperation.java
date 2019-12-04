@@ -71,6 +71,7 @@ public class GetCohortSummaryOperation {
                 .map(t -> this.reflectionRepository.findAllByResponder(t))
                 .map(reflections -> getReflectionQuestions(reflections, weekStartDate))
                 .map(rqs -> averageRatingForTrainee(rqs))
+                .filter(rating -> rating.isPresent()) // added this in
                 .filter( rating -> rating.getAsDouble() > 0.0)
                 .mapToDouble(x -> x.getAsDouble())
                 .average().orElseGet(() -> 0.0);
