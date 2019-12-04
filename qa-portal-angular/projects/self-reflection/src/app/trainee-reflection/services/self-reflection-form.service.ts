@@ -22,7 +22,7 @@ export class SelfReflectionFormService {
   }
 
   public getAllReflectionFormsForUser(): Observable<Set<SelfReflectionFormModel>> {
-    return this.qaHttp.get<Set<SelfReflectionFormModel>>({ref: 'GET_ALL_FORM_USER_SELF_REFLECTION_API'});
+    return this.qaHttp.get<Set<SelfReflectionFormModel>>({ref: 'GET_SELF_REFLECTIONS_FOR_TRAINEE_API'});
   }
 
   public updateSelfReflectionForm(form: SelfReflectionFormModel): Observable<SelfReflectionFormModel> {

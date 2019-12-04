@@ -70,7 +70,6 @@ export interface Endpoints {
   GET_SELF_REFLECTIONS_FOR_TRAINEE_API: string;
   CREATE_SELF_REFLECTION_API: string;
   GET_SELF_REFLECTION_API_BY_ID: string;
-  GET_ALL_FORM_USER_SELF_REFLECTION_API: string;
   UPDATE_SELF_REFLECTION_API: string;
   GET_SELF_REFLECTION_TRAINEE_BY_ID: string;
   SAVE_REFLECTION_FORM:string;
@@ -93,17 +92,15 @@ export interface Endpoints {
 export const endpoints: Endpoints = {
 
   SELF_REFLECTION_QUESTION_API : 'self-reflection-api/question',
+  GET_ALL_SELF_REFLECTIONS_API : 'self-reflection-api/reflections',
+
   UPDATE_SELF_REFLECTION_API: 'self-reflection-api/reflection',
   SAVE_REFLECTION_FORM: 'self-reflection-api/reflection',
   CREATE_SELF_REFLECTION_API: 'self-reflection-api/reflection/',
-  
-  GET_ALL_SELF_REFLECTIONS_API : 'self-reflection-api/reflections',
   GET_SELF_REFLECTION_API : 'self-reflection-api/reflection',
-  REFLECTION_QUESTION_API : 'self-reflection-api/reflection-question',
   CREATE_SELF_REFLECTION_QUESTIONS_API : 'self-reflection-api/reflection-question',
   GET_ALL_RATED_QUESTIONS_API : 'self-reflection-api/reflection-question/questions',
   GET_SELF_REFLECTION_API_BY_ID: 'self-reflection-api/reflection/:id',
-  GET_ALL_FORM_USER_SELF_REFLECTION_API: 'self-reflection-api/reflection/trainee',
   GET_SELF_REFLECTIONS_FOR_TRAINEE_API: 'self-reflection-api/reflection/trainee',
   GET_SELF_REFLECTION_TRAINEE_BY_ID:'self-reflection-api/reflection/trainee/:traineeId',
   GET_SELF_REFLECTIONS_BY_STATUS_API : 'self-reflection-api/reflection/trainee/status',

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {GET_SELF_REFLECTIONS_FOR_TRAINEE_API} from '../../_common/models/trainee-reflection-constants';
 import {Observable} from 'rxjs';
 import {SelfReflectionFormModel} from '../../_common/models/self-reflection-form-model';
 import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
