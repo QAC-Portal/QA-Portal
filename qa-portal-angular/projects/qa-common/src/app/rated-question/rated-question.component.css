@@ -14,10 +14,17 @@
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
+ 
+}
+.qa-radio-btn-innerlayout {
+  
+  text-align: center;
+  margin: 5px auto;
+  min-width: 5px;
 }
 
 .qa-radio-btn {
-  margin-right: 25px;
+  width: 20px;
   border-width: 1px;
   border-color: black;
   color: #004050;
