@@ -65,9 +65,33 @@ export interface Endpoints {
   GET_CURRENT_CV_URL: string;
   GENERATE_CV_URL: string;
   SAVE_CV_DATA_URL: string;
+  GET_SELF_REFLECTION_SUMMARY: string;
+  GET_TRAINEE_COHORT_URL: string;
+  GET_USER_API_COHORTS: string;
+  GET_USER_API_TRAINEES: string;
+  GET_USER_API_TRAINEES_FOR_REVIEW: string;
+  GET_SELF_REFLECTIONS_FOR_TRAINEE_API: string;
+  CREATE_SELF_REFLECTION_API: string;
+  GET_SELF_REFLECTION_API_BY_ID: string;
+  GET_ALL_FORM_USER_SELF_REFLECTION_API: string;
+  UPDATE_SELF_REFLECTION_API: string;
+  GET_SELF_REFLECTION_TRAINEE_BY_ID: string;
+  SAVE_REFLECTION_FORM:string;
 }
 
 export const endpoints: Endpoints = {
+  GET_SELF_REFLECTION_API_BY_ID: 'self-reflection-api/reflection/:id',
+  GET_ALL_FORM_USER_SELF_REFLECTION_API: 'self-reflection-api/reflection/trainee',
+  UPDATE_SELF_REFLECTION_API: 'self-reflection-api/reflection',
+  SAVE_REFLECTION_FORM: 'self-reflection-api/reflection',
+  GET_SELF_REFLECTION_TRAINEE_BY_ID:'self-reflection-api/reflection/trainee/:traineeId',
+  CREATE_SELF_REFLECTION_API: 'self-reflection-api/reflection/',
+  GET_TRAINEE_COHORT_URL: '/cohort-api/user/trainee/cohort',
+  GET_USER_API_COHORTS: 'cohort-api/user/trainer/cohorts',
+  GET_USER_API_TRAINEES: 'cohort-api/cohort/trainees/:id',
+  GET_USER_API_TRAINEES_FOR_REVIEW: 'self-reflection-api/reflection/cohort/trainees/review/:cohortId',
+  GET_SELF_REFLECTIONS_FOR_TRAINEE_API: 'self-reflection-api/reflection/trainee',
+  GET_SELF_REFLECTION_SUMMARY: '/self-reflection-api/reflection/summary',
   GET_CV_FOR_ID_URL: 'cv-api/cv/:id',
   GET_SKILLS_FOR_TRAINEE_URL: 'cohort-api/user/trainee/skills',
   GET_CURRENT_CV_URL: 'cv-api/cv/trainee/current',

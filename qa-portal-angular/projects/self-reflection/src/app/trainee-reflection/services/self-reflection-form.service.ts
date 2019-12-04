@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {SelfReflectionFormModel} from '../../_common/models/self-reflection-form-model';
 import {Observable} from 'rxjs';
 import {
@@ -7,25 +6,26 @@ import {
   GET_SELF_REFLECTION_API,
   UPDATE_SELF_REFLECTION_API
 } from '../../_common/models/trainee-reflection-constants';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
 @Injectable()
 export class SelfReflectionFormService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private qaHttp: QaHttpService) { }
 
   public createSelfReflectionForm(form: SelfReflectionFormModel): Observable<SelfReflectionFormModel> {
-    return this.httpClient.post<SelfReflectionFormModel>(CREATE_SELF_REFLECTION_API , form);
+    return this.qaHttp.post<SelfReflectionFormModel>({ ref: 'CREATE_SELF_REFLECTION_API'} , form);
   }
 
   public getSelfReflectionForm(formId: string): Observable<SelfReflectionFormModel> {
-    return this.httpClient.get<SelfReflectionFormModel>(GET_SELF_REFLECTION_API + '/' + formId);
+    return this.qaHttp.get<SelfReflectionFormModel>({ ref: 'GET_SELF_REFLECTION_API_BY_ID', params: { formId: formId.toString() } });
   }
 
   public getAllReflectionFormsForUser(): Observable<Set<SelfReflectionFormModel>> {
-    return this.httpClient.get<Set<SelfReflectionFormModel>>(GET_SELF_REFLECTION_API + '/trainee');
+    return this.qaHttp.get<Set<SelfReflectionFormModel>>({ref: 'GET_ALL_FORM_USER_SELF_REFLECTION_API'});
   }
 
   public updateSelfReflectionForm(form: SelfReflectionFormModel): Observable<SelfReflectionFormModel> {
-    return this.httpClient.put<SelfReflectionFormModel>(UPDATE_SELF_REFLECTION_API, form);
+    return this.qaHttp.put<SelfReflectionFormModel>({ ref: 'UPDATE_SELF_REFLECTION_API'}, form);
   }
 }
