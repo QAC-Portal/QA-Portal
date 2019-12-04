@@ -1,6 +1,3 @@
-import { FORM_TYPE_PLACEHOLDER } from '../app/_common/models/portal-constants';
-
-
 export interface Endpoints {
   GET_FORM_TYPE: string;
   SEND_EVAL_RESPONSE: string;
@@ -77,6 +74,7 @@ export interface Endpoints {
   UPDATE_SELF_REFLECTION_API: string;
   GET_SELF_REFLECTION_TRAINEE_BY_ID: string;
   SAVE_REFLECTION_FORM:string;
+  GET_FORM_TYPE_QUESTIONS:string;
 }
 
 export const endpoints: Endpoints = {
@@ -97,7 +95,7 @@ export const endpoints: Endpoints = {
   GET_CURRENT_CV_URL: 'cv-api/cv/trainee/current',
   GENERATE_CV_URL : 'cv-api/cv/generated',
   SAVE_CV_DATA_URL: 'cv-api/cv',
-  GET_FORM_TYPE: 'form-api/form/' + FORM_TYPE_PLACEHOLDER + '/categories',
+  GET_FORM_TYPE: 'form-api/form/:formType/categories',
   SEND_EVAL_RESPONSE: 'feedback-api/feedback',
   GET_TRAINER_EVALUATION_SUMMARY: 'feedback-api/evaluation/course/:courseId',
   GET_COHORT_COURSES_FOR_TRAINER : '/feedback-api/evaluation/trainer',
@@ -128,6 +126,7 @@ export const endpoints: Endpoints = {
   CREATE_COHORT: 'cohort-api/manage/cohort',
   GET_ALL_FORMS: '/form-api/forms',
   GET_FORM_BY_ID: '/form-api/form/:id',
+  GET_FORM_TYPE_QUESTIONS : 'form-api/form/:formType/questions',
   CREATE_FORM: '/form-api/manage/form',
   SAVE_FORM: '/form-api/manage/form',
   GET_ALL_APPLICATIONS: '/portal-application-api/manage/portal/applications',
@@ -154,7 +153,8 @@ export const endpoints: Endpoints = {
   CREATE_USER_URL : 'cohort-api/manage/user',
   UPDATE_USER_URL : 'cohort-api/manage/user',
   GET_COHORTS_URL : 'cohort-api/cohorts',
-  GET_USER_BY_USERNAME_URL: 'cohort-api/manage/user/:username'
+  GET_USER_BY_USERNAME_URL: 'cohort-api/manage/user/:username',
+  
 };
 
 export type EndpointRef = keyof Endpoints;

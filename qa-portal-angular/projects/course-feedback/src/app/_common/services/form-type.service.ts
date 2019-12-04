@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
-import {GET_FORM_TYPE} from '../models/course-feedback.constants';
 import { IFormModel } from 'projects/qa-forms/src/app/_common/models';
-import {FORM_TYPE_PLACEHOLDER} from '../../../../../portal-core/src/app/_common/models/portal-constants';
 
 @Injectable()
 export class FormTypeService {
@@ -11,7 +9,7 @@ export class FormTypeService {
   constructor(private qaHttp: QaHttpService) { }
 
   getFormType(formName: string): Observable<any> {
-    return this.qaHttp.get<any>(GET_FORM_TYPE.replace(FORM_TYPE_PLACEHOLDER, formName));
+    return this.qaHttp.get<any>({ ref: 'GET_FORM_TYPE', params :{formName}});
   }
 
   /**
