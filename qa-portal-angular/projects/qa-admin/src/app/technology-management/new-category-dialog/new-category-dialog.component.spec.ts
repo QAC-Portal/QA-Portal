@@ -22,8 +22,6 @@ describe('NewCategoryDialogComponent', () => {
       imports: [
         ReactiveFormsModule,
         MatFormFieldModule,
-        MatOptionModule,
-        MatSelectModule,
         MatDialogModule,
         MatInputModule,
         BrowserAnimationsModule

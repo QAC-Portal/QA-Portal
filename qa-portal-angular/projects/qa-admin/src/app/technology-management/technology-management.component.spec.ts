@@ -17,7 +17,8 @@ describe('TechnologyManagementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TechnologyManagementComponent,
+      declarations: [
+        TechnologyManagementComponent,
         MockComponents(
           SpinnerOverlayComponent,
           DataTableComponent
