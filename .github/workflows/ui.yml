@@ -24,6 +24,9 @@ jobs:
       - name: Test Common Project
         working-directory: ./qa-portal-angular
         run: npm run test -- --project qa-common --browsers=ChromiumCI --watch=false --code-coverage
+      - name: Test Forms Project
+        working-directory: ./qa-portal-angular
+        run: npm run test -- --project qa-forms --browsers=ChromiumCI --watch=false --code-coverage
       - name: Build
         working-directory: ./qa-portal-angular
         run: npm run build -- --prod
