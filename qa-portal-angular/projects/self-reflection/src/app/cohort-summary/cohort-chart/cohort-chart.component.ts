@@ -54,7 +54,12 @@ export class CohortChartComponent implements OnInit {
           xAxes: [{
             display: true
           }],
-          yAxes: [{
+          yAxes: [{ 
+            ticks: {
+              max: 10,
+              min: 0,
+              stepSize: 1
+            },
             display: true
           }],
         }
@@ -89,7 +94,10 @@ export class CohortChartComponent implements OnInit {
     }
   }
 
+  public color;
   private random_rgba(seed) {
-    return randomColor({ seed, hue: 'random', luminosity: 'random' });
+    this.color = randomColor({ seed, hue: 'random', luminosity: 'random' });
+    console.log(this.color);
+    return this.color;
   }
 }
