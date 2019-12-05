@@ -18,6 +18,7 @@ import { ApplicationService } from './_common/services/application.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PortalHomeComponent } from './portal-home/portal-home.component';
+import { PortalHelpComponent } from './portal-help/portal-help.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PortalHomeComponent } from './portal-home/portal-home.component';
     HeaderLinkComponent,
     PortalApplicationHomeComponent,
     PortalHomeComponent,
+    PortalHelpComponent,
   ],
   imports: [
     BrowserModule,

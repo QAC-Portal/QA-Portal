@@ -1,0 +1,31 @@
+.help-bar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed; 
+    bottom: 0; 
+    right: 0;
+    z-index: 10;
+  }
+
+  .help-bar button.mat-flat-button {
+    float: left;
+    display: block;
+    color: #004050;
+    background: #eeeeee;
+    text-align: center;
+    text-decoration: none;
+    padding: 2px 150px;
+  }
+
+  button.mat-flat-button{
+    border-radius: 0px;
+  }
+
+  .help-bar button:hover {
+    background: #ddd;
+    color: black;
+  }
+
+  .main {
+    margin-bottom: 20px; 
+  }
