@@ -1,6 +1,6 @@
 <div class="mat-elevation-z8">
 
-  <app-data-table #dataTable [displayedColumns]="displayedColumns" [dataSource]="dataSource" (rowSelectionChange)="selectChange($event)">
+  <app-data-table #dataTable [displayedColumns]="displayedColumns" [dataSource]="dataSource" [actionsEnabled]="false" (rowSelectionChange)="selectChange($event)" [clickRowWillCheckBox]="true">
     <!-- Name Columns -->
     <ng-container matColumnDef="cohortName">
       <th mat-header-cell *matHeaderCellDef>Cohort Name</th>

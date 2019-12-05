@@ -21,7 +21,7 @@ export class CohortTableComponent implements OnChanges {
   selectChange(){
     
     this.cohortsToShow = this.dataTable.getSelectedRowsData();
-    this.shownCohortsChange.emit(this.cohortsToShow)
+    this.shownCohortsChange.emit(this.cohortsToShow);
 
   }
 
