@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   font-size: 14px;
+  margin-top: 20px;
 }
 
 .qa-radio-btn-grp-label {
@@ -9,7 +10,7 @@
   color: white;
   font-size: 14px;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 15px;
   text-align: center;
 }
 
@@ -50,4 +51,8 @@
 .horizontal-radio-btn {
   display: flex;
   flex-direction: column;
+}
+
+.textarea-response{
+width: 100%;
 }
