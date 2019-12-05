@@ -1,0 +1,93 @@
+.row{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.col-no-fit{
+    display: flex;
+    flex-direction: column;
+}
+
+.col-3{
+    display: flex;
+    flex-direction: column;
+    width: 33.333333%;
+}
+
+.block-container{
+    width: 100%;
+    align-items: center;
+}
+
+.block-item{
+    color: white;
+    text-shadow: 1px 2px 3px black;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    align-self: center;
+    align-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.80);
+    height: 230px;
+}
+
+.block-title{
+    color: white !important;
+    font-size: 2.3em;
+}
+
+.sub-block-item{
+    align-self: center;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    height: 80px;
+}
+
+.sub-block-title{
+    font-size: 12px;  @media (min-width: 400px) {
+        font-size: 15px;
+      }  @media (min-width: 600px) {
+        font-size: 18px;
+      } @media (min-width: 800px) {
+        font-size: 20px;
+      }
+}
+
+.sub-block-text{
+    max-width: 100px;
+    text-align: center;
+}
+
+.block-button{
+    width: 6rem;
+    align-self: center;
+    background: rgb(255, 255, 255, 0.7);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+$bg-imgs:   url("../../assets/images/QA-bg-img1.jpg"),
+            url("../../assets/images/QA-bg-img2.jpg"),
+            url("../../assets/images/QA-bg-img3.jpg"),
+            url("../../assets/images/QA-bg-img4.jpg");
+
+@each $url in $bg-imgs {
+    $i: index($list: $bg-imgs, $value: $url);
+    .bg-img-#{$i} {
+        background-image: $url;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: right;    
+    }
+}

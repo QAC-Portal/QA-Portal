@@ -1,2 +1,35 @@
-<h1 class="mat-title">Portal Home</h1>
-<p class="mat-caption">This page is a work in progress.</p>
+<div class="h-100 w-100" style="display: flex;">
+  <div class="my-auto w-100">
+    <header>
+      <h1 class="mat-display-3 text-center" style="margin:0;">Welcome to QA Portal</h1>
+      <p class="mat-caption text-center">The QAC Feedback, CV Management and Reflection Hub
+      </p>
+    </header>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <div *ngFor="let portalApp of (appService.portalApplications$ | async); index as i"
+        [ngClass]="'bg-img-' + (i + 1)" class="block-item col">
+        <div class="col" style="align-self: center;">
+          <h1 class="block-title">{{portalApp?.portalApplication?.name || 'Unknown Department'}}</h1>
+          <mat-divider></mat-divider>
+          <br>
+          <div class="sub-block-container row">
+            <div *ngFor="let app of portalApp.portalProjects" class="sub-block-item col">
+              <h2 class="sub-block-title">{{app.name}}</h2>
+              <!-- <p class="sub-block-text">make text field in model for appService. portalApllications .portalProjects, after this is done change input value of this textbox to {{app.text}}</p> -->
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+          <br>
+          <button routerLink="{{portalApp.portalApplication.baseUrl}}" class="block-button">Continue</button>
+        </div>
+
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <section name="portal-actions" style="display: flex; flex-direction: column">
+      <p class="text-center mat-body-strong">These links can also be found in the side menu.</p>
+      <button mat-stroked-button color="primary" class="mx-auto" (click)="sideMenuService.setOpenState(true)"
+        [disabled]="sideMenuService.sideMenuOpen">Open side menu</button>
+    </section>
+  </div>
