@@ -8,11 +8,10 @@ import { MatIconModule, MatDialogRef, MatDialogModule } from '@angular/material'
 import { RoleService } from '../_common/services/role.service';
 import { MockRoleService } from '../_mocks/role.service.mock';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockMatDialogRef } from 'projects/portal-core/src/app/_mocks/mat-dialog-ref.mock';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { MockQaErrorHandlerService } from 'projects/portal-core/src/app/_mocks/qa-error-handler.service.mock';
 
-fdescribe('RoleManagementComponent', () => {
+describe('RoleManagementComponent', () => {
   let component: RoleManagementComponent;
   let fixture: ComponentFixture<RoleManagementComponent>;
 
