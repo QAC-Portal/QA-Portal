@@ -1,29 +1,32 @@
 <div style="display: flex; flex-direction: column; margin-top: 10px">
 
-  <div style="display: flex; flex-direction: row">
-    <div class="qa-checkbox-grp-label" style="width: 65%;">
+  <div style="flex-direction: row">
+    <div class="qa-checkbox-grp-label">
       {{question.body}}
     </div>
 
-    <div style="width: 5%"></div>
 
-    <div style="display: flex; width:35%">
-      <div style="display: flex; flex-direction: column;">
-        <mat-checkbox #matCheckBox class="checkbox-response" *ngFor="let option of question.selectionOptionsList"
-                      [value]="option" [disabled]="isDisabled"
-                      [checked]="matchesValue(option, questionResponse.responseValues)"
-                      (change)="setCheckResponse($event)" style="padding-right : 10px;">{{option}}</mat-checkbox>
+    <section role="grid" name="portal-applications" class="checkbox-grid-width">
+      <div class="app-card-container" *ngFor="let option of question.selectionOptionsList">
+        <mat-card class="checkbox-card">
+          <mat-grid-tile>
+          </mat-grid-tile>
+          <mat-card-content style="margin: 0 -16px -16px; white-space: nowrap">
+            <mat-checkbox flex="auto" #matCheckBox class="checkbox-response" [value]="option" [disabled]="isDisabled" 
+              [checked]="matchesValue(option, questionResponse.responseValues)" (change)="setCheckResponse($event)"
+              style="padding-right : 10px; word-wrap: normal;">
+              {{option}}
+            </mat-checkbox>
+          </mat-card-content>
+        </mat-card>
       </div>
-    </div>
+    </section>
   </div>
 
   <div style="display: flex; margin-top: 10px; margin-bottom: 10px;" *ngIf="question.hasComment">
-    <div class="checkbox-filler"></div>
-    <textarea class="checkbox-response" matInput
-              [disabled]="isDisabled"
-              [ngModel]="questionResponse?.comment?.content"
-              (ngModelChange)="setComment($event)"
-              placeholder="{{question.commentLabel}}"></textarea>
-    <div class="checkbox-filler"></div>
+    <div class="textarea-filler"></div>
+    <textarea class="textarea-response" matInput [disabled]="isDisabled" [ngModel]="questionResponse?.comment?.content"
+      (ngModelChange)="setComment($event)" placeholder="{{question.commentLabel}}"></textarea>
+    <div class="textarea-filler"></div>
   </div>
 </div>

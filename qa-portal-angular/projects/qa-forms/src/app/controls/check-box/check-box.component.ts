@@ -5,7 +5,7 @@ import {MatCheckboxChange} from '@angular/material';
 @Component({
   selector: 'app-check-box',
   templateUrl: './check-box.component.html',
-  styleUrls: ['./check-box.component.css']
+  styleUrls: ['./check-box.component.scss']
 })
 export class CheckBoxComponent extends GenericControlComponent implements OnInit {
 
