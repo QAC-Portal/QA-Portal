@@ -90,6 +90,6 @@ export class CohortChartComponent implements OnInit {
   }
 
   private random_rgba(seed) {
-    return randomColor({ seed, hue: 'random', luminosity: 'random' });
+    return randomColor({ seed, hue: 'random', luminosity: 'bright' });
   }
 }
