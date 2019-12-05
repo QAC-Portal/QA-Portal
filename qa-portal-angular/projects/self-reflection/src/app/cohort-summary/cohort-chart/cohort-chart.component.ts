@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { CohortSummaryModel } from '../../_common/models/cohort-summary.model';
 
+import { randomColor } from 'randomcolor';
+
 @Component({
   selector: 'app-cohort-chart',
   templateUrl: './cohort-chart.component.html',
@@ -75,7 +77,7 @@ export class CohortChartComponent implements OnInit {
           data: r.averageRatings,
           fill: false,
           borderWidth: 1,
-          borderColor: this.random_rgba(),
+          borderColor: this.random_rgba(r.cohortName),
           lineTension: 0.2
         });
       });
@@ -87,10 +89,7 @@ export class CohortChartComponent implements OnInit {
     }
   }
 
-  private random_rgba() {
-    const o = Math.round;
-    const r = Math.random;
-    const s = 255;
-    return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+  private random_rgba(seed) {
+    return randomColor({ seed, hue: 'random', luminosity: 'random' });
   }
 }
