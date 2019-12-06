@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { QaHelpService } from '../../_common/services/qa-help.service';
 
 @Component({
   selector: 'app-portal-help-content',
@@ -8,17 +9,24 @@ import { Router } from '@angular/router';
 })
 export class PortalHelpContentComponent implements OnInit {
   @Input() currentUrl: string;
+  message: string;
+  constructor(private helpService: QaHelpService, private router: Router){
+    this.helpService.currentMessage.subscribe(message => this.message = message);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd){
+        this.helpService.changeMessage();
+      }
+      
+    })
+  }
+  
+  change(){
+  
+  }
 
   
-
-  
-
-  constructor() {
-    
-   }
-
   ngOnInit() {
-
+    this.helpService.currentMessage.subscribe(message => this.message = message);
   }
 
 }
