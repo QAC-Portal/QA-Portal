@@ -24,8 +24,6 @@ update training.role set portal_application_id = 1 where id in (1, 2, 3);
 update training.role set portal_application_id = 2 where id in (4, 5, 6);
 update training.role set portal_application_id = 3 where id in (7, 8, 9);
 
--- insert into training.role (id, name, portal_application_id) values (11, 'any', 4);
-
 insert into training.role_project_page (id, role_id, project_page_id) VALUES (12, 2, 12);
 insert into training.role_project_page (id, role_id, project_page_id) VALUES (13, 11, 3);
 
