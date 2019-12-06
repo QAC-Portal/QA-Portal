@@ -56,7 +56,7 @@ public class CohortMapper {
                 .ifPresent(t -> cohortDto.setTrainerUserName(t.getUserName()));
         cohortDto.setTraineeNames(new ArrayList<>());
         qaCohortEntity.getTrainees().stream()
-                .forEach(te -> cohortDto.getTraineeNames().add(te.getUserName()));
+        		.forEach(te -> cohortDto.getTraineeNames().add(te.getUserName()));
         setCohortCourseDtos(cohortDto, qaCohortEntity);
         return cohortDto;
     }

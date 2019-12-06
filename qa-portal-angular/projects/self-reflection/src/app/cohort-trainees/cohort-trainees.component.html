@@ -13,9 +13,9 @@
       <mat-panel-title class="form-category-header">
         Cohorts
       </mat-panel-title>
-<!--      <mat-panel-description>-->
-<!--        Select a cohort to display the trainees with reflections for review-->
-<!--      </mat-panel-description>-->
+      <!--      <mat-panel-description>-->
+      <!--        Select a cohort to display the trainees with reflections for review-->
+      <!--      </mat-panel-description>-->
     </mat-expansion-panel-header>
 
     <table mat-table [dataSource]='dataSource' class="mat-elevation-z8">
@@ -34,8 +34,8 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="cohortColumns"></tr>
-      <tr  class="cohort-row" mat-row  matTooltip="Select cohort to display the trainees with reflections for review"
-           *matRowDef='let row; columns: cohortColumns;' (click)='updateTraineesTable(row)'></tr>
+      <tr class="cohort-row" mat-row matTooltip="Select cohort to display the trainees with reflections for review"
+        *matRowDef='let row; columns: cohortColumns;' (click)='updateTraineesTable(row)'></tr>
     </table>
   </mat-expansion-panel>
 
@@ -46,13 +46,15 @@
     <mat-spinner [diameter]="70" *ngIf="loadingTrainees"></mat-spinner>
   </div>
 
+  <!-- cohort trainees -->
+
   <mat-card *ngIf="!!cohortSelected && !loadingTrainees">
     <mat-card-subtitle *ngIf="dataSourceTrainees.data.length > 0">
-      <span style="margin-left: 5px;">{{ cohortSelected }} has the following trainees with a reflection for review</span>
+      <span style="margin-left: 5px;"> All {{ cohortSelected }} trainees</span>
     </mat-card-subtitle>
 
     <mat-card-subtitle *ngIf="dataSourceTrainees.data.length === 0">
-      <span style="margin-left: 5px;">No Trainees in {{ cohortSelected }} with a reflection for review</span>
+      <span style="margin-left: 5px;">No Trainees in cohort {{ cohortSelected }}</span>
     </mat-card-subtitle>
 
     <mat-card-content>
@@ -77,9 +79,43 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="traineeColumns"></tr>
-        <tr class="trainee-row" mat-row matTooltip="Select trainee to review their reflection form"
-            *matRowDef="let row; columns: traineeColumns;" [routerLink]="reviewReflectionForm(row.id)"></tr>
+        <tr class="trainee-row" mat-row matTooltip="Review this trainee's reflection forms"
+          *matRowDef="let row; columns: traineeColumns;" (click)="updateReflectionFormTable(row)"></tr>
       </table>
     </mat-card-content>
   </mat-card>
+  <br><br>
+
+  <!-- reflection forms for trainees to be reviewed by trainers -->
+
+  <mat-card *ngIf="!!traineeSelected && !loadingReflections">
+    <mat-card-subtitle *ngIf="dataSourceTraineeReflections.data.length > 0">
+      <span style="margin-left: 5px;"> All refleciions for {{ traineeSelected }}</span>
+    </mat-card-subtitle>
+
+    <mat-card-subtitle *ngIf="dataSourceTraineeReflections.data.length === 0">
+      <span style="margin-left: 5px;"> No reflections for {{ traineeSelected }}</span>
+    </mat-card-subtitle>
+
+    <mat-card-content>
+      <table mat-table [dataSource]='dataSourceTraineeReflections' class="mat-elevation-z8">
+        <ng-container matColumnDef='userName'>
+          <th mat-header-cell *matHeaderCellDef> User name</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.responder.userName}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef='formDate'>
+          <th mat-header-cell *matHeaderCellDef> Reflection Submission Date</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.formDate}}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="reflectionColumns"></tr>
+        <tr class="reflection-form-row" mat-row matToolTip="Select reflection form to be reviewd"
+          *matRowDef="let row; columns: reflectionColumns;" [routerLink]="reviewReflectionForm(row.id)"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
 </div>
