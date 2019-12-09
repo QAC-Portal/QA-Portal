@@ -8,20 +8,21 @@
               Comments
             </h4>
           </div>
-          
-          
+
+
           <button mat-icon-button (click)="drawer.close()" title="Hide comments">
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
         <div #commentContainer class="middle" data-simplebar>
           <div class="comment-bubble" *ngFor="let comment of feedback">
-
-            <div class="comment-body">
-              {{comment.comment}}
-            </div>
-            <div>
-              <input type="checkbox">
+            <div class="checkbox-row">
+              <div class="comment-body">
+                {{comment.comment}}
+              </div>
+              <div class="checkbox-div">
+                <mat-checkbox>resolved</mat-checkbox>
+              </div>
             </div>
             <div class="comment-details mat-caption">
               <div class="reviewer">
@@ -41,7 +42,7 @@
         <div class="bottom" *ngIf="canComment">
           <form class="comment-form" (ngSubmit)="addFeedbackItem()">
             <mat-form-field class="comment-form-field" class="comment-field"
-                            [hideRequiredMarker]="options.value.hideRequired" floatLabel="never">
+              [hideRequiredMarker]="options.value.hideRequired" floatLabel="never">
               <input [formControl]="commentInput" type="text" matInput placeholder="Write a comment" autocomplete="off">
               <mat-icon matSuffix (click)="addFeedbackItem()">send
               </mat-icon>
@@ -51,10 +52,10 @@
       </div>
     </mat-drawer>
     <mat-card-header>
-        <mat-card-title>{{cardTitle || ''}}</mat-card-title>
-        <button mat-icon-button *ngIf="showOpenButton && !drawer.opened" (click)="drawer.open()" title="Show comments">
-          <mat-icon>feedback</mat-icon>
-        </button>
+      <mat-card-title>{{cardTitle || ''}}</mat-card-title>
+      <button mat-icon-button *ngIf="showOpenButton && !drawer.opened" (click)="drawer.open()" title="Show comments">
+        <mat-icon>feedback</mat-icon>
+      </button>
     </mat-card-header>
     <mat-card-content>
       <div class="card-base-content-wrapper">

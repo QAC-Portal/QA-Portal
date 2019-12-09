@@ -64,6 +64,7 @@ export class ViewCvComponent implements OnInit {
     } else {
       this.initialiseCvPageForAdmin();
     }
+    console.log(this.cvData);
   }
 
   openDialog(): void {
