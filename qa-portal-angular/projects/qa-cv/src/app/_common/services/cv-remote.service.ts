@@ -13,7 +13,7 @@ export class CvRemoteService {
 
   public getCvPdf(cv: CvModel): Observable<Blob> {
     return this.httpClient.post(
-      'cv-api/public/cv/generated',
+      '/cv-api/cv/generated',
       cv,
       {
         responseType: 'arraybuffer',
