@@ -168,6 +168,7 @@ export class ViewCvComponent implements OnInit {
         this.cvService.getCvForId(paramMap.get('id')).subscribe(
           (response) => {
             this.cvData = response;
+            console.log(this.cvData);
             this.refreshPageStatus();
           },
           (error) => {
