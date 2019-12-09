@@ -1,0 +1,11 @@
+{ 
+  "HomePage": "/qa/portal/home This is your home page. Use this as a starting area to navigate across the portal. Use the tabs on the top to navigate you across different sections of the portal.",
+  "TrainingPage": "/qa/portal/training This is the training page to manage your current training at the academy. The links on the page are as followed:",
+  "Feedback": "For providing feedback for your trainer and to evaluate your experience at the academy",
+  "CVManagement": "For viewing and editing your current CV",
+  "Reflection": "For adding and viewing reflections on your progress at the academy",
+  "EvaluationHistory": "/qa/portal/training/feedback/trainee/evaluation/history Evalution History",
+  "CurrentCV": "/qa/portal/training/cv/trainee/current Current CV",
+  "TraineeReflections": "/qa/portal/training/self-reflection/trainee/history Trainee Reflections",
+  "CurrentReflection": "/qa/portal/training/self-reflection/trainee/new Current Reflections"
+}

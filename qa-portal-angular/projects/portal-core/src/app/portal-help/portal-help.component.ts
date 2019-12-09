@@ -13,12 +13,6 @@ export class PortalHelpComponent implements OnInit {
 
   ngOnInit() {
   }
-  
-  DetectUrl(){
-    if (this.currentUrl != window.location.href){
-      this.currentUrl = window.location.href;
-    }
-  }
 }
 
 

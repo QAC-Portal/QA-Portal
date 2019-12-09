@@ -10,20 +10,18 @@ import { QaHelpService } from '../../_common/services/qa-help.service';
 export class PortalHelpContentComponent implements OnInit {
   @Input() currentUrl: string;
   message: string;
+  
+
   constructor(private helpService: QaHelpService, private router: Router){
     this.helpService.currentMessage.subscribe(message => this.message = message);
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd){
-        this.helpService.changeMessage();
+        let file = this.helpService.accessFile();
+        this.helpService.changeMessage(file, this.router.url);
       }
     })
   }
-  
-  change(){
-  
-  }
 
-  
   ngOnInit() {
     this.helpService.currentMessage.subscribe(message => this.message = message);
   }
