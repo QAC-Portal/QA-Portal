@@ -37,30 +37,28 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.80);
-    height: 230px;
+    max-width: 800px;
 }
 
 .block-title{
     color: white !important;
-    font-size: 2.3em;
+    font-size: calc(20px + .8vw);
 }
 
 .sub-block-item{
     align-self: center;
-    margin: 5px;
-    padding: 5px;
+    text-align: center;
+    align-content: center;
+    align-items: center;
     border-radius: 3px;
-    height: 80px;
+    padding: 10px;
+    height: calc(60px + 2vw);
 }
 
 .sub-block-title{
-    font-size: 12px;  @media (min-width: 400px) {
-        font-size: 15px;
-      }  @media (min-width: 600px) {
-        font-size: 18px;
-      } @media (min-width: 800px) {
-        font-size: 20px;
-      }
+    font-size: calc(6px + .8vw);
+    vertical-align: middle;
+    margin: auto;
 }
 
 .sub-block-text{
@@ -69,12 +67,10 @@
 }
 
 .block-button{
-    width: 6rem;
+    width: calc(90px + .6vw);
     align-self: center;
-    background: rgb(255, 255, 255, 0.7);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 4px;
-    font-size: 1rem;
+    font-size: calc(8px + .5vw);
 }
 
 $bg-imgs:   url("../../assets/images/QA-bg-img1.jpg"),
