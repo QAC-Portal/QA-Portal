@@ -43,13 +43,26 @@ export class CvCardBaseComponent {
   }
 
 
+
+  onCommentCheckboxClicked(comment: IFeedback, index: number) {
+    event.preventDefault(); // Stop default checkbox behaviour
+    event.stopPropagation(); // Stop the row from clicking when using a checkbox
+    
+    if (comment) {
+      this.feedback[index].resolved = this.feedback[index] === undefined ? false : !this.feedback[index].resolved;
+      this.feedbackChange.emit(this.feedback);
+    }
+  }
+  //need to update by index, could use similar top below. 
+
+
   addFeedbackItem(): void {
     if (this.commentInput.valid) {
       const fb: IFeedback = {
         comment: this.commentInput.value,
         date: moment().format(),
         reviewer: this.keycloak.getUsername(),
-        resolved: false
+        resolved: true
       };
       this.feedback.push(fb);
       this.feedbackChange.emit(this.feedback);
