@@ -25,6 +25,13 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
+    customLaunchers: {
+      ChromiumCI: {
+        base: 'ChromiumHeadless',
+        flags: ['--no-sandbox'],
+        displayName: 'Chromium for CI (headless, --no-sandbox)'
+      }
+    },
     browsers: ['Chrome'],
     singleRun: false,
     restartOnFileChange: true
