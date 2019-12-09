@@ -8,7 +8,7 @@ import {TrainerFeedbackHistoryModel} from './models/trainer-feedback-history.mod
 @Component({
   selector: 'app-trainer-feedback-history',
   templateUrl: './trainer-feedback-history.component.html',
-  styleUrls: ['./trainer-feedback-history.component.scss']
+  styleUrls: ['./trainer-feedback-history.component.css']
 })
 export class TrainerFeedbackHistoryComponent implements OnInit {
 

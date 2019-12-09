@@ -1,0 +1,34 @@
+mat-card {
+    margin-bottom: 2rem;
+}
+
+.submit-button {
+    margin-bottom: 2rem;
+}
+
+
+.loading-overlay {
+    position: fixed;
+    top:0px;
+    left: 0px;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background: #00000022;
+    mat-spinner {
+        margin: auto;
+    }
+}
+
+.action-buttons {
+    display: flex;
+    button {
+        &:first-of-type {
+            margin-right: 1rem;
+        }
+        &:last-of-type {
+            margin-left: 1rem;
+        }
+        
+    }
+}

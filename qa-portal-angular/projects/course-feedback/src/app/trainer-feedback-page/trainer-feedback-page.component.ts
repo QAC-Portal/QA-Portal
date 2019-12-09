@@ -7,7 +7,7 @@ import {FormPage} from '../_common/form-page';
 @Component({
   selector: 'app-trainer-feedback-page',
   templateUrl: './trainer-feedback-page.component.html',
-  styleUrls: ['./trainer-feedback-page.component.scss']
+  styleUrls: ['./trainer-feedback-page.component.css']
 })
 export class TrainerFeedbackPageComponent extends FormPage implements OnInit, OnDestroy {
 
