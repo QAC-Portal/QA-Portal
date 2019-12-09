@@ -28,9 +28,22 @@ describe('RatedQuestionComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should allow you to pick a rating', () => {
+  it('should check if setModel correctly sets response value', () => {
     const testData = '1';
     component.setModel(testData);
     expect(component.selectedRating.response).toEqual(testData);
-  })
+  });
+
+  it('should check if radio button has the same value as its label', () => {
+    const testData = '1';
+    component.setModel(testData);
+    expect(component.matchedValue(JSON.stringify(testData))).toBeTruthy();
+  });
+
+  it('should check if radio button does not have the same value as its label as a false input value', () => {
+    const testData = '1';
+    const testDataFalse = '2'
+    component.setModel(testData);
+    expect(component.matchedValue(JSON.stringify(testDataFalse))).toBeFalsy();
+  });
 });
