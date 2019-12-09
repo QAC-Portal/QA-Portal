@@ -27,6 +27,7 @@ import {APPROVED_STATUS, FAILED_REVIEW_STATUS, FOR_REVIEW_STATUS, IN_PROGRESS_ST
 })
 export class ViewCvComponent implements OnInit {
 
+  // keep "canComment" and "canEdit" permission names as commenting and editing permissions depend on role AND cv status.
   @Output() public canComment = false;
 
   @Output() public canEdit = true;

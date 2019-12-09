@@ -15,13 +15,13 @@
           </button>
         </div>
         <div #commentContainer class="middle" data-simplebar>
-          <div class="comment-bubble" *ngFor="let comment of feedback">
+          <div class="comment-bubble" *ngFor="let comment of feedback; let i = index">
             <div class="checkbox-row">
               <div class="comment-body">
                 {{comment.comment}}
               </div>
               <div class="checkbox-div">
-                <mat-checkbox [(ngModel)]="checked" >resolved</mat-checkbox>
+                <mat-checkbox [checked]="comment.resolved" (click)="onCommentCheckboxClicked(comment, i);" >resolved</mat-checkbox>
               </div>
             </div>
             <div class="comment-details mat-caption">
