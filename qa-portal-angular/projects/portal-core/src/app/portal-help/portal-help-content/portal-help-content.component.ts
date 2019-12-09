@@ -16,7 +16,6 @@ export class PortalHelpContentComponent implements OnInit {
       if (event instanceof NavigationEnd){
         this.helpService.changeMessage();
       }
-      
     })
   }
   
