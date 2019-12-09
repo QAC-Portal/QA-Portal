@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RatedQuestionComponent } from './rated-question.component';
+import { MatRadioModule } from '@angular/material';
 
 describe('RatedQuestionComponent', () => {
   let component: RatedQuestionComponent;
@@ -8,9 +9,10 @@ describe('RatedQuestionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RatedQuestionComponent ]
+      declarations: [RatedQuestionComponent],
+      imports: [MatRadioModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

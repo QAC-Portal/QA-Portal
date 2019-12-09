@@ -36,6 +36,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "moment-business": "^3.0.1",
+    "ng-mocks": "^8.1.0",
     "ngx-toastr": "10.0.4",
     "popper": "^1.0.1",
     "randomcolor": "^0.5.4",
