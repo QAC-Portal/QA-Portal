@@ -18,10 +18,19 @@ describe('RatedQuestionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RatedQuestionComponent);
     component = fixture.componentInstance;
+
+    component.selectedRating = { response: null };
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should allow you to pick a rating', () => {
+    const testData = '1';
+    component.setModel(testData);
+    expect(component.selectedRating.response).toEqual(testData);
+  })
 });
