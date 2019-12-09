@@ -42,6 +42,12 @@ export class CvCardBaseComponent {
     SimpleBar.getScrollElement().scrollTo(0, SimpleBar.contentEl.clientHeight);
   }
 
+  updateFeedbackStatus(){
+    //activates on click of checkbox
+    //
+
+  }
+
 
   addFeedbackItem(): void {
     if (this.commentInput.valid) {
