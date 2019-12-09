@@ -1,11 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ListComponent } from './list.component';
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ExpanderDirective } from './directives/expander.directive';
 
-fdescribe('ListComponent', () => {
+describe('ListComponent', () => {
   let component: ListComponent<any>;
   let fixture: ComponentFixture<ListComponent<any>>;
 
