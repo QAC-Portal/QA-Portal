@@ -15,8 +15,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'error/404',
-    redirectTo: '/error?errorMsg=Page not found. Please try again./'
+    path: '404',
+    redirectTo: '/error?errorMsg=Page not found. Please try again.'
   }
 ];
 
