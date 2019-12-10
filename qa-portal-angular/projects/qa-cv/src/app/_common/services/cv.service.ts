@@ -4,8 +4,8 @@ import { CvModel } from '../models/cv.model';
 import { of, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import * as mom from 'moment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ICvModel} from '../../_common/models/qac-cv-db.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ICvModel } from '../../_common/models/qac-cv-db.model';
 import {
   APPLICATION_PDF_CONTENT_TYPE, GENERATE_CV_URL,
   GET_CURRENT_CV_URL,
@@ -13,7 +13,7 @@ import {
   GET_SKILLS_FOR_TRAINEE_URL,
   SAVE_CV_DATA_URL
 } from '../../_common/models/cv.constants';
-import {take} from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ import {take} from 'rxjs/operators';
 export class CvService {
 
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private cvRemote: CvRemoteService, private http: HttpClient) { }
@@ -58,8 +58,20 @@ export class CvService {
       return of(true);
     }));
   }
+  // /** POST: add a new cv to the server */
   createCv(cv: CvModel): Observable<CvModel> {
     return this.http.post<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
+      take(1)
+    );
+  }
+  /** PUT: update the cv on the server */
+  updateCv(cv: CvModel): Observable<CvModel> {
+    return this.http.put<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
+      take(1)
+    );
+  }
+  getCurrentCvForTrainee(): Observable<CvModel> {
+    return this.http.get<CvModel>(GET_CURRENT_CV_URL).pipe(
       take(1)
     );
   }

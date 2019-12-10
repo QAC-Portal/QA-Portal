@@ -6,6 +6,12 @@ import * as _ from 'lodash';
 import { MatChipInputEvent } from '@angular/material';
 import { CvService } from '../_common/services/cv.service';
 import { finalize } from 'rxjs/operators';
+import { ViewCvService } from '../view-cv/services/view-cv.service';
+import { IN_PROGRESS_STATUS } from '../view-cv/models/view-cv.constants';
+import { Observable } from 'rxjs';
+import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
+import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-generate-cv',
@@ -50,8 +56,11 @@ export class GenerateCvComponent implements OnInit {
   ];
 
   public cvForm: FormGroup;
+  cvData: CvModel;
+  isTraineeView = true;
+  cv: any;
 
-  constructor(private cvService: CvService) {
+  constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private VCvService: ViewCvService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
     const fb = new FormBuilder();
 
@@ -77,8 +86,23 @@ export class GenerateCvComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cvForm.patchValue(new CvModel());
+    // this.cvForm.patchValue(new CvModel());
+    // this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);  // Is page being displayed for Trainee or Admin
+    // if (this.isTraineeView) {
+      this.cvService.getCurrentCvForTrainee().subscribe((cv) => 
+      {
+        console.log(cv);
+        this.cv = {...this.cvForm, ...cv};
+        
+      });
+    // } else {
+    //   this.initialiseCvPageForAdmin();
+    // }
   }
+    // this.cvService.getCurrentCvForTrainee().subscribe(
+    //     (cv) => {
+    //       this.cvData = {...DEFAULT_CV, ...cv};
+
 
   public removeSkill(category, value): void {
     this.cvForm.patchValue({
@@ -95,48 +119,97 @@ export class GenerateCvComponent implements OnInit {
     input.value = '';
   }
 
+  private getCvData(): CvModel {
+    const { skills, qualifications, workExperience, ...rest } = this.cvForm.value;
+    return _.merge(new CvModel(), {
+      allSkills: [skills],
+      allQualifications: qualifications,
+      allWorkExperience: workExperience,
+      fullName: `${rest.firstName} ${rest.surname}`,
+      ...rest
+    } as CvModel).build();
+  }
+
 
   onGenerateCvButtonClicked() {
-    const { skills, qualifications, workExperience, ...rest } = this.cvForm.value;
-
     this.cvForm.disable();
     this.isLoading = true;
-    this.cvService.displayCvPdf(
-      _.merge(new CvModel(), {
-        allSkills: [skills],
-        allQualifications: qualifications,
-        allWorkExperience: workExperience,
-        fullName: `${rest.firstName} ${rest.surname}`,
-        ...rest
-      } as CvModel)).pipe(
-        finalize(() => {
-          this.cvForm.enable();
-          this.isLoading = false;
-        })
-      ).subscribe(() => { });
+    this.cvService.displayCvPdf(this.getCvData()).pipe(
+      finalize(() => {
+        this.cvForm.enable();
+        this.isLoading = false;
+      })
+    ).subscribe(() => { });
   }
-
 
   onDownloadCvButtonClicked() {
-    const { skills, qualifications, workExperience, ...rest } = this.cvForm.value;
-
     this.cvForm.disable();
     this.isLoading = true;
-    this.cvService.downloadCvPdf(
-      (_.merge(new CvModel(), {
-        allSkills: [skills],
-        allQualifications: qualifications,
-        allWorkExperience: workExperience,
-        fullName: `${rest.firstName} ${rest.surname}`,
-        ...rest
-      }) as CvModel).build()).pipe(
+    this.cvService.downloadCvPdf(this.getCvData()).pipe(
         finalize(() => {
           this.cvForm.enable();
           this.isLoading = false;
         })
       ).subscribe(() => { });
   }
-  onSaveCvButtonClicked(){
-    return 0;
+
+
+  onSaveCvButtonClicked() {
+    const cv = this.getCvData();
+    if (!cv.id) {
+      cv.status = IN_PROGRESS_STATUS;
+    }
+    this.persistCvForTrainee(cv);
   }
+
+
+  // CV PERSIST FUNCTIONS
+  private persistCvForTrainee(cv: CvModel) {
+    if (!cv.id) {
+      this.createCv(cv);
+    } else {
+      this.updateCv(cv);
+    }
+  }
+
+  private createCv(cv: CvModel): void {
+    this.processCvServiceResponse(this.cvService.createCv(cv));
+  }
+
+  private updateCv(cv: CvModel): void {
+    this.processCvServiceResponse(this.cvService.updateCv(cv));
+  }
+
+  private processCvServiceResponse(obs: Observable<CvModel>) {
+    this.cvForm.disable();
+    this.isLoading = true;
+    obs.pipe(
+      finalize(() => {
+        this.cvForm.enable();
+        this.isLoading = false;
+      })
+    ).subscribe(
+      (response) => {
+        this.cvData = response;
+        this.setPageEditStatus();
+      },
+      (error) => {
+        this.errorHandlerService.handleError(error);
+      }
+    );
+  }
+
+
+
+  // STATUS UPDATE FUNCTIONS
+  private setPageEditStatus(): void {
+    // this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
+  }
+
+  private setCommentStatus() {
+    // if (SubmitConfirmDialogComponent) {
+    //   this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
+    // }
+  }
+
 }

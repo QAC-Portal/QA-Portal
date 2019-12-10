@@ -37,7 +37,7 @@ export class CvModel {
     allWorkExperience: WorkExperienceModel[] = [];
     otherWorkExperience: WorkExperienceModel[] = [];
     hobbies: HobbiesModel = new HobbiesModel();
-    id = 'standalone';
+    id: string;
     status: string;
     userName: string;
     firstName: string;
