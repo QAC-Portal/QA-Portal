@@ -39,6 +39,9 @@ fdescribe('Portal Header Component Tests', () => {
     fixture = TestBed.createComponent(PortalHeaderComponent);
     keycloakService = TestBed.get(KeycloakService);
     component = fixture.componentInstance;
+
+    spyOn(keycloakService, 'getUsername').and.callThrough();
+     
     fixture.detectChanges();
   });
 
@@ -46,11 +49,11 @@ fdescribe('Portal Header Component Tests', () => {
     expect(component).toBeDefined();
   });
 
-  it('should get username', () => {
-    expect(keycloakService.getUsername()).toEqual('test username');
+  it('should get the username when the component initialises', () => {
+    expect(keycloakService.getUsername).toHaveBeenCalledTimes(1);
   });
 
-  it('should put username to be uppercase', () => {
+  it('should fetch the username and store it in uppercase', () => {
     expect(component.displayName).toEqual('TEST USERNAME');
   });
 });
