@@ -1,4 +1,4 @@
-<div style="display: flex; flex-direction: column; margin-top: 10px;">
+<div id="radioButtonLayout">
     <div class="qa-radio-btn-grp-label">
       {{question.body}}
     </div>
@@ -16,7 +16,7 @@
 
   <div></div>
 
-  <div style="display: flex; margin-top: 10px" *ngIf="question.hasComment">
+  <div id="commentsBox" *ngIf="question.hasComment">
       <mat-form-field appearance="outline" class="textarea-response">
         <mat-label>{{question.commentLabel}}</mat-label>
         <textarea matInput [disabled]="isDisabled" [ngModel]="questionResponse?.comment?.content"
