@@ -4,3 +4,4 @@ INSERT INTO training.application (id, name, url) VALUES (3, 'Apartment Managemen
 INSERT INTO training.application (id, name, url) VALUES (1, 'Trainee Self Reflection', '/qa/portal/training/trainee/selfreflections');
 INSERT INTO training.application (id, name, url) VALUES (6, 'Trainer Cohorts', '/qa/portal/training/trainer/cohort/trainees');
 INSERT INTO training.application (id, name, url) VALUES (7, 'Cohorts Ratings Summary', '/qa/portal/training/admin/cohorts');
+INSERT INTO training.application (id, name, url) VALUES (5, 'Portal Home', '/qa/portal/home');
