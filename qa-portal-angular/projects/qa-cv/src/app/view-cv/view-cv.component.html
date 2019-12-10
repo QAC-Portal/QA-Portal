@@ -16,7 +16,7 @@
   <div class="cv-content-wrapper" (onSubmit)="onCvSubmitForReview($event)">
     <section>
       <app-cv-card-base cardTitle="Personal Profile" [canComment]="canComment"
-        [feedback]="cvData?.profile?.profileFeedback">
+        (feedbackChange)="genericFeedBackChange()" [feedback]="cvData?.profile?.profileFeedback">
         <app-cv-profile [profile]="cvData?.profile" (profileChange)="cvData.profile = $event" [canEdit]="canEdit">
         </app-cv-profile>
       </app-cv-card-base>
@@ -24,7 +24,7 @@
 
     <section>
       <app-cv-card-base cardTitle="Hobbies and Interests" [canComment]="canComment"
-        [feedback]="cvData?.hobbies?.hobbiesFeedback">
+        (feedbackChange)="genericFeedBackChange()" [feedback]="cvData?.hobbies?.hobbiesFeedback">
         <app-cv-hobbies [hobbies]="cvData?.hobbies" (hobbiesChange)="cvData.hobbies = $event" [canEdit]="canEdit">
         </app-cv-hobbies>
       </app-cv-card-base>
@@ -43,7 +43,7 @@
     <section>
       <app-cv-card-base #expCard [feedback]="workExperienceFeedback" [canComment]="canComment"
         (feedbackChange)="onWorkExperienceFeedbackChange($event)" [showOpenButton]="false" cardTitle="Work Experience">
-        <app-cv-work-exp [experiences]="cvData?.allWorkExperience" 
+        <app-cv-work-exp [experiences]="cvData?.allWorkExperience"
           (experiencesChange)="cvData.allWorkExperience = $event"
           (feedbackClick)="onWorkExperienceFeedbackClick($event, expCard)" [canEdit]="canEdit">
         </app-cv-work-exp>
@@ -93,7 +93,7 @@
         <div *ngIf="canComment" style="margin-right: 20px"></div>
         <button *ngIf="canComment  && cvData.status !== 'Approved'" mat-flat-button color="primary"
           (click)="onCvFailedReview()" title="Fail Cv"
-          [disabled]="!cvData || cvData.status==='In Progress' || !cvData.status || cvData.status === 'Failed Review'">
+          [disabled]="!cvData || cvData.status==='In Progress' || !cvData.status || cvData.status === 'Failed Review' || allFeedbackCompleted">
           Fail
         </button>
       </div>
