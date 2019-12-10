@@ -61,7 +61,8 @@ appropriate for your platform. Version 11 is currently being used by the QA Port
 <a name="configure-postgres-module-and-datasource"></a>
 ### 2.2. Configure Postgres Module and Datasource
     
-	-!THIS PART IS IMPORTANT! if you miss this step you might have to restart (this part is not necessary if you have installed the latest version of Keycloak)<br> 
+
+   - !THIS PART IS IMPORTANT! if you miss this step you might have to restart (this part is not necessary if you have installed the latest version of Keycloak)<br> 
 
 
    - Copy the modules folder (and all it's contents) into your KEYCLOAK_HOME folder. This will set up your Postgres module.<br>
@@ -92,14 +93,15 @@ admin page. You should also have a master realm available which is created by de
 
 <a name="create scott-client"></a>
 ### 2.4.1. Create scott-client
-	- (This part should be removed in a future version, after the scripts used in step 2.4 will be fixed)<br>
-	
-	- Check you are in the QA-portal realm by looking on the top left part of the page.<br>
-	
-	- Navigate to 'Clients' and create a new Client named: "scott-client". Save.<br>
-	
-	- Navigate to 'import' and select the qa-portal-users-0.json from the exported_realms folder. Import all users, if a resource currently exists OVERWRITE. Click the Import button.
 
+   - (This part should be removed in a future version, after the scripts used in step 2.4 will be fixed) <br>
+
+   - Check you are in the QA-portal realm by looking on the top left part of the page.<br>
+	
+   - Navigate to 'Clients' and create a new Client named: "scott-client". Save.<br>
+	
+   - Navigate to 'import' and select the qa-portal-users-0.json from the exported_realms folder. Import all users, if a resource currently exists OVERWRITE. Click the Import button.
+	
 <a name="manage-keycloak-users"></a>
 ### 2.5. Manage keycloak users
 
@@ -129,16 +131,16 @@ Any additional new Portal users should be added through the QA Portal User manag
 
 <a name="in-case-of-error-500"></a>
 ### 2.6. In case of error 500
+
+- In case of error 500 while running the software please check what version of JAVA you are running by looking into the top right of the screen in keycloak, and by clicking server Info.
 	
-	- In case of error 500 while running the software please check what version of JAVA you are running by looking into the top right of the screen in keycloak, and by clicking server Info.
+- Keycloak only works properly with JRE or openJDK running
 	
-	- Keycloak only works properly with JRE or openJDK running
+- The latest version of jre should be used. We advise to always keep java version updated to avoid environment issues.
 	
-	- The latest version of jre should be used. We advise to always keep java version updated to avoid environment issues.
+- If any other version than jre is used, check your environment variable and look for the variable JAVA_HOME.
 	
-	- If any other version than jre is used, check your environment variable and look for the variable JAVA_HOME.
-	
-	- Edit the Variable JAVA_HOME by assigning the path to the java folder you wish to use by default, Or remove it to use the default jre:latest.
+- Edit the Variable JAVA_HOME by assigning the path to the java folder you wish to use by default, Or remove it to use the default jre:latest.
 
 <a name="mongodb"></a>
 ## 3. MongoDB
