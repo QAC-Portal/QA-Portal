@@ -62,7 +62,7 @@ export class CvCardBaseComponent {
         comment: this.commentInput.value,
         date: moment().format(),
         reviewer: this.keycloak.getUsername(),
-        resolved: true
+        resolved: false
       };
       this.feedback.push(fb);
       this.feedbackChange.emit(this.feedback);

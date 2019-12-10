@@ -1,28 +1,31 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {DEFAULT_CV, ICvModel} from '../_common/models/qac-cv-db.model';
-import {ViewCvService} from './services/view-cv.service';
-import {CvCardBaseComponent} from '../cv-card-base/cv-card-base.component';
-import {IFeedback} from '../_common/models/feedback.model';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {MAT_DATE_LOCALE, MatDialog} from '@angular/material';
-import {SubmitConfirmDialogComponent} from './submit-confirm-dialog/submit-confirm-dialog.component';
-import {QaErrorHandlerService} from '../../../../portal-core/src/app/_common/services/qa-error-handler.service';
-import {UserSkillsModel} from '../_common/models/user-skills.model';
-import {TRAINING_ADMIN_ROLE} from '../../../../portal-core/src/app/_common/models/portal-constants';
-import {ADMIN_CV_SEARCH_URL} from '../_common/models/cv.constants';
+import { Component, OnInit, Output } from '@angular/core';
+import { DEFAULT_CV, ICvModel } from '../_common/models/qac-cv-db.model';
+import { ViewCvService } from './services/view-cv.service';
+import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
+import { IFeedback } from '../_common/models/feedback.model';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { MAT_DATE_LOCALE, MatDialog } from '@angular/material';
+import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
+import { QaErrorHandlerService } from '../../../../portal-core/src/app/_common/services/qa-error-handler.service';
+import { UserSkillsModel } from '../_common/models/user-skills.model';
+import { TRAINING_ADMIN_ROLE } from '../../../../portal-core/src/app/_common/models/portal-constants';
+import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 import {
   ViewCvStateManagerService
 } from './services/view-cv-state-manager.service';
-import {ViewCvPageDataService} from './services/view-cv-page-data.service';
-import {Observable} from 'rxjs';
-import {APPROVED_STATUS, FAILED_REVIEW_STATUS, FOR_REVIEW_STATUS, IN_PROGRESS_STATUS} from './models/view-cv.constants';
+import { ViewCvPageDataService } from './services/view-cv-page-data.service';
+import { Observable } from 'rxjs';
+import { APPROVED_STATUS, FAILED_REVIEW_STATUS, FOR_REVIEW_STATUS, IN_PROGRESS_STATUS } from './models/view-cv.constants';
+import { TechnologyService } from 'projects/qa-admin/src/app/_common/technology.service';
+import { IProfile } from '../_common/models/profile.model';
+import { IHobbies } from '../_common/models/hobbies.model';
 
 @Component({
   selector: 'app-view-cv',
   templateUrl: './view-cv.component.html',
   styleUrls: ['./view-cv.component.scss'],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ]
 })
 export class ViewCvComponent implements OnInit {
@@ -47,6 +50,8 @@ export class ViewCvComponent implements OnInit {
   public workExperienceFeedback = [];
 
   public qualificationFeedback = [];
+
+  allFeedbackCompleted: boolean = false;
 
   constructor(
     private cvService: ViewCvService,
@@ -112,7 +117,11 @@ export class ViewCvComponent implements OnInit {
     this.cvUpdatedByAdmin(FAILED_REVIEW_STATUS);
   }
 
-  onWorkExperienceFeedbackClick({index}: { index: number }, expCard: CvCardBaseComponent): void {
+  genericFeedBackChange(){
+    this.allFeedbackCompleted = this.setAllFeedbackResolvedStatus();
+  }
+
+  onWorkExperienceFeedbackClick({ index }: { index: number }, expCard: CvCardBaseComponent): void {
     this.workExperienceFeedbackIndex = index;
     this.workExperienceFeedback = this.cvData.allWorkExperience[index].workExperienceFeedback;
     expCard.drawer.open();
@@ -120,9 +129,11 @@ export class ViewCvComponent implements OnInit {
 
   onWorkExperienceFeedbackChange(feedback: IFeedback[]): void {
     this.cvData.allWorkExperience[this.workExperienceFeedbackIndex].workExperienceFeedback = feedback;
+    this.allFeedbackCompleted = this.setAllFeedbackResolvedStatus();
+    console.log(this.allFeedbackCompleted)
   }
 
-  onQualificationFeedbackClick({index}: { index: number }, qualCard: CvCardBaseComponent): void {
+  onQualificationFeedbackClick({ index }: { index: number }, qualCard: CvCardBaseComponent): void {
     this.qualificationFeedbackIndex = index;
     this.qualificationFeedback = this.cvData.allQualifications[index].qualificationFeedback;
     qualCard.drawer.open();
@@ -130,6 +141,8 @@ export class ViewCvComponent implements OnInit {
 
   onQualificationFeedbackChange(feedback: IFeedback[]): void {
     this.cvData.allQualifications[this.qualificationFeedbackIndex].qualificationFeedback = feedback;
+    this.allFeedbackCompleted = this.setAllFeedbackResolvedStatus();
+    console.log(this.allFeedbackCompleted)
   }
 
   onUseExistingCvAsTemplateChanged() {
@@ -139,7 +152,7 @@ export class ViewCvComponent implements OnInit {
   private initialiseCvPageForTrainee() {
     this.cvService.getCurrentCvForTrainee().subscribe(
       (cv) => {
-        this.cvData = {...DEFAULT_CV, ...cv};    // use spread operator to merge blank default Cv with returned CV
+        this.cvData = { ...DEFAULT_CV, ...cv };    // use spread operator to merge blank default Cv with returned CV
         if (this.noExistingCvForTrainee(cv)) {
           this.initialiseBlankCvForTrainee();
         } else {
@@ -246,6 +259,30 @@ export class ViewCvComponent implements OnInit {
   private setCommentStatus() {
     if (SubmitConfirmDialogComponent) {
       this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
+    }
+  }
+
+  private setAllFeedbackResolvedStatus(): boolean {
+    //check all feedback.resolved values, if any are false then return false. Once one false is detected the return statement ends the fuction call. 
+    //if this doent work fully then may need to change where we check to be the local front end version that includes changes on the current page. 
+    if (this.cvData) {
+      if (this.cvData.profile && this.cvData.profile.profileFeedback.some(fb => !fb.resolved)) {
+        return false;
+      }
+      else if (this.cvData.hobbies && this.cvData.hobbies.hobbiesFeedback.some(fb => !fb.resolved)) {
+        return false;
+      }
+      else if (this.cvData.allWorkExperience && this.cvData.allWorkExperience.some(we => we.workExperienceFeedback.some(fb => !fb.resolved))) {
+        return false;
+      }
+      else if (this.cvData.allQualifications && this.cvData.allQualifications.some(q => q.qualificationFeedback.some(fb => !fb.resolved))) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    else {
+      return false;
     }
   }
 }
