@@ -5,7 +5,11 @@
   "projects": {
     "qa-common": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "root": "projects/qa-common",
       "sourceRoot": "projects/qa-common/src",
       "prefix": "app",

@@ -18,10 +18,32 @@ describe('RatedQuestionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RatedQuestionComponent);
     component = fixture.componentInstance;
+
+    component.selectedRating = { response: null };
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should check if setModel correctly sets response value', () => {
+    const testData = '1';
+    component.setModel(testData);
+    expect(component.selectedRating.response).toEqual(testData);
+  });
+
+  it('should check if radio button has the same value as its label', () => {
+    const testData = '1';
+    component.setModel(testData);
+    expect(component.matchedValue(JSON.stringify(testData))).toBeTruthy();
+  });
+
+  it('should check if radio button does not have the same value as its label as a false input value', () => {
+    const testData = '1';
+    const testDataFalse = '2'
+    component.setModel(testData);
+    expect(component.matchedValue(JSON.stringify(testDataFalse))).toBeFalsy();
   });
 });
