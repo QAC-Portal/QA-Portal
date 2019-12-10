@@ -28,7 +28,7 @@ public class KeycloakRoleResourceManager {
         this.keycloakAdminClient = keycloakAdminClient;
     }
 
-    public RoleRepresentation createRole(String roleName) {
+	public RoleRepresentation createRole(String roleName) {
         keycloakRoleValidator.validateRole(roleName);
         RoleRepresentation roleRepresentation = keycloakRoleFactory.createKeycloakRole(roleName);
         keycloakAdminClient.getRealm().roles().create(roleRepresentation);
