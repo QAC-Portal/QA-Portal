@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataTableComponent } from './data-table.component';
-import { MatProgressBarModule, MatTableModule, MatCheckboxModule, MatCardModule, MatTableDataSource } from '@angular/material';
+import { MatProgressBarModule, MatTableModule, MatCheckboxModule, MatCardModule, MatTableDataSource, MatCheckboxChange } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { doesNotThrow } from 'assert';
@@ -45,6 +45,7 @@ fdescribe('DataTableComponent', () => {
       expect(data.data).toEqual(testData);
       expect(data.event).toEqual(testEvent);
       
+      
       done();
     });
 
@@ -63,8 +64,22 @@ fdescribe('DataTableComponent', () => {
     
   });
 
+  it('should toggle all checkboxes or none when clicked', done => {
+    component.dataSource = new MatTableDataSource<any>([1,2,3,4,5]);
+    const checked = new MatCheckboxChange
+
+    component.rowSelectionChange.subscribe(data => {
+      expect(data).toEqual(component.rowSelection)
+
+      done();
+    });
+    component.onSelectAllCheckboxChange({checked: true} as MatCheckboxChange);
+    component.onSelectAllCheckboxChange({checked: false} as MatCheckboxChange);
+
+  });
+
   it('should deselect all rows', done => {
-    component.dataSource = new MatTableDataSource<any>([]);
+    component.dataSource = new MatTableDataSource<any>([1,2,3,3,5]);
 
     component.rowSelectionChange.subscribe(data => {
       expect(data).toEqual(component.rowSelection);
