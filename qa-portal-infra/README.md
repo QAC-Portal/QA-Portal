@@ -60,7 +60,8 @@ appropriate for your platform. Version 11 is currently being used by the QA Port
 
 <a name="configure-postgres-module-and-datasource"></a>
 ### 2.2. Configure Postgres Module and Datasource
-    !THIS PART IS IMPORTANT! if you miss this step you might have to restart (this part is not necessary if you have installed the latest version of Keycloak) 
+    
+	-!THIS PART IS IMPORTANT! if you miss this step you might have to restart (this part is not necessary if you have installed the latest version of Keycloak)<br> 
 
 
    - Copy the modules folder (and all it's contents) into your KEYCLOAK_HOME folder. This will set up your Postgres module.<br>
@@ -89,12 +90,13 @@ sections 2.3 and 2.4 for full instructions.<br>
    - Once the command has executed, keycloak should be started (localhost:8080/auth/admin) and the qa-portal realm should be available (see drop down list at top left of side navigation on the 
 admin page. You should also have a master realm available which is created by default)
 
+<a name="create scott-client"></a>
 ### 2.4.1. Create scott-client
-	- (This part should be removed in a future version, after the scripts used in step 2.4 will be fixed)
+	- (This part should be removed in a future version, after the scripts used in step 2.4 will be fixed)<br>
 	
-	- Check you are in the QA-portal realm by looking on the top left part of the page.
+	- Check you are in the QA-portal realm by looking on the top left part of the page.<br>
 	
-	- Navigate to 'Clients' and create a new Client named: "scott-client". Save.
+	- Navigate to 'Clients' and create a new Client named: "scott-client". Save.<br>
 	
 	- Navigate to 'import' and select the qa-portal-users-0.json from the exported_realms folder. Import all users, if a resource currently exists OVERWRITE. Click the Import button.
 
