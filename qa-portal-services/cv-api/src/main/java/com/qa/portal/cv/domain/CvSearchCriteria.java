@@ -55,7 +55,7 @@ public class CvSearchCriteria {
     public String toString() {
         return "CvSearchCriteria{" +
                 "cvStatus='" + cvStatus + "\'" +
-                ", FullName='" + fullName + "\'" +
+                ", fullName='" + fullName + "\'" +
                 ", cohort='" + cohort + "\'" +
                 ", technology='" + technology + "\'" +
                 "}";
