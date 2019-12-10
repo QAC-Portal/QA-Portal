@@ -89,7 +89,7 @@ sections 2.3 and 2.4 for full instructions.<br>
    - Once the command has executed, keycloak should be started (localhost:8080/auth/admin) and the qa-portal realm should be available (see drop down list at top left of side navigation on the 
 admin page. You should also have a master realm available which is created by default)
 
-### 2.4.1. Create Scott-user
+### 2.4.1. Create scott-client
 	- (This part should be removed in a future version, after the scripts used in step 2.4 will be fixed)
 	
 	- Check you are in the QA-portal realm by looking on the top left part of the page.
@@ -134,7 +134,7 @@ Any additional new Portal users should be added through the QA Portal User manag
 	
 	- The latest version of jre should be used. We advise to always keep java version updated to avoid environment issues.
 	
-	- If any Other version than jre is used, check your environment variable and look for the variable JAVA_HOME.
+	- If any other version than jre is used, check your environment variable and look for the variable JAVA_HOME.
 	
 	- Edit the Variable JAVA_HOME by assigning the path to the java folder you wish to use by default, Or remove it to use the default jre:latest.
 
