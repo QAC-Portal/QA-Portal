@@ -73,10 +73,10 @@
     font-size: calc(8px + .5vw);
 }
 
-$bg-imgs:   url("../../assets/images/QA-bg-img1.jpg"),
-            url("../../assets/images/QA-bg-img2.jpg"),
-            url("../../assets/images/QA-bg-img3.jpg"),
-            url("../../assets/images/QA-bg-img4.jpg");
+$bg-imgs:   url("/assets/images/QA-bg-img1.jpg"),
+            url("/assets/images/QA-bg-img2.jpg"),
+            url("/assets/images/QA-bg-img3.jpg"),
+            url("/assets/images/QA-bg-img4.jpg");
 
 @each $url in $bg-imgs {
     $i: index($list: $bg-imgs, $value: $url);
