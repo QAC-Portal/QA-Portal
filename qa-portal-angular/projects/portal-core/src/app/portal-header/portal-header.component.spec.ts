@@ -12,8 +12,9 @@ import { MockApplicationService } from '../_mocks/application.service.mock';
 import { KeycloakService } from 'keycloak-angular';
 import { MockKeycloakService } from '../_mocks/keycloak.service.mock';
 
-describe('Portal Header Component Tests', () => {
+fdescribe('Portal Header Component Tests', () => {
   let component: PortalHeaderComponent;
+  let keycloakService: KeycloakService;
   let fixture: ComponentFixture<PortalHeaderComponent>;
 
   beforeEach(async(() => {
@@ -36,11 +37,20 @@ describe('Portal Header Component Tests', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PortalHeaderComponent);
+    keycloakService = TestBed.get(KeycloakService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should be created', () => {
     expect(component).toBeDefined();
+  });
+
+  it('should get username', () => {
+    expect(keycloakService.getUsername()).toEqual('test username');
+  });
+
+  it('should put username to be uppercase', () => {
+    expect(component.displayName).toEqual('TEST USERNAME');
   });
 });
