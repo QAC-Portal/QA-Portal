@@ -73,7 +73,6 @@ export class CvWorkExpComponent {
 
   public announceChange() {
     this.experiencesChange.emit(this.experiences);
-    console.log(this.experiences);
   }
 
   public getFormattedDateRange({ start, end }: IWorkExperience): string {
