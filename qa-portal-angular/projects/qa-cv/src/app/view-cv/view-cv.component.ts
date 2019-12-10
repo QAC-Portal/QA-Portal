@@ -51,7 +51,7 @@ export class ViewCvComponent implements OnInit {
 
   public qualificationFeedback = [];
 
-  allFeedbackCompleted: boolean = false;
+  public allFeedbackCompleted: boolean = false;
 
   constructor(
     private cvService: ViewCvService,
@@ -70,7 +70,6 @@ export class ViewCvComponent implements OnInit {
     } else {
       this.initialiseCvPageForAdmin();
     }
-    console.log(this.cvData);
   }
 
   openDialog(): void {
@@ -130,7 +129,6 @@ export class ViewCvComponent implements OnInit {
   onWorkExperienceFeedbackChange(feedback: IFeedback[]): void {
     this.cvData.allWorkExperience[this.workExperienceFeedbackIndex].workExperienceFeedback = feedback;
     this.allFeedbackCompleted = this.setAllFeedbackResolvedStatus();
-    console.log(this.allFeedbackCompleted)
   }
 
   onQualificationFeedbackClick({ index }: { index: number }, qualCard: CvCardBaseComponent): void {
@@ -142,7 +140,6 @@ export class ViewCvComponent implements OnInit {
   onQualificationFeedbackChange(feedback: IFeedback[]): void {
     this.cvData.allQualifications[this.qualificationFeedbackIndex].qualificationFeedback = feedback;
     this.allFeedbackCompleted = this.setAllFeedbackResolvedStatus();
-    console.log(this.allFeedbackCompleted)
   }
 
   onUseExistingCvAsTemplateChanged() {
@@ -182,7 +179,6 @@ export class ViewCvComponent implements OnInit {
         this.cvService.getCvForId(paramMap.get('id')).subscribe(
           (response) => {
             this.cvData = response;
-            console.log(this.cvData);
             this.refreshPageStatus();
           },
           (error) => {

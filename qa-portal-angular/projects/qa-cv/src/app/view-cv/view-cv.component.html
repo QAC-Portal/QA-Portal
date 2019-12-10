@@ -93,7 +93,7 @@
         <div *ngIf="canComment" style="margin-right: 20px"></div>
         <button *ngIf="canComment  && cvData.status !== 'Approved'" mat-flat-button color="primary"
           (click)="onCvFailedReview()" title="Fail Cv"
-          [disabled]="!cvData || cvData.status==='In Progress' || !cvData.status || cvData.status === 'Failed Review'">
+          [disabled]="!cvData || cvData.status==='In Progress' || !cvData.status || cvData.status === 'Failed Review' || allFeedbackCompleted">
           Fail
         </button>
       </div>
