@@ -1,6 +1,6 @@
-<div style="display: flex; flex-direction: column; margin-top: 10px">
+<div id="checkboxLayout">
 
-  <div style="flex-direction: row">
+  <div id="questionLayout">
     <div class="qa-checkbox-grp-label">
       {{question.body}}
     </div>
@@ -11,10 +11,9 @@
         <mat-card class="checkbox-card">
           <mat-grid-tile>
           </mat-grid-tile>
-          <mat-card-content style="margin: 0 -16px -16px; white-space: nowrap">
-            <mat-checkbox flex="auto" #matCheckBox class="checkbox-response" [value]="option" [disabled]="isDisabled"
-              [checked]="matchesValue(option, questionResponse.responseValues)" (change)="setCheckResponse($event)"
-              style="padding-right : 10px; word-wrap: normal;">
+          <mat-card-content id="matCard">
+            <mat-checkbox id="checkbox" flex="auto" #matCheckBox class="checkbox-response" [value]="option" [disabled]="isDisabled"
+              [checked]="matchesValue(option, questionResponse.responseValues)" (change)="setCheckResponse($event)">
               {{option}}
             </mat-checkbox>
           </mat-card-content>
@@ -23,7 +22,7 @@
     </section>
   </div>
 
-  <div style="display: flex; margin-top: 25px;" *ngIf="question.hasComment">
+  <div id="commentBox" *ngIf="question.hasComment">
     <mat-form-field appearance="outline" class="textarea-response">
       <mat-label>Comments</mat-label>
       <textarea matInput [disabled]="isDisabled" [ngModel]="questionResponse?.comment?.content"

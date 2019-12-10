@@ -1,3 +1,28 @@
+#commentBox{
+  display: flex; 
+  margin-top: 25px;
+}
+
+#checkbox{
+  padding-right : 10px; 
+  word-wrap: normal;
+}
+
+#matCard{
+  margin: 0 -16px -16px; 
+  white-space: nowrap;
+}
+
+#questionLayout{
+  flex-direction: row;
+}
+
+#checkboxLayout{
+  display: flex; 
+  flex-direction: column; 
+  margin-top: 10px;
+}
+
 .qa-checkbox-grp-label {
   background-color: #004050;
   text-align: center;
