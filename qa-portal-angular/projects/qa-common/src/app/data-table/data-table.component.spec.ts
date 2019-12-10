@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataTableComponent } from './data-table.component';
-import { MatProgressBarModule, MatTableModule, MatCheckboxModule, MatCardModule } from '@angular/material';
+import { MatProgressBarModule, MatTableModule, MatCheckboxModule, MatCardModule, MatTableDataSource } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { doesNotThrow } from 'assert';
@@ -51,11 +51,21 @@ fdescribe('DataTableComponent', () => {
     component.onRowClicked(testIndex, testData, testEvent);
   });
 
-  it('should update when a row is selected', () => {
+  it('should update state when a row is selected', done => {
+    component.dataSource = new MatTableDataSource<any>([]);
+    
+    component.rowSelectionChange.subscribe(data => {
+      expect(data.length).toEqual(component.rowSelection.length);
+
+      done();
+    })
+    component.updateRowSelectedState();
     
   });
 
   it('should deselect all rows', done => {
+    component.dataSource = new MatTableDataSource<any>([]);
+
     component.rowSelectionChange.subscribe(data => {
       expect(data).toEqual(component.rowSelection);
 
