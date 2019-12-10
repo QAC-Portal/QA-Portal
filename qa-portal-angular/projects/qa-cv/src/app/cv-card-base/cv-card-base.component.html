@@ -43,7 +43,7 @@
           <form class="comment-form" (ngSubmit)="addFeedbackItem()">
             <mat-form-field class="comment-form-field" class="comment-field"
               [hideRequiredMarker]="options.value.hideRequired" floatLabel="never">
-              <input [formControl]="commentInput" type="text" matInput placeholder="Write a comment" autocomplete="off">
+              <input class="muteColorChange" [formControl]="commentInput" type="text" matInput placeholder="Write a comment" autocomplete="off">
               <mat-icon matSuffix (click)="addFeedbackItem()">send
               </mat-icon>
             </mat-form-field>
