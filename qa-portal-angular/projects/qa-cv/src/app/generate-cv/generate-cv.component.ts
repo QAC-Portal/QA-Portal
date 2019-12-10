@@ -136,4 +136,7 @@ export class GenerateCvComponent implements OnInit {
         })
       ).subscribe(() => { });
   }
+  onSaveCvButtonClicked(){
+    return 0;
+  }
 }

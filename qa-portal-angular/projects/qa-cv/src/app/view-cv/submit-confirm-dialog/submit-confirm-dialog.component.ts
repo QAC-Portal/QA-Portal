@@ -12,15 +12,15 @@ export class SubmitConfirmDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<SubmitConfirmDialogComponent>) { }
 
-  onNoClick(): void {
-    this.canSubmit = false;
-    this.doSubmit.emit();
-    this.dialogRef.close();
-  }
+  // onNoClick(): void {
+  //   this.canSubmit = false;
+  //   this.doSubmit.emit();
+  //   this.dialogRef.close();
+  // }
 
-  onSubmit(): void {
-    this.canSubmit = true;
-    this.doSubmit.emit();
-    this.dialogRef.close();
-  }
+  // onSubmit(): void {
+  //   this.canSubmit = true;
+  //   this.doSubmit.emit();
+  //   this.dialogRef.close();
+  // }
 }

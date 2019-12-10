@@ -113,13 +113,17 @@
 
 
 <div class="action-buttons">
-    <button mat-flat-button color="accent" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
+    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
         [disabled]="cvForm?.invalid" name="generate-cv-button">
         <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
     </button>
     <button mat-flat-button color="primary" class="submit-button w-100" (click)="onDownloadCvButtonClicked()"
         [disabled]="cvForm?.invalid" name="download-cv-button">
         <mat-icon>get_app</mat-icon>&nbsp;Download CV
+    </button>
+    <button mat-flat-button color="accent" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="save-cv-button">
+        <mat-icon>save</mat-icon>&nbsp;Save CV
     </button>
 
 </div>

@@ -20,6 +20,10 @@ import {take} from 'rxjs/operators';
 })
 export class CvService {
 
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
+
   constructor(private cvRemote: CvRemoteService, private http: HttpClient) { }
 
   public displayCvPdf(cv: CvModel): Observable<boolean> {
@@ -53,5 +57,10 @@ export class CvService {
       }, 100);
       return of(true);
     }));
+  }
+  createCv(cv: CvModel): Observable<CvModel> {
+    return this.http.post<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
+      take(1)
+    );
   }
 }
