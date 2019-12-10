@@ -1,8 +1,8 @@
-package com.qa.portal.cv.smoke;
+package com.qa.portal.cv.smoke.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.qa.portal.cv.rest.CvManagementController;
+import com.qa.portal.cv.services.CvManagementService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +11,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CvManagementControllerSmokeTest {
+public class CvManagementServiceSmokeTest {
 
     @Autowired
-    public CvManagementController cvManagementController;
+    public CvManagementService cvManagementService;
 
     @Test
     public void portalApplicationApiApplicationSmokeTest() {
-        assertThat(this.cvManagementController).isNotNull();
+        assertThat(this.cvManagementService).isNotNull();
     }
 
 }
