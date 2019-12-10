@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchBarComponent } from './search-bar.component';
+import { MatIconModule, MatRadioModule, MatCardModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -8,7 +11,14 @@ describe('SearchBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchBarComponent ]
+      declarations: [ SearchBarComponent ],
+      imports: [
+        MatIconModule,
+        MatRadioModule,
+        FormsModule,
+        MatCardModule,
+        OverlayModule
+      ],
     })
     .compileComponents();
   }));

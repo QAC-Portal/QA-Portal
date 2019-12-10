@@ -7,7 +7,7 @@ import {FormPage} from '../_common/form-page';
 @Component({
   selector: 'app-trainee-course-evaluation',
   templateUrl: './trainee-course-evaluation.component.html',
-  styleUrls: ['./trainee-course-evaluation.component.css']
+  styleUrls: ['./trainee-course-evaluation.component.scss']
 })
 export class TraineeCourseEvaluationComponent extends FormPage implements OnInit, OnDestroy {
 
