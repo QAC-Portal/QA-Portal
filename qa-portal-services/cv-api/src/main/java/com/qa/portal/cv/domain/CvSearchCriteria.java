@@ -6,7 +6,7 @@ public class CvSearchCriteria {
 
     private String cvStatus;
 
-    private String FullName;
+    private String fullName;
 
     private String cohort;
 
@@ -14,7 +14,7 @@ public class CvSearchCriteria {
 
     public CvSearchCriteria(String cvStatus, String fullName, String cohort, String technology) {
         this.cvStatus = cvStatus;
-        FullName = fullName;
+        this.fullName = fullName;
         this.cohort = cohort;
         this.technology = technology;
     }
@@ -28,11 +28,11 @@ public class CvSearchCriteria {
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
     public void setFullName(String fullName) {
-        FullName = fullName;
+        this.fullName = fullName;
     }
 
     public String getCohort() {
@@ -54,10 +54,10 @@ public class CvSearchCriteria {
     @Override
     public String toString() {
         return "CvSearchCriteria{" +
-                "cvStatus='" + cvStatus + '\'' +
-                ", FullName='" + FullName + '\'' +
-                ", cohort='" + cohort + '\'' +
-                ", technology='" + technology + '\'' +
-                '}';
+                "cvStatus='" + cvStatus + "\'" +
+                ", FullName='" + fullName + "\'" +
+                ", cohort='" + cohort + "\'" +
+                ", technology='" + technology + "\'" +
+                "}";
     }
 }
