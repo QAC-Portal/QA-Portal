@@ -22,4 +22,12 @@ export class PortalHeaderComponent implements OnInit {
     this.keycloak.logout(environment.host + '/qa/portal/home');
   }
 
+  tooltipMaker(data){
+    if (data == "Training"){
+      return "This be training";
+    } else {
+      return "Testing 123";
+    }
+  }
+
 }

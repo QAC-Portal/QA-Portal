@@ -14,7 +14,7 @@
           <mat-card-content data-simplebar style="height: 200px; margin: 0 -16px -16px;">
             <mat-list>
               <ng-template ngFor let-item [ngForOf]="app?.projectPages">
-                <mat-list-item *ngIf="item?.displayOnMenu" [routerLink]="item.url"  >
+                <mat-list-item *ngIf="item?.displayOnMenu" [routerLink]="item.url" matTooltip="{{item.name}}">
                     <mat-icon matListIcon [svgIcon]="item.icon">{{item.icon || 'bookmark'}}</mat-icon>
                   <h4 matLine>
                     {{item.name}}

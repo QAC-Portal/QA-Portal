@@ -6,7 +6,7 @@
         <mat-icon svgIcon="qa-logo"></mat-icon>
       </a>
       <div class="header-links">
-          <app-header-link *ngFor="let portalApp of (appService.portalApplications$ | async)" [portalApplicationProjects]="portalApp">
+          <app-header-link matTooltip="toolTipMaker({{portalApp?.portalApplication?.name}})" *ngFor="let portalApp of (appService.portalApplications$ | async)" [portalApplicationProjects]="portalApp">
               {{portalApp?.portalApplication?.name || 'Unknown Department'}}
             </app-header-link>
         </div>
@@ -28,7 +28,7 @@
       </span> -->
       <!-- TODO END -->
 
-      <button isIconButton="true" class="user-button" mat-flat-button color="primary"
+      <button isIconButton="true" matTooltip="Account Menu" class="user-button" mat-flat-button color="primary"
         [mat-menu-trigger-for]="acct_menu">
         {{displayName}}
         <mat-icon>

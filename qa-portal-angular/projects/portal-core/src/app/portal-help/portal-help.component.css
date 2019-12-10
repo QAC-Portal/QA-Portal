@@ -1,11 +1,12 @@
 .help-bar mat-expansion-panel{
     overflow: hidden;
     background-color: #eeeeee;
-    position: fixed; 
+    position: fixed;
     bottom: 0%; 
     right: 0%;
     z-index: 20;
     opacity: 1;
+    width: 20%;
   }
 
   .help-bar mat-expansion-panel-header {
@@ -18,7 +19,7 @@
     color: #004050;
     text-align: center;
     text-decoration: none;
-    padding: 0% 120px;
+    padding: 0% 20%;
     padding-bottom: 5%;
   }
 

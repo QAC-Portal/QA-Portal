@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PortalHomeComponent } from './portal-home/portal-home.component';
 import { PortalHelpComponent } from './portal-help/portal-help.component';
 import { PortalHelpContentComponent } from './portal-help/portal-help-content/portal-help-content.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { PortalHelpContentComponent } from './portal-help/portal-help-content/po
     QaCommonModule,
     AppRoutingModule,
     HttpClientModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    MatTooltipModule,
   ],
   providers: [
     ApplicationService,
