@@ -22,12 +22,14 @@ export class CvCardBaseComponent {
 
   public commentInput = new FormControl('', Validators.required);
   public options: FormGroup;
+  public allFeedbackResolved: boolean;
 
   constructor(private keycloak: KeycloakService, fb: FormBuilder) {
     this.options = fb.group({
       hideRequired: true,
     });
   }
+
 
   getFormattedDate(date: string): string {
     return moment(date).fromNow();
@@ -50,6 +52,8 @@ export class CvCardBaseComponent {
     
     if (comment) {
       this.feedback[index].resolved = this.feedback[index] === undefined ? false : !this.feedback[index].resolved;
+      // if there exist any elements fb in feedback which are false then allFeedbackResolved is falsy.
+      this.allFeedbackResolved = !this.feedback.some(fb => !fb.resolved);
       this.feedbackChange.emit(this.feedback);
     }
   }
