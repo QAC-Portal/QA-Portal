@@ -52,7 +52,7 @@ appropriate for your platform. Version 11 is currently being used by the QA Port
 <a name="install-keycloak"></a>
 ### 2.1. Install Keycloak
 
-   - Download Keycloak from https://www.keycloak.org/downloads.html. Version 6.0.1 is the current version being used by the QA Portal applications.<br>
+   - Download Keycloak from https://www.keycloak.org/archive/downloads-6.0.1.html. Version 6.0.1 is the current version being used by the QA Portal applications.<br>
 
    - Select the Server - Standalone server distribution ZIP download.<br>
 
@@ -60,6 +60,8 @@ appropriate for your platform. Version 11 is currently being used by the QA Port
 
 <a name="configure-postgres-module-and-datasource"></a>
 ### 2.2. Configure Postgres Module and Datasource
+    !THIS PART IS IMPORTANT! if you miss this step you might have to restart (this part is not necessary if you have installed the latest version of Keycloak) 
+
 
    - Copy the modules folder (and all it's contents) into your KEYCLOAK_HOME folder. This will set up your Postgres module.<br>
 
@@ -69,7 +71,7 @@ appropriate for your platform. Version 11 is currently being used by the QA Port
 <a name="start-keycloak-instance"></a>
 ### 2.3. Start Keycloak instance
 
-   - From the KEYCLOAK_HOME/bin directory, run the ./standalone.bat script.<br>
+   - From the KEYCLOAK_HOME/bin directory, run the ./standalone.bat script for a Windows OS, or run the ./standalone.sh for a linux OS. <br>
 
    - Set up an admin user and password (admin / admin). See [Keycloak documentation](https://www.keycloak.org/docs/latest/getting_started/index.html) 
 sections 2.3 and 2.4 for full instructions.<br> 
@@ -87,6 +89,14 @@ sections 2.3 and 2.4 for full instructions.<br>
    - Once the command has executed, keycloak should be started (localhost:8080/auth/admin) and the qa-portal realm should be available (see drop down list at top left of side navigation on the 
 admin page. You should also have a master realm available which is created by default)
 
+### 2.4.1. Create Scott-user
+	- This part should be remove in an ulterior version after the scripts used in step 2.4 will be fixed.
+	
+	- Check you are in the QA-portal realm by looking on the top left part of the page.
+	
+	- Go in Clients and create a new Client named: "scott-client". Save.
+	
+	- Go in import and select the qa-portal-users-0.json from the exported_realms folder. Import all user and if a ressource Exist OVERWRITE. Click the Import button.
 
 <a name="manage-keycloak-users"></a>
 ### 2.5. Manage keycloak users
@@ -114,6 +124,19 @@ As part of the import in step 2.3, the following users should automatically be s
    - trainee21@qa.com ... trainee25@qa.com with roles training-user and Cohort_Scala_Intake_1
 
 Any additional new Portal users should be added through the QA Portal User management features of the administration application. This application will be available when you log into the portal as adminclient1@qa.com
+
+<a name="in-case-of-error-500"></a>
+### 2.6. In case of error 500
+	
+	- In case of error 500 while running the software please check what version of JAVA you are running by looking into the top right of the screen in keycloak, and by clicking server Info.
+	
+	- Keycloak is only running with a jre running or with an openjdk running.
+	
+	- The latest version of jre should be used. We advise to always keep java updated as not updating can cause security issues.
+	
+	- If any Other version than jre is used, check your environment variable and look for the variable JAVA_HOME.
+	
+	- Edit the Variable JAVA_HOME by giving it the path to the java you are willing to use by default, Or remove it to use the default jre:latest.
 
 <a name="mongodb"></a>
 ## 3. MongoDB
