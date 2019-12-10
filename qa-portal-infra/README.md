@@ -90,13 +90,13 @@ sections 2.3 and 2.4 for full instructions.<br>
 admin page. You should also have a master realm available which is created by default)
 
 ### 2.4.1. Create Scott-user
-	- This part should be remove in an ulterior version after the scripts used in step 2.4 will be fixed.
+	- (This part should be removed in a future version, after the scripts used in step 2.4 will be fixed)
 	
 	- Check you are in the QA-portal realm by looking on the top left part of the page.
 	
-	- Go in Clients and create a new Client named: "scott-client". Save.
+	- Navigate to 'Clients' and create a new Client named: "scott-client". Save.
 	
-	- Go in import and select the qa-portal-users-0.json from the exported_realms folder. Import all user and if a ressource Exist OVERWRITE. Click the Import button.
+	- Navigate to 'import' and select the qa-portal-users-0.json from the exported_realms folder. Import all users, if a resource currently exists OVERWRITE. Click the Import button.
 
 <a name="manage-keycloak-users"></a>
 ### 2.5. Manage keycloak users
@@ -130,13 +130,13 @@ Any additional new Portal users should be added through the QA Portal User manag
 	
 	- In case of error 500 while running the software please check what version of JAVA you are running by looking into the top right of the screen in keycloak, and by clicking server Info.
 	
-	- Keycloak is only running with a jre running or with an openjdk running.
+	- Keycloak only works properly with JRE or openJDK running
 	
-	- The latest version of jre should be used. We advise to always keep java updated as not updating can cause security issues.
+	- The latest version of jre should be used. We advise to always keep java version updated to avoid environment issues.
 	
 	- If any Other version than jre is used, check your environment variable and look for the variable JAVA_HOME.
 	
-	- Edit the Variable JAVA_HOME by giving it the path to the java you are willing to use by default, Or remove it to use the default jre:latest.
+	- Edit the Variable JAVA_HOME by assigning the path to the java folder you wish to use by default, Or remove it to use the default jre:latest.
 
 <a name="mongodb"></a>
 ## 3. MongoDB
