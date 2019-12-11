@@ -26,7 +26,7 @@ public class CvSearchCriteriaTest {
 
     @Test
     public void toStringTest() {
-        assertEquals("toString is returning an unexpected result",
+        assertEquals("toString() is returning an unexpected result",
                 "CvSearchCriteria{cvStatus='Completed', " +
                         "fullName='Steve Roddy', " +
                         "cohort='October', " +
