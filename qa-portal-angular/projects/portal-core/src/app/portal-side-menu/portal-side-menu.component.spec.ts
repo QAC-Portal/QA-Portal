@@ -41,18 +41,18 @@ fdescribe('PortalSideMenuComponent', () => {
     expect(component).toBeTruthy();
     expect(component.animating).toBeFalsy();
   });
-  it('should get the done component when its called', () => {
+  it('should check if the done component sets animation to false', () => {
     component.animating = true;
     component.done();
     expect(component.animating).toBeFalsy();
   });
-  it('should get the start component when its called', () => {
+  it('should get the start component calls tick once', () => {
     spyOn(component, 'tick').and.callFake(() => { });
     component.start();
     expect(component.animating).toBeTruthy();
     expect(component.tick).toHaveBeenCalledTimes(1);
   });
-  it('should get the tick component when its called', () => {
+  it('should if the tick component is called once', () => {
     component.animating = true;
     spyOn(window, 'requestAnimationFrame').and.callFake((cb: FrameRequestCallback) => {
       
@@ -60,6 +60,15 @@ fdescribe('PortalSideMenuComponent', () => {
     });
     component.tick();
     expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
+  });
+  it('should if the tick component has not been called', () => {
+    component.animating = false;
+    spyOn(window, 'requestAnimationFrame').and.callFake((cb: FrameRequestCallback) => {
+      
+      return 0;
+    });
+    component.tick();
+    expect(window.requestAnimationFrame).toHaveBeenCalledTimes(0);
   });
 
 });
