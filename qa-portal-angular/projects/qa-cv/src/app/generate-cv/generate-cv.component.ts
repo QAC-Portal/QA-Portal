@@ -120,13 +120,22 @@ export class GenerateCvComponent implements OnInit {
     return _.merge(new CvModel(), {
       allSkills: [skills],
       allQualifications: qualifications,
-      id: id,
       allWorkExperience: workExperience,
       fullName: `${rest.firstName} ${rest.surname}`,
       ...rest
     } as CvModel).build();
   }
-
+  // private getCvData2(): CvModel {
+  //   const { skills, qualifications, id, workExperience, ...rest } = this.cvForm.value;
+  //   return _.merge(new CvModel(), {
+  //     allSkills: [skills],
+  //     allQualifications: qualifications,
+  //     id: id,
+  //     allWorkExperience: workExperience,
+  //     fullName: `${rest.firstName} ${rest.surname}`,
+  //     ...rest
+  //   } as CvModel).build();
+  // }
 
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
@@ -149,16 +158,9 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(() => { });
   }
-  // ff;
-  // private callCV(): any {
-  //   this.cvService.getCurrentCvForTrainee().subscribe((cvv) => {
-  //     this.ff = cvv;
-  //   })
-  //   return this.ff;
-  // }
+
   onSaveCvButtonClicked() {
     const cv = this.getCvData();
-    debugger;
     if (!cv.id) {
       cv.status = IN_PROGRESS_STATUS;
     }
@@ -168,7 +170,7 @@ export class GenerateCvComponent implements OnInit {
 
   // CV PERSIST FUNCTIONS
   private persistCvForTrainee(cv: CvModel) {
-    if (!this.cv.id) {
+    if (!cv.id) {
       this.createCv(cv);
     } else {
       this.updateCv(cv);
