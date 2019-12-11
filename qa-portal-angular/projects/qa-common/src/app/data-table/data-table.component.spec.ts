@@ -89,4 +89,22 @@ fdescribe('DataTableComponent', () => {
 
     component.deselectAllRows();
   });
+
+  it('should allow user to use mouse event or special keys to select and deselect multipal checkboxes ', done => {
+    component.dataSource = new MatTableDataSource<any>([1,2,3,3,5]);
+    const testIndex = 1;
+    const testEvent = new MouseEvent('click');
+
+    component.rowSelectionChange.subscribe(data => {
+      expect(data).toEqual(component.rowSelection);
+      // expect(data.event).toEqual(testEvent);
+      // expect(data.index).toEqual(testIndex);
+
+
+      done();
+    });
+    component.onRowCheckboxClicked(testEvent,testIndex);
+    
+  });
+
 });
