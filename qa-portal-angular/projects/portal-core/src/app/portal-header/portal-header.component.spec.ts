@@ -15,7 +15,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { of } from 'rxjs';
 import { stringify } from '@angular/compiler/src/util';
 
-fdescribe('Portal Header Component Tests', () => {
+describe('Portal Header Component Tests', () => {
   let component: PortalHeaderComponent;
   let keycloakService: KeycloakService;
   let fixture: ComponentFixture<PortalHeaderComponent>;
