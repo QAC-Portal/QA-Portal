@@ -43,7 +43,7 @@
     <section>
       <app-cv-card-base #expCard [feedback]="workExperienceFeedback" [canComment]="canComment"
         (feedbackChange)="onWorkExperienceFeedbackChange($event)" [showOpenButton]="false" cardTitle="Work Experience">
-        <app-cv-work-exp [experiences]="cvData?.allWorkExperience"
+        <app-cv-work-exp [experiences]="cvData?.allWorkExperience" 
           (experiencesChange)="cvData.allWorkExperience = $event"
           (feedbackClick)="onWorkExperienceFeedbackClick($event, expCard)" [canEdit]="canEdit">
         </app-cv-work-exp>

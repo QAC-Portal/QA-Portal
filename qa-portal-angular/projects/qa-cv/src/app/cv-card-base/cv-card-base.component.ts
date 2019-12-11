@@ -19,6 +19,7 @@ export class CvCardBaseComponent {
   @Input() showOpenButton: boolean = true;
   @ViewChild('commentContainer', { static: true }) commentContainer: ElementRef;
   @ViewChild('drawer', { static: true }) public drawer: MatDrawer;
+  //@Input() resolvedAllComments: boolean;
 
   public commentInput = new FormControl('', Validators.required);
   public options: FormGroup;
@@ -29,7 +30,7 @@ export class CvCardBaseComponent {
       hideRequired: true,
     });
   }
-
+  
 
   getFormattedDate(date: string): string {
     return moment(date).fromNow();
@@ -49,11 +50,13 @@ export class CvCardBaseComponent {
   onCommentCheckboxClicked(comment: IFeedback, index: number) {
     event.preventDefault(); // Stop default checkbox behaviour
     event.stopPropagation(); // Stop the row from clicking when using a checkbox
-    
+
     if (comment) {
+      console.log("comment")
+      console.log(comment)
+      console.log("feedback")
+      console.log(this.feedback)
       this.feedback[index].resolved = this.feedback[index] === undefined ? false : !this.feedback[index].resolved;
-      // if there exist any elements fb in feedback which are false then allFeedbackResolved is falsy.
-      this.allFeedbackResolved = !this.feedback.some(fb => !fb.resolved);
       this.feedbackChange.emit(this.feedback);
     }
   }

@@ -52,6 +52,10 @@ export class ViewCvComponent implements OnInit {
   public qualificationFeedback = [];
 
   public allFeedbackCompleted: boolean = false;
+  public qualFeedbackCompeted: boolean[] = [];
+  public workFeedbackCompeted: boolean[] = [];
+  public profileFeedbackCompeted: boolean = true;
+  public hobbiesFeedbackCompeted: boolean = true;
 
   constructor(
     private cvService: ViewCvService,
@@ -116,8 +120,8 @@ export class ViewCvComponent implements OnInit {
     this.cvUpdatedByAdmin(FAILED_REVIEW_STATUS);
   }
 
-  genericFeedBackChange(){
-    this.allFeedbackCompleted = this.setAllFeedbackResolvedStatus();
+  genericFeedBackChange() {
+    this.setResolvedStatus();
   }
 
   onWorkExperienceFeedbackClick({ index }: { index: number }, expCard: CvCardBaseComponent): void {
@@ -128,7 +132,7 @@ export class ViewCvComponent implements OnInit {
 
   onWorkExperienceFeedbackChange(feedback: IFeedback[]): void {
     this.cvData.allWorkExperience[this.workExperienceFeedbackIndex].workExperienceFeedback = feedback;
-    this.allFeedbackCompleted = this.setAllFeedbackResolvedStatus();
+    this.setResolvedStatus();
   }
 
   onQualificationFeedbackClick({ index }: { index: number }, qualCard: CvCardBaseComponent): void {
@@ -139,7 +143,7 @@ export class ViewCvComponent implements OnInit {
 
   onQualificationFeedbackChange(feedback: IFeedback[]): void {
     this.cvData.allQualifications[this.qualificationFeedbackIndex].qualificationFeedback = feedback;
-    this.allFeedbackCompleted = this.setAllFeedbackResolvedStatus();
+    this.setResolvedStatus();
   }
 
   onUseExistingCvAsTemplateChanged() {
@@ -245,6 +249,7 @@ export class ViewCvComponent implements OnInit {
   private refreshPageStatus() {
     this.setPageEditStatus();
     this.setCommentStatus();
+    this.setResolvedStatus();
     this.loadingData = false;
   }
 
@@ -258,27 +263,52 @@ export class ViewCvComponent implements OnInit {
     }
   }
 
-  private setAllFeedbackResolvedStatus(): boolean {
+  private setResolvedStatus() {
     //check all feedback.resolved values, if any are false then return false. Once one false is detected the return statement ends the fuction call. 
     //if this doent work fully then may need to change where we check to be the local front end version that includes changes on the current page. 
     if (this.cvData) {
       if (this.cvData.profile && this.cvData.profile.profileFeedback.some(fb => !fb.resolved)) {
-        return false;
-      }
-      else if (this.cvData.hobbies && this.cvData.hobbies.hobbiesFeedback.some(fb => !fb.resolved)) {
-        return false;
-      }
-      else if (this.cvData.allWorkExperience && this.cvData.allWorkExperience.some(we => we.workExperienceFeedback.some(fb => !fb.resolved))) {
-        return false;
-      }
-      else if (this.cvData.allQualifications && this.cvData.allQualifications.some(q => q.qualificationFeedback.some(fb => !fb.resolved))) {
-        return false;
+        this.profileFeedbackCompeted = false
       } else {
-        return true;
-      }
-    }
-    else {
-      return false;
+        this.profileFeedbackCompeted = true
+      };
+
+      if (this.cvData.hobbies && this.cvData.hobbies.hobbiesFeedback.some(fb => !fb.resolved)) {
+        this.hobbiesFeedbackCompeted = false;
+      } else {
+        this.hobbiesFeedbackCompeted = true;
+      };
+
+      if (this.cvData.allWorkExperience) {
+        this.cvData.allWorkExperience.forEach(we => {
+          const index = this.cvData.allWorkExperience.findIndex(x => x === we);
+          if (we.workExperienceFeedback.some(fb => !fb.resolved)) {
+            this.workFeedbackCompeted[index] = false;
+          } else {
+            this.workFeedbackCompeted[index] = true;
+          };
+        });
+      };
+
+      if (this.cvData.allQualifications) {
+        this.cvData.allQualifications.forEach(q => {
+          const index = this.cvData.allQualifications.findIndex(x => x === q);
+          if (q.qualificationFeedback.some(fb => !fb.resolved)) {
+            this.qualFeedbackCompeted[index] = false;
+          } else {
+            this.qualFeedbackCompeted[index] = true;
+          };
+        });
+      };
+
+      // set all feedback compleated boolean
+      if(this.profileFeedbackCompeted && this.hobbiesFeedbackCompeted && this.workFeedbackCompeted.every(x => x==true) &&this.qualFeedbackCompeted.every(x => x==true)){
+        this.allFeedbackCompleted = true;
+      } else {
+        this.allFeedbackCompleted = false;
+      };
+      
+      
     }
   }
 }
