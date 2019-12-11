@@ -5,7 +5,7 @@
         <div class="top">
           <div class="drawer-title">
             <h4>
-              Comments / test
+              Comments
             </h4>
           </div>
 
@@ -15,13 +15,19 @@
           </button>
         </div>
         <div #commentContainer class="middle" data-simplebar>
+
           <div class="comment-bubble" *ngFor="let comment of feedback; let i = index">
+
             <div class="checkbox-row">
               <div class="comment-body">
                 {{comment.comment}}
               </div>
               <div class="checkbox-div">
-                <mat-checkbox [checked]="comment.resolved" (click)="onCommentCheckboxClicked(comment, i);" >resolved</mat-checkbox>
+                <mat-checkbox *ngIf="canComment" [checked]="comment.resolved"
+                  (click)="onCommentCheckboxClicked(comment, i);">Resolved</mat-checkbox>
+                
+                <mat-icon *ngIf="comment.resolved && !canComment">done_outline</mat-icon> 
+                <mat-icon *ngIf="!comment.resolved && !canComment">highlight_off</mat-icon> <!-- -->
               </div>
             </div>
             <div class="comment-details mat-caption">
@@ -32,6 +38,7 @@
                 {{getFormattedDate(comment.date)}}
               </div>
             </div>
+
           </div>
 
           <div *ngIf="!feedback || feedback.length == 0" class="no-comments-text">

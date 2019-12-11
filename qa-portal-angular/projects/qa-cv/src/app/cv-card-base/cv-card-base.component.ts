@@ -45,12 +45,9 @@ export class CvCardBaseComponent {
     SimpleBar.getScrollElement().scrollTo(0, SimpleBar.contentEl.clientHeight);
   }
 
-
-
   onCommentCheckboxClicked(comment: IFeedback, index: number) {
     event.preventDefault(); // Stop default checkbox behaviour
     event.stopPropagation(); // Stop the row from clicking when using a checkbox
-
     if (comment) {
       console.log("comment")
       console.log(comment)
@@ -59,6 +56,7 @@ export class CvCardBaseComponent {
       this.feedback[index].resolved = this.feedback[index] === undefined ? false : !this.feedback[index].resolved;
       this.feedbackChange.emit(this.feedback);
     }
+    
   }
   //need to update by index, could use similar top below. 
 
