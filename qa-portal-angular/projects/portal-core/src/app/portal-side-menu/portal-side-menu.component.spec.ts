@@ -30,11 +30,29 @@ fdescribe('PortalSideMenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PortalSideMenuComponent);
     component = fixture.componentInstance;
+
+    
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should get the done component when its called', () => {
+    spyOn(component, 'done').and.callThrough();
+    component.done();
+    expect(component.done).toHaveBeenCalledTimes(1);
+  });
+  it('should get the start component when its called', () => {
+    spyOn(component, 'start').and.callThrough();
+    component.start();
+    expect(component.start).toHaveBeenCalledTimes(1);
+  });
+  it('should get the tick component when its called', () => {
+    spyOn(component, 'tick').and.callThrough();
+    component.tick();
+    expect(component.tick).toHaveBeenCalledTimes(1);
   });
 
 });
