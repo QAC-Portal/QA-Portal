@@ -12,7 +12,7 @@ import { HeaderLinkComponent } from '../header-link/header-link.component';
 import { MatCardModule, MatListModule, MatIconModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
-describe('PortalApplicationHomeComponent', () => {
+fdescribe('PortalApplicationHomeComponent', () => {
   let component: PortalApplicationHomeComponent;
   let fixture: ComponentFixture<PortalApplicationHomeComponent>;
   let applicationService: ApplicationService;
@@ -42,5 +42,9 @@ describe('PortalApplicationHomeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should create services', () => {
+    expect(component.appService).toBeDefined();
+    expect(component.sideMenuService).toBeDefined();
   });
 });
