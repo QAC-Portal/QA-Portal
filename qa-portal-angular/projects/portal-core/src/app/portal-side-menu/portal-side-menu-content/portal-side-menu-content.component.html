@@ -21,12 +21,12 @@
                   matTooltipClass="menu-item-tooltip"
                   >
 
-            <div class="menu-item-content">
+            <div class="menu-item-content" [matTooltip]="sideMenuService.sideMenuOpen ? QaHelpService.tooltipMaker(projectPage.name) : ''">
               <div class="menu-item-icon">
                 <mat-icon [svgIcon]="projectPage.icon">{{projectPage.icon || 'bookmark'}}</mat-icon>
               </div>
               <div style="width: 100%; text-overflow:ellipsis; overflow: hidden; text-align: left; margin: auto 0;">
-            <span [matTooltip]="QaHelpService.tooltipMaker(projectPage.name)">
+            <span>
               {{projectPage.name}}
             </span>
               </div>

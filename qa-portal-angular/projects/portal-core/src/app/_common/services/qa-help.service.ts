@@ -22,7 +22,7 @@ export class QaHelpService {
   }
 
 changeMessage(data, tag){
-  data.subscribe(data => this.helpContent = data.filter(help => help.Tag == tag));
+  data.subscribe(data => this.helpContent = data.filter(help => help.Tag == tag || help.Tag + String(tag).match(/[0-9]+/) == tag));
   data.subscribe(() => this.helpContent = this.helpContent[0].Help.split("\n"));
   data.subscribe(() => this.helpContent = this.helpContent.join("\n"));
   data.subscribe(() => this.messageSource.next(this.helpContent));
