@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatTooltipModule, MatIconModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
-fdescribe('PortalSideMenuContentComponent', () => {
+describe('PortalSideMenuContentComponent', () => {
   let component: PortalSideMenuContentComponent;
   let fixture: ComponentFixture<PortalSideMenuContentComponent>;
 
