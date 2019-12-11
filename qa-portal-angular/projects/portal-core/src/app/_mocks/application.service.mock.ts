@@ -5,5 +5,7 @@ export class MockApplicationService {
   public portalApplications$ = new BehaviorSubject<PortalApplicationProjectsModel[]>([]);
   public currentApplication$ = new BehaviorSubject<PortalApplicationProjectsModel>(null);
 
+
+  //spyOn
   public onApplicationLoaded(): void { }
 }
