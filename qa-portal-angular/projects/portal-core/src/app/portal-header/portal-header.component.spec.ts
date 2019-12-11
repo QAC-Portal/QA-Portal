@@ -19,7 +19,7 @@ fdescribe('Portal Header Component Tests', () => {
   let component: PortalHeaderComponent;
   let keycloakService: KeycloakService;
   let fixture: ComponentFixture<PortalHeaderComponent>;
-  let location: ActivatedRoute;
+  
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -72,7 +72,7 @@ fdescribe('Portal Header Component Tests', () => {
       expect(url).toContain('/portal/home');
 
 
-      
+
       done();
       return new Promise<void>(res => res());
     })
