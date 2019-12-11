@@ -78,6 +78,7 @@ export class GenerateCvComponent implements OnInit {
         other: [[]]
       }),
       hobbies: fb.group({ hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]] }),
+      id: [[]],
       qualifications: [[]],
       workExperience: [[]],
       otherWorkExperience: [[]],
@@ -115,11 +116,11 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private getCvData(): CvModel {
-    debugger;
-    const { skills, qualifications, workExperience, ...rest } = this.cvForm.value;
+    const { skills, qualifications, id, workExperience, ...rest } = this.cvForm.value;
     return _.merge(new CvModel(), {
       allSkills: [skills],
       allQualifications: qualifications,
+      id: id,
       allWorkExperience: workExperience,
       fullName: `${rest.firstName} ${rest.surname}`,
       ...rest
@@ -148,8 +149,13 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(() => { });
   }
-
-
+  // ff;
+  // private callCV(): any {
+  //   this.cvService.getCurrentCvForTrainee().subscribe((cvv) => {
+  //     this.ff = cvv;
+  //   })
+  //   return this.ff;
+  // }
   onSaveCvButtonClicked() {
     const cv = this.getCvData();
     debugger;
@@ -162,8 +168,7 @@ export class GenerateCvComponent implements OnInit {
 
   // CV PERSIST FUNCTIONS
   private persistCvForTrainee(cv: CvModel) {
-    debugger;
-    if (!cv.id) {
+    if (!this.cv.id) {
       this.createCv(cv);
     } else {
       this.updateCv(cv);
@@ -179,7 +184,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private processCvServiceResponse(obs: Observable<CvModel>) {
-  this.cvForm.disable();
+    this.cvForm.disable();
     this.isLoading = true;
     obs.pipe(
       finalize(() => {

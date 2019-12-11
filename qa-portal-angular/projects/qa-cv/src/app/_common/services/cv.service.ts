@@ -27,7 +27,6 @@ export class CvService {
   constructor(private cvRemote: CvRemoteService, private http: HttpClient) { }
 
   public displayCvPdf(cv: CvModel): Observable<boolean> {
-    debugger;
     return this.cvRemote.getCvPdf(cv).pipe(switchMap(pdf => {
       const fileURL = URL.createObjectURL(pdf);
       window.open(fileURL, '_blank');
