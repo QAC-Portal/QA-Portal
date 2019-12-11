@@ -7,6 +7,7 @@
     z-index: 20;
     opacity: 1;
     width: 20%;
+    white-space: pre-line;
   }
 
   .help-bar mat-expansion-panel-header {

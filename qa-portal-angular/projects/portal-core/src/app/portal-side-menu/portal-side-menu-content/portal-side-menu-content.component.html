@@ -26,7 +26,7 @@
                 <mat-icon [svgIcon]="projectPage.icon">{{projectPage.icon || 'bookmark'}}</mat-icon>
               </div>
               <div style="width: 100%; text-overflow:ellipsis; overflow: hidden; text-align: left; margin: auto 0;">
-            <span matTooltip="{{projectPage.name}}">
+            <span [matTooltip]="QaHelpService.tooltipMaker(projectPage.name)">
               {{projectPage.name}}
             </span>
               </div>

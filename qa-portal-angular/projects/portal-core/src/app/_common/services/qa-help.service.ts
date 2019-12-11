@@ -23,10 +23,27 @@ export class QaHelpService {
 
 changeMessage(data, tag){
   data.subscribe(data => this.helpContent = data.filter(help => help.Tag == tag));
-  data.subscribe(() => this.messageSource.next(this.helpContent[0].Help));
+  data.subscribe(() => this.helpContent = this.helpContent[0].Help.split("\n"));
+  data.subscribe(() => this.helpContent = this.helpContent.join("\n"));
+  data.subscribe(() => this.messageSource.next(this.helpContent));
   };
 
-  toolTipHelp(data){
-    return "This is the training page";
+  tooltipMaker(data){
+    if (data == "Training"){
+      return "Training at the academy";
+    } else if (data == "Home") {
+      return "Home Page";
+    } else if (data == "Trainee Evaluation History") {
+      return "View and edit your current evaluations of your courses at the academy, providing feedback to your trainer to help them improve in the future.";
+    } else if (data == "Trainee Current CV") {
+      return "Update and view your current CV which should include everything learnt at the academy.";
+    } else if (data == "Trainee Reflections") {
+      return "For viewing the history of your reflections at the academy";
+    } else if (data == "Current Trainee Reflection") {
+      return "A form to reflect over your progress at the academy at the current date";
+    } else {
+      return "Placeholder Tooltip"
+    }
   }
+
 }
