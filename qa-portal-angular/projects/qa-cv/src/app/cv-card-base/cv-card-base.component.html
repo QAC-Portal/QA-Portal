@@ -60,7 +60,7 @@
     </mat-drawer>
     <mat-card-header>
       <mat-card-title>{{cardTitle || ''}}</mat-card-title>
-      <button mat-icon-button *ngIf="showOpenButton && !drawer.opened" (click)="drawer.open()" title="Show comments">
+      <button mat-icon-button *ngIf="showOpenButton" (click)="drawer.open()" title="Show comments" [color]= "resolvedAllComments ? 'primary': 'warn'">
         <mat-icon>feedback</mat-icon>
       </button>
     </mat-card-header>

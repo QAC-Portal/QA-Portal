@@ -19,7 +19,7 @@ export class CvCardBaseComponent {
   @Input() showOpenButton: boolean = true;
   @ViewChild('commentContainer', { static: true }) commentContainer: ElementRef;
   @ViewChild('drawer', { static: true }) public drawer: MatDrawer;
-  //@Input() resolvedAllComments: boolean;
+  @Input() resolvedAllComments: boolean;
 
   public commentInput = new FormControl('', Validators.required);
   public options: FormGroup;
@@ -49,10 +49,6 @@ export class CvCardBaseComponent {
     event.preventDefault(); // Stop default checkbox behaviour
     event.stopPropagation(); // Stop the row from clicking when using a checkbox
     if (comment) {
-      console.log("comment")
-      console.log(comment)
-      console.log("feedback")
-      console.log(this.feedback)
       this.feedback[index].resolved = this.feedback[index] === undefined ? false : !this.feedback[index].resolved;
       this.feedbackChange.emit(this.feedback);
     }

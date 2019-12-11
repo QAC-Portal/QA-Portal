@@ -31,6 +31,8 @@ export class CvWorkExpComponent {
   @Output() feedbackClick = new EventEmitter<{ index: number, experience: IWorkExperience }>();
 
   @Input() canEdit: boolean;
+  
+  @Input() resolvedAllComments: boolean;
 
   public workExperienceTableDataSource = new MatTableDataSource<IWorkExperience>();
   public expandedElement: IWorkExperience;

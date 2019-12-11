@@ -21,6 +21,8 @@ export class CvQualificationComponent {
   @Output() feedbackClick = new EventEmitter<{ index: number, qualifications: IQualification }>();
 
   @Input() canEdit: boolean;
+  
+  @Input() resolvedAllComments: boolean;
 
   public qualificationsTableDataSource = new MatTableDataSource<IQualification>();
 

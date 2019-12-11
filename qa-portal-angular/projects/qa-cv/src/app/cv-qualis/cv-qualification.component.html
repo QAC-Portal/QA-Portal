@@ -21,7 +21,7 @@
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element; let i = index" class="icon-cell">
             <button mat-icon-button (click)="onFeedbackButtonClicked(i, element)" matTooltip="Feedback"
-                matTooltipPosition="left" aria-label="Show feedback for this qualification">
+                matTooltipPosition="left" aria-label="Show feedback for this qualification"  [color]= "resolvedAllComments[i] ? 'primary': 'warn'">
                 <mat-icon>feedback</mat-icon>
             </button></td>
     </ng-container>
