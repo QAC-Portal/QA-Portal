@@ -11,15 +11,12 @@ import { ApplicationService } from '../_common/services/application.service';
 import { MockApplicationService } from '../_mocks/application.service.mock';
 import { KeycloakService } from 'keycloak-angular';
 import { MockKeycloakService } from '../_mocks/keycloak.service.mock';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
-import { of } from 'rxjs';
-import { stringify } from '@angular/compiler/src/util';
+
 
 describe('Portal Header Component Tests', () => {
   let component: PortalHeaderComponent;
   let keycloakService: KeycloakService;
   let fixture: ComponentFixture<PortalHeaderComponent>;
-  let location: ActivatedRoute;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,7 +41,6 @@ describe('Portal Header Component Tests', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PortalHeaderComponent);
     keycloakService = TestBed.get(KeycloakService);
-    location = TestBed.get(ActivatedRoute);
     component = fixture.componentInstance;
     
 
