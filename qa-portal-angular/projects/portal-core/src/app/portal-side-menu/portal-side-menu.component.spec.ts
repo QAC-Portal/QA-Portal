@@ -6,6 +6,7 @@ import { MockComponents } from 'ng-mocks';
 import { PortalSideMenuContentComponent } from './portal-side-menu-content/portal-side-menu-content.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { callbackify } from 'util';
 
 fdescribe('PortalSideMenuComponent', () => {
   let component: PortalSideMenuComponent;
@@ -31,28 +32,34 @@ fdescribe('PortalSideMenuComponent', () => {
     fixture = TestBed.createComponent(PortalSideMenuComponent);
     component = fixture.componentInstance;
 
-    
+
 
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.animating).toBeFalsy();
   });
   it('should get the done component when its called', () => {
-    spyOn(component, 'done').and.callThrough();
+    component.animating = true;
     component.done();
-    expect(component.done).toHaveBeenCalledTimes(1);
+    expect(component.animating).toBeFalsy();
   });
   it('should get the start component when its called', () => {
-    spyOn(component, 'start').and.callThrough();
+    spyOn(component, 'tick').and.callFake(() => { });
     component.start();
-    expect(component.start).toHaveBeenCalledTimes(1);
+    expect(component.animating).toBeTruthy();
+    expect(component.tick).toHaveBeenCalledTimes(1);
   });
   it('should get the tick component when its called', () => {
-    spyOn(component, 'tick').and.callThrough();
+    component.animating = true;
+    spyOn(window, 'requestAnimationFrame').and.callFake((cb: FrameRequestCallback) => {
+      
+      return 0;
+    });
     component.tick();
-    expect(component.tick).toHaveBeenCalledTimes(1);
+    expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
   });
 
 });
