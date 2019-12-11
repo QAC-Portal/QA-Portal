@@ -28,7 +28,7 @@ public class CvSearchCriteriaTest {
     public void toStringTest() {
         assertEquals("toString is returning an unexpected result",
                 "CvSearchCriteria{cvStatus='Completed', " +
-                        "FullName='Steve Roddy', " +
+                        "fullName='Steve Roddy', " +
                         "cohort='October', " +
                         "technology='AWS'}",
                 cvSearchCriteria.toString());
