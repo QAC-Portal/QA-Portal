@@ -82,7 +82,7 @@ export class WorkExperienceComponent implements ControlValueAccessor {
 
   // ControlValueAccessor methods
   writeValue(obj: any): void {
-    this.workExperienceTableDataSource.data = obj;
+    this.workExperienceTableDataSource.data = obj || [];
   }
 
   registerOnChange(fn: (v: WorkExperienceModel[]) => {}): void {

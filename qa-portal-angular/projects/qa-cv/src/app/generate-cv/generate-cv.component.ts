@@ -89,20 +89,15 @@ export class GenerateCvComponent implements OnInit {
     // this.cvForm.patchValue(new CvModel());
     // this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);  // Is page being displayed for Trainee or Admin
     // if (this.isTraineeView) {
-      this.cvService.getCurrentCvForTrainee().subscribe((cv) => 
-      {
-        console.log(cv);
-        this.cv = {...this.cvForm, ...cv};
-        
-      });
+    this.cvService.getCurrentCvForTrainee().subscribe((cv) => {
+      console.log(cv);
+      this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
+      this.refreshPageStatus();
+    });
     // } else {
     //   this.initialiseCvPageForAdmin();
     // }
   }
-    // this.cvService.getCurrentCvForTrainee().subscribe(
-    //     (cv) => {
-    //       this.cvData = {...DEFAULT_CV, ...cv};
-
 
   public removeSkill(category, value): void {
     this.cvForm.patchValue({
@@ -120,6 +115,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private getCvData(): CvModel {
+    debugger;
     const { skills, qualifications, workExperience, ...rest } = this.cvForm.value;
     return _.merge(new CvModel(), {
       allSkills: [skills],
@@ -146,16 +142,17 @@ export class GenerateCvComponent implements OnInit {
     this.cvForm.disable();
     this.isLoading = true;
     this.cvService.downloadCvPdf(this.getCvData()).pipe(
-        finalize(() => {
-          this.cvForm.enable();
-          this.isLoading = false;
-        })
-      ).subscribe(() => { });
+      finalize(() => {
+        this.cvForm.enable();
+        this.isLoading = false;
+      })
+    ).subscribe(() => { });
   }
 
 
   onSaveCvButtonClicked() {
     const cv = this.getCvData();
+    debugger;
     if (!cv.id) {
       cv.status = IN_PROGRESS_STATUS;
     }
@@ -165,6 +162,7 @@ export class GenerateCvComponent implements OnInit {
 
   // CV PERSIST FUNCTIONS
   private persistCvForTrainee(cv: CvModel) {
+    debugger;
     if (!cv.id) {
       this.createCv(cv);
     } else {
@@ -181,7 +179,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private processCvServiceResponse(obs: Observable<CvModel>) {
-    this.cvForm.disable();
+  this.cvForm.disable();
     this.isLoading = true;
     obs.pipe(
       finalize(() => {
@@ -191,6 +189,7 @@ export class GenerateCvComponent implements OnInit {
     ).subscribe(
       (response) => {
         this.cvData = response;
+        this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
         this.setPageEditStatus();
       },
       (error) => {
@@ -202,6 +201,13 @@ export class GenerateCvComponent implements OnInit {
 
 
   // STATUS UPDATE FUNCTIONS
+
+  private refreshPageStatus() {
+    // this.setPageEditStatus();
+    // this.setCommentStatus();
+    // this.loadingData = false;
+  }
+
   private setPageEditStatus(): void {
     // this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
   }
