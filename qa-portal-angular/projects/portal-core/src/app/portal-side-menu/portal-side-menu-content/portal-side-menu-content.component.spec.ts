@@ -29,6 +29,14 @@ fdescribe('PortalSideMenuContentComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should toggle drawer', () => {
+    component.toggleDrawer();
+    expect(component.opened).toBeTruthy();
+  });
+  it('should not toggle drawer', () => {
+    
+    expect(component.opened).toBeFalsy();
+  });
 
   // it('should open the drawer when clicked', () => {
 
