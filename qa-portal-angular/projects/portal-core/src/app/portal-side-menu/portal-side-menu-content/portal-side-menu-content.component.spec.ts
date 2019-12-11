@@ -31,10 +31,11 @@ fdescribe('PortalSideMenuContentComponent', () => {
   });
   it('should toggle drawer', () => {
     component.toggleDrawer();
-    expect(component.opened).toBeTruthy();
+    expect(component.opened.valueOf).toBeTruthy();
   });
   it('should not toggle drawer', () => {
-    
+    component.toggleDrawer();
+    component.toggleDrawer();
     expect(component.opened).toBeFalsy();
   });
 
