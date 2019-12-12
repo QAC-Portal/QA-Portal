@@ -14,8 +14,19 @@ export class QaHelpService {
   private messageSource = new BehaviorSubject("Help");
   currentMessage = this.messageSource.asObservable();
   private helpContent;
+  private userType;
 
   constructor(private router: Router, private http: HttpClient) { }
+
+  getUserType(roleBool){
+    if (roleBool == true){
+      this.userType = "USER";
+    } else {
+      this.userType = "ADMIN";
+    }
+    return this.userType;
+  }
+
 
   accessFile(): Observable <HelpModel>{
     return this.http.get<HelpModel>('../assets/Textfiles/homeHelp.json', {responseType: 'json'});
@@ -42,7 +53,7 @@ changeMessage(data, tag){
     } else if (data == "Current Trainee Reflection") {
       return "A form to reflect over your progress at the academy at the current date";
     } else {
-      return "Placeholder Tooltip"
+      return ""
     }
   }
 
