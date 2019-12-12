@@ -86,23 +86,64 @@ export class GenerateCvComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setRoleForPage();   // Is page being displayed for Trainee or Admin
     // this.cvForm.patchValue(new CvModel());
     // this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);  // Is page being displayed for Trainee or Admin
-    // if (this.isTraineeView) {
-    this.cvService.getCurrentCvForTrainee().subscribe((cv) => {
-      console.log(cv);
-      this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
-      this.refreshPageStatus();
-    });
-    // } else {
-    //   this.initialiseCvPageForAdmin();
-    // }
+
+    if (this.isTraineeView) {
+      this.initialiseCvPageForTrainee();
+    } else {
+      this.initialiseCvPageForAdmin();
+    };
+
   }
 
-  public removeSkill(category, value): void {
-    this.cvForm.patchValue({
-      skills: { [category]: this.cvForm.value.skills[category].filter(v => v !== value) }
-    });
+  private setRoleForPage() {
+    this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);
+  }
+  
+  private initialiseCvPageForTrainee() {
+    this.cvService.getCurrentCvForTrainee().subscribe(
+      (cv) => {
+        if (this.noExistingCvForTrainee(cv)) {
+          //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
+        } else {
+          console.log(cv);
+          this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
+          this.refreshPageStatus();
+        }
+      },
+      (error) => {
+        this.processError(error);
+      });
+  }
+
+  private initialiseCvPageForAdmin() {
+    this.activatedRoute.paramMap.subscribe(
+      (paramMap: ParamMap) => {
+        this.cvService.getCvForId(paramMap.get('id')).subscribe(
+          (cv) => {
+            if (this.noExistingCvForTrainee(cv)) {
+              //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
+            } else {
+              console.log(cv);
+              this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
+              this.refreshPageStatus();
+            }
+          },
+          (error) => {
+            this.processError(error);
+          });
+      });
+  }
+
+  private noExistingCvForTrainee(traineeCv: CvModel): boolean {
+    return !traineeCv;
+  }
+
+  private processError(error: any) {
+    //this.loadingData = false;
+    this.errorHandlerService.handleError(error);
   }
 
   public addSkill(category, { value, input }: MatChipInputEvent): void {
@@ -114,6 +155,13 @@ export class GenerateCvComponent implements OnInit {
     input.value = '';
   }
 
+  public removeSkill(category, value): void {
+    this.cvForm.patchValue({
+      skills: { [category]: this.cvForm.value.skills[category].filter(v => v !== value) }
+    });
+  }
+
+  // for generating, saving, downloading
   private getCvData(): CvModel {
     debugger;
     const { skills, qualifications, workExperience, ...rest } = this.cvForm.value;
@@ -179,7 +227,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private processCvServiceResponse(obs: Observable<CvModel>) {
-  this.cvForm.disable();
+    this.cvForm.disable();
     this.isLoading = true;
     obs.pipe(
       finalize(() => {

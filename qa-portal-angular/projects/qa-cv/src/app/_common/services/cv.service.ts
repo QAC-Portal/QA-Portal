@@ -71,9 +71,18 @@ export class CvService {
       take(1)
     );
   }
+
+  //load trainee's own cv
   getCurrentCvForTrainee(): Observable<CvModel> {
     return this.http.get<CvModel>(GET_CURRENT_CV_URL).pipe(
       take(1)
     );
   }
+
+    /** GET cv by id. Will 404 if id not found (for admin) */
+    getCvForId(id: string): Observable<CvModel> {
+      return this.http.get<CvModel>(GET_CV_FOR_ID_URL + id).pipe(
+        take(1)
+      );
+    }
 }
