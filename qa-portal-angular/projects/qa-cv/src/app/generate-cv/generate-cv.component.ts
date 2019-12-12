@@ -109,9 +109,10 @@ export class GenerateCvComponent implements OnInit {
         if (this.noExistingCvForTrainee(cv)) {
           //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
         } else {
-          console.log(cv);
-          this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
-          this.refreshPageStatus();
+            console.log(cv);
+            this.origCv = cv;
+            this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
+            this.refreshPageStatus();
         }
       },
       (error) => {
@@ -128,6 +129,7 @@ export class GenerateCvComponent implements OnInit {
               //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
             } else {
               console.log(cv);
+              this.origCv = cv;
               this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
               this.refreshPageStatus();
             }
