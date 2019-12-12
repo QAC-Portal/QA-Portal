@@ -58,8 +58,8 @@ export class GenerateCvComponent implements OnInit {
   public cvForm: FormGroup;
   cvData: CvModel;
   isTraineeView = true;
-  cv: any;
-  origCv: any;
+  cv: CvModel;
+  origCv: CvModel;
   constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private VCvService: ViewCvService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
     const fb = new FormBuilder();
@@ -79,8 +79,8 @@ export class GenerateCvComponent implements OnInit {
       }),
       hobbies: fb.group({ hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]] }),
       id: [[]],
-      qualifications: [[]],
-      workExperience: [[]],
+      allQualifications: [[]],
+      allWorkExperience: [[]],
       otherWorkExperience: [[]],
       sourceControlLink: ['']
     });
@@ -118,24 +118,14 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private getCvData(): CvModel {
-    const { skills, qualifications, id, workExperience, ...rest } = this.cvForm.value;
+    const { skills, id, ...rest } = this.cvForm.value;
     return _.merge(new CvModel(), {
+      ...this.origCv,
       allSkills: [skills],
-      allQualifications: qualifications,
-      allWorkExperience: workExperience,
       fullName: `${rest.firstName} ${rest.surname}`,
       ...rest
     } as CvModel).build();
-  }
-  //This function merges the form with the 
-  private getCvData2(): CvModel {
-    const { skills, qualifications, id, workExperience, ...rest } = this.cvForm.value;
-    const cvform = this.getCvData();
-    return _.merge(new CvModel(), {
-      ...this.origCv,
-      ...cvform
-    } as CvModel).build();
-  }
+  } 
 
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
@@ -160,7 +150,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   onSaveCvButtonClicked() {
-    const cv = this.getCvData2();
+    const cv = this.getCvData();
     if (!cv.id) {
       cv.status = IN_PROGRESS_STATUS;
     }
