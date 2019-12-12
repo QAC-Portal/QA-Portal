@@ -185,11 +185,9 @@ describe('DataTableComponent', () => {
 
   it('should get data for the rows selected', () => {
     component.dataSource = new MatTableDataSource<any>([1,2,3,4,5,6,7,8,9]);
-    component.rowSelection = [false, true, false, false, false, false, true, false, false];
-    const firstIndex = 2;
-    const secondIndex = 7;
-    
-
+    let t = true;
+    let f = false;
+    component.rowSelection = [f, t, f, f, f, f, t, f, f];
     let result = component.getSelectedRowsData();
     for(let i= 0; i< component.rowSelection.length-1; i++)
     {
