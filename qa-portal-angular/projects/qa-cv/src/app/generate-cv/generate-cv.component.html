@@ -118,14 +118,14 @@
         </button>
     </div>
     <!-- Trainee Buttons -->
-    <div *ngIf="isTraineeView"
+    <div *ngIf="isTraineeView && cvData.status !== 'Approved'"
     style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button">
             <mat-icon>save</mat-icon>&nbsp;Save CV
         </button>
     </div>
-    <div *ngIf="isTraineeView"
+    <div *ngIf="isTraineeView && cvData.status !== 'Approved'"
     style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button">
