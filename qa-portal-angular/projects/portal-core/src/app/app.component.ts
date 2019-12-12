@@ -4,7 +4,7 @@ import { ApplicationService } from './_common/services/application.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   constructor(appServ: ApplicationService) {
