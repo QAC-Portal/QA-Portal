@@ -7,7 +7,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { CvService } from '../_common/services/cv.service';
 import { finalize } from 'rxjs/operators';
 import { ViewCvService } from '../view-cv/services/view-cv.service';
-import { IN_PROGRESS_STATUS } from '../view-cv/models/view-cv.constants';
+import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_STATUS } from '../view-cv/models/view-cv.constants';
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
@@ -102,17 +102,17 @@ export class GenerateCvComponent implements OnInit {
   private setRoleForPage() {
     this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);
   }
-  
+
   private initialiseCvPageForTrainee() {
     this.cvService.getCurrentCvForTrainee().subscribe(
       (cv) => {
         if (this.noExistingCvForTrainee(cv)) {
           //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
         } else {
-            console.log(cv);
-            this.origCv = cv;
-            this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
-            this.refreshPageStatus();
+          console.log(cv);
+          this.origCv = cv;
+          this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
+          this.refreshPageStatus();
         }
       },
       (error) => {
@@ -173,7 +173,7 @@ export class GenerateCvComponent implements OnInit {
       fullName: `${rest.firstName} ${rest.surname}`,
       ...rest
     } as CvModel).build();
-  } 
+  }
 
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
@@ -204,8 +204,22 @@ export class GenerateCvComponent implements OnInit {
     }
     this.persistCvForTrainee(cv);
   }
+  onSubmitCvButtonClicked() {
+    const cv = this.getCvData();
+    cv.status = FOR_REVIEW_STATUS;
+    this.persistCvForTrainee(cv);
+  }
+  onNewCvButtonClicked() {
 
-
+  }
+  onApproveCvButtonClicked() {
+    const cv = this.getCvData();
+    cv.status = APPROVED_STATUS;
+  }
+  onFailCvButtonClicked() {
+    const cv = this.getCvData();
+    cv.status = FAILED_REVIEW_STATUS;
+  }
   // CV PERSIST FUNCTIONS
   private persistCvForTrainee(cv: CvModel) {
     if (!cv.id) {
@@ -234,7 +248,7 @@ export class GenerateCvComponent implements OnInit {
     ).subscribe(
       (response) => {
         this.cv = response;
-        this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {})});
+        this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
         this.setPageEditStatus();
       },
       (error) => {
