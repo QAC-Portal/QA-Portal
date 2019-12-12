@@ -30,12 +30,9 @@ public class KeycloakAdminClient {
 
     private Environment environment;
 
-    private QaSecurityContext qaSecurityContext;
-
     public KeycloakAdminClient(Environment environment,
                                QaSecurityContext qaSecurityContext) {
         this.environment = environment;
-        this.qaSecurityContext = qaSecurityContext;
     }
 
     @PostConstruct
