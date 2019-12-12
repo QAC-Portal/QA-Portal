@@ -58,16 +58,17 @@ export class GenerateCvComponent implements OnInit {
 
   public cvForm: FormGroup;
   cvData: CvModel;
-  isTraineeView = true;
   cv: CvModel;
   origCv: CvModel;
+  canComment = true;  
+  isTraineeView = true; 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
     const fb = new FormBuilder();
 
     this.cvForm = fb.group({
-      firstName: ['', Validators.required],
-      surname: ['', Validators.required],
+      firstName: [''],
+      surname: [''],
       profile: fb.group({ profileDetails: ['', [Validators.required, Validators.maxLength(1800)]] }),
       skills: fb.group({
         programmingLanguages: [[]],
@@ -112,6 +113,7 @@ export class GenerateCvComponent implements OnInit {
         } else {
           console.log(cv);
           this.origCv = cv;
+          this.cvData = cv;
           this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
           this.refreshPageStatus();
         }
@@ -131,6 +133,7 @@ export class GenerateCvComponent implements OnInit {
             } else {
               console.log(cv);
               this.origCv = cv;
+              this.cvData = cv;
               this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
               this.refreshPageStatus();
             }

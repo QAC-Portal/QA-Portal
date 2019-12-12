@@ -29,7 +29,9 @@ mat-card {
         &:last-of-type {
             margin-left: 1rem;
         }
-        
+        width: 100%;
+        flex-direction: row;
+        justify-content: left;
     }
 }
 // Custom Theming for Angular Material
