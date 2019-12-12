@@ -60,7 +60,7 @@ export class GenerateCvComponent implements OnInit {
   isTraineeView = true;
   cv: CvModel;
   origCv: CvModel;
-  constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private VCvService: ViewCvService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
+  constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
     const fb = new FormBuilder();
 
@@ -174,7 +174,7 @@ export class GenerateCvComponent implements OnInit {
       ...rest
     } as CvModel).build();
   }
-
+//Button Functions
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
     this.isLoading = true;
@@ -208,18 +208,27 @@ export class GenerateCvComponent implements OnInit {
     const cv = this.getCvData();
     cv.status = FOR_REVIEW_STATUS;
     this.persistCvForTrainee(cv);
+    //This needs to disable any further edits to the CV
   }
   onNewCvButtonClicked() {
-
+    // This needs to not delete the old CV, but equally 
+    // const cv = this.getCvData();
+    // cv.status = IN_PROGRESS_STATUS;
+    // this.createCv(cv);
   }
   onApproveCvButtonClicked() {
     const cv = this.getCvData();
     cv.status = APPROVED_STATUS;
+    this.updateCv(cv);
+    // This needs to be an admin only button
   }
   onFailCvButtonClicked() {
     const cv = this.getCvData();
     cv.status = FAILED_REVIEW_STATUS;
+    this.updateCv(cv);
+    // This needs to be an admin only button
   }
+
   // CV PERSIST FUNCTIONS
   private persistCvForTrainee(cv: CvModel) {
     if (!cv.id) {
