@@ -59,7 +59,7 @@ export class GenerateCvComponent implements OnInit {
   cvData: CvModel;
   isTraineeView = true;
   cv: any;
-
+  origCv: any;
   constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private VCvService: ViewCvService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
     const fb = new FormBuilder();
@@ -92,6 +92,8 @@ export class GenerateCvComponent implements OnInit {
     // if (this.isTraineeView) {
     this.cvService.getCurrentCvForTrainee().subscribe((cv) => {
       console.log(cv);
+      const origCv = cv;
+      this.origCv = origCv;
       this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
       this.refreshPageStatus();
     });
@@ -125,17 +127,15 @@ export class GenerateCvComponent implements OnInit {
       ...rest
     } as CvModel).build();
   }
-  // private getCvData2(): CvModel {
-  //   const { skills, qualifications, id, workExperience, ...rest } = this.cvForm.value;
-  //   return _.merge(new CvModel(), {
-  //     allSkills: [skills],
-  //     allQualifications: qualifications,
-  //     id: id,
-  //     allWorkExperience: workExperience,
-  //     fullName: `${rest.firstName} ${rest.surname}`,
-  //     ...rest
-  //   } as CvModel).build();
-  // }
+  //This function merges the form with the 
+  private getCvData2(): CvModel {
+    const { skills, qualifications, id, workExperience, ...rest } = this.cvForm.value;
+    const cvform = this.getCvData();
+    return _.merge(new CvModel(), {
+      ...this.origCv,
+      ...cvform
+    } as CvModel).build();
+  }
 
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
@@ -160,7 +160,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   onSaveCvButtonClicked() {
-    const cv = this.getCvData();
+    const cv = this.getCvData2();
     if (!cv.id) {
       cv.status = IN_PROGRESS_STATUS;
     }
@@ -195,8 +195,8 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(
       (response) => {
-        this.cvData = response;
-        this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
+        this.cv = response;
+        this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {})});
         this.setPageEditStatus();
       },
       (error) => {
