@@ -11,7 +11,8 @@ import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_S
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 
 @Component({
   selector: 'app-generate-cv',
@@ -60,7 +61,7 @@ export class GenerateCvComponent implements OnInit {
   isTraineeView = true;
   cv: CvModel;
   origCv: CvModel;
-  constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
     const fb = new FormBuilder();
 
@@ -220,13 +221,18 @@ export class GenerateCvComponent implements OnInit {
     const cv = this.getCvData();
     cv.status = APPROVED_STATUS;
     this.updateCv(cv);
+    this.navigateToAdminSearch();
     // This needs to be an admin only button
   }
   onFailCvButtonClicked() {
     const cv = this.getCvData();
     cv.status = FAILED_REVIEW_STATUS;
     this.updateCv(cv);
+    this.navigateToAdminSearch();
     // This needs to be an admin only button
+  }
+  private navigateToAdminSearch() {
+    this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
   }
 
   // CV PERSIST FUNCTIONS

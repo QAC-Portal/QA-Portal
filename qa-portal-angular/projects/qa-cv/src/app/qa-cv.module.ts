@@ -34,7 +34,7 @@ import { WorkExperienceComponent } from './controls/work-experience/work-experie
     CvCardBaseComponent,
     GenerateCvComponent,
     QualificationsComponent,
-    WorkExperienceComponent
+    WorkExperienceComponent,
   ],
   imports: [
     QaCommonModule,
