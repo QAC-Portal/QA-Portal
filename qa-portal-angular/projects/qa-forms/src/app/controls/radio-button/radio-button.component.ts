@@ -3,8 +3,7 @@ import { GenericControlComponent } from '../generic-control/generic-control.comp
 
 @Component({
   selector: 'app-radio-button',
-  templateUrl: './radio-button.component.html',
-  styleUrls: ['./radio-button.component.scss']
+  templateUrl: './radio-button.component.html'
 })
 export class RadioButtonComponent extends GenericControlComponent implements OnInit  {
 
