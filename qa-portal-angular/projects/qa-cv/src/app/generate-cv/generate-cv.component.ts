@@ -59,7 +59,7 @@ export class GenerateCvComponent implements OnInit {
   cvData: CvModel;
   isTraineeView = true;
   cv: CvModel;
-  origCv: CvModel;
+  public origCv: CvModel;
   constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private VCvService: ViewCvService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
     const fb = new FormBuilder();
@@ -96,7 +96,6 @@ export class GenerateCvComponent implements OnInit {
     } else {
       this.initialiseCvPageForAdmin();
     };
-
   }
 
   private setRoleForPage() {
