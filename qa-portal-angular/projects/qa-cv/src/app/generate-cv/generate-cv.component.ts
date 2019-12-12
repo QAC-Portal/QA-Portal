@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CvModel } from '../_common/models/cv.model';
 import { ENTER } from '@angular/cdk/keycodes';
@@ -8,6 +8,8 @@ import { CvService } from '../_common/services/cv.service';
 import { finalize } from 'rxjs/operators';
 import { ViewCvService } from '../view-cv/services/view-cv.service';
 import { IN_PROGRESS_STATUS } from '../view-cv/models/view-cv.constants';
+import { TRAINING_ADMIN_ROLE } from '../../../../portal-core/src/app/_common/models/portal-constants';
+import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants'
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
@@ -23,6 +25,10 @@ export class GenerateCvComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER];
 
   public isLoading = false;
+
+  @Output() public canComment = false;
+
+  @Output() public canEdit = true;
 
   public skillCategories = [
     {
