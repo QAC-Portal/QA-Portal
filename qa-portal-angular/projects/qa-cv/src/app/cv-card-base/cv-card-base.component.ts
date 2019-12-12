@@ -48,7 +48,8 @@ export class CvCardBaseComponent {
       const fb: IFeedback = {
         comment: this.commentInput.value,
         date: moment().format(),
-        reviewer: this.keycloak.getUsername()
+        reviewer: this.keycloak.getUsername(),
+        resolved: false
       };
       this.feedback.push(fb);
       this.feedbackChange.emit(this.feedback);

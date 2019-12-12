@@ -7,7 +7,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { CvService } from '../_common/services/cv.service';
 import { finalize } from 'rxjs/operators';
 import { ViewCvService } from '../view-cv/services/view-cv.service';
-import { IN_PROGRESS_STATUS } from '../view-cv/models/view-cv.constants';
+import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_STATUS } from '../view-cv/models/view-cv.constants';
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
@@ -58,8 +58,8 @@ export class GenerateCvComponent implements OnInit {
   public cvForm: FormGroup;
   cvData: CvModel;
   isTraineeView = true;
-  cv: any;
-
+  cv: CvModel;
+  public origCv: CvModel;
   constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private VCvService: ViewCvService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
     const fb = new FormBuilder();
@@ -78,31 +78,74 @@ export class GenerateCvComponent implements OnInit {
         other: [[]]
       }),
       hobbies: fb.group({ hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]] }),
-      qualifications: [[]],
-      workExperience: [[]],
+      id: [[]],
+      allQualifications: [[]],
+      allWorkExperience: [[]],
       otherWorkExperience: [[]],
       sourceControlLink: ['']
     });
   }
 
   ngOnInit() {
+    this.setRoleForPage();   // Is page being displayed for Trainee or Admin
     // this.cvForm.patchValue(new CvModel());
     // this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);  // Is page being displayed for Trainee or Admin
-    // if (this.isTraineeView) {
-    this.cvService.getCurrentCvForTrainee().subscribe((cv) => {
-      console.log(cv);
-      this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
-      this.refreshPageStatus();
-    });
-    // } else {
-    //   this.initialiseCvPageForAdmin();
-    // }
+
+    if (this.isTraineeView) {
+      this.initialiseCvPageForTrainee();
+    } else {
+      this.initialiseCvPageForAdmin();
+    };
   }
 
-  public removeSkill(category, value): void {
-    this.cvForm.patchValue({
-      skills: { [category]: this.cvForm.value.skills[category].filter(v => v !== value) }
-    });
+  private setRoleForPage() {
+    this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);
+  }
+
+  private initialiseCvPageForTrainee() {
+    this.cvService.getCurrentCvForTrainee().subscribe(
+      (cv) => {
+        if (this.noExistingCvForTrainee(cv)) {
+          //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
+        } else {
+          console.log(cv);
+          this.origCv = cv;
+          this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
+          this.refreshPageStatus();
+        }
+      },
+      (error) => {
+        this.processError(error);
+      });
+  }
+
+  private initialiseCvPageForAdmin() {
+    this.activatedRoute.paramMap.subscribe(
+      (paramMap: ParamMap) => {
+        this.cvService.getCvForId(paramMap.get('id')).subscribe(
+          (cv) => {
+            if (this.noExistingCvForTrainee(cv)) {
+              //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
+            } else {
+              console.log(cv);
+              this.origCv = cv;
+              this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
+              this.refreshPageStatus();
+            }
+          },
+          (error) => {
+            this.processError(error);
+          });
+      });
+  }
+
+  private noExistingCvForTrainee(traineeCv: CvModel): boolean {
+    return !traineeCv;
+  }
+
+  private processError(error: any) {
+    //this.loadingData = false;
+    this.errorHandlerService.handleError(error);
   }
 
   public addSkill(category, { value, input }: MatChipInputEvent): void {
@@ -114,18 +157,22 @@ export class GenerateCvComponent implements OnInit {
     input.value = '';
   }
 
+  public removeSkill(category, value): void {
+    this.cvForm.patchValue({
+      skills: { [category]: this.cvForm.value.skills[category].filter(v => v !== value) }
+    });
+  }
+
+  // for generating, saving, downloading
   private getCvData(): CvModel {
-    debugger;
-    const { skills, qualifications, workExperience, ...rest } = this.cvForm.value;
+    const { skills, id, ...rest } = this.cvForm.value;
     return _.merge(new CvModel(), {
+      ...this.origCv,
       allSkills: [skills],
-      allQualifications: qualifications,
-      allWorkExperience: workExperience,
       fullName: `${rest.firstName} ${rest.surname}`,
       ...rest
     } as CvModel).build();
   }
-
 
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
@@ -149,20 +196,31 @@ export class GenerateCvComponent implements OnInit {
     ).subscribe(() => { });
   }
 
-
   onSaveCvButtonClicked() {
     const cv = this.getCvData();
-    debugger;
     if (!cv.id) {
       cv.status = IN_PROGRESS_STATUS;
     }
     this.persistCvForTrainee(cv);
   }
+  onSubmitCvButtonClicked() {
+    const cv = this.getCvData();
+    cv.status = FOR_REVIEW_STATUS;
+    this.persistCvForTrainee(cv);
+  }
+  onNewCvButtonClicked() {
 
-
+  }
+  onApproveCvButtonClicked() {
+    const cv = this.getCvData();
+    cv.status = APPROVED_STATUS;
+  }
+  onFailCvButtonClicked() {
+    const cv = this.getCvData();
+    cv.status = FAILED_REVIEW_STATUS;
+  }
   // CV PERSIST FUNCTIONS
   private persistCvForTrainee(cv: CvModel) {
-    debugger;
     if (!cv.id) {
       this.createCv(cv);
     } else {
@@ -179,7 +237,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private processCvServiceResponse(obs: Observable<CvModel>) {
-  this.cvForm.disable();
+    this.cvForm.disable();
     this.isLoading = true;
     obs.pipe(
       finalize(() => {
@@ -188,7 +246,7 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(
       (response) => {
-        this.cvData = response;
+        this.cv = response;
         this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
         this.setPageEditStatus();
       },
