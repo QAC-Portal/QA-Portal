@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { KeycloakService } from 'keycloak-angular';
-import { IFeedback } from '../_common/models/feedback.model';
+import { IFeedback } from '../_common/models/iFeedback.model';
 import * as moment from 'moment';
 
 @Component({
