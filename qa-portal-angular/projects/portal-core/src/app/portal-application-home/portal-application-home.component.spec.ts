@@ -12,7 +12,7 @@ import { HeaderLinkComponent } from '../header-link/header-link.component';
 import { MatCardModule, MatListModule, MatIconModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
-fdescribe('PortalApplicationHomeComponent', () => {
+describe('PortalApplicationHomeComponent', () => {
   let component: PortalApplicationHomeComponent;
   let fixture: ComponentFixture<PortalApplicationHomeComponent>;
   let applicationService: ApplicationService;
