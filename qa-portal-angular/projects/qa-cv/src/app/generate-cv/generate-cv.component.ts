@@ -246,8 +246,8 @@ export class GenerateCvComponent implements OnInit {
   // STATUS UPDATE FUNCTIONS
 
   private refreshPageStatus() {
-    // this.setPageEditStatus();
-    // this.setCommentStatus();
+    this.setPageEditStatus();
+    this.setCommentStatus();
     // this.loadingData = false;
   }
 
