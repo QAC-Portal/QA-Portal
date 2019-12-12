@@ -1,4 +1,6 @@
-[{
+﻿[{	"Help": "Welcome to QA Portal! \n\n Kindly click any of the buttons displayed to navigate the portal",
+		"Tag": "/"
+}, {
 		"Help": "This is your home page.\n\nUse this as a starting area to navigate across the portal.\n\nUse the tabs on the top to navigate across different sections of the portal.",
 		"Tag": "/qa/portal/home"
 	}, {

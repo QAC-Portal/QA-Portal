@@ -6,19 +6,11 @@
         <mat-icon svgIcon="qa-logo"></mat-icon>
       </a>
       <div class="header-links">
-<<<<<<< HEAD
           <app-header-link [matTooltip]="QaHelpService.tooltipMaker(portalApp?.portalApplication?.name)" *ngFor="let portalApp of (appService.portalApplications$ | async)" [portalApplicationProjects]="portalApp">
               {{portalApp?.portalApplication?.name || 'Unknown Department'}}
             </app-header-link>
         </div>
-=======
-        <app-header-link *ngFor="let portalApp of (appService.portalApplications$ | async)"
-          [portalApplicationProjects]="portalApp">
-          {{portalApp?.portalApplication?.name || 'Unknown Department'}}
-        </app-header-link>
       </div>
->>>>>>> origin/development
-    </div>
 
     <!-- RIGHT ALIGN -->
     <div class="content-right">

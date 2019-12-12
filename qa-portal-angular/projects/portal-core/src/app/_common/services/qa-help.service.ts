@@ -11,7 +11,7 @@ import { filter, map } from 'rxjs/operators';
 })
 export class QaHelpService {
 
-  private messageSource = new BehaviorSubject("Help");
+  private messageSource = new BehaviorSubject("");
   currentMessage = this.messageSource.asObservable();
   private helpContent;
   private userType;
@@ -33,6 +33,7 @@ export class QaHelpService {
   }
 
 changeMessage(data, tag){
+  console.log(tag);
   data.subscribe(data => this.helpContent = data.filter(help => help.Tag == tag || help.Tag + String(tag).match(/[0-9]+/) == tag));
   data.subscribe(() => this.helpContent = this.helpContent[0].Help.split("\n"));
   data.subscribe(() => this.helpContent = this.helpContent.join("\n"));
