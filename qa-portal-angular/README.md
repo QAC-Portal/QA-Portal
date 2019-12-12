@@ -57,7 +57,7 @@ The following provides a more detailed explanation of each of the portal project
 
 #### 2.1.1. Security
 
-Security is managed by Keycloak with the application integrated with the Keycloak Identity and Access Management Provider through an angular-keycloak adapter. The portal-core app.module.ts has an APP_INITIALIZER provider that triggers the initializer function in app-init.ts. This initiates the keycloak authentication. If the user is not authenticated, then the application is redirected to the keycloak provider and a log in page for the QA Portal is presented to the user.
+Security is managed by Keycloak with the application integrated with the Keycloak Identity and Access Management Provider through an angular-keycloak adapter. The portal-core app.module.ts has an APP_INITIALIZER provider that triggers the initializer function in app-init.ts. This initiates the keycloak 2entication. If the user is not authenticated, then the application is redirected to the keycloak provider and a log in page for the QA Portal is presented to the user.
 
 Once the user has entered their username and password, they are authenticated by the keycloak provider, and if successful a JWT is issued. Keycloak then redirects the application to the url originally specified by the user prior to the keyloak redirection. 
 
