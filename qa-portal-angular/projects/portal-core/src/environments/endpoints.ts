@@ -86,10 +86,11 @@ export interface Endpoints {
   GET_ALL_FEEDBACK_API: string;
   CV_SEARCH: string;
   CREATE_COURSE: string;
+  RND: string;
 }
 
 export const endpoints: Endpoints = {
-
+RND : 'random',
   SELF_REFLECTION_QUESTION_API : 'self-reflection-api/question',
   GET_ALL_SELF_REFLECTIONS_API : 'self-reflection-api/reflections',
 
