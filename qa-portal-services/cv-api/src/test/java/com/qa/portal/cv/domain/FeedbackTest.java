@@ -14,33 +14,26 @@ import static org.junit.Assert.assertEquals;
 public class FeedbackTest {
 
     @InjectMocks
-    public Feedback feedback;
-
-    @Before
-    public void setVariables() {
-        feedback.setReviewer("Tom Bennett");
-        feedback.setDate("2019-12-11");
-        feedback.setComment("comment");
-    }
+    public MockFeedbackList feedback = new MockFeedbackList();
 
     @Test
     public void getReviewerTest() {
         assertEquals("getReviewer() returning an unexpected result",
                 "Tom Bennett",
-                feedback.getReviewer());
+                feedback.getFeedbackList().get(2).getReviewer());
     }
 
     @Test
     public void getDateTest() {
         assertEquals("getDate() returning an unexpected result",
-                "2019-12-11",
-                feedback.getDate());
+                "2011-06-31",
+                feedback.getFeedbackList().get(2).getDate());
     }
 
     @Test
     public void getComment() {
         assertEquals("getComment() returning an unexpected result",
-                "comment",
-                feedback.getComment());
+                "feedback 3",
+                feedback.getFeedbackList().get(2).getComment());
     }
 }
