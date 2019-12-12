@@ -11,7 +11,8 @@ import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_S
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 
 @Component({
   selector: 'app-generate-cv',
@@ -57,16 +58,18 @@ export class GenerateCvComponent implements OnInit {
 
   public cvForm: FormGroup;
   cvData: CvModel;
-  isTraineeView = true;
   cv: CvModel;
-  public origCv: CvModel;
-  constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private VCvService: ViewCvService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
+  origCv: CvModel;
+  canComment = true;  
+  isTraineeView = true; 
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
+
 
     const fb = new FormBuilder();
 
     this.cvForm = fb.group({
-      firstName: ['', Validators.required],
-      surname: ['', Validators.required],
+      firstName: [''],
+      surname: [''],
       profile: fb.group({ profileDetails: ['', [Validators.required, Validators.maxLength(1800)]] }),
       skills: fb.group({
         programmingLanguages: [[]],
@@ -110,6 +113,7 @@ export class GenerateCvComponent implements OnInit {
         } else {
           console.log(cv);
           this.origCv = cv;
+          this.cvData = cv;
           this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
           this.refreshPageStatus();
         }
@@ -129,6 +133,7 @@ export class GenerateCvComponent implements OnInit {
             } else {
               console.log(cv);
               this.origCv = cv;
+              this.cvData = cv;
               this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
               this.refreshPageStatus();
             }
@@ -173,7 +178,7 @@ export class GenerateCvComponent implements OnInit {
       ...rest
     } as CvModel).build();
   }
-
+//Button Functions
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
     this.isLoading = true;
@@ -207,18 +212,32 @@ export class GenerateCvComponent implements OnInit {
     const cv = this.getCvData();
     cv.status = FOR_REVIEW_STATUS;
     this.persistCvForTrainee(cv);
+    //This needs to disable any further edits to the CV
   }
   onNewCvButtonClicked() {
-
+    // This needs to not delete the old CV, but equally 
+    // const cv = this.getCvData();
+    // cv.status = IN_PROGRESS_STATUS;
+    // this.createCv(cv);
   }
   onApproveCvButtonClicked() {
     const cv = this.getCvData();
     cv.status = APPROVED_STATUS;
+    this.updateCv(cv);
+    this.navigateToAdminSearch();
+    // This needs to be an admin only button
   }
   onFailCvButtonClicked() {
     const cv = this.getCvData();
     cv.status = FAILED_REVIEW_STATUS;
+    this.updateCv(cv);
+    this.navigateToAdminSearch();
+    // This needs to be an admin only button
   }
+  private navigateToAdminSearch() {
+    this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
+  }
+
   // CV PERSIST FUNCTIONS
   private persistCvForTrainee(cv: CvModel) {
     if (!cv.id) {
