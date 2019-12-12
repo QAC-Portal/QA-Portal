@@ -60,8 +60,8 @@ export class GenerateCvComponent implements OnInit {
   cvData: CvModel;
   cv: CvModel;
   origCv: CvModel;
-  canComment = true;  
-  isTraineeView = true; 
+  canComment = true;
+  isTraineeView = true;
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
 
@@ -178,7 +178,8 @@ export class GenerateCvComponent implements OnInit {
       ...rest
     } as CvModel).build();
   }
-//Button Functions
+  //Button Functions
+  //All Users Buttons
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
     this.isLoading = true;
@@ -200,7 +201,7 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(() => { });
   }
-
+  //User Buttons
   onSaveCvButtonClicked() {
     const cv = this.getCvData();
     if (!cv.id) {
@@ -212,27 +213,25 @@ export class GenerateCvComponent implements OnInit {
     const cv = this.getCvData();
     cv.status = FOR_REVIEW_STATUS;
     this.persistCvForTrainee(cv);
-    //This needs to disable any further edits to the CV
+    //This needs to disable any further edits to the CV, wich it curently doesn't
   }
   onNewCvButtonClicked() {
-    // This needs to not delete the old CV, but equally 
-    // const cv = this.getCvData();
-    // cv.status = IN_PROGRESS_STATUS;
-    // this.createCv(cv);
+    const cv = this.getCvData();
+    cv.status = IN_PROGRESS_STATUS;
+    this.createCv(cv);
   }
+  //Admin Buttons
   onApproveCvButtonClicked() {
     const cv = this.getCvData();
     cv.status = APPROVED_STATUS;
     this.updateCv(cv);
     this.navigateToAdminSearch();
-    // This needs to be an admin only button
   }
   onFailCvButtonClicked() {
     const cv = this.getCvData();
     cv.status = FAILED_REVIEW_STATUS;
     this.updateCv(cv);
     this.navigateToAdminSearch();
-    // This needs to be an admin only button
   }
   private navigateToAdminSearch() {
     this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
