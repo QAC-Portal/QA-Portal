@@ -64,6 +64,7 @@ export class GenerateCvComponent implements OnInit {
   isTraineeView = true; 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
+
     const fb = new FormBuilder();
 
     this.cvForm = fb.group({
@@ -98,7 +99,6 @@ export class GenerateCvComponent implements OnInit {
     } else {
       this.initialiseCvPageForAdmin();
     };
-
   }
 
   private setRoleForPage() {
