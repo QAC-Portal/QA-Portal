@@ -1,6 +1,13 @@
+export class Feedback {
+    reviewer: string;
+    date: string;
+    comment: string;
+    resolved: boolean;
+}
+
 export class ProfileModel {
     profileDetails: string;
-    profileFeedback = [];
+    profileFeedback: Feedback[] = [];
 }
 
 export class SkillsModel {
@@ -15,18 +22,18 @@ export class SkillsModel {
 
 export class QualificationModel {
     qualificationDetails: string;
-    qualificationFeedback = [];
+    qualificationFeedback: Feedback[]  = [];
 }
 
 export class WorkExperienceModel {
     jobTitle: string;
     workExperienceDetails: string;
-    workExperienceFeedback = [];
+    workExperienceFeedback: Feedback[]  = [];
 }
 
 export class HobbiesModel {
     hobbiesDetails: string;
-    hobbiesFeedback = [];
+    hobbiesFeedback: Feedback[]  = [];
 }
 
 export class CvModel {
@@ -54,6 +61,7 @@ export class CvModel {
         return str.replace(/\t/g, '');
     }
 
+    // do we need ot satitize feedback aswell??
     public build(): this {
         this.profile.profileDetails = this.sanitizeStr(this.profile.profileDetails);
         this.hobbies.hobbiesDetails = this.sanitizeStr(this.hobbies.hobbiesDetails);
