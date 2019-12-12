@@ -96,17 +96,6 @@ export class GenerateCvComponent implements OnInit {
     } else {
       this.initialiseCvPageForAdmin();
     };
-
-    // if (this.isTraineeView) {
-    this.cvService.getCurrentCvForTrainee().subscribe((cv) => {
-      console.log(cv);
-      this.origCv = cv;
-      this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
-      this.refreshPageStatus();
-    });
-    // } else {
-    //   this.initialiseCvPageForAdmin();
-    // }
   }
 
   private setRoleForPage() {
