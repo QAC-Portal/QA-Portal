@@ -24,7 +24,6 @@ public class RoleEntityJavaUnitTest {
 	public RoleEntity roleEntityDiffId = new RoleEntity();
 	public RoleEntity roleEntityDiffName = new RoleEntity();
 	public RoleEntity roleEntityDiffPortalApplication = new RoleEntity();
-//	public RoleEntity roleEntityDiffRoleProjectPages = new RoleEntity();
 	
 	@Before
 	public void setup() {
@@ -97,7 +96,6 @@ public class RoleEntityJavaUnitTest {
 	
 	@Test
 	public void getPortalApplicationTest() {
-		System.out.println(this.roleEntity.getPortalApplication().toString());
 		assertThat(this.roleEntity.getPortalApplication().toString()).isEqualTo("PortalApplicationEntity{id=1, name=\'null\', description=\'null\', displayOrder=null, baseUrl=\'null\'}"); 
 	}
 	

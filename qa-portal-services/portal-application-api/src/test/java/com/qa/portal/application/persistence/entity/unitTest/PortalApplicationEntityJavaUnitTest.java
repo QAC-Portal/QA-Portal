@@ -88,7 +88,6 @@ public class PortalApplicationEntityJavaUnitTest {
 	
 	@Test
 	public void hashTest() {
-//		System.out.println((String.valueOf(this.portalApplicationEntity.hashCode()).length()));
 		assertThat(String.valueOf(this.portalApplicationEntity.hashCode()).length()).isEqualTo(11);
 	}
 	

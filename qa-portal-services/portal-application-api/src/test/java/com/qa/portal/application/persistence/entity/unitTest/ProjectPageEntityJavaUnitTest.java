@@ -30,6 +30,8 @@ public class ProjectPageEntityJavaUnitTest {
 	ProjectPageEntity projectPageEntityDiffPortalProject = new ProjectPageEntity();
 	ProjectPageEntity projectPageEntityDiffRoleProjectPages = new ProjectPageEntity();
 	ProjectPageEntity projectPageEntityRoleProjectNull = new ProjectPageEntity();
+	ProjectPageEntity projectPageEntityRoleProjectAdd = new ProjectPageEntity();
+
 	
 	@Before
 	public void setup() {
@@ -204,11 +206,25 @@ public class ProjectPageEntityJavaUnitTest {
 //	PortalProjectEntity portalProjectEntity0 = new PortalProjectEntity();
 //	portalProjectEntity0.setId(1);
 //	this.projectPageEntityRoleProjectNull.setPortalProject(portalProjectEntity0);
-//	List<RoleProjectPageEntity> roleProjectList0 = null;
+//	RoleProjectPageEntity roleProjectPageEntity0 = null;
+//	List<RoleProjectPageEntity> roleProjectList0 = new ArrayList<>();
+//	roleProjectList0.add(roleProjectPageEntity0);
 //	this.projectPageEntityRoleProjectNull.setRoleProjectPageEntities(roleProjectList0);
-	
-	
-	}
+//	
+//	this.projectPageEntityRoleProjectAdd.setId(1);
+//	this.projectPageEntityRoleProjectAdd.setName("test name");
+//	this.projectPageEntityRoleProjectAdd.setUrl("test url");
+//	this.projectPageEntityRoleProjectAdd.setTooltip("test tooltip");
+//	this.projectPageEntityRoleProjectAdd.setIcon("test icon");
+//	this.projectPageEntityRoleProjectAdd.setDisplayOnMenu(true);
+//	PortalProjectEntity portalProjectEntity01 = new PortalProjectEntity();
+//	portalProjectEntity01.setId(1);
+//	this.projectPageEntityRoleProjectAdd.setPortalProject(portalProjectEntity01);
+//	RoleProjectPageEntity roleProjectPageEntity01 = new RoleProjectPageEntity();
+//	List<RoleProjectPageEntity> roleProjectList01 = new ArrayList<>();
+//	roleProjectList01.add(roleProjectPageEntity01);
+//	this.projectPageEntityRoleProjectAdd.setRoleProjectPageEntities(roleProjectList01);
+}
 	
 	@Test
 	public void getIdTest() {
@@ -277,7 +293,7 @@ public class ProjectPageEntityJavaUnitTest {
 	
 //	@Test
 //	public void addRoleProjectPageEntityTest() {
-//		
-//		System.out.println(this.projectPageEntity.addRoleProjectPageEntity(););
+//		RoleProjectPageEntity roleProjectPage = new RoleProjectPageEntity();
+//		assertThat(this.projectPageEntityRoleProjectNull.addRoleProjectPageEntity(roleProjectPage).isEqualTo(projectPageEntityRoleProjectAdd));
 //	}
 }
