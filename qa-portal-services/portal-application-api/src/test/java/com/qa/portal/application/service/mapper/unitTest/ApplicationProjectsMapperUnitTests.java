@@ -282,8 +282,6 @@ public class ApplicationProjectsMapperUnitTests {
 		Mockito.when(this.baseMapper.mapObject(projectPageEntity3, ProjectPageDto.class)).thenReturn(projectPageDto3);
 		Mockito.when(this.baseMapper.mapObject(projectPageEntity4, ProjectPageDto.class)).thenReturn(projectPageDto4);
 		
-		System.out.println(applicationProjectsMapper.createApplicationProjectsDto(roleProjectPageEntitieset));
-		
 		assertThat(applicationProjectsMapper.createApplicationProjectsDto(roleProjectPageEntitieset)).isEqualTo(applicationProjectslist);
 	}
 
