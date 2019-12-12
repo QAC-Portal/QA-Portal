@@ -15,28 +15,20 @@ describe('SideMenuService', () => {
   })
 
   it('should be created', () => {
-
     expect(service).toBeTruthy();
   });
 
   it('should call toggleOpen', () => {
     spyOn(service, 'toggleOpen').and.callThrough();
     service.toggleOpen();
-
     expect(service.toggleOpen).toHaveBeenCalledTimes(1);
   });
 
   it('should set sideMenuOpen to true on init', () => {
-    
-    
-    
     expect(service.sideMenuOpen).toEqual(false);
-   //expect(localStorage.getItem('sideMenuOpen')).toEqual('true');
   });
   it('should open side menu', () => {
     service.toggleOpen();
-    
-    
     expect(localStorage.getItem('sideMenuOpen')).toEqual('true');
   });
 });
