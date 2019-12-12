@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CvCardBaseComponent } from './cv-card-base.component';
+import { CvCardBaseComponent } from './cv-card-generate.component';
 
 describe('CvCardBaseComponent', () => {
   let component: CvCardBaseComponent;
