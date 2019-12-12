@@ -8,4 +8,6 @@ export class MockApplicationService {
 
   //spyOn
   public onApplicationLoaded(): void { }
+  
+
 }

@@ -9,4 +9,8 @@ describe('SideMenuService', () => {
     const service: SideMenuService = TestBed.get(SideMenuService);
     expect(service).toBeTruthy();
   });
+
+  it('should open the side menu', () => {
+    
+  });
 });

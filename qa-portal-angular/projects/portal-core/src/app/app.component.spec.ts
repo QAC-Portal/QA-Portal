@@ -1,23 +1,45 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { ApplicationService } from './_common/services/application.service';
+import { MockApplicationService } from './_mocks/application.service.mock';
+import { PortalHeaderComponent } from '../app/portal-header/portal-header.component'
+import { MockComponents } from 'ng-mocks';
+import { PortalSideMenuComponent } from '../app/portal-side-menu/portal-side-menu.component';
+import { KeycloakService } from 'keycloak-angular';
+import { MockKeycloakService } from './_mocks/keycloak.service.mock';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let appService: ApplicationService;
+  let fixture: ComponentFixture<AppComponent>;
+  let keyCloak: KeycloakService;
 
-
-
-  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        MockComponents(PortalSideMenuComponent, PortalHeaderComponent)
+      ],
+      providers: [
+        { provide: ApplicationService, useClass: MockApplicationService },
+        { provide: KeycloakService, useClass: MockKeycloakService }
       ],
     }).compileComponents();
   }));
 
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    appService = TestBed.get(ApplicationService);
+    component = fixture.componentInstance;
+
+    spyOn(appService, 'onApplicationLoaded').and.callThrough();
+
+    fixture.detectChanges();
+  })
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -25,16 +47,4 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'portal-core'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('portal-core');
-  });
-
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to portal-core!');
-  });
 });
