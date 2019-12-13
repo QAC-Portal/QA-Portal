@@ -1,61 +1,165 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 
 import { QaHttpService } from './qa-http.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MockQaHttpService } from '../../_mocks/qa-http.service.mock';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-fdescribe('QaHttpService', () => {
-  let service: QaHttpService;
+describe('QaHttpService', () => {
 
-  beforeEach(async() => {
 
-    TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-    })
-  })
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule
+    ]
+  }));
 
-  beforeEach(() => {
-    service = TestBed.get(QaHttpService)
-
-  })
-
-  it('should be created', () => {
+  it('should be created', inject([HttpTestingController, QaHttpService], (httpMock: HttpTestingController, service: QaHttpService) => {
     expect(service).toBeTruthy();
-  });
-
-  it('should call the get function', () => {
-    spyOn(service, 'get').and.callThrough();
-    let t =service.get('www');
-    
-    expect(service.get).toHaveBeenCalledTimes(1);
-    //expect(t).toBeFalsy();
-    //expect(t.source.source..subscribe(m =>m.HttpRequest)).toContain("");
-    //expect(t.source.subscribe(m =>m.HttpRequest)).toContain("");
-  });
-
-  it('should call the post function', () => {
-    spyOn(service, 'post').and.callThrough();
-    service.post('www', 'adf');
-    expect(service.post).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call the put function', () => {
-    spyOn(service, 'put').and.callThrough();
-    service.put('www', 'adf');
-    expect(service.put).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call the patch function', () => {
-    spyOn(service, 'patch').and.callThrough();
-    service.patch('www', 'adf');
-    expect(service.patch).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call the delete function', () => {
-    spyOn(service, 'delete').and.callThrough();
-    service.delete('www');
-    expect(service.delete).toHaveBeenCalledTimes(1);
-  });
+  }));
 });
+describe('Get request',  () => {
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule
+    ]
+    }));
+
+    it('should send get request using ref',  inject([HttpTestingController, QaHttpService], (httpMock: HttpTestingController, service: QaHttpService) => {
+      
+      service.get({ref: 'GET_ALL_USERS'}).subscribe(body => {
+        expect(body).toEqual('test body');
+      });
+      
+      const mockGetReq = httpMock.expectOne('cohort-api/manage/users');
+      mockGetReq.flush('test body');
+      httpMock.verify();
+    }));
+});
+describe('Post request', () => {
+
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [
+      HttpClientTestingModule
+    ]
+  }));
+
+  it('should send post request using ref', inject([HttpTestingController, QaHttpService], (httpMock: HttpTestingController, service: QaHttpService) => {
+    const mockUser = {
+      name: 'userTest',
+      role: ''
+    };
+    
+    service.post({ref: 'CREATE_USER'}, {
+      headers: { 'Content-Type': 'application/json' }
+    }).subscribe((userData) => {
+      expect(userData).toEqual(mockUser);
+    });
+  
+    const mockGetReq = httpMock.expectOne('cohort-api/manage/user');
+      
+    expect(mockGetReq.request.method).toEqual('POST');
+
+    mockGetReq.flush(mockUser);
+    httpMock.verify();
+  }));
+});
+describe('Put request', () => {
+
+    beforeEach(() => TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ]
+    }));
+
+  it('should send put request using ref', inject([HttpTestingController, QaHttpService], (httpMock: HttpTestingController, service: QaHttpService) => {
+    const mockUser = {
+      name: 'userTest',
+      role: ''
+    };
+    
+    service.put({ref: 'UPDATE_EVALUATION_FORM'}, {
+      headers: { 'Content-Type': 'application/json' }
+    }).subscribe((userData) => {
+      expect(userData).toEqual(mockUser);
+    });
+    const mockGetReq = httpMock.expectOne('feedback-api/evaluation');
+      
+    expect(mockGetReq.request.method).toEqual('PUT');
+
+    mockGetReq.flush(mockUser);
+    httpMock.verify();
+  }));
+  // No request is using patch yet can't be tested
+  // it('should send patch request using ref', inject([HttpTestingController, QaHttpService], (httpMock: HttpTestingController, service: QaHttpService) => {
+  //   const mockUser = {
+  //     name: 'userTest',
+  //     role: ''
+  //   };
+    
+  //   service.patch({ref: 'UPDATE_USERS'}, {
+  //     headers: { 'Content-Type': 'application/json' }
+  //   }).subscribe((userData) => {
+  //     expect(userData).toEqual(mockUser);
+  //   });
+  //   const mockGetReq = httpMock.expectOne('cohort-api/manage/user');
+      
+  //   expect(mockGetReq.request.method).toEqual('PATCH');
+
+  //   mockGetReq.flush(mockUser);
+  //   httpMock.verify();
+  // }));
+});
+describe('Delete request', () => {
+
+    beforeEach(() => TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ]
+    }));
+  it('should send delete request using ref',inject([HttpTestingController, QaHttpService], (httpMock: HttpTestingController, service: QaHttpService) => {
+    const mockUser = {
+      name: 'userTest',
+      role: ''
+    };
+    
+    service.delete({ref: 'DELETE_USERS'}, {
+      headers: { 'Content-Type': 'application/json' }
+    }).subscribe((userData) => {
+      expect(userData).toEqual(mockUser);
+    });
+    const mockGetReq = httpMock.expectOne('cohort-api/manage/users/delete');
+      
+    expect(mockGetReq.request.method).toEqual('DELETE');
+
+    mockGetReq.flush(mockUser);
+    httpMock.verify();
+  }));
+});
+describe('Url Builder Test', () => {
+
+    beforeEach(() => TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ]
+    }));
+  it('should work using a url instead of an endpoint', inject([HttpTestingController, QaHttpService], (httpMock: HttpTestingController, service: QaHttpService) => {
+    service.get('cohort-api/manage/users').subscribe(body => {
+      expect(body).toEqual('test body');
+    });
+    
+    const mockGetReq = httpMock.expectOne('cohort-api/manage/users');
+    mockGetReq.flush('test body');
+    httpMock.verify();
+  }));
+
+  it('should use params', inject([HttpTestingController, QaHttpService], (httpMock: HttpTestingController, service: QaHttpService) => {
+    service.get({ ref: 'GET_EVALUATION_FORM_FOR_ID' , params : { courseId : 1 }}).subscribe(body => {
+      expect(body).toEqual('test body');
+    });
+    
+    const mockGetReq = httpMock.expectOne('feedback-api/evaluation/1');
+    mockGetReq.flush('test body');
+    httpMock.verify();
+  }));
+});
+
+  
