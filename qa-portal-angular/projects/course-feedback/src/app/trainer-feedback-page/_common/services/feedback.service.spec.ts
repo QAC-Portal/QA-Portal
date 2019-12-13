@@ -5,7 +5,7 @@ import { QaHttpService, HttpUrlDefinition } from 'projects/portal-core/src/app/_
 import { IFormModel } from 'projects/qa-forms/src/app/_common/models';
 import { of, Observable } from 'rxjs';
 
-fdescribe('FeedbackService', () => {
+describe('FeedbackService', () => {
     let service: FeedbackService;
     let qaHttp: QaHttpService;
     beforeEach(() => TestBed.configureTestingModule({
