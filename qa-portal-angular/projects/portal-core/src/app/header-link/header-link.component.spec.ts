@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeaderLinkComponent } from './header-link.component';
 
 describe('HeaderLinkComponent', () => {
@@ -8,7 +7,9 @@ describe('HeaderLinkComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderLinkComponent ]
+      declarations: [ HeaderLinkComponent
+      ]
+
     })
     .compileComponents();
   }));
