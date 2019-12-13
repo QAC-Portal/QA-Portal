@@ -38,8 +38,6 @@ export class CohortSummaryComponent implements OnInit, OnDestroy {
   }
 
   cohortsToShow(desiredCohorts) {
-    console.log("we are in cohort summary")
-    console.log(desiredCohorts);
     this.cohortsForGraph = desiredCohorts;
     //feed in to input and reload component.
   }
