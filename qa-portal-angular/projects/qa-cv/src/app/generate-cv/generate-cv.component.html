@@ -1,4 +1,5 @@
-<h1>Generate CV <div style="float: right;">{{origCv?.status}}</div></h1>
+<h1>Generate CV <div style="float: right;">{{origCv?.status}}</div>
+</h1>
 
 <form [formGroup]="cvForm">
     <mat-card>
@@ -102,10 +103,10 @@
     </section>
 </form>
 
-<!-- All User Buttons -->   
+<!-- All User Buttons -->
 <br>
 <div class="action-buttons">
-    <div  class="inline">
+    <div class="inline">
         <button mat-flat-button color="accent" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="generate-cv-button">
             <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
@@ -114,20 +115,20 @@
             [disabled]="cvForm?.invalid" name="download-cv-button">
             <mat-icon>get_app</mat-icon>&nbsp;Download CV
         </button>
-    </div>
-    <!-- Trainee Buttons -->
-    <div *ngIf="isTraineeView && origCv?.status !== 'Approved'" >
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button">
-            <mat-icon>save</mat-icon>&nbsp;Save CV
+            <mat-icon>save</mat-icon>&nbsp;Save CV        
         </button>
+    </div>
+    <!-- Trainee Buttons -->
+    <div *ngIf="isTraineeView && origCv?.status !== 'Approved'">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Submit
         </button>
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Create new
         </button>
-    </div>   
+    </div>
     <!-- Admin Buttons -->
     <div *ngIf="!isTraineeView">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onApproveCvButtonClicked()"
