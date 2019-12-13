@@ -115,18 +115,18 @@
             [disabled]="cvForm?.invalid" name="download-cv-button">
             <mat-icon>get_app</mat-icon>&nbsp;Download CV
         </button>
-        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
-            [disabled]="cvForm?.invalid" name="save-cv-button">
-            <mat-icon>save</mat-icon>&nbsp;Save CV        
-        </button>
     </div>
     <!-- Trainee Buttons -->
+    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="save-cv-button">
+        <mat-icon>save</mat-icon>&nbsp;Save CV
+    </button>
     <div *ngIf="isTraineeView && origCv?.status !== 'Approved'">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Submit
         </button>
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
-            [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Create new
+            [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;New CV
         </button>
     </div>
     <!-- Admin Buttons -->
