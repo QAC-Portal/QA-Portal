@@ -2,7 +2,7 @@ import {Component, OnInit, Output} from '@angular/core';
 import {DEFAULT_CV, ICvModel} from '../_common/models/qac-cv-db.model';
 import {ViewCvService} from './services/view-cv.service';
 import {CvCardBaseComponent} from '../cv-card-base/cv-card-base.component';
-import {IFeedback} from '../_common/models/feedback.model';
+import {IFeedback} from '../_common/models/iFeedback.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MAT_DATE_LOCALE, MatDialog} from '@angular/material';
 import {SubmitConfirmDialogComponent} from './submit-confirm-dialog/submit-confirm-dialog.component';

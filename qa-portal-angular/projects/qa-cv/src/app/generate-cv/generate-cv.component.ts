@@ -11,7 +11,8 @@ import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_S
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
 import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 
 @Component({
@@ -57,18 +58,23 @@ export class GenerateCvComponent implements OnInit {
   ];
 
   public cvForm: FormGroup;
-  origCv: CvModel;
-  public canComment = true;
-  public isTraineeView = true;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
-
-
+  isTraineeView = true;
+  public origCv: CvModel;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private viewCvStateManagerService: ViewCvStateManagerService,
+    private VCvService: ViewCvService,
+    private cvService: CvService,
+    private errorHandlerService: QaErrorHandlerService
+  ) {
     const fb = new FormBuilder();
-
     this.cvForm = fb.group({
-      firstName: [''],
-      surname: [''],
-      profile: fb.group({ profileDetails: ['', [Validators.required, Validators.maxLength(1800)]] }),
+      firstName: ['', Validators.required],
+      surname: ['', Validators.required],
+      profile: fb.group({
+        profileDetails: ['', [Validators.required, Validators.maxLength(1800)]],
+        profileFeedback: [[]]
+      }),
       skills: fb.group({
         programmingLanguages: [[]],
         ides: [[]],
@@ -78,7 +84,10 @@ export class GenerateCvComponent implements OnInit {
         platforms: [[]],
         other: [[]]
       }),
-      hobbies: fb.group({ hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]] }),
+      hobbies: fb.group({
+        hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]],
+        hobbiesFeedback: [[]] 
+      }),
       id: [[]],
       allQualifications: [[]],
       allWorkExperience: [[]],
@@ -260,6 +269,7 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(
       (response) => {
+        this.origCv = response;
         this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
         this.setPageEditStatus();
       },
