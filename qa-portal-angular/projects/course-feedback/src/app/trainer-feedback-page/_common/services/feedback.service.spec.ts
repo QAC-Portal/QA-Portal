@@ -48,9 +48,6 @@ fdescribe('FeedbackService', () => {
         const testFormModel = { id: 123, cohortCourse: 'course name', trainee: 'trainee name' } as IFormModel;
 
         spyOn(qaHttp, "post").and.callFake((arg: HttpUrlDefinition, testFormModel: IFormModel): Observable<any> => {
-            expect(arg.params.id).toEqual(testFormModel.id);
-            expect(arg.params.cohortCourse).toEqual(testFormModel.cohortCourse);
-            expect(arg.params.trainee).toEqual(testFormModel.trainee);
             expect(arg.ref).toEqual('CREATE_FEEDBACK_FORM');
             return of(testFormModel);
         });
@@ -60,4 +57,19 @@ fdescribe('FeedbackService', () => {
             done();
         });
     })
+
+    it('should update a form', done => {
+        const updatedFormModel = { id: 123, cohortCourse: 'changed course name', trainee: 'changed trainee name' } as IFormModel;
+
+        spyOn(qaHttp, "put").and.callFake((arg: HttpUrlDefinition, updatedFormModel: IFormModel): Observable<any> => {
+            expect(arg.ref).toEqual('UPDATE_FEEDBACK_FORM');
+            return of(updatedFormModel);
+        });
+
+        service.updateForm(updatedFormModel).subscribe(data => {
+            expect(data).toEqual(updatedFormModel)
+            done();
+        });
+    })
+
 });
