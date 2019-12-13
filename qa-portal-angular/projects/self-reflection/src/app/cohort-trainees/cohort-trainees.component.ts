@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {QaCohortModel} from './models/qa-cohort.model';
 import {TraineeModel} from './models/trainee.model';
 import {Subscription, Observable} from 'rxjs';
@@ -26,7 +25,7 @@ export class CohortTraineesComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<QaCohortModel>(this.cohorts);
   dataSourceTrainees = new MatTableDataSource<TraineeModel>(this.trainees);
 
-  constructor(private http: HttpClient,
+  constructor(
               private errorHandler: QaErrorHandlerService,
               private cohortTraineesService: CohortTraineesService) {
   }
