@@ -1,7 +1,7 @@
 <h1>Generate CV</h1>
 
 <form [formGroup]="cvForm">
-    <div style="margin-left: auto; color: #004050"><b>CV Status:</b> {{cvData?.status}}</div>
+    <div style="margin-left: auto; color: #004050; padding-bottom: 1%;"><b>CV Status:</b> {{cvData?.status}}</div>
     <mat-card>
         <mat-card-header>
             <mat-card-title>
@@ -27,7 +27,7 @@
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>&nbsp;</mat-label>
                     <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="profileDetails"
-                        name="profile-input" required></textarea>
+                        name="profile-input" [disabled]="isDisabled()" required></textarea>
                 </mat-form-field>
             </mat-card-content>
         </app-cv-card-base>

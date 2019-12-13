@@ -64,7 +64,6 @@ export class GenerateCvComponent implements OnInit {
   cvData: CvModel;
   cv: CvModel;
   origCv: CvModel;
-  canComment = true;
   isTraineeView = true;
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
@@ -278,7 +277,10 @@ export class GenerateCvComponent implements OnInit {
     );
   }
 
-
+  //Checking status for casnEdit boolean
+  isDisabled() {
+    return !this.canEdit;
+  }
 
   // STATUS UPDATE FUNCTIONS
 
@@ -289,7 +291,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setPageEditStatus(): void {
-    // this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
+    this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
   }
 
   private setCommentStatus() {
