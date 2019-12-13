@@ -118,37 +118,32 @@
         </button>
     </div>
     <!-- Trainee Buttons -->
-    <div *ngIf="isTraineeView && cvData.status !== 'Approved'"
-    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+    <div *ngIf="isTraineeView && origCv?.status !== 'Approved'">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button">
             <mat-icon>save</mat-icon>&nbsp;Save CV
         </button>
     </div>
-    <div *ngIf="isTraineeView && cvData.status !== 'Approved'"
-    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+    <div *ngIf="isTraineeView && origCv?.status !== 'Approved'">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button">
             <mat-icon>Submit</mat-icon>&nbsp;Submit
         </button>
     </div>
-    <div *ngIf="isTraineeView && cvData.status === 'Approved'"
-    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+    <div *ngIf="isTraineeView && origCv?.status === 'Approved'">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button">
             <mat-icon>New</mat-icon>&nbsp;Create as new CV
         </button>
     </div>  
     <!-- Admin Buttons -->
-    <div *ngIf="!isTraineeView"
-    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+    <div *ngIf="!isTraineeView">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onApproveCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button">
             <mat-icon>Approve</mat-icon>&nbsp;Approve Review
         </button>
     </div>
-    <div *ngIf="!isTraineeView"
-    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+    <div *ngIf="!isTraineeView">
         <button mat-flat-button color="primary" class="submit-button w-100" (click)="onFailCvButtonClicked()"
             [disabled]="cvForm?.invalid" name="save-cv-button">
             <mat-icon>Fail</mat-icon>&nbsp;Fail Review

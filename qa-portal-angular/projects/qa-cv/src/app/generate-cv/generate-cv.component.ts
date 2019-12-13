@@ -57,11 +57,9 @@ export class GenerateCvComponent implements OnInit {
   ];
 
   public cvForm: FormGroup;
-  cvData: CvModel;
-  cv: CvModel;
   origCv: CvModel;
-  canComment = true;
-  isTraineeView = true;
+  public canComment = true;
+  public isTraineeView = true;
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
 
 
@@ -113,7 +111,6 @@ export class GenerateCvComponent implements OnInit {
         } else {
           console.log(cv);
           this.origCv = cv;
-          this.cvData = cv;
           this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
           this.refreshPageStatus();
         }
@@ -133,7 +130,6 @@ export class GenerateCvComponent implements OnInit {
             } else {
               console.log(cv);
               this.origCv = cv;
-              this.cvData = cv;
               this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
               this.refreshPageStatus();
             }
@@ -203,34 +199,34 @@ export class GenerateCvComponent implements OnInit {
   }
   //User Buttons
   onSaveCvButtonClicked() {
-    const cv = this.getCvData();
-    if (!cv.id) {
-      cv.status = IN_PROGRESS_STATUS;
+    const cvForm = this.getCvData();
+    if (!cvForm.id) {
+      cvForm.status = IN_PROGRESS_STATUS;
     }
-    this.persistCvForTrainee(cv);
+    this.persistCvForTrainee(cvForm);
   }
   onSubmitCvButtonClicked() {
-    const cv = this.getCvData();
-    cv.status = FOR_REVIEW_STATUS;
-    this.persistCvForTrainee(cv);
+    const cvForm = this.getCvData();
+    cvForm.status = FOR_REVIEW_STATUS;
+    this.persistCvForTrainee(cvForm);
     //This needs to disable any further edits to the CV, wich it curently doesn't
   }
   onNewCvButtonClicked() {
-    const cv = this.getCvData();
-    cv.status = IN_PROGRESS_STATUS;
-    this.createCv(cv);
+    const cvForm = this.getCvData();
+    cvForm.status = IN_PROGRESS_STATUS;
+    this.createCv(cvForm);
   }
   //Admin Buttons
   onApproveCvButtonClicked() {
-    const cv = this.getCvData();
-    cv.status = APPROVED_STATUS;
-    this.updateCv(cv);
+    const cvForm = this.getCvData();
+    cvForm.status = APPROVED_STATUS;
+    this.updateCv(cvForm);
     this.navigateToAdminSearch();
   }
   onFailCvButtonClicked() {
-    const cv = this.getCvData();
-    cv.status = FAILED_REVIEW_STATUS;
-    this.updateCv(cv);
+    const cvForm = this.getCvData();
+    cvForm.status = FAILED_REVIEW_STATUS;
+    this.updateCv(cvForm);
     this.navigateToAdminSearch();
   }
   private navigateToAdminSearch() {
@@ -238,20 +234,20 @@ export class GenerateCvComponent implements OnInit {
   }
 
   // CV PERSIST FUNCTIONS
-  private persistCvForTrainee(cv: CvModel) {
-    if (!cv.id) {
-      this.createCv(cv);
+  private persistCvForTrainee(cvForm: CvModel) {
+    if (!cvForm.id) {
+      this.createCv(cvForm);
     } else {
-      this.updateCv(cv);
+      this.updateCv(cvForm);
     }
   }
 
-  private createCv(cv: CvModel): void {
-    this.processCvServiceResponse(this.cvService.createCv(cv));
+  private createCv(cvForm: CvModel): void {
+    this.processCvServiceResponse(this.cvService.createCv(cvForm));
   }
 
-  private updateCv(cv: CvModel): void {
-    this.processCvServiceResponse(this.cvService.updateCv(cv));
+  private updateCv(cvForm: CvModel): void {
+    this.processCvServiceResponse(this.cvService.updateCv(cvForm));
   }
 
   private processCvServiceResponse(obs: Observable<CvModel>) {
@@ -264,7 +260,6 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(
       (response) => {
-        this.cv = response;
         this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
         this.setPageEditStatus();
       },
@@ -285,12 +280,12 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setPageEditStatus(): void {
-    // this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
+    // this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
   }
 
   private setCommentStatus() {
     // if (SubmitConfirmDialogComponent) {
-    //   this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
+    //   this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.origCv.status === FOR_REVIEW_STATUS;
     // }
   }
 
