@@ -58,7 +58,7 @@ export class CvCardBaseComponent implements ControlValueAccessor {
         comment: this.commentInput.value,
         date: moment().format(),
         reviewer: this.keycloak.getUsername(),
-        // resolved: false
+        resolved: false
       };
       this.feedback.push(fb);
       this.onChange(this.feedback);
