@@ -4,7 +4,7 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>
-                Source Control:
+                Source Control
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
@@ -15,20 +15,21 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card formGroupName="profile">
-        <mat-card-header>
-            <mat-card-title>
-                Profile
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>&nbsp;</mat-label>
-                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="profileDetails"
-                    name="profile-input" required></textarea>
-            </mat-form-field>
-        </mat-card-content>
-    </mat-card>
+
+    <section formGroupName="profile">
+        <app-cv-card-base cardTitle="Profile" [canComment]="true" formControlName="profileFeedback">
+            <mat-card-content>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>&nbsp;</mat-label>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="profileDetails"
+                        name="profile-input" required></textarea>
+                </mat-form-field>
+            </mat-card-content>
+
+        </app-cv-card-base>
+    </section>
+
+
 
     <mat-card formGroupName="skills">
         <mat-card-header>
@@ -87,20 +88,18 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card formGroupName="hobbies">
-        <mat-card-header>
-            <mat-card-title>
-                Hobbies / Interests
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>&nbsp;</mat-label>
-                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="hobbiesDetails"
-                    name="hobbies-input" required></textarea>
-            </mat-form-field>
-        </mat-card-content>
-    </mat-card>
+    <section formGroupName="hobbies">
+        <app-cv-card-base cardTitle="Hobbies / Interests" [canComment]="true" formControlName="hobbiesFeedback">
+            <mat-card-content>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>&nbsp;</mat-label>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="hobbiesDetails"
+                        name="hobbies-input" required></textarea>
+                </mat-form-field>
+            </mat-card-content>
+
+        </app-cv-card-base>
+    </section>
 </form>
 
 <!-- All User Buttons -->   

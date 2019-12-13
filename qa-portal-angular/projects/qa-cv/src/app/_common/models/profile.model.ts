@@ -1,4 +1,4 @@
-import { IFeedback } from "./feedback.model";
+import { IFeedback } from "./iFeedback.model";
 
 export interface IProfile {
     profileDetails: string;

@@ -1,4 +1,4 @@
-import { IFeedback } from "./feedback.model";
+import { IFeedback } from "./IFeedback.model";
 
 export interface IWorkExperience {
     jobTitle: string;
