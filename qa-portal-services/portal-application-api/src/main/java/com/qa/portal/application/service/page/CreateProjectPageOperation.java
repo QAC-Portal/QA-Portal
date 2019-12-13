@@ -29,7 +29,7 @@ public class CreateProjectPageOperation {
         if (projectPageExists(projectPageDto)) {
             throw new QaPortalBusinessException("Portal Page already exists with the same name");
         }
-        return persistProjectPage(projectPageDto);
+        return persistProjectPage(projectPageDto); 
     }
 
     private ProjectPageDto persistProjectPage(ProjectPageDto projectPageDto) {
@@ -41,6 +41,6 @@ public class CreateProjectPageOperation {
     private boolean projectPageExists(ProjectPageDto projectPageDto) {
         return projectPageRepository.findByName(projectPageDto.getName())
                 .map(pp -> true)
-                .orElseGet(() -> false);
+                .orElseGet(() -> false); 
     }
 }
