@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {GET_FORM_TYPE, SEND_EVAL_RESPONSE} from '../models/course-feedback.constants';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 import { IFormModel } from 'projects/qa-forms/src/app/_common/models';
-import {FORM_TYPE_PLACEHOLDER} from '../../../../../portal-core/src/app/_common/models/portal-constants';
 
 @Injectable()
 export class FormTypeService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private qaHttp: QaHttpService) { }
 
   getFormType(formName: string): Observable<any> {
-    return this.httpClient.get<any>(GET_FORM_TYPE.replace(FORM_TYPE_PLACEHOLDER, formName));
+    return this.qaHttp.get<any>({ ref: 'GET_FORM_TYPE', params :{formName}});
   }
 
   /**
@@ -23,6 +21,6 @@ export class FormTypeService {
    * @memberof FormTypeService
    */
   sendEvalForm(form: IFormModel): Observable<IFormModel> {
-    return this.httpClient.post<IFormModel>(SEND_EVAL_RESPONSE, form);
+    return this.qaHttp.post<IFormModel>({ref : 'SEND_EVAL_RESPONSE' }, form);
   }
 }
