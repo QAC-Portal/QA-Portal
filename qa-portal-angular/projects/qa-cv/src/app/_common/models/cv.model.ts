@@ -22,18 +22,18 @@ export class SkillsModel {
 
 export class QualificationModel {
     qualificationDetails: string;
-    qualificationFeedback: Feedback[]  = [];
+    qualificationFeedback: Feedback[] = [];
 }
 
 export class WorkExperienceModel {
     jobTitle: string;
     workExperienceDetails: string;
-    workExperienceFeedback: Feedback[]  = [];
+    workExperienceFeedback: Feedback[] = [];
 }
 
 export class HobbiesModel {
     hobbiesDetails: string;
-    hobbiesFeedback: Feedback[]  = [];
+    hobbiesFeedback: Feedback[] = [];
 }
 
 export class CvModel {
@@ -58,17 +58,17 @@ export class CvModel {
      * Sanitizes an input string by removing invalid characters.
      */
     private sanitizeStr(str: string): string {
-        return str.replace(/\t/g, '');
+        return str && str.replace ? str.replace(/\t/g, '') : str;
+
     }
 
-    // do we need ot satitize feedback aswell??
     public build(): this {
         this.profile.profileDetails = this.sanitizeStr(this.profile.profileDetails);
         this.hobbies.hobbiesDetails = this.sanitizeStr(this.hobbies.hobbiesDetails);
-        this.allWorkExperience.map(wE => ({ ...wE, workExperienceDetails: this.sanitizeStr(wE.workExperienceDetails) }));
-        this.otherWorkExperience.map(wE => ({ ...wE, workExperienceDetails: this.sanitizeStr(wE.workExperienceDetails) }));
-        this.allQualifications.map(quali => ({ ...quali, qualificationDetails: this.sanitizeStr(quali.qualificationDetails) }));
-        this.sourceControlLink = this.sanitizeStr(this.sourceControlLink);
+        this.allWorkExperience = (this.allWorkExperience || []).map(wE => ({ ...wE, workExperienceDetails: this.sanitizeStr(wE.workExperienceDetails) }));
+        this.otherWorkExperience = (this.otherWorkExperience || []).map(wE => ({ ...wE, workExperienceDetails: this.sanitizeStr(wE.workExperienceDetails) }));
+        this.allQualifications = (this.allQualifications || []).map(quali => ({ ...quali, qualificationDetails: this.sanitizeStr(quali.qualificationDetails) }));
+        this.sourceControlLink = this.sourceControlLink = this.sanitizeStr(this.sourceControlLink);
         this.firstName = this.sanitizeStr(this.firstName);
         this.surname = this.sanitizeStr(this.surname);
 

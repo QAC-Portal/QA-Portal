@@ -71,7 +71,8 @@ export class GenerateCvComponent implements OnInit {
       firstName: ['', Validators.required],
       surname: ['', Validators.required],
       profile: fb.group({
-        profileDetails: ['', [Validators.required, Validators.maxLength(1800)]]
+        profileDetails: ['', [Validators.required, Validators.maxLength(1800)]],
+        profileFeedback: [[]]
       }),
       skills: fb.group({
         programmingLanguages: [[]],
@@ -82,7 +83,10 @@ export class GenerateCvComponent implements OnInit {
         platforms: [[]],
         other: [[]]
       }),
-      hobbies: fb.group({ hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]] }),
+      hobbies: fb.group({
+        hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]],
+        hobbiesFeedback: [[]] 
+      }),
       id: [[]],
       allQualifications: [[]],
       allWorkExperience: [[]],
