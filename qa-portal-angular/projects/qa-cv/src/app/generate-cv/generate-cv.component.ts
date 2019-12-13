@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
 
 @Component({
   selector: 'app-generate-cv',
@@ -56,18 +57,22 @@ export class GenerateCvComponent implements OnInit {
   ];
 
   public cvForm: FormGroup;
-  cvData: CvModel;
   isTraineeView = true;
-  cv: CvModel;
   public origCv: CvModel;
-  constructor(private activatedRoute: ActivatedRoute, private viewCvStateManagerService: ViewCvStateManagerService, private VCvService: ViewCvService, private cvService: CvService, private errorHandlerService: QaErrorHandlerService) {
-
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private viewCvStateManagerService: ViewCvStateManagerService,
+    private VCvService: ViewCvService,
+    private cvService: CvService,
+    private errorHandlerService: QaErrorHandlerService
+  ) {
     const fb = new FormBuilder();
-
     this.cvForm = fb.group({
       firstName: ['', Validators.required],
       surname: ['', Validators.required],
-      profile: fb.group({ profileDetails: ['', [Validators.required, Validators.maxLength(1800)]] }),
+      profile: fb.group({
+        profileDetails: ['', [Validators.required, Validators.maxLength(1800)]]
+      }),
       skills: fb.group({
         programmingLanguages: [[]],
         ides: [[]],
@@ -246,7 +251,7 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(
       (response) => {
-        this.cv = response;
+        this.origCv = response;
         this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
         this.setPageEditStatus();
       },

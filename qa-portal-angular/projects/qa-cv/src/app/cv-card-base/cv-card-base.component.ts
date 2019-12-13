@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { KeycloakService } from 'keycloak-angular';
-import { IFeedback } from '../_common/models/iFeedback.model';
+import { Feedback } from '../_common/models/cv.model';
 import * as moment from 'moment';
 
 @Component({
@@ -14,9 +14,10 @@ export class CvCardBaseComponent {
   @Input() cardTitle: string;
   @Input() canComment: boolean;
   @Input() canEdit: boolean;
-  @Input() feedback: IFeedback[];
-  @Output() feedbackChange = new EventEmitter<IFeedback[]>();
+  @Input() feedback: Feedback[];
+  @Output() feedbackChange = new EventEmitter<Feedback[]>();
   @Input() showOpenButton: boolean = true;
+
   @ViewChild('commentContainer', { static: true }) commentContainer: ElementRef;
   @ViewChild('drawer', { static: true }) public drawer: MatDrawer;
 
@@ -45,7 +46,7 @@ export class CvCardBaseComponent {
 
   addFeedbackItem(): void {
     if (this.commentInput.valid) {
-      const fb: IFeedback = {
+      const fb: Feedback = {
         comment: this.commentInput.value,
         date: moment().format(),
         reviewer: this.keycloak.getUsername(),
