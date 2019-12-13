@@ -283,6 +283,11 @@ export class GenerateCvComponent implements OnInit {
   }
 
   // STATUS UPDATE FUNCTIONS
+  private checkEditable() {
+    if(!this.canEdit) {
+      
+    }
+  }
 
   private refreshPageStatus() {
     this.setPageEditStatus();

@@ -22,12 +22,12 @@
                 Profile
             </mat-card-title>
         </mat-card-header> -->
-        <app-cv-card-base cardTitle="Profile">
+        <app-cv-card-base cardTitle="Profile" [canEdit]="canEdit">
             <mat-card-content>
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>&nbsp;</mat-label>
                     <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="profileDetails"
-                        name="profile-input" [disabled]="isDisabled()" required></textarea>
+                        name="profile-input" [disabled]="cvData.status === 'For Review'" required></textarea>
                 </mat-form-field>
             </mat-card-content>
         </app-cv-card-base>
