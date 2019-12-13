@@ -5,18 +5,10 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>
-                About
+                Source Control:
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName" name="first-name-input" required>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Surname</mat-label>
-                <input matInput formControlName="surname" name="surname-input" required>
-            </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Source Control Link - (GitHub, GitLab, BitBucket, etc. URL)</mat-label>
                 <input matInput formControlName="sourceControlLink" name="source-control-link-input">
@@ -114,21 +106,57 @@
     </mat-card>
 </form>
 
-
+<!-- All User Buttons -->
 <div class="action-buttons">
-    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
-        [disabled]="cvForm?.invalid" name="generate-cv-button">
-        <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
-    </button>
-    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onDownloadCvButtonClicked()"
-        [disabled]="cvForm?.invalid" name="download-cv-button">
-        <mat-icon>get_app</mat-icon>&nbsp;Download CV
-    </button>
-    <button mat-flat-button color="accent" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
-        [disabled]="cvForm?.invalid" name="save-cv-button">
-        <mat-icon>save</mat-icon>&nbsp;Save CV
-    </button>
-
+    <div >
+        <button mat-flat-button color="accent" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
+            [disabled]="cvForm?.invalid" name="generate-cv-button">
+            <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
+        </button>
+    </div>
+    <div>
+        <button mat-flat-button color="accent" class="submit-button w-100" (click)="onDownloadCvButtonClicked()"
+            [disabled]="cvForm?.invalid" name="download-cv-button">
+            <mat-icon>get_app</mat-icon>&nbsp;Download CV
+        </button>
+    </div>
+    <!-- Trainee Buttons -->
+    <div *ngIf="isTraineeView && cvData.status !== 'Approved'"
+    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
+            [disabled]="cvForm?.invalid" name="save-cv-button">
+            <mat-icon>save</mat-icon>&nbsp;Save CV
+        </button>
+    </div>
+    <div *ngIf="isTraineeView && cvData.status !== 'Approved'"
+    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
+            [disabled]="cvForm?.invalid" name="save-cv-button">
+            <mat-icon>Submit</mat-icon>&nbsp;Submit
+        </button>
+    </div>
+    <div *ngIf="isTraineeView && cvData.status === 'Approved'"
+    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
+            [disabled]="cvForm?.invalid" name="save-cv-button">
+            <mat-icon>New</mat-icon>&nbsp;Create as new CV
+        </button>
+    </div>  
+    <!-- Admin Buttons -->
+    <div *ngIf="!isTraineeView"
+    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onApproveCvButtonClicked()"
+            [disabled]="cvForm?.invalid" name="save-cv-button">
+            <mat-icon>Approve</mat-icon>&nbsp;Approve Review
+        </button>
+    </div>
+    <div *ngIf="!isTraineeView"
+    style="width: 50%; display:flex; flex-direction: row; justify-content: left; align-items: center">
+        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onFailCvButtonClicked()"
+            [disabled]="cvForm?.invalid" name="save-cv-button">
+            <mat-icon>Fail</mat-icon>&nbsp;Fail Review
+        </button>
+    </div>
 </div>
 
 <div class="loading-overlay" *ngIf="isLoading">
