@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { FilterModel } from '../models/filter-search-model';
 import { FILTERS } from '../models/mock-filters';
 import { catchError, map, tap } from 'rxjs/operators';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
 @Injectable()
 export class CVSearchFilterService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private qaHttp: QaHttpService) { }
 
     private filterUrl = 'portal-application-api/referencedata';  // URL to web api
 
@@ -36,7 +36,7 @@ export class CVSearchFilterService {
     /* GET filter dropdowns */
     getFilters(): Observable<FilterModel> {
 
-        return this.http.get<FilterModel>(`${this.filterUrl}`).pipe(
+        return this.qaHttp.get<FilterModel>(`${this.filterUrl}`).pipe(
 
             catchError(this.handleError<FilterModel>('getFilters', {
                 technology: [],

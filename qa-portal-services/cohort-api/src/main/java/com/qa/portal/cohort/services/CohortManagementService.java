@@ -1,7 +1,7 @@
 package com.qa.portal.cohort.services;
 
 import com.qa.portal.cohort.keycloak.KeycloakCohortResourceManager;
-import com.qa.portal.cohort.keycloak.KeycloakUserResourceManager;
+import com.qa.portal.cohort.keycloak.KeycloakUserCohortManager;
 import com.qa.portal.common.dto.QaCohortDto;
 import org.springframework.stereotype.Service;
 
@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 public class CohortManagementService {
 
     private KeycloakCohortResourceManager keycloakCohortResourceManager;
-
-    private KeycloakUserResourceManager keycloakUserResourceManager;
+    
+    private KeycloakUserCohortManager keycloakUserCohortManager;
 
     private CreateCohortOperation createCohortOperation;
 
     private UpdateCohortOperation updateCohortOperation;
 
     public CohortManagementService(KeycloakCohortResourceManager keycloakCohortResourceManager,
-                                   KeycloakUserResourceManager keycloakUserResourceManager,
                                    CreateCohortOperation createCohortOperation,
-                                   UpdateCohortOperation updateCohortOperation) {
+                                   UpdateCohortOperation updateCohortOperation,
+                                   KeycloakUserCohortManager keycloakUserCohortManager) {
         this.keycloakCohortResourceManager = keycloakCohortResourceManager;
-        this.keycloakUserResourceManager = keycloakUserResourceManager;
+        this.keycloakUserCohortManager = keycloakUserCohortManager;
         this.createCohortOperation = createCohortOperation;
         this.updateCohortOperation = updateCohortOperation;
     }
@@ -29,13 +29,14 @@ public class CohortManagementService {
     public QaCohortDto createCohort(QaCohortDto cohortDetails) {
         createCohortOperation.createCohort(cohortDetails);
         keycloakCohortResourceManager.createCohort(cohortDetails.getName().replace(' ', '_'));
-        keycloakUserResourceManager.updateCohortMembers(cohortDetails);
+        keycloakUserCohortManager.updateCohortMembers(cohortDetails);
+
         return cohortDetails;
     }
 
     public QaCohortDto updateCohort(QaCohortDto cohortDetails) {
         updateCohortOperation.updateCohort(cohortDetails);
-        keycloakUserResourceManager.updateCohortMembers(cohortDetails);
+        keycloakUserCohortManager.updateCohortMembers(cohortDetails);
         return cohortDetails;
     }
 }

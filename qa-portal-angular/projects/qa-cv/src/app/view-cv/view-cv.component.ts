@@ -9,7 +9,7 @@ import {SubmitConfirmDialogComponent} from './submit-confirm-dialog/submit-confi
 import {QaErrorHandlerService} from '../../../../portal-core/src/app/_common/services/qa-error-handler.service';
 import {UserSkillsModel} from '../_common/models/user-skills.model';
 import {TRAINING_ADMIN_ROLE} from '../../../../portal-core/src/app/_common/models/portal-constants';
-import {ADMIN_CV_SEARCH_URL} from '../_common/models/cv.constants';
+import {ADMIN_CV_SEARCH} from '../_common/models/cv.constants';
 import {
   ViewCvStateManagerService
 } from './services/view-cv-state-manager.service';
@@ -218,7 +218,7 @@ export class ViewCvComponent implements OnInit {
   }
 
   private navigateToAdminSearch() {
-    this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
+    this.router.navigateByUrl(ADMIN_CV_SEARCH);
   }
 
   private allDetailsEntered(): boolean {
