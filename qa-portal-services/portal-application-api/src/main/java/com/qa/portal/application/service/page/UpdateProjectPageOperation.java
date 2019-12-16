@@ -15,15 +15,12 @@ public class UpdateProjectPageOperation {
 
     private ProjectPageRepository projectPageRepository;
 
-    private PortalProjectRepository portalProjectRepository;
-
     private ProjectPageMapper projectPageMapper;
 
     public UpdateProjectPageOperation(ProjectPageRepository projectPageRepository,
                                       PortalProjectRepository portalProjectRepository,
                                       ProjectPageMapper projectPageMapper) {
         this.projectPageRepository = projectPageRepository;
-        this.portalProjectRepository = portalProjectRepository;
         this.projectPageMapper = projectPageMapper;
     }
 

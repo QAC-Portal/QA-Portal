@@ -13,15 +13,12 @@ public class CreateProjectPageOperation {
 
     private ProjectPageRepository projectPageRepository;
 
-    private PortalProjectRepository portalProjectRepository;
-
     private ProjectPageMapper projectPageMapper;
 
     public CreateProjectPageOperation(ProjectPageRepository projectPageRepository,
                                       PortalProjectRepository portalProjectRepository,
                                       ProjectPageMapper projectPageMapper) {
         this.projectPageRepository = projectPageRepository;
-        this.portalProjectRepository = portalProjectRepository;
         this.projectPageMapper = projectPageMapper;
     }
 
@@ -41,6 +38,6 @@ public class CreateProjectPageOperation {
     private boolean projectPageExists(ProjectPageDto projectPageDto) {
         return projectPageRepository.findByName(projectPageDto.getName())
                 .map(pp -> true)
-                .orElseGet(() -> false); 
+                .orElseGet(() -> false);
     }
 }
