@@ -25,9 +25,9 @@ export class GenerateCvComponent implements OnInit {
 
   public isLoading = false;
 
-  @Output() public canComment = false;
+  public canComment = false;
 
-  @Output() public canEdit = true;
+  public canEdit = true;
 
   public skillCategories = [
     {
