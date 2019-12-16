@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CvModel } from '../_common/models/cv.model';
+import { CvModel, Feedback } from '../_common/models/cv.model';
 import { ENTER } from '@angular/cdk/keycodes';
 import * as _ from 'lodash';
 import { MatChipInputEvent } from '@angular/material';
@@ -60,6 +60,13 @@ export class GenerateCvComponent implements OnInit {
   public cvForm: FormGroup;
   isTraineeView = true;
   public origCv: CvModel;
+
+
+  // Card selected feedback indexes
+  private qualificationFeedbackIndex: number;
+  private workExperianceFeedbackIndex: number;
+  private otherWorkExperianceFeedbackIndex: number;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private viewCvStateManagerService: ViewCvStateManagerService,
@@ -86,13 +93,18 @@ export class GenerateCvComponent implements OnInit {
       }),
       hobbies: fb.group({
         hobbiesDetails: ['', [Validators.required, Validators.maxLength(750)]],
-        hobbiesFeedback: [[]] 
+        hobbiesFeedback: [[]]
       }),
       id: [[]],
       allQualifications: [[]],
       allWorkExperience: [[]],
       otherWorkExperience: [[]],
-      sourceControlLink: ['']
+      sourceControlLink: [''],
+
+      // Feedback that should't be part of the final CV object
+      qualificationFeedbackCard: [[]],
+      workExperianceFeedbackCard: [[]],
+      otherWorkExperianceFeedbackCard: [[]]
     });
   }
 
@@ -106,6 +118,18 @@ export class GenerateCvComponent implements OnInit {
     } else {
       this.initialiseCvPageForAdmin();
     };
+
+  }
+
+
+  /**
+   * Handles the complexity around swapping card data when clicking feedback on a control with multiple items
+   */
+  onFeedbackButtonClicked({ index, feedback }: { index: number, feedback: Feedback[] }, cardRef: CvCardBaseComponent, formControlName: string): void {
+    this.cvForm.patchValue({
+      [formControlName]: feedback
+    });
+    cardRef.drawer.open();
   }
 
   private setRoleForPage() {
@@ -118,7 +142,6 @@ export class GenerateCvComponent implements OnInit {
         if (this.noExistingCvForTrainee(cv)) {
           //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
         } else {
-          console.log(cv);
           this.origCv = cv;
           this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
           this.refreshPageStatus();
@@ -278,8 +301,6 @@ export class GenerateCvComponent implements OnInit {
       }
     );
   }
-
-
 
   // STATUS UPDATE FUNCTIONS
 
