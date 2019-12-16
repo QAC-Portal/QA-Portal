@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ViewCvComponent } from './view-cv/view-cv.component';
 import { CvSearchComponent } from './cv-search/cv-search.component';
 
 import { AppAuthGuard } from '../../../portal-core/src/app/_common/guards/app-auth-guard';

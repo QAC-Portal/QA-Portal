@@ -5,7 +5,6 @@ import { of, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import * as mom from 'moment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ICvModel } from '../../_common/models/qac-cv-db.model';
 import {
   APPLICATION_PDF_CONTENT_TYPE, GENERATE_CV_URL,
   GET_CURRENT_CV_URL,
