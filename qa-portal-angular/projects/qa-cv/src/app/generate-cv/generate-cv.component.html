@@ -56,7 +56,7 @@
 
 
     <section>
-        <app-cv-card-base cardTitle="Qualifications" [canComment]="true" #qualiCard
+        <app-cv-card-base cardTitle="Qualifications" [canComment]="true" #qualiCard [showOpenButton]="false"
             formControlName="qualificationFeedbackCard">
             <mat-card-content>
                 <app-qualifications class="w-100" formControlName="allQualifications"
@@ -67,75 +67,27 @@
     </section>
 
     <section>
-        <app-cv-card-base cardTitle="Work Experience - QA" [canComment]="true" #workExpCard
+        <app-cv-card-base cardTitle="Work Experience - QA" [canComment]="true" #workExpCard [showOpenButton]="false"
             formControlName="workExperianceFeedbackCard">
             <mat-card-content>
-                <app-qualifications class="w-100" formControlName="allWorkExperience"
+                <app-work-experience class="w-100" formControlName="allWorkExperience"
                     (feedbackClick)="onFeedbackButtonClicked($event, workExpCard, 'workExperianceFeedbackCard')">
-                </app-qualifications>
+                </app-work-experience>
             </mat-card-content>
         </app-cv-card-base>
     </section>
 
 
     <section>
-        <app-cv-card-base cardTitle="Work Experience - Other" [canComment]="true" #otherWorkExpCard
+        <app-cv-card-base cardTitle="Work Experience - Other" [canComment]="true" #otherWorkExpCard [showOpenButton]="false"
             formControlName="otherWorkExperianceFeedbackCard">
             <mat-card-content>
-                <app-qualifications class="w-100" formControlName="otherWorkExperience"
+                <app-work-experience class="w-100" formControlName="otherWorkExperience"
                     (feedbackClick)="onFeedbackButtonClicked($event, otherWorkExpCard, 'otherWorkExperianceFeedbackCard')">
-                </app-qualifications>
+                </app-work-experience>
             </mat-card-content>
         </app-cv-card-base>
     </section>
-
-
-    <!-- <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-                Qualifications
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-qualifications class="w-100" formControlName="allQualifications"></app-qualifications>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-                Work Experience - QA
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-work-experience class="w-100" formControlName="allWorkExperience"></app-work-experience>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-                Work Experience - Other
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-work-experience class="w-100" formControlName="otherWorkExperience"></app-work-experience>
-        </mat-card-content>
-    </mat-card> -->
-
-    <section formGroupName="hobbies">
-        <app-cv-card-base cardTitle="Hobbies / Interests" [canComment]="true" formControlName="hobbiesFeedback">
-            <mat-card-content>
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>&nbsp;</mat-label>
-                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="hobbiesDetails"
-                        name="hobbies-input" required></textarea>
-                </mat-form-field>
-            </mat-card-content>
-
-        </app-cv-card-base>
-    </section>
-</form>
 
 <!-- All User Buttons -->
 <div class="action-buttons">
