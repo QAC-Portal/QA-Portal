@@ -6,7 +6,7 @@ import { CVSearchFilterService } from './cv-search/services/cv-search-filter.ser
 import { CvSearchComponent } from './cv-search/cv-search.component';
 import { CvCardBaseComponent } from './cv-card-base/cv-card-base.component';
 import { CVSearchHistoryService } from './cv-search/services/cv-search.service';
-import { SubmitConfirmDialogComponent } from './controls/submit-confirm-dialog/submit-confirm-dialog.component';
+import { SubmitConfirmDialogComponent } from './generate-cv/submit-confirm-dialog/submit-confirm-dialog.component';
 import { ViewCvService } from './view-cv/services/view-cv.service';
 import { CvStateManagerService } from './_common/services/cv-state-manager.service';
 import { ViewCvPageDataService } from './view-cv/services/view-cv-page-data.service';
