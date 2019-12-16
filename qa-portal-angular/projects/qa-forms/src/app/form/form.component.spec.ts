@@ -37,4 +37,13 @@ describe('FormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create', () => {
+    let body: any = {
+      name: "hello"
+    };
+    component.onCategoryChange(body, 0)
+    expect(component.model.categoryResponses[0]).toEqual(body);
+  });
+
 });
