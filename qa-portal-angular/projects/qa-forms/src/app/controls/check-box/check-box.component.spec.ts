@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckBoxComponent } from './check-box.component';
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule, MatGridListModule, MatCardModule, MatInput, MatFormFieldModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { IQuestion, IQuestionResponse } from '../../_common/models';
 
@@ -33,7 +33,10 @@ describe('CheckBoxComponent', () => {
       declarations: [ CheckBoxComponent ],
       imports: [
         MatCheckboxModule,
-        FormsModule
+        FormsModule,
+        MatGridListModule,
+        MatCardModule,
+        MatFormFieldModule
       ]
     })
     .compileComponents();
