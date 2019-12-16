@@ -11,6 +11,5 @@ describe('HeaderLinkComponent', () => {
 
   it('should create', () => {
     expect(headerLinkComponent).toBeTruthy();
-    console.log(headerLinkComponent);
   });
 });
