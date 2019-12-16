@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {UserSkillsModel} from '../../_common/models/user-skills.model';
 import {DEFAULT_CV, ICvModel} from '../../_common/models/qac-cv-db.model';
-import {IN_PROGRESS_STATUS} from '../models/view-cv.constants';
+import {IN_PROGRESS_STATUS} from '../../_common/models/cv-status.constants';
 
 @Injectable()
 export class ViewCvPageDataService {
