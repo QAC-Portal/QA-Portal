@@ -38,7 +38,7 @@ describe('FormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should create', () => {
+  it('should test category response update', () => {
     let body: any = {
       name: "hello"
     };
