@@ -1,4 +1,4 @@
-package com.qa.portal.application.service.page;
+package com.qa.portal.application.service.page.unitTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -20,27 +18,27 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.qa.portal.application.dto.ProjectPageDto;
 import com.qa.portal.application.persistence.entity.PortalProjectEntity;
 import com.qa.portal.application.persistence.entity.ProjectPageEntity;
+import com.qa.portal.application.persistence.entity.RoleEntity;
 import com.qa.portal.application.persistence.entity.RoleProjectPageEntity;
 import com.qa.portal.application.persistence.repository.ProjectPageRepository;
 import com.qa.portal.application.service.page.mapper.ProjectPageMapper;
+import com.qa.portal.common.service.mapper.BaseMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UpdateProjectPageOperationTest {
+public class ProjectPageMapperTest {
+
 	@InjectMocks
-	public UpdateProjectPageOperation updateProjectPageOperation;
+	public ProjectPageMapper projectPageMapper;
 
 	@Mock
 	public ProjectPageRepository projectPageRepository;
 
 	@Mock
-	public ProjectPageMapper projectPageMapper;
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+	public BaseMapper baseMapper;
 
 	@Test
-	public void updateProjectPageTest() {
+	public void mapToProjectPageTest() {
 		ProjectPageDto pageDto = new ProjectPageDto();
 		pageDto.setDisplayOnMenu(true);
 		pageDto.setIcon("icon");
@@ -65,7 +63,12 @@ public class UpdateProjectPageOperationTest {
 		projectPageList.add(projectPageEntity2);
 		portalProjectEntity.setProjectPages(projectPageList);
 
+		RoleEntity roleEntity = new RoleEntity();
+		roleEntity.setName("test name");
+
 		RoleProjectPageEntity roleProjectPageEntity = new RoleProjectPageEntity();
+		roleProjectPageEntity.setId(1);
+		roleProjectPageEntity.setRole(roleEntity);
 
 		ProjectPageEntity projectPageEntity = new ProjectPageEntity();
 		projectPageEntity.setId(1);
@@ -79,9 +82,8 @@ public class UpdateProjectPageOperationTest {
 		projectPageEntity.setRoleProjectPageEntities(roleProjectPageEntityList);
 		projectPageEntity.setDisplayOnMenu(true);
 		
-		Optional<ProjectPageEntity> optionalProjectPageEntity = Optional.of(projectPageEntity);
-		
-		Mockito.when(projectPageRepository.findById(pageDto.getId())).thenReturn(optionalProjectPageEntity);
-		
+
+		Mockito.when(baseMapper.mapObject(projectPageEntity, ProjectPageDto.class)).thenReturn(pageDto);
+		assertThat(projectPageMapper.mapToProjectPageDto(projectPageEntity)).isEqualTo(pageDto);
 	}
 }

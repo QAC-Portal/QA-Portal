@@ -1,4 +1,4 @@
-package com.qa.portal.application.service.page;
+package com.qa.portal.application.service.page.unitTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,6 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.qa.portal.application.dto.ProjectPageDto;
+import com.qa.portal.application.service.page.CreateProjectPageOperation;
+import com.qa.portal.application.service.page.ProjectPageManagementService;
+import com.qa.portal.application.service.page.UpdateProjectPageOperation;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
