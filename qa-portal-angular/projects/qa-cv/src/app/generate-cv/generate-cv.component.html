@@ -1,8 +1,10 @@
-<h1>Generate CV <div style="float: right;">{{origCv?.status}}</div>
+<h1>
+    Generate CV 
+    <div style="margin-left: auto; color: #004050; padding-bottom: 1%; float: right; font-size: 18px;"><b>CV Status:</b> {{origCv?.status}}</div>
+
 </h1>
 
 <form [formGroup]="cvForm">
-    <div style="margin-left: auto; color: #004050; padding-bottom: 1%;"><b>CV Status:</b> {{origCv?.status}}</div>
     <mat-card>
         <mat-card-header>
             <mat-card-title>
