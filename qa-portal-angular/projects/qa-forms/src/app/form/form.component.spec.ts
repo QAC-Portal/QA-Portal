@@ -37,4 +37,15 @@ describe('FormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should update category change', () => {
+    let body: any = {
+      name: "bob"
+    }
+
+    component.onCategoryChange(body, 0);
+
+    expect(component.model.categoryResponses[0]).toEqual(body);
+  });
+
 });
