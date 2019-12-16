@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CvModel, Feedback } from '../_common/models/cv.model';
 import { ENTER } from '@angular/cdk/keycodes';
 import * as _ from 'lodash';
-import { MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent, MatDialog } from '@angular/material';
 import { CvService } from '../_common/services/cv.service';
 import { finalize } from 'rxjs/operators';
 import { ViewCvService } from '../view-cv/services/view-cv.service';
@@ -14,6 +14,7 @@ import { CvStateManagerService } from '../_common/services/cv-state-manager.serv
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
 import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
+import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
 
 @Component({
   selector: 'app-generate-cv',
@@ -78,6 +79,7 @@ export class GenerateCvComponent implements OnInit {
     private cvStateManagerService: CvStateManagerService,
     private cvService: CvService,
     private errorHandlerService: QaErrorHandlerService,
+    public dialog: MatDialog
   ) {
     const fb = new FormBuilder();
     this.cvForm = fb.group({
@@ -244,9 +246,25 @@ export class GenerateCvComponent implements OnInit {
   }
   onSubmitCvButtonClicked() {
     const cvForm = this.getCvData();
-    cvForm.status = FOR_REVIEW_STATUS;
-    this.persistCvForTrainee(cvForm);
+    this. openDialog(cvForm)
     //This needs to disable any further edits to the CV, wich it curently doesn't
+  }
+  openDialog(cvForm): void {
+    const dialogRef = this.dialog.open(SubmitConfirmDialogComponent, {
+      width: '250px'
+    });
+    dialogRef.componentInstance.canSubmit = false;
+    dialogRef.componentInstance.doSubmit.subscribe(() => {
+      if (dialogRef.componentInstance.canSubmit === true) {
+        cvForm.status = FOR_REVIEW_STATUS;
+        this.onCvSubmitForReview(cvForm);
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+    });
+  }
+  onCvSubmitForReview(cvForm): void {
+    this.persistCvForTrainee(cvForm);
   }
   onNewCvButtonClicked() {
     const cvForm = this.getCvData();

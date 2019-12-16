@@ -5,7 +5,7 @@ import {CvCardBaseComponent} from '../cv-card-base/cv-card-base.component';
 // import {IFeedback} from '../_common/models/iFeedback.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MAT_DATE_LOCALE, MatDialog} from '@angular/material';
-import {SubmitConfirmDialogComponent} from '../submit-confirm-dialog/submit-confirm-dialog.component';
+import {SubmitConfirmDialogComponent} from '../generate-cv/submit-confirm-dialog/submit-confirm-dialog.component';
 import {QaErrorHandlerService} from '../../../../portal-core/src/app/_common/services/qa-error-handler.service';
 // import {UserSkillsModel} from '../_common/models/user-skills.model';
 import {TRAINING_ADMIN_ROLE} from '../../../../portal-core/src/app/_common/models/portal-constants';
