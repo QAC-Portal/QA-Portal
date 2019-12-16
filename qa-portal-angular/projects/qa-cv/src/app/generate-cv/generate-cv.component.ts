@@ -315,13 +315,15 @@ export class GenerateCvComponent implements OnInit {
   // }
 
   // STATUS UPDATE FUNCTIONS
-  private checkEditable(cv: CvModel) {
-    if(!this.isTraineeView && cv.status === "In Progress") {
-      this.canEdit = false;
-    } else {
-      this.canEdit = true;
-    }
-  }
+  // private checkEditable(cv: CvModel) {
+  //   if(this.isTraineeView && this.origCv.status === "In Progress") {
+  //     this.canEdit = false;
+  //   } else {
+  //     this.canEdit = true;
+  //   }
+
+
+  // }
 
   private refreshPageStatus() {
     this.setPageEditStatus();
@@ -330,7 +332,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setPageEditStatus(): void {
-    // this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
+     this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
   }
 
   private setCommentStatus() {
@@ -338,5 +340,4 @@ export class GenerateCvComponent implements OnInit {
     //   this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.origCv.status === FOR_REVIEW_STATUS;
     // }
   }
-
 }
