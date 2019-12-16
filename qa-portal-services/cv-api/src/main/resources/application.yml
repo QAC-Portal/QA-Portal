@@ -11,9 +11,9 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-#     !IMPORTANT - don't leave this empty for final build.
-#     username: MongoDB
-#     password:
+      #     !IMPORTANT - don't leave this empty for final build.
+      #     username: MongoDB
+      #     password:
       database: qa-portal-cv
 
   datasource:
@@ -54,6 +54,10 @@ cv:
   
   enable_public_endpoints: false
 
+  paths:
+    logopath: target/classes/QA_Logo.png
+    arrowpath: target/classes/QA_Logo.png
+
 qa:
   keycloak:
     config:
@@ -91,7 +95,6 @@ spring:
       hibernate:
         ddl-auto: none
         dialect: org.hibernate.dialect.H2Dialect
-
 
   level:
     org.springframework.web: DEBUG

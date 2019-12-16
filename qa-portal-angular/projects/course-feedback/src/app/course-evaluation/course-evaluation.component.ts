@@ -5,7 +5,7 @@ import { templateJitUrl } from '@angular/compiler';
 @Component({
   selector: 'app-course-evaluation',
   templateUrl: './course-evaluation.component.html',
-  styleUrls: ['./course-evaluation.component.css']
+  styleUrls: ['./course-evaluation.component.scss']
 })
 export class CourseEvaluationComponent implements OnInit {
 
