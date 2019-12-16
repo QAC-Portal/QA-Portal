@@ -7,6 +7,18 @@
       <td mat-cell *matCellDef="let row">{{row.cohortName}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="pathway">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pathway</th>
+      <td mat-cell *matCellDef="let row">Placeholder</td>
+      <!-- <td mat-cell *matCellDef="let row">{{row.trainingPathway}}</td> -->
+    </ng-container>
+
+    <ng-container matColumnDef="courseVersion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Course Version</th>
+      <td mat-cell *matCellDef="let row">Placeholder</td>
+      <!-- <td mat-cell *matCellDef="let row">{{row.courseVersion}}</td> -->
+    </ng-container>
+
     <!-- Week Columns -->
     <ng-container matColumnDef="week1">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Week 1</th>

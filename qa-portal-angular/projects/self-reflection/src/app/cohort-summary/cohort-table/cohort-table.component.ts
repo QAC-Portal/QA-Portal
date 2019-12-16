@@ -13,7 +13,7 @@ export class CohortTableComponent implements OnChanges {
   dataSource: MatTableDataSource<CohortSummaryModel>;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['cohortName', 'week1', 'week2', 'week3', 'week4', 'week5', 'week6', 'week7', 'week8', 'week9', 'week10', 'week11', 'week12'];
+  displayedColumns = ['cohortName', 'pathway', 'courseVersion', 'week1', 'week2', 'week3', 'week4', 'week5', 'week6', 'week7', 'week8', 'week9', 'week10', 'week11', 'week12'];
 
   ngOnChanges(): void {
     this.dataSource = new MatTableDataSource<CohortSummaryModel>(this.cohortSummaryData);

@@ -9,9 +9,21 @@ public class CohortSummaryDto extends QaBaseDto {
 
     private String cohortName;
 
+    private String pathway;
+
+    private String courseVersion;
+
     private List<Double> averageRatings;
 
     private List<ReflectionQuestionDto> scores;
+
+    public String getPathway() { return pathway; }
+
+    public void setPathway(String pathway) { this.pathway = pathway; }
+
+    public String getCourseVersion() { return courseVersion; }
+
+    public void setCourseVersion(String courseVersion) { this.courseVersion = courseVersion; }
 
     public String getCohortName() {
         return cohortName;
