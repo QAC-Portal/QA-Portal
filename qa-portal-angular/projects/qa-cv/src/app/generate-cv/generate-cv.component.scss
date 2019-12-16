@@ -23,15 +23,12 @@ mat-card {
 .action-buttons {
     display: flex;
     button {
-        &:first-of-type {
-            margin-right: 1rem;
-        }
-        &:last-of-type {
-            margin-left: 1rem;
-        }
-        width: 100%;
+        margin: 1rem;
+        min-width: 16%;
+        width: auto;
         flex-direction: row;
         justify-content: left;
+        text-align: center;
     }
     div{
     width: 100%; 
@@ -39,6 +36,7 @@ mat-card {
     flex-direction: row; 
     justify-content: left; 
     align-items: center;
+    margin: 0% !important;
 }
 }
 // Custom Theming for Angular Material
