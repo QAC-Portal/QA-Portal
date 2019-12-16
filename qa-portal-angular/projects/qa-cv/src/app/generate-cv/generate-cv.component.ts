@@ -11,7 +11,7 @@ import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_S
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
 import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 
@@ -73,13 +73,15 @@ export class GenerateCvComponent implements OnInit {
   private qualificationFeedbackIndex: number;
   private workExperianceFeedbackIndex: number;
   private otherWorkExperianceFeedbackIndex: number;
+  
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private viewCvStateManagerService: ViewCvStateManagerService,
     private VCvService: ViewCvService,
     private cvService: CvService,
-    private errorHandlerService: QaErrorHandlerService
+    private errorHandlerService: QaErrorHandlerService,
+    private router: Router,
   ) {
     const fb = new FormBuilder();
     this.cvForm = fb.group({
