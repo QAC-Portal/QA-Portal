@@ -12,7 +12,8 @@ import { FilterModel } from './models/filter-search-model';
 
 @Component({
   selector: 'app-cv-search',
-  templateUrl: './cv-search.component.html'
+  templateUrl: './cv-search.component.html',
+  styleUrls: ['./cv-search.component.scss']
 })
 export class CvSearchComponent implements OnInit {
 
