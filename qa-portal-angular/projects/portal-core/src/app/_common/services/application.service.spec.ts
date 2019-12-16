@@ -7,6 +7,7 @@ import { ApplicationService } from './application.service';
 import { NavigationEnd } from '@angular/router';
 import { PortalApplicationProjectsModel } from '../models/portal-application-projects.model';
 import { MockQaHttpService } from '../../_mocks/qa-http.service.mock';
+import { HeaderLinkComponent } from '../../../app/header-link/header-link.component';
 
 describe('ApplicationService', () => {
 
@@ -17,6 +18,7 @@ describe('ApplicationService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      //declarations: [ HeaderLinkComponent ],
       imports: [
         RouterTestingModule, HttpClientTestingModule
       ],
@@ -41,6 +43,7 @@ describe('ApplicationService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
   it('should call onApplicationLoaded once', () => {
     spyOn(service, 'onApplicationLoaded').and.callThrough();
     //navEnd.urlAfterRedirects = 'cohort-api/manage/user';
@@ -51,4 +54,7 @@ describe('ApplicationService', () => {
 
   });
  
+  it('should get the current app location', () => {
+
+  });
 });
