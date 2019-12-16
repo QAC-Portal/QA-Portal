@@ -14,25 +14,25 @@ import {take} from 'rxjs/operators';
 @Injectable()
 export class ViewCvService {
 
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
+  // httpOptions = {
+  //   headers: new HttpHeaders({'Content-Type': 'application/json'})
+  // };
 
-  constructor(private http: HttpClient) {
-  }
+  // constructor(private http: HttpClient) {
+  // }
 
-  /** GET cv by id. Will 404 if id not found */
+  // /** GET cv by id. Will 404 if id not found */
   // getCvForId(id: string): Observable<ICvModel> {
   //   return this.http.get<ICvModel>(GET_CV_FOR_ID_URL + id).pipe(
   //     take(1)
   //   );
   // }
 
-  getSkillsForTrainee(): Observable<any> {
-    return this.http.get<any>(GET_SKILLS_FOR_TRAINEE_URL).pipe(
-      take(1)
-    );
-  }
+  // getSkillsForTrainee(): Observable<any> {
+  //   return this.http.get<any>(GET_SKILLS_FOR_TRAINEE_URL).pipe(
+  //     take(1)
+  //   );
+  // }
 
   // getCurrentCvForTrainee(): Observable<ICvModel> {
   //   return this.http.get<ICvModel>(GET_CURRENT_CV_URL).pipe(
@@ -51,7 +51,7 @@ export class ViewCvService {
   //   });
   // }
 
-  // /** POST: add a new cv to the server */
+  // // /** POST: add a new cv to the server */
   // createCv(cv: ICvModel): Observable<ICvModel> {
   //   return this.http.post<ICvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
   //     take(1)

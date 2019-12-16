@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {TRAINEE_ROLE, TRAINING_ADMIN_ROLE} from '../../../../../portal-core/src/app/_common/models/portal-constants';
 import {ActivatedRoute} from '@angular/router';
-// import {ICvModel} from '../../_common/models/qac-cv-db.model';
-// import {IQualification} from '../../_common/models/qualification.model';
-// import {IWorkExperience} from '../../_common/models/work-experience.model';
-import {ADMIN_USER_EDIT_STATES, TRAINING_USER_EDIT_STATES} from '../models/view-cv.constants';
+import {CvModel, WorkExperienceModel, QualificationModel} from '../models/cv.model';
+
+import {ADMIN_USER_EDIT_STATES, TRAINING_USER_EDIT_STATES} from '../models/cv-status.constants';
 
 
 @Injectable()
-export class ViewCvStateManagerService {
+export class CvStateManagerService {
 
   constructor() {
   }
@@ -44,12 +43,16 @@ export class ViewCvStateManagerService {
   //     !!cvData.profile && !!cvData.profile.profileDetails;
   // }
 
+  private allQualificationsCompleted(qualifications: QualificationModel[]): boolean {
+    return !!qualifications &&
+      qualifications.length > 0 &&
+      !qualifications.find(q => !this.qualificationCompleted(q));
+  }
 
-  // private allQualificationsCompleted(qualifications: IQualification[]): boolean {
-  //   return !!qualifications &&
-  //     qualifications.length > 0 &&
-  //     !qualifications.find(q => !this.qualificationCompleted(q));
-  // }
+  private qualificationCompleted(qualifiation: QualificationModel): boolean {
+    return !!qualifiation &&
+      !!qualifiation.qualificationDetails;
+  }
 
   // private qualificationCompleted(qualifiation: IQualification): boolean {
   //   return !!qualifiation &&
@@ -68,4 +71,4 @@ export class ViewCvStateManagerService {
 //       !!workExperience.jobTitle &&
 //       !!workExperience.workExperienceDetails;
 //   }
-
+}

@@ -7,10 +7,10 @@ import { MatChipInputEvent } from '@angular/material';
 import { CvService } from '../_common/services/cv.service';
 import { finalize } from 'rxjs/operators';
 import { ViewCvService } from '../view-cv/services/view-cv.service';
-import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_STATUS } from '../view-cv/models/view-cv.constants';
+import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_STATUS } from '../_common/models/cv-status.constants';
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
-import { ViewCvStateManagerService } from '../view-cv/services/view-cv-state-manager.service';
+import { CvStateManagerService } from '../_common/services/cv-state-manager.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
 import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
@@ -62,10 +62,7 @@ export class GenerateCvComponent implements OnInit {
   ];
 
   public cvForm: FormGroup;
-  cvData: CvModel;
-  cv: CvModel;
-  //origCv: CvModel;
-  isTraineeView = true;
+  public isTraineeView = true;
   public origCv: CvModel;
 
 
@@ -76,12 +73,11 @@ export class GenerateCvComponent implements OnInit {
   
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private viewCvStateManagerService: ViewCvStateManagerService,
-    private VCvService: ViewCvService,
+    private cvStateManagerService: CvStateManagerService,
     private cvService: CvService,
     private errorHandlerService: QaErrorHandlerService,
-    private router: Router
   ) {
     const fb = new FormBuilder();
     this.cvForm = fb.group({
@@ -142,12 +138,12 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setRoleForPage() {
-    this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);
+    this.isTraineeView = this.cvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);
   }
 
   private initialiseCvPageForTrainee() {
     this.cvService.getCurrentCvForTrainee().subscribe(
-      (cv) => {
+      (cv: CvModel) => {
         if (this.noExistingCvForTrainee(cv)) {
           //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
         } else {
@@ -330,7 +326,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setPageEditStatus(): void {
-    this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
+    // this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
   }
 
   private setCommentStatus() {
