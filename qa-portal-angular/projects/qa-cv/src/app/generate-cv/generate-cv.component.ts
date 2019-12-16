@@ -6,13 +6,14 @@ import * as _ from 'lodash';
 import { MatChipInputEvent } from '@angular/material';
 import { CvService } from '../_common/services/cv.service';
 import { finalize } from 'rxjs/operators';
-import { ViewCvService } from '../view-cv/services/view-cv.service';
 import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_STATUS } from '../_common/models/cv-status.constants';
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { CvStateManagerService } from '../_common/services/cv-state-manager.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
+import {SubmitConfirmDialogComponent} from '../controls/submit-confirm-dialog/submit-confirm-dialog.component';
+import {TRAINING_ADMIN_ROLE} from '../../../../portal-core/src/app/_common/models/portal-constants';
 import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 
 @Component({
@@ -114,10 +115,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setRoleForPage();   // Is page being displayed for Trainee or Admin
-    // this.cvForm.patchValue(new CvModel());
-    // this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);  // Is page being displayed for Trainee or Admin
-
+    this.setRoleForPage();   
     if (this.isTraineeView) {
       this.initialiseCvPageForTrainee();
     } else {
@@ -211,7 +209,9 @@ export class GenerateCvComponent implements OnInit {
       ...rest
     } as CvModel).build();
   }
+
   //Button Functions
+
   //All Users Buttons
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
@@ -234,6 +234,7 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(() => { });
   }
+
   //User Buttons
   onSaveCvButtonClicked() {
     const cvForm = this.getCvData();
@@ -322,17 +323,17 @@ export class GenerateCvComponent implements OnInit {
   private refreshPageStatus() {
     this.setPageEditStatus();
     this.setCommentStatus();
-    // this.loadingData = false;
+    this.isLoading = false;
   }
 
   private setPageEditStatus(): void {
-    // this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
+    this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
   }
 
   private setCommentStatus() {
-    // if (SubmitConfirmDialogComponent) {
-    //   this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.origCv.status === FOR_REVIEW_STATUS;
-    // }
+    if (SubmitConfirmDialogComponent) {
+      this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.origCv.status === FOR_REVIEW_STATUS;
+    }
   }
 
 }
