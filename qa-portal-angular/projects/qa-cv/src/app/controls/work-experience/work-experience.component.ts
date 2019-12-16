@@ -4,7 +4,7 @@ import { WorkExperienceModel, Feedback } from '../../_common/models/cv.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatTableDataSource } from '@angular/material';
 import * as moment from 'moment';
-import { IWorkExperience } from '../../_common/models/work-experience.model';
+//import { IWorkExperience } from '../../_common/models/work-experience.model';
 
 
 @Component({
@@ -40,7 +40,7 @@ export class WorkExperienceComponent implements ControlValueAccessor {
   public onChange = (v: WorkExperienceModel[]) => {};
   public onTouch = () => {};
 
-  @Output() feedbackClick = new EventEmitter<{ index: number, qualifications: QualificationModel, feedback: Feedback[] }>();
+  @Output() feedbackClick = new EventEmitter<{ index: number, workExperiance: WorkExperienceModel, feedback: Feedback[] }>();
 
   constructor() {
     this.columns = ['title', 'remove', 'showFeedback'];
@@ -70,7 +70,7 @@ export class WorkExperienceComponent implements ControlValueAccessor {
     this.onTouch();
   }
 
-  onFeedbackButtonClicked(index: number, workExperiance: IWorkExperience): void {
+  onFeedbackButtonClicked(index: number, workExperiance: WorkExperienceModel): void {
     this.feedbackClick.emit({ index, workExperiance, feedback: workExperiance.workExperienceFeedback });
   }
 
