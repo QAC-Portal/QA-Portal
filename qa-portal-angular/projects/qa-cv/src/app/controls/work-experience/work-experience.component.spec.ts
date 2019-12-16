@@ -88,14 +88,14 @@ describe('WorkExperienceComponent', () => {
     it('should store the onChange callback when called', () => {
       const spy = jasmine.createSpy('onChangeSpy', (v) => { });
       component.onChange = null;
-      component.registerOnChange(spy);
+      (component as any).registerOnChange(spy);
       component.onChange(null);
       expect(spy).toHaveBeenCalledTimes(1);
     });
     it('should store the onTouch callback when called', () => {
       const spy = jasmine.createSpy('onTouchSpy', () => { });
       component.onTouch = null;
-      component.registerOnTouched(spy);
+      (component as any).registerOnTouched(spy);
       component.onTouch();
       expect(spy).toHaveBeenCalledTimes(1);
     });

@@ -816,7 +816,7 @@
               "projects/qa-cv/src/assets"
             ],
             "styles": [
-              "projects/qa-cv/src/styles.scss"
+              "projects/portal-core/src/styles.scss"
             ],
             "scripts": []
           },
@@ -876,7 +876,7 @@
               "projects/qa-cv/src/assets"
             ],
             "styles": [
-              "projects/qa-cv/src/styles.scss"
+              "projects/portal-core/src/styles.scss"
             ],
             "scripts": []
           }
