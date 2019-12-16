@@ -89,7 +89,6 @@ export interface Endpoints {
 }
 
 export const endpoints: Endpoints = {
-
   SELF_REFLECTION_QUESTION_API : 'self-reflection-api/question',
   GET_ALL_SELF_REFLECTIONS_API : 'self-reflection-api/reflections',
 
