@@ -167,10 +167,10 @@ export class ViewCvComponent {
         this.cvService.getCvForId(paramMap.get('id')).subscribe(
           (response) => {
             this.cvData = response;
-            this.refreshPageStatus();
+            //this.refreshPageStatus();
           },
           (error) => {
-            this.processError(error);
+            //this.processError(error);
           });
       });
   }
@@ -197,7 +197,7 @@ export class ViewCvComponent {
         this.populateResponse(response);
       },
       (error) => {
-        this.processError(error);
+        //this.processError(error);
       }
     );
   }
@@ -214,35 +214,35 @@ export class ViewCvComponent {
 
   private populateResponse(response: ICvModel): void {
     this.cvData = response;
-    this.setPageEditStatus();
+    //this.setPageEditStatus();
   }
 
   private navigateToAdminSearch() {
     this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
   }
 
-  private allDetailsEntered(): boolean {
-    return this.viewCvStateManagerService.isMandatoryCvDetailsEntered(this.cvData);
-  }
+  // private allDetailsEntered(): boolean {
+  //   return this.viewCvStateManagerService.isMandatoryCvDetailsEntered(this.cvData);
+  // }
 
-  private processError(error: any) {
-    this.loadingData = false;
-    this.errorHandlerService.handleError(error);
-  }
+  // private processError(error: any) {
+  //   this.loadingData = false;
+  //   this.errorHandlerService.handleError(error);
+  // }
 
-  private refreshPageStatus() {
-    this.setPageEditStatus();
-    this.setCommentStatus();
-    this.loadingData = false;
-  }
+  // private refreshPageStatus() {
+  //   this.setPageEditStatus();
+  //   this.setCommentStatus();
+  //   this.loadingData = false;
+  // }
 
-  private setPageEditStatus(): void {
-    this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
-  }
+  // private setPageEditStatus(): void {
+  //   this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
+  // }
 
-  private setCommentStatus() {
-    if (SubmitConfirmDialogComponent) {
-      this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
-    }
-  }
+  // private setCommentStatus() {
+  //   if (SubmitConfirmDialogComponent) {
+  //     this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
+  //   }
+  // }
 }

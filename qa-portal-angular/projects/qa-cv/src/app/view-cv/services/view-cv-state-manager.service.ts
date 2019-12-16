@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {TRAINEE_ROLE, TRAINING_ADMIN_ROLE} from '../../../../../portal-core/src/app/_common/models/portal-constants';
 import {ActivatedRoute} from '@angular/router';
-import {ICvModel} from '../../_common/models/qac-cv-db.model';
+import {CvModel, WorkExperienceModel} from '../../_common/models/cv.model';
 import {IQualification} from '../../_common/models/qualification.model';
 import {IWorkExperience} from '../../_common/models/work-experience.model';
 import {ADMIN_USER_EDIT_STATES, TRAINING_USER_EDIT_STATES} from '../models/view-cv.constants';
@@ -13,7 +13,7 @@ export class ViewCvStateManagerService {
   constructor() {
   }
 
-  public isPageEditable(activatedRoute: ActivatedRoute, cvData: ICvModel): boolean {
+  public isPageEditable(activatedRoute: ActivatedRoute, cvData: CvModel): boolean {
     let isEditable = false;
     if (activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE) {
       if (ADMIN_USER_EDIT_STATES.includes(cvData.status)) {
@@ -36,7 +36,7 @@ export class ViewCvStateManagerService {
     return true;
   }
 
-  public isMandatoryCvDetailsEntered(cvData: ICvModel): boolean {
+  public isMandatoryCvDetailsEntered(cvData: CvModel): boolean {
     return !!this.allQualificationsCompleted(cvData.allQualifications) &&
       !!this.allWorkExperienceCompleted(cvData.allWorkExperience) &&
       !!cvData.hobbies && !!cvData.hobbies.hobbiesDetails &&
@@ -54,15 +54,14 @@ export class ViewCvStateManagerService {
       !!qualifiation.qualificationDetails;
   }
 
-  private allWorkExperienceCompleted(workExperiences: IWorkExperience[]): boolean {
+  private allWorkExperienceCompleted(workExperiences: WorkExperienceModel[]): boolean {
     return !!workExperiences &&
       workExperiences.length > 0 &&
       !workExperiences.find(w => !this.workExperienceCompleted(w));
   }
 
-  private workExperienceCompleted(workExperience: IWorkExperience): boolean {
+  private workExperienceCompleted(workExperience: WorkExperienceModel): boolean {
     return !!workExperience &&
-      !!workExperience.start &&
       !!workExperience.jobTitle &&
       !!workExperience.workExperienceDetails;
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CvModel, Feedback } from '../_common/models/cv.model';
 import { ENTER } from '@angular/cdk/keycodes';
@@ -25,6 +25,10 @@ export class GenerateCvComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER];
 
   public isLoading = false;
+
+  public canComment = false;
+
+  public canEdit = true;
 
   public skillCategories = [
     {
@@ -58,6 +62,9 @@ export class GenerateCvComponent implements OnInit {
   ];
 
   public cvForm: FormGroup;
+  cvData: CvModel;
+  cv: CvModel;
+  //origCv: CvModel;
   isTraineeView = true;
   public origCv: CvModel;
 
@@ -302,16 +309,26 @@ export class GenerateCvComponent implements OnInit {
     );
   }
 
+  //Checking status for casnEdit boolean
+  isDisabled() {
+    return !this.canEdit;
+  }
+
   // STATUS UPDATE FUNCTIONS
+  private checkEditable() {
+    if(!this.canEdit) {
+      
+    }
+  }
 
   private refreshPageStatus() {
-    // this.setPageEditStatus();
-    // this.setCommentStatus();
+    this.setPageEditStatus();
+    this.setCommentStatus();
     // this.loadingData = false;
   }
 
   private setPageEditStatus(): void {
-    // this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
+    this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
   }
 
   private setCommentStatus() {
