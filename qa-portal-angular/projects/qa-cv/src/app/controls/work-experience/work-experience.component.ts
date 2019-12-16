@@ -1,9 +1,10 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, EventEmitter, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS } from '@angular/forms';
-import { WorkExperienceModel } from '../../_common/models/cv.model';
+import { WorkExperienceModel, Feedback } from '../../_common/models/cv.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatTableDataSource } from '@angular/material';
 import * as moment from 'moment';
+//import { IWorkExperience } from '../../_common/models/work-experience.model';
 
 
 @Component({
@@ -39,13 +40,15 @@ export class WorkExperienceComponent implements ControlValueAccessor {
   public onChange = (v: WorkExperienceModel[]) => {};
   public onTouch = () => {};
 
+  @Output() feedbackClick = new EventEmitter<{ index: number, workExperiance: WorkExperienceModel, feedback: Feedback[] }>();
+
   constructor() {
-    this.columns = ['title', 'remove'];
+    this.columns = ['title', 'remove', 'showFeedback'];
   }
 
   onNewWorkExperienceClick(): void {
     const newExperience = {
-      jobTitle: '',
+      jobTitle: '', 
       workExperienceDetails: '',
       workExperienceFeedback: []
     };
@@ -65,6 +68,10 @@ export class WorkExperienceComponent implements ControlValueAccessor {
   public announceChange() {
     this.onChange(this.workExperienceTableDataSource.data);
     this.onTouch();
+  }
+
+  onFeedbackButtonClicked(index: number, workExperiance: WorkExperienceModel): void {
+    this.feedbackClick.emit({ index, workExperiance, feedback: workExperiance.workExperienceFeedback });
   }
 
   // Built-in validation

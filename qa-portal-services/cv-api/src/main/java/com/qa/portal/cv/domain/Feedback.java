@@ -7,7 +7,9 @@ public class Feedback {
     private String date;
 
     private String comment;
-
+    
+    private Boolean resolved;
+    
     public Feedback() {
         super();
     }
@@ -35,5 +37,15 @@ public class Feedback {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+	public Boolean getResolved() {
+		return resolved;
+	}
+
+	public void setResolved(Boolean resolved) {
+		this.resolved = resolved;
+	}
+    
+    
 
 }

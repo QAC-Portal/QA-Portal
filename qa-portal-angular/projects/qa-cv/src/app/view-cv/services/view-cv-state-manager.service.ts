@@ -21,6 +21,7 @@ export class ViewCvStateManagerService {
   //     }
   //   }
 
+
   //   if (activatedRoute.snapshot.data.roles[0] === TRAINEE_ROLE) {
   //     if (TRAINING_USER_EDIT_STATES.includes(cvData.status)) {
   //       isEditable = true;
@@ -42,6 +43,7 @@ export class ViewCvStateManagerService {
   //     !!cvData.hobbies && !!cvData.hobbies.hobbiesDetails &&
   //     !!cvData.profile && !!cvData.profile.profileDetails;
   // }
+
 
   // private allQualificationsCompleted(qualifications: IQualification[]): boolean {
   //   return !!qualifications &&
@@ -66,4 +68,4 @@ export class ViewCvStateManagerService {
 //       !!workExperience.jobTitle &&
 //       !!workExperience.workExperienceDetails;
 //   }
-}
+

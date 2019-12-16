@@ -1,7 +1,8 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS } from '@angular/forms';
-import { QualificationModel } from '../../_common/models/cv.model';
+import { QualificationModel, Feedback } from '../../_common/models/cv.model';
 import { MatTableDataSource } from '@angular/material';
+//import { IQualification } from '../../_common/models/qualification.model';
 
 @Component({
   selector: 'app-qualifications',
@@ -29,8 +30,10 @@ export class QualificationsComponent implements ControlValueAccessor {
   public onChange = (v: QualificationModel[]) => { };
   public onTouch = () => { };
 
+  @Output() feedbackClick = new EventEmitter<{ index: number, qualifications: QualificationModel, feedback: Feedback[] }>();
+
   constructor() {
-    this.columns = ['qualificationDetails', 'remove'];
+    this.columns = ['qualificationDetails', 'remove', 'showFeedback'];
   }
 
 
@@ -59,6 +62,10 @@ export class QualificationsComponent implements ControlValueAccessor {
     this.qualisTableDataSource.data.splice(index, 1); // setters don't get called by higher order functions so do it directly
     this.qualisTableDataSource._updateChangeSubscription(); // force the table to update (it doesn't auto detect splices)
     this.announceChange();
+  }
+
+  onFeedbackButtonClicked(index: number, qualifications: QualificationModel): void {
+    this.feedbackClick.emit({ index, qualifications, feedback: qualifications.qualificationFeedback });
   }
 
   // Built-in validation

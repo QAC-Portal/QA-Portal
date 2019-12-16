@@ -161,6 +161,7 @@ export class ViewCvComponent {
   //   });
   // }
 
+
   // private initialiseCvPageForAdmin() {
   //   this.activatedRoute.paramMap.subscribe(
   //     (paramMap: ParamMap) => {
@@ -174,6 +175,7 @@ export class ViewCvComponent {
   //         });
   //     });
   // }
+
 
   // private persistCvForTrainee() {
   //   if (!this.cvData.id) {
@@ -191,6 +193,7 @@ export class ViewCvComponent {
   //   this.processCvServiceResponse(this.cvService.updateCv(this.cvData));
   // }
 
+
   // private processCvServiceResponse(obs: Observable<ICvModel>) {
   //   obs.subscribe(
   //     (response) => {
@@ -202,6 +205,7 @@ export class ViewCvComponent {
   //   );
   // }
 
+
   // private cvUpdatedByAdmin(cvStatus: string) {
   //   this.cvData.status = cvStatus;
   //   this.updateCv();
@@ -212,10 +216,12 @@ export class ViewCvComponent {
     this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);
   }
 
+
   // private populateResponse(response: ICvModel): void {
   //   this.cvData = response;
   //   this.setPageEditStatus();
   // }
+
 
   private navigateToAdminSearch() {
     this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
@@ -225,10 +231,10 @@ export class ViewCvComponent {
   //   return this.viewCvStateManagerService.isMandatoryCvDetailsEntered(this.cvData);
   // }
 
-  private processError(error: any) {
-    this.loadingData = false;
-    this.errorHandlerService.handleError(error);
-  }
+  // private processError(error: any) {
+  //   this.loadingData = false;
+  //   this.errorHandlerService.handleError(error);
+  // }
 
   // private refreshPageStatus() {
   //   this.setPageEditStatus();
@@ -245,4 +251,5 @@ export class ViewCvComponent {
 //       this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
 //     }
 //   }
+
 }
