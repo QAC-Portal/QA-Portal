@@ -1,13 +1,13 @@
 import {Component, OnInit, Output} from '@angular/core';
-import {DEFAULT_CV, ICvModel} from '../_common/models/qac-cv-db.model';
+// import {DEFAULT_CV, ICvModel} from '../_common/models/qac-cv-db.model';
 import {ViewCvService} from './services/view-cv.service';
 import {CvCardBaseComponent} from '../cv-card-base/cv-card-base.component';
-import {IFeedback} from '../_common/models/iFeedback.model';
+// import {IFeedback} from '../_common/models/iFeedback.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MAT_DATE_LOCALE, MatDialog} from '@angular/material';
 import {SubmitConfirmDialogComponent} from './submit-confirm-dialog/submit-confirm-dialog.component';
 import {QaErrorHandlerService} from '../../../../portal-core/src/app/_common/services/qa-error-handler.service';
-import {UserSkillsModel} from '../_common/models/user-skills.model';
+// import {UserSkillsModel} from '../_common/models/user-skills.model';
 import {TRAINING_ADMIN_ROLE} from '../../../../portal-core/src/app/_common/models/portal-constants';
 import {ADMIN_CV_SEARCH_URL} from '../_common/models/cv.constants';
 import {
@@ -41,7 +41,7 @@ export class ViewCvComponent {
 
   workExperienceFeedbackIndex: number;
 
-  public cvData: ICvModel;
+  // public cvData: ICvModel;
 
   public workExperienceFeedback = [];
 
@@ -66,23 +66,23 @@ export class ViewCvComponent {
   //   }
   // }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(SubmitConfirmDialogComponent, {
-      width: '250px'
-    });
-    dialogRef.componentInstance.canSubmit = false;
-    dialogRef.componentInstance.doSubmit.subscribe(() => {
-      if (dialogRef.componentInstance.canSubmit === true) {
-        this.onCvSubmitForReview();
-      }
-    });
-    dialogRef.afterClosed().subscribe(() => {
-    });
-  }
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(SubmitConfirmDialogComponent, {
+  //     width: '250px'
+  //   });
+  //   dialogRef.componentInstance.canSubmit = false;
+  //   dialogRef.componentInstance.doSubmit.subscribe(() => {
+  //     if (dialogRef.componentInstance.canSubmit === true) {
+  //       this.onCvSubmitForReview();
+  //     }
+  //   });
+  //   dialogRef.afterClosed().subscribe(() => {
+  //   });
+  // }
 
-  onDisplayPdf() {
-    this.cvService.displayPdf(this.cvData);
-  }
+  // onDisplayPdf() {
+  //   this.cvService.displayPdf(this.cvData);
+  // }
 
   // onInitialiseNewCv() {
   //   this.cvData = this.viewCvPageDataService.initialiseNewCv(this.cvData, this.useExistingCvAsTemplate);
@@ -90,45 +90,45 @@ export class ViewCvComponent {
   //   this.refreshPageStatus();
   // }
 
-  onCvSave(): void {
-    if (!this.cvData.id) {
-      this.cvData.status = IN_PROGRESS_STATUS;
-    }
-    this.persistCvForTrainee();
-  }
+  // onCvSave(): void {
+  //   if (!this.cvData.id) {
+  //     this.cvData.status = IN_PROGRESS_STATUS;
+  //   }
+  //   this.persistCvForTrainee();
+  // }
 
-  onCvSubmitForReview(): void {
-    this.cvData.status = FOR_REVIEW_STATUS;
-    this.persistCvForTrainee();
-  }
+  // onCvSubmitForReview(): void {
+  //   this.cvData.status = FOR_REVIEW_STATUS;
+  //   this.persistCvForTrainee();
+  // }
 
-  onCvApproved(): void {
-    this.cvUpdatedByAdmin(APPROVED_STATUS);
-  }
+  // onCvApproved(): void {
+  //   this.cvUpdatedByAdmin(APPROVED_STATUS);
+  // }
 
-  onCvFailedReview(): void {
-    this.cvUpdatedByAdmin(FAILED_REVIEW_STATUS);
-  }
+  // onCvFailedReview(): void {
+  //   this.cvUpdatedByAdmin(FAILED_REVIEW_STATUS);
+  // }
 
-  onWorkExperienceFeedbackClick({index}: { index: number }, expCard: CvCardBaseComponent): void {
-    this.workExperienceFeedbackIndex = index;
-    this.workExperienceFeedback = this.cvData.allWorkExperience[index].workExperienceFeedback;
-    expCard.drawer.open();
-  }
+  // onWorkExperienceFeedbackClick({index}: { index: number }, expCard: CvCardBaseComponent): void {
+  //   this.workExperienceFeedbackIndex = index;
+  //   this.workExperienceFeedback = this.cvData.allWorkExperience[index].workExperienceFeedback;
+  //   expCard.drawer.open();
+  // }
 
-  onWorkExperienceFeedbackChange(feedback: IFeedback[]): void {
-    this.cvData.allWorkExperience[this.workExperienceFeedbackIndex].workExperienceFeedback = feedback;
-  }
+  // onWorkExperienceFeedbackChange(feedback: IFeedback[]): void {
+  //   this.cvData.allWorkExperience[this.workExperienceFeedbackIndex].workExperienceFeedback = feedback;
+  // }
 
-  onQualificationFeedbackClick({index}: { index: number }, qualCard: CvCardBaseComponent): void {
-    this.qualificationFeedbackIndex = index;
-    this.qualificationFeedback = this.cvData.allQualifications[index].qualificationFeedback;
-    qualCard.drawer.open();
-  }
+  // onQualificationFeedbackClick({index}: { index: number }, qualCard: CvCardBaseComponent): void {
+  //   this.qualificationFeedbackIndex = index;
+  //   this.qualificationFeedback = this.cvData.allQualifications[index].qualificationFeedback;
+  //   qualCard.drawer.open();
+  // }
 
-  onQualificationFeedbackChange(feedback: IFeedback[]): void {
-    this.cvData.allQualifications[this.qualificationFeedbackIndex].qualificationFeedback = feedback;
-  }
+  // onQualificationFeedbackChange(feedback: IFeedback[]): void {
+  //   this.cvData.allQualifications[this.qualificationFeedbackIndex].qualificationFeedback = feedback;
+  // }
 
   onUseExistingCvAsTemplateChanged() {
     this.useExistingCvAsTemplate = !this.useExistingCvAsTemplate;
@@ -149,9 +149,9 @@ export class ViewCvComponent {
   //     });
   // }
 
-  private noExistingCvForTrainee(traineeCv: ICvModel): boolean {
-    return !traineeCv;
-  }
+  // private noExistingCvForTrainee(traineeCv: ICvModel): boolean {
+  //   return !traineeCv;
+  // }
 
   // private initialiseBlankCvForTrainee() {
   //   this.cvService.getSkillsForTrainee().subscribe((userSkillsModel: UserSkillsModel) => {
@@ -161,61 +161,67 @@ export class ViewCvComponent {
   //   });
   // }
 
-  private initialiseCvPageForAdmin() {
-    this.activatedRoute.paramMap.subscribe(
-      (paramMap: ParamMap) => {
-        this.cvService.getCvForId(paramMap.get('id')).subscribe(
-          (response) => {
-            this.cvData = response;
-            //this.refreshPageStatus();
-          },
-          (error) => {
-            //this.processError(error);
-          });
-      });
-  }
 
-  private persistCvForTrainee() {
-    if (!this.cvData.id) {
-      this.createCv();
-    } else {
-      this.updateCv();
-    }
-  }
+  // private initialiseCvPageForAdmin() {
+  //   this.activatedRoute.paramMap.subscribe(
+  //     (paramMap: ParamMap) => {
+  //       this.cvService.getCvForId(paramMap.get('id')).subscribe(
+  //         (response) => {
+  //           this.cvData = response;
+  //           this.refreshPageStatus();
+  //         },
+  //         (error) => {
+  //           this.processError(error);
+  //         });
+  //     });
+  // }
 
-  private createCv(): void {
-    this.processCvServiceResponse(this.cvService.createCv(this.cvData));
-  }
 
-  private updateCv(): void {
-    this.processCvServiceResponse(this.cvService.updateCv(this.cvData));
-  }
+  // private persistCvForTrainee() {
+  //   if (!this.cvData.id) {
+  //     this.createCv();
+  //   } else {
+  //     this.updateCv();
+  //   }
+  // }
 
-  private processCvServiceResponse(obs: Observable<ICvModel>) {
-    obs.subscribe(
-      (response) => {
-        this.populateResponse(response);
-      },
-      (error) => {
-        //this.processError(error);
-      }
-    );
-  }
+  // private createCv(): void {
+  //   this.processCvServiceResponse(this.cvService.createCv(this.cvData));
+  // }
 
-  private cvUpdatedByAdmin(cvStatus: string) {
-    this.cvData.status = cvStatus;
-    this.updateCv();
-    this.navigateToAdminSearch();
-  }
+  // private updateCv(): void {
+  //   this.processCvServiceResponse(this.cvService.updateCv(this.cvData));
+  // }
+
+
+  // private processCvServiceResponse(obs: Observable<ICvModel>) {
+  //   obs.subscribe(
+  //     (response) => {
+  //       this.populateResponse(response);
+  //     },
+  //     (error) => {
+  //       this.processError(error);
+  //     }
+  //   );
+  // }
+
+
+  // private cvUpdatedByAdmin(cvStatus: string) {
+  //   this.cvData.status = cvStatus;
+  //   this.updateCv();
+  //   this.navigateToAdminSearch();
+  // }
 
   private setRoleForPage() {
     this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);
   }
 
-  private populateResponse(response: ICvModel): void {
-    this.cvData = response;
-    //this.setPageEditStatus();
-  }
+
+  // private populateResponse(response: ICvModel): void {
+  //   this.cvData = response;
+  //   this.setPageEditStatus();
+  // }
+
 
   private navigateToAdminSearch() {
     this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
@@ -240,9 +246,10 @@ export class ViewCvComponent {
   //   this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
   // }
 
-  // private setCommentStatus() {
-  //   if (SubmitConfirmDialogComponent) {
-  //     this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
-  //   }
-  // }
+//   private setCommentStatus() {
+//     if (SubmitConfirmDialogComponent) {
+//       this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.cvData.status === FOR_REVIEW_STATUS;
+//     }
+//   }
+
 }

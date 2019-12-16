@@ -81,7 +81,7 @@ export class GenerateCvComponent implements OnInit {
     private VCvService: ViewCvService,
     private cvService: CvService,
     private errorHandlerService: QaErrorHandlerService,
-    private router: Router,
+    private router: Router
   ) {
     const fb = new FormBuilder();
     this.cvForm = fb.group({

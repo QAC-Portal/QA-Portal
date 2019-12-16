@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {UserSkillsModel} from '../../_common/models/user-skills.model';
-import {DEFAULT_CV, ICvModel} from '../../_common/models/qac-cv-db.model';
+// import {UserSkillsModel} from '../../_common/models/user-skills.model';
+// import {DEFAULT_CV, ICvModel} from '../../_common/models/qac-cv-db.model';
 import {IN_PROGRESS_STATUS} from '../models/view-cv.constants';
 
 @Injectable()
