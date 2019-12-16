@@ -12,7 +12,6 @@ import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/serv
 import { CvStateManagerService } from '../_common/services/cv-state-manager.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
-import {SubmitConfirmDialogComponent} from '../controls/submit-confirm-dialog/submit-confirm-dialog.component';
 import {TRAINING_ADMIN_ROLE} from '../../../../portal-core/src/app/_common/models/portal-constants';
 import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
