@@ -2,11 +2,6 @@ import { NgModule } from '@angular/core';
 import { QaCommonModule } from '../../../qa-common/src/app/qa-common.module';
 import { CvRoutingModule } from './cv-routing.module';
 import { ViewCvComponent } from './view-cv/view-cv.component';
-import { CvProfileComponent } from './cv-profile/cv-profile.component';
-import { CvWorkExpComponent } from './cv-work-exp/cv-work-exp.component';
-import { CvHobbiesComponent } from './cv-hobbies/cv-hobbies.component';
-import { CvQualificationComponent } from './cv-qualis/cv-qualification.component';
-import { CvSkillsComponent } from './cv-skills/cv-skills.component';
 import { MatNativeDateModule } from '@angular/material';
 import { CVSearchFilterService } from './cv-search/services/cv-search-filter.service';
 import { CvSearchComponent } from './cv-search/cv-search.component';
@@ -23,11 +18,6 @@ import { WorkExperienceComponent } from './controls/work-experience/work-experie
 @NgModule({
   declarations: [
     ViewCvComponent,
-    CvProfileComponent,
-    CvWorkExpComponent,
-    CvHobbiesComponent,
-    CvQualificationComponent,
-    CvSkillsComponent,
     CvSearchComponent,
     CvCardBaseComponent,
     SubmitConfirmDialogComponent,
