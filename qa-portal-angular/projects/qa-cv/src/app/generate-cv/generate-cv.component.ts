@@ -28,7 +28,7 @@ export class GenerateCvComponent implements OnInit {
 
   public canComment = false;
 
-  public canEdit = true;
+  public canEdit = false;
 
   public skillCategories = [
     {
@@ -154,6 +154,7 @@ export class GenerateCvComponent implements OnInit {
           this.origCv = cv;
           this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
           this.refreshPageStatus();
+          console.log(cv);
         }
       },
       (error) => {
@@ -303,6 +304,7 @@ export class GenerateCvComponent implements OnInit {
       (response) => {
         this.origCv = response;
         this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
+        
         this.setPageEditStatus();
       },
       (error) => {
@@ -312,14 +314,16 @@ export class GenerateCvComponent implements OnInit {
   }
 
   //Checking status for casnEdit boolean
-  isDisabled() {
-    return !this.canEdit;
-  }
+  // isDisabled() {
+  //   return !this.canEdit;
+  // }
 
   // STATUS UPDATE FUNCTIONS
-  private checkEditable() {
-    if(!this.canEdit) {
-      
+  private checkEditable(cv: CvModel) {
+    if(!this.isTraineeView && cv.status === "In Progress") {
+      this.canEdit = false;
+    } else {
+      this.canEdit = true;
     }
   }
 
@@ -330,7 +334,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setPageEditStatus(): void {
-    this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
+    // this.canEdit = this.viewCvStateManagerService.isPageEditable(this.activatedRoute, this.cvData);
   }
 
   private setCommentStatus() {
