@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.dto.PortalProjectDto;
@@ -18,6 +19,8 @@ public class PortalProjectDtoJavaUnitTest {
 	
 	@InjectMocks
 	public PortalProjectDto portalProjectDto = new PortalProjectDto();
+	
+	@Mock
 	public PortalProjectDto portalProjectDtoNull = null;
 	public String portalProjectDtoDiffClass = "this is a string";
 	public PortalProjectDto portalProjectDtoDiffId = new PortalProjectDto();

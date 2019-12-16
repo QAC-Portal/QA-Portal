@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.persistence.entity.PortalProjectEntity;
@@ -19,6 +21,8 @@ public class ProjectPageEntityJavaUnitTest {
 
 	@InjectMocks
 	ProjectPageEntity projectPageEntity = new ProjectPageEntity();
+	
+	@Mock
 	ProjectPageEntity projectPageEntityNull = null;
 	String projectPageEntityDiffClass = "this is a string";
 	ProjectPageEntity projectPageEntityDiffId = new ProjectPageEntity();
@@ -31,6 +35,7 @@ public class ProjectPageEntityJavaUnitTest {
 	ProjectPageEntity projectPageEntityDiffRoleProjectPages = new ProjectPageEntity();
 	ProjectPageEntity projectPageEntityRoleProjectNull = new ProjectPageEntity();
 	ProjectPageEntity projectPageEntityRoleProjectAdd = new ProjectPageEntity();
+	
 
 	
 	@Before
@@ -291,9 +296,11 @@ public class ProjectPageEntityJavaUnitTest {
 		assertThat(this.projectPageEntity.toString()).isEqualTo("ProjectPageEntity{id=1, name=\'test name\', url=\'test url\', tooltip=\'test tooltip\', icon=\'test icon\', portalProject=ApplicationEntity{id=1, name=\'null\', menuItems=null}, displayOnMenu=true}");
 	}
 	
-//	@Test
-//	public void addRoleProjectPageEntityTest() {
-//		RoleProjectPageEntity roleProjectPage = new RoleProjectPageEntity();
-//		assertThat(this.projectPageEntityRoleProjectNull.addRoleProjectPageEntity(roleProjectPage).isEqualTo(projectPageEntityRoleProjectAdd));
-//	}
+	@Test
+	public void addRoleProjectPageEntityTest() {
+		
+//		Mockito.when(this.roleProjectPageEntities.add(roleProjectPageEntity)).thenReturn(null);
+		
+//		assertThat(this.projectPageEntity.addRoleProjectPageEntity(null)).isEqualTo(null);
+	}
 }

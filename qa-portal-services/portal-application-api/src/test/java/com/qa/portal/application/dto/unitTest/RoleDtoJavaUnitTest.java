@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.dto.PortalApplicationDto;
@@ -15,6 +16,8 @@ public class RoleDtoJavaUnitTest {
 	
 	@InjectMocks
 	public RoleDto roleDto = new RoleDto();
+	
+	@Mock
 	public RoleDto roleDtoNull = null;
 	public String roleDtoDiffClass = "this is a string";
 	public RoleDto roleDtoDiffId = new RoleDto();

@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.dto.ProjectPageDto;
@@ -18,6 +19,8 @@ public class ProjectPageDtoJavaUnitTest {
 	
 	@InjectMocks
 	public ProjectPageDto projectPageDto = new ProjectPageDto();
+	
+	@Mock
 	public ProjectPageDto projectPageDtoNull = null;
 	public String projectPageDtoDiffClass = "this is a string";
 	public ProjectPageDto projectPageDtoDiffId = new ProjectPageDto();

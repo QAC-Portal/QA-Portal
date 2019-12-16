@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.persistence.entity.ProjectPageEntity;
@@ -16,6 +17,8 @@ public class RoleProjectPageEntityJavaUnitTest {
 	
 	@InjectMocks
 	public RoleProjectPageEntity roleProjectPageEntity = new RoleProjectPageEntity();
+	
+	@Mock
 	public RoleProjectPageEntity roleProjectPageEntityNull = null;
 	public String roleProjectPageEntityDiffClass = "this is a string";
 	public RoleProjectPageEntity roleProjectPageEntityDiffId = new RoleProjectPageEntity();

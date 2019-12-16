@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.persistence.entity.PortalApplicationEntity;
@@ -19,6 +20,8 @@ public class RoleEntityJavaUnitTest {
 
 	@InjectMocks
 	public RoleEntity roleEntity = new RoleEntity();
+	
+	@Mock
 	public RoleEntity roleEntityNull = null;
 	public String roleEntityDiffClass = "this is a string";
 	public RoleEntity roleEntityDiffId = new RoleEntity();

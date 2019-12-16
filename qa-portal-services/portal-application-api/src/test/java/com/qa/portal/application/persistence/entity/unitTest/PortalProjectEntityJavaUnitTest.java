@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.persistence.entity.PortalProjectEntity;
@@ -18,6 +19,8 @@ public class PortalProjectEntityJavaUnitTest {
 
 	@InjectMocks
 	PortalProjectEntity portalProjectEntity = new PortalProjectEntity();
+	
+	@Mock
 	PortalProjectEntity portalProjectEntityNull = null;
 	String portalProjectEntityDiffClass = "this is a string";
 	PortalProjectEntity portalProjectEntityDiffId = new PortalProjectEntity();

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.dto.PortalApplicationDto;
@@ -15,6 +16,8 @@ public class PortalApplicationDtoJavaUnitTest {
 	
 	@InjectMocks
 	public PortalApplicationDto portalApplicationDto = new PortalApplicationDto();
+	
+	@Mock
 	public PortalApplicationDto portalApplicationDtoNull = null;
 	public String portalApplicationDtoDiffClass = "This is a string";
 	public PortalApplicationDto portalApplicationDtoDiffId = new PortalApplicationDto();

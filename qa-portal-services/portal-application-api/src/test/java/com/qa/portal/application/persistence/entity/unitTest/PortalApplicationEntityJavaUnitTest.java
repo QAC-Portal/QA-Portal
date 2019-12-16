@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.portal.application.persistence.entity.PortalApplicationEntity;
@@ -14,6 +15,8 @@ public class PortalApplicationEntityJavaUnitTest {
 	
 	@InjectMocks
 	public PortalApplicationEntity portalApplicationEntity = new PortalApplicationEntity();
+	
+	@Mock
 	public PortalApplicationEntity portalApplicationEntityNull = null;
 	public String portalApplicationEntityDiffClass = "this is a string";
 	public PortalApplicationEntity portalApplicationEntityDiffId = new PortalApplicationEntity();
