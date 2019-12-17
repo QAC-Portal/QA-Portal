@@ -244,6 +244,7 @@ export class GenerateCvComponent implements OnInit {
     }
     this.persistCvForTrainee(cvForm);
   }
+
   onSubmitCvButtonClicked() {
     const cvForm = this.getCvData();
     this. openDialog(cvForm)
@@ -344,7 +345,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setPageEditStatus(): void {
-    this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
+    //this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
   }
 
   private setCommentStatus() {
