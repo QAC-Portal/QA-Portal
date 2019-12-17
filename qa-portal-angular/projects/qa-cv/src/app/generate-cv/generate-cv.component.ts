@@ -145,6 +145,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private initialiseCvPageForTrainee() {
+  
     this.cvService.getCurrentCvForTrainee().subscribe(
       (cv: CvModel) => {
         if (this.noExistingCvForTrainee(cv)) {
