@@ -11,7 +11,7 @@ public class CohortSummaryDto extends QaBaseDto {
 
     private String pathway;
 
-    private String courseVersion;
+    private String pathwayVersion;
 
     private List<Double> averageRatings;
 

@@ -10,6 +10,10 @@ public class QaCohortDto extends QaBaseDto {
 
     private String name;
 
+    private String pathway;
+
+    private String pathwayVersion;
+
     private LocalDate startDate;
 
     private String trainerUserName;
@@ -33,6 +37,14 @@ public class QaCohortDto extends QaBaseDto {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getPathway() { return pathway; }
+
+    public void setPathway(String pathway) { this.pathway = pathway; }
+
+    public String getPathwayVersion() { return pathwayVersion; }
+
+    public void setPathwayVersion(String pathwayVersion) { this.pathwayVersion = pathwayVersion; }
 
     public LocalDate getStartDate() {
         return startDate;

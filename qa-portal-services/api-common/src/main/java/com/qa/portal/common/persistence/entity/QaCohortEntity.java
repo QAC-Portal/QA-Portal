@@ -22,6 +22,12 @@ public class QaCohortEntity extends QaBaseEntity {
     @Column(name = "cohort_name")
     private String name;
 
+    @Column(name = "training_pathway")
+    private String pathway;
+
+    @Column(name = "pathway_version")
+    private String pathwayVersion;
+
     @Column(name = "start_date")
     private Date startDate;
 
@@ -54,6 +60,14 @@ public class QaCohortEntity extends QaBaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getPathway() { return pathway; }
+
+    public void setPathway(String pathway) { this.pathway = pathway; }
+
+    public String getPathwayVersion() { return pathwayVersion; }
+
+    public void setPathwayVersion(String pathwayVersion) { this.pathwayVersion = pathwayVersion; }
 
     public Set<TraineeEntity> getTrainees() {
         return trainees;
