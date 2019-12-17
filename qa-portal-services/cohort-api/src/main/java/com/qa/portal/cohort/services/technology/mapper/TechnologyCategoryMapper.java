@@ -10,6 +10,7 @@ import com.qa.portal.common.persistence.repository.TechnologyRepository;
 import com.qa.portal.common.service.mapper.BaseMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,10 +43,17 @@ public class TechnologyCategoryMapper {
 
     public TechnologyCategoryEntity mapToNewTechnologyCategoryEntity(TechnologyCategoryDto technologyCategoryDto) {
         TechnologyCategoryEntity technologyCategoryEntity = baseMapper.mapObject(technologyCategoryDto, TechnologyCategoryEntity.class);
-        List<TechnologyEntity> technologyEntities = technologyCategoryDto.getTechnologies().stream()
-                .map(t -> getTechnologyEntity(t.getId()))
-                .collect(Collectors.toList());
+        List<TechnologyEntity> technologyEntities = new ArrayList<>();
+
+        if(technologyCategoryDto.getTechnologies() != null) {
+            technologyEntities = technologyCategoryDto.getTechnologies().stream()
+                    .map(t -> getTechnologyEntity(t.getId()))
+                    .collect(Collectors.toList());
+        }
+
         technologyCategoryEntity.setTechnologies(technologyEntities);
+
+        technologyCategoryEntity.setSearchString(technologyCategoryDto.getCategoryName().replace(" ", "-"));
         return technologyCategoryEntity;
     }
 

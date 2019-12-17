@@ -4,7 +4,7 @@ import { TraineeEvaluation } from '../models/trainee-evaluation-data';
 @Component({
   selector: 'app-table-component',
   templateUrl: './table-component.component.html',
-  styleUrls: ['./table-component.component.css']
+  styleUrls: ['./table-component.component.scss']
 })
 export class TableComponentComponent {
 
