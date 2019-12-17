@@ -1,3 +1,5 @@
+export const ADMIN_CV_SEARCH = 'qa/portal/training/cv/admin/search';
+
 export const GET_CV_FOR_ID_URL = 'cv-api/cv/';
 
 export const GET_SKILLS_FOR_TRAINEE_URL = 'cohort-api/user/trainee/skills'
