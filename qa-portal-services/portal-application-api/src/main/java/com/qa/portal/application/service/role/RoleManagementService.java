@@ -44,6 +44,7 @@ public class RoleManagementService {
     public List<RoleDto> getPortalRoles() {
         return keycloakRoleResourceManager.getPortalRoles().stream()
                 .map(r -> getRoleByNameOperation.getRoleByName(r))
+                .filter(r -> r != null)
                 .collect(Collectors.toList());
     }
 

@@ -158,14 +158,7 @@
       "clientRole" : false,
       "containerId" : "qa-portal",
       "attributes" : { }
-    }, {
-      "id" : "d5ff1ace-ab40-473d-9448-33680e9f13df",
-      "name" : "scotttestrole",
-      "composite" : false,
-      "clientRole" : false,
-      "containerId" : "qa-portal",
-      "attributes" : { }
-    } ],
+    }],
     "client" : {
       "qa-portal-services-core" : [ ],
       "realm-management" : [ {
