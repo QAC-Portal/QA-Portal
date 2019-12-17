@@ -1,32 +1,27 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {CREATE_USER_URL, DELETE_USERS_URL, GET_ALL_USERS_URL, GET_USER_BY_USERNAME_URL, UPDATE_USER_URL} from '../models/user.constant';
+import {HttpHeaders} from '@angular/common/http';
 import {take} from 'rxjs/operators';
 import {UserDetailsModel} from '../../../../../portal-core/src/app/_common/models/user-details.model';
 import {UserModel} from '../../../../../portal-core/src/app/_common/models/user.model';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
-
   constructor(
-    private http: HttpClient) {
+    private qaHttp: QaHttpService) {
   }
 
   getAllUsers(): Observable<UserDetailsModel[]> {
-    return this.http.get<UserDetailsModel[]>(GET_ALL_USERS_URL, this.httpOptions).pipe(
+    return this.qaHttp.get<UserDetailsModel[]>({ ref: 'GET_ALL_USERS'}).pipe(
       take(1)
     );
   }
 
   deleteUsers(users: UserDetailsModel[]): Observable<any> {
-    return this.http.put<any>(DELETE_USERS_URL, users).pipe(
+    return this.qaHttp.put<any>({ ref: 'DELETE_USERS'}, users).pipe(
       take(1)
     );
   }
@@ -36,18 +31,18 @@ export class UserService {
     user.email = user.userName;
     userDetails.user = user;
     userDetails.roleNames = [user.role];
-    return this.http.post<UserModel>(CREATE_USER_URL, userDetails, this.httpOptions).pipe(
+    return this.qaHttp.post<UserModel>({ ref: 'CREATE_USER'}, userDetails).pipe(
       take(1)
     );
   }
 
   updateUser(user: UserDetailsModel): Observable<UserDetailsModel> {
-    return this.http.put<UserDetailsModel>(UPDATE_USER_URL, user, this.httpOptions).pipe(
+    return this.qaHttp.put<UserDetailsModel>({ ref: 'UPDATE_USER'}, user).pipe(
       take(1)
     );
   }
 
   getUserByUsername(username: string): Observable<UserDetailsModel> {
-    return this.http.get<UserDetailsModel>(GET_USER_BY_USERNAME_URL + username, this.httpOptions).pipe(take(1));
+    return this.qaHttp.get<UserDetailsModel>({ ref: 'GET_USER_BY_USERNAME' , params: { username: username.toString() } }).pipe(take(1));
   }
 }

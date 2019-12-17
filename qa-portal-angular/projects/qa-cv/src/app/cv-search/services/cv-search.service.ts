@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { CVSearchModel } from '../models/cv-search-model';
 import { catchError } from 'rxjs/operators';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
 @Injectable()
 export class CVSearchHistoryService {
 
-    constructor(private http: HttpClient) { }
-
-    private searchUrl = 'cv-api/cv/search';  // URL to cv-api
+    constructor(private qahttp: QaHttpService) { }
 
     /**
      * Handle Http operation that failed.
@@ -28,22 +26,8 @@ export class CVSearchHistoryService {
     }
 
     /* GET cvs whose name contains search term */
-    searchCVs(name: string, cohort: string = '', tech: string = '', status: string = ''): Observable<CVSearchModel[]> {
-        const params = new URLSearchParams();
-        if (name) {
-            params.set('name', name);
-        }
-        if (cohort) {
-            params.set('cohort', cohort);
-        }
-        if (tech) {
-            params.set('tech', tech);
-        }
-        if (status) {
-            params.set('status', status);
-        }
-
-        return this.http.get<CVSearchModel[]>(`${this.searchUrl}?${params.toString()}`).pipe(
+    searchCVs(params: { name: string, cohort: string, tech: string, status: string }): Observable<CVSearchModel[]> {
+        return this.qahttp.get<CVSearchModel[]>({ ref: 'CV_SEARCH' }, { params }).pipe(
             catchError(this.handleError<CVSearchModel[]>('searchCVs', []))
         );
     }

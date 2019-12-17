@@ -1,0 +1,39 @@
+server:
+  port: 8087
+  servlet:
+    context-path: /cv-api
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+#     !IMPORTANT - don't leave this empty for final build.
+#     username: MongoDB
+#     password:
+      database: qa-portal-cv
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/qa-portal
+    username: postgres
+    password: postgres
+
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+  level:
+    org.springframework.web: DEBUG
+
+cv:
+  enable_public_endpoints: true
+
+  paths:
+    logopath: target/classes/QA_Logo.png
+    arrowpath: target/classes/QA_Logo.png

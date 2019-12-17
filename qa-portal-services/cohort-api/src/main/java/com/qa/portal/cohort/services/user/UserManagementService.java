@@ -1,6 +1,6 @@
 package com.qa.portal.cohort.services.user;
 
-import com.qa.portal.cohort.keycloak.KeycloakUserResourceManager;
+import com.qa.portal.cohort.keycloak.KeycloakUserRoleManager;
 import com.qa.portal.common.dto.QaUserDetailsDto;
 import com.qa.portal.common.exception.QaPortalBusinessException;
 import com.qa.portal.common.persistence.entity.CohortCourseEntity;
@@ -27,8 +27,6 @@ public class UserManagementService {
 
     private static final Long COHORT_DURATION = 84L;  // TODO - Assumption is 12 weeks - can calculate from courses when this is added
 
-    private KeycloakUserResourceManager keycloakUserResourceManager;
-
     private QaCohortRepository cohortRepository;
 
     private GetTrainerCohortsOperation getTrainerCohortsOperation;
@@ -38,27 +36,29 @@ public class UserManagementService {
     private UpdateUserOperation updateUserOperation;
 
     private DeleteUserOperation deleteUserOperation;
+    
+    private KeycloakUserRoleManager keycloakUserRoleManager;
 
-    public UserManagementService(KeycloakUserResourceManager keycloakUserResourceManager,
-                                 CreateUserOperation createUserOperation,
+    public UserManagementService(CreateUserOperation createUserOperation,
                                  UpdateUserOperation updateUserOperation,
                                  DeleteUserOperation deleteUserOperation,
                                  GetTrainerCohortsOperation getTrainerCohortsOperation,
+                                 KeycloakUserRoleManager keycloakUserRoleManager,
                                  QaCohortRepository cohortRepository) {
-        this.keycloakUserResourceManager = keycloakUserResourceManager;
         this.createUserOperation = createUserOperation;
         this.updateUserOperation = updateUserOperation;
         this.deleteUserOperation = deleteUserOperation;
         this.getTrainerCohortsOperation = getTrainerCohortsOperation;
         this.cohortRepository = cohortRepository;
+        this.keycloakUserRoleManager = keycloakUserRoleManager;
     }
 
     public QaUserDetailsDto getUserFromKeycloak(String userName) {
-        return keycloakUserResourceManager.getUser(userName);
+        return keycloakUserRoleManager.getUser(userName);
     }
 
     public List<QaUserDetailsDto> getAllUsersFromKeycloak() {
-        return keycloakUserResourceManager.getAllUsers();
+        return keycloakUserRoleManager.getAllUsers();
     }
 
     public List<QaUserDetailsDto> getTraineesWithoutCohort() {
@@ -82,20 +82,20 @@ public class UserManagementService {
     }
 
     public List<QaUserDetailsDto> getTrainees() {
-        return keycloakUserResourceManager.getAllUsers().stream()
+        return keycloakUserRoleManager.getAllUsers().stream()
                 .filter(u -> u.getRoleNames().contains(TRAINEE_USER_ROLE))
                 .collect(Collectors.toList());
     }
 
     public List<QaUserDetailsDto> getTrainers() {
-        return keycloakUserResourceManager.getAllUsers().stream()
+        return keycloakUserRoleManager.getAllUsers().stream()
                 .filter(u -> u.getRoleNames().contains(TRAINER_USER_ROLE))
                 .collect(Collectors.toList());
     }
 
     public QaUserDetailsDto createUserDetails(QaUserDetailsDto userDetails) {
         createUserOperation.createUserDetails(userDetails);
-        keycloakUserResourceManager.createUserAndRoles(userDetails);
+        keycloakUserRoleManager.createUserAndRoles(userDetails);
         return userDetails;
     }
 
@@ -107,13 +107,13 @@ public class UserManagementService {
 
     public QaUserDetailsDto updateUserDetails(QaUserDetailsDto userDetails) {
         updateUserOperation.updateUserDetails(userDetails);
-        keycloakUserResourceManager.updateUser(userDetails);
+        keycloakUserRoleManager.updateUser(userDetails);
         return userDetails;
     }
 
     public void deleteUsers(List<QaUserDetailsDto> users) {
         deleteUserOperation.deleteUsers(users);
-        keycloakUserResourceManager.deleteUsers(users);
+        keycloakUserRoleManager.deleteUsers(users);
     }
 
     private boolean traineeAvailableForCohort(QaUserDetailsDto userDetailsDto, QaCohortEntity cohortEntity) {
