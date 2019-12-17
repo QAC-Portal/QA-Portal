@@ -12,7 +12,7 @@ import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/serv
 import { CvStateManagerService } from '../_common/services/cv-state-manager.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
-import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
+import { ADMIN_CV_SEARCH } from '../_common/models/cv.constants';
 import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
 import { CvPersistService } from '../_common/services/cv-persist.service'
 
@@ -289,7 +289,7 @@ export class GenerateCvComponent implements OnInit {
     this.navigateToAdminSearch();
   }
   private navigateToAdminSearch() {
-    this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
+    this.router.navigateByUrl(ADMIN_CV_SEARCH);
   }
 
   // CV PERSIST FUNCTIONS 
