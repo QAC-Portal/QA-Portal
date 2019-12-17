@@ -15,6 +15,7 @@ mat-card {
     height: 100%;
     width: 100%;
     background: #00000022;
+    z-index:99;
     mat-spinner {
         margin: auto;
     }
