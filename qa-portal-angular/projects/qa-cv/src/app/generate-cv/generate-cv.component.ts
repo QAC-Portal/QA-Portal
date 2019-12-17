@@ -71,7 +71,7 @@ export class GenerateCvComponent implements OnInit {
   private qualificationFeedbackIndex: number;
   private workExperianceFeedbackIndex: number;
   private otherWorkExperianceFeedbackIndex: number;
-  
+
 
   constructor(
     private router: Router,
@@ -246,7 +246,7 @@ export class GenerateCvComponent implements OnInit {
   }
   onSubmitCvButtonClicked() {
     const cvForm = this.getCvData();
-    this. openDialog(cvForm)
+    this.openDialog(cvForm)
     //This needs to disable any further edits to the CV, wich it curently doesn't
   }
   openDialog(cvForm): void {
@@ -288,7 +288,7 @@ export class GenerateCvComponent implements OnInit {
     this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
   }
 
-  // CV PERSIST FUNCTIONS
+  // CV PERSIST FUNCTIONS  //Moving to 'persist.service' soon(tm) ↓↓↓
   private persistCvForTrainee(cvForm: CvModel) {
     if (!cvForm.id) {
       this.createCv(cvForm);
@@ -325,6 +325,8 @@ export class GenerateCvComponent implements OnInit {
     );
   }
 
+  //Moving to 'persist.service' soon(tm) ↑↑↑
+
   //Checking status for casnEdit boolean
   isDisabled() {
     return !this.canEdit;
@@ -332,8 +334,8 @@ export class GenerateCvComponent implements OnInit {
 
   // STATUS UPDATE FUNCTIONS
   private checkEditable() {
-    if(!this.canEdit) {
-      
+    if (!this.canEdit) {
+
     }
   }
 
