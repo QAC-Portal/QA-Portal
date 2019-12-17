@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CvModel, Feedback } from '../_common/models/cv.model';
 import { ENTER } from '@angular/cdk/keycodes';
