@@ -1,5 +1,6 @@
 package com.qa.portal.application.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,7 +39,12 @@ public class PortalProjectDto {
     }
 
     public List<ProjectPageDto> getProjectPages() {
+        List<ProjectPageDto> p = new ArrayList<>();
+        if(projectPages != null){
         return projectPages;
+        } else {
+            return p;
+        }
     }
 
     public void setProjectPages(List<ProjectPageDto> projectPages) {
