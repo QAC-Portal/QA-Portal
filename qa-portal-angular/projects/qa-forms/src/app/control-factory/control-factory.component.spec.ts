@@ -73,4 +73,9 @@ describe('ControlFactoryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should destroy', () => {
+    component.ngOnDestroy();
+    expect((component as any).keepAlive).toEqual(false);
+  });
 });
