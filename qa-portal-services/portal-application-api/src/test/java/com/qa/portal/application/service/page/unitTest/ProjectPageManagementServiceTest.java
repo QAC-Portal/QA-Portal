@@ -33,47 +33,45 @@ public class ProjectPageManagementServiceTest {
 	
 	@Test
 	public void createProjectPageTest() {
-		ProjectPageDto p = new ProjectPageDto();
-		p.setDisplayOnMenu(true);
-		p.setIcon("icon");
-		p.setId(1);
-		p.setLevel(1);
-		p.setName("name");
-		p.setPortalProjectName("p-p-name");
-		List<String> rolesDummyData = new ArrayList<String>();
-		rolesDummyData.add("a");
-		rolesDummyData.add("b");
-		rolesDummyData.add("c");
-		p.setRoles(rolesDummyData);
-		p.setTooltip("tooltip");
-		p.setUrl("www.test.co.uk");
-		this.projectPageManagementService.createProjectPage(p);
+		ProjectPageDto pageDto = new ProjectPageDto();
+		pageDto.setDisplayOnMenu(true);
+		pageDto.setIcon("icon");
+		pageDto.setId(1);
+		pageDto.setLevel(1);
+		pageDto.setName("pname");
+		pageDto.setPortalProjectName("p-p-name");
+		List<String> dummyData = new ArrayList<String>();
+		dummyData.add("a");
+		dummyData.add("b");
+		dummyData.add("c");
+		pageDto.setRoles(dummyData);
+		pageDto.setTooltip("tooltip");
+		pageDto.setUrl("www.test.co.uk");
 		
-		Mockito.when(createProjectPageOperation.createProjectPage(p)).thenReturn(p);
-		assertThat(this.projectPageManagementService.createProjectPage(p).getName()).isEqualTo(p.getName());
+		Mockito.when(createProjectPageOperation.createProjectPage(pageDto)).thenReturn(pageDto);
+		assertThat(this.projectPageManagementService.createProjectPage(pageDto).getName()).isEqualTo(pageDto.getName());
 		
 	}
 	
 	@Test
 	public void updateProjectPageTest() {
-		ProjectPageDto p = new ProjectPageDto();
-		p.setDisplayOnMenu(true);
-		p.setIcon("icon");
-		p.setId(1);
-		p.setLevel(1);
-		p.setName("name");
-		p.setPortalProjectName("p-p-name");
-		List<String> rolesDummyData = new ArrayList<String>();
-		rolesDummyData.add("a");
-		rolesDummyData.add("b");
-		rolesDummyData.add("c");
-		p.setRoles(rolesDummyData);
-		p.setTooltip("tooltip");
-		p.setUrl("www.test.co.uk");
-		this.projectPageManagementService.updateProjectPage(p);
+		ProjectPageDto pageDto = new ProjectPageDto();
+		pageDto.setDisplayOnMenu(true);
+		pageDto.setIcon("icon");
+		pageDto.setId(1);
+		pageDto.setLevel(1);
+		pageDto.setName("pname");
+		pageDto.setPortalProjectName("p-p-name");
+		List<String> dummyData = new ArrayList<String>();
+		dummyData.add("a");
+		dummyData.add("b");
+		dummyData.add("c");
+		pageDto.setRoles(dummyData);
+		pageDto.setTooltip("tooltip");
+		pageDto.setUrl("www.test.co.uk");
 		
-		Mockito.when(updateProjectPageOperation.updateProjectPage(p)).thenReturn(p);
-		assertThat(this.projectPageManagementService.updateProjectPage(p).getName()).isEqualTo(p.getName());
+		Mockito.when(updateProjectPageOperation.updateProjectPage(pageDto)).thenReturn(pageDto);
+		assertThat(this.projectPageManagementService.updateProjectPage(pageDto).getName()).isEqualTo(pageDto.getName());
 	} 
 
 }
