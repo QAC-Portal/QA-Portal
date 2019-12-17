@@ -52,4 +52,11 @@ describe('RadioButtonComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('should run setRadioResponse', () => {
+    let input: string = "Fly on the Wall";
+    component.setRadioResponse(input)
+    expect(component.questionResponse.responseValues).toEqual([input]);
+  });
+
 });
