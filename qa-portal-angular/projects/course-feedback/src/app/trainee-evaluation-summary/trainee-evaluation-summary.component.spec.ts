@@ -11,7 +11,7 @@ import { of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
-fdescribe('TraineeEvaluationSummaryComponent', () => {
+describe('TraineeEvaluationSummaryComponent', () => {
   let component: TraineeEvaluationSummaryComponent;
   let fixture: ComponentFixture<TraineeEvaluationSummaryComponent>;
   let traineeEvaluationSummaryService: TraineeEvaluationSummaryService
