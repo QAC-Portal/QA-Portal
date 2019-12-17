@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseEvaluationComponent } from './course-evaluation.component';
+import { MockComponents } from 'ng-mocks';
+import { EvaluationTableComponent } from '../evaluation-table/evaluation-table.component';
 
 describe('CourseEvaluationComponent', () => {
   let component: CourseEvaluationComponent;
@@ -8,9 +10,12 @@ describe('CourseEvaluationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseEvaluationComponent ]
+      declarations: [
+        CourseEvaluationComponent,
+        MockComponents(EvaluationTableComponent)
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

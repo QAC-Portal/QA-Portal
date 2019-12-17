@@ -13,29 +13,48 @@ enum Fonts {
 	MONTSERRAT_FILE("Montserrat-Regular.ttf"), MONTSERRAT_BOLD_FILE("Montserrat-SemiBold.ttf"),
 	KRANA_FAT_B_FILE("Krana-Fat-B.ttf");
 	final String value;
-
 	Fonts(String value) {
 		this.value = value;
 	}
-}
+}    
 
-enum Images {
-	LOGO("target/classes/QA_Logo.png", 37, PageFormat.WIDTH.value - PageFormat.PADDING.value,
-			MainFooter.HEIGHT.value + MainBody.HEIGHT.value + 4),
-	ARROW("target/classes/Arrow.png", 37, PageFormat.PADDING.value,
-			SkillsBox.HEIGHT.value + QualificationsBox.HEIGHT.value + PageFormat.PADDING.value);
 
-	final String filePath;
+enum LogoImage {
+	
+	LOGO("{{logoPath}}", 37, PageFormat.WIDTH.value - PageFormat.PADDING.value,
+			MainFooter.HEIGHT.value + MainBody.HEIGHT.value + 4);
+	
+	String logoPath;
 	final float resizeFactor;
 	final float xPosition;
 	final float yPosition;
-
-	Images(String FilePath, float resizeFactor, float xPosition, float yPosition) {
-		this.filePath = FilePath;
+	
+	LogoImage(String logoPath, float resizeFactor, float xPosition, float yPosition) {
+		
+		this.logoPath=logoPath;
+		this.resizeFactor = resizeFactor;
+		this.xPosition = xPosition;
+		this.yPosition = yPosition	;
+	}
+	
+}
+enum ArrowImage {
+	
+	ARROW("{{arrowPath}}", 37, PageFormat.PADDING.value,
+			SkillsBox.HEIGHT.value + QualificationsBox.HEIGHT.value + PageFormat.PADDING.value);
+	
+	String arrowPath;
+	final float resizeFactor;
+	final float xPosition;
+	final float yPosition;
+	
+	ArrowImage(String arrowPath, float resizeFactor, float xPosition, float yPosition) {
+		this.arrowPath = arrowPath;
 		this.resizeFactor = resizeFactor;
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
 	}
+	
 }
 
 enum FontSize {

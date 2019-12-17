@@ -22,4 +22,14 @@ describe('SearchBarBackdropComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('should dismiss filter when background is clicked', () => {
+    component.show = true;
+    spyOn(component, 'onBackdropClick').and.callThrough();
+      
+    component._handleClick();
+
+    expect(component.show).toBeFalsy();
+    expect(component.onBackdropClick).toHaveBeenCalledTimes(1);
+  });
 });

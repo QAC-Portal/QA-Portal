@@ -42,6 +42,9 @@ export class DataTableComponent<DataType> implements AfterContentInit {
   /** Which columns to display. */
   @Input() public displayedColumns: string[] = [];
   @Input() public isLoading = false;
+  @Input() public clickRowWillCheckBox = false;
+  /** Should the actions bar be displayed when an item is selected? */
+  @Input() public actionsEnabled = true;
 
   // Events
   @Output() rowSelectionChange = new EventEmitter<boolean[]>();
@@ -68,7 +71,11 @@ export class DataTableComponent<DataType> implements AfterContentInit {
   }
 
   onRowClicked(index: number, data: DataType, event: MouseEvent | KeyboardEvent): void {
-    this.rowClick.emit({ index, data, event });
+    if (this.clickRowWillCheckBox && event instanceof MouseEvent) {
+      this.onRowCheckboxClicked(event, index);
+    } else {
+      this.rowClick.emit({ index, data, event });
+    }
   }
 
 

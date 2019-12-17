@@ -1,9 +1,11 @@
 package com.qa.portal.application.service.role;
 
 import com.qa.portal.application.dto.RoleDto;
+import com.qa.portal.application.persistence.entity.RoleEntity;
 import com.qa.portal.application.persistence.repository.RoleRepository;
 import com.qa.portal.common.exception.QaPortalBusinessException;
 import com.qa.portal.common.service.mapper.BaseMapper;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.stereotype.Component;
 
 @Component

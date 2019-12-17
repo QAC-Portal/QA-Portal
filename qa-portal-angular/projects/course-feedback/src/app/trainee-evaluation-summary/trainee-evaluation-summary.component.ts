@@ -28,7 +28,7 @@ export class TraineeEvaluationSummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.traineeEvaluationSummaryService.getTraineeEvaluationSummary().subscribe((response) => {
+    this.getEvaluationSummarySubscription = this.traineeEvaluationSummaryService.getTraineeEvaluationSummary().subscribe((response) => {
         this.viewModel = response;
         this.dataSource = new MatTableDataSource<TraineeEvaluationSummaryRowModel>(this.viewModel.evaluationSummaryRows);
         this.dataLoading = false;
@@ -40,7 +40,7 @@ export class TraineeEvaluationSummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (!!this.getEvaluationSummarySubscription) {
+    if (this.getEvaluationSummarySubscription && !this.getEvaluationSummarySubscription.closed) {
       this.getEvaluationSummarySubscription.unsubscribe();
     }
   }
