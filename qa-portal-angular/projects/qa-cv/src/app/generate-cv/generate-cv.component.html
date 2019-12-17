@@ -1,7 +1,7 @@
 <h1>
-    Generate CV 
-    <div style="margin-left: auto; color: #004050; padding-bottom: 1%; float: right; font-size: 18px;"><b>CV Status:</b> {{origCv?.status}}</div>
-
+    Generate CV
+    <div style="margin-left: auto; color: #004050; padding-bottom: 1%; float: right; font-size: 18px;"><b>CV Status:</b>
+        {{origCv?.status}}</div>
 </h1>
 
 <form [formGroup]="cvForm">
@@ -14,24 +14,25 @@
         <mat-card-content>
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Source Control Link - (GitHub, GitLab, BitBucket, etc. URL)</mat-label>
-                <input matInput formControlName="sourceControlLink" name="source-control-link-input">
+                <input [readonly]="!canEdit" matInput formControlName="sourceControlLink"
+                    name="source-control-link-input">
             </mat-form-field>
         </mat-card-content>
     </mat-card>
 
     <section formGroupName="profile">
-        <app-cv-card-base cardTitle="Profile" [canComment]="true" formControlName="profileFeedback">
+        <app-cv-card-base cardTitle="Profile" [canComment]="canComment" formControlName="profileFeedback">
             <mat-card-content>
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>&nbsp;</mat-label>
                     <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="profileDetails"
-                        name="profile-input" required></textarea>
+                        name="profile-input" [readonly]="!canEdit" required></textarea>
                 </mat-form-field>
             </mat-card-content>
 
         </app-cv-card-base>
     </section>
-<br>
+    <br>
 
 
     <mat-card formGroupName="skills">
@@ -59,8 +60,8 @@
 
 
     <section>
-        <app-cv-card-base class="cardBase" cardTitle="Qualifications" [canComment]="true" #qualiCard [showOpenButton]="false"
-            formControlName="qualificationFeedbackCard">
+        <app-cv-card-base class="cardBase" cardTitle="Qualifications" [canComment]="canComment" #qualiCard
+            [showOpenButton]="false" formControlName="qualificationFeedbackCard">
             <mat-card-content>
                 <app-qualifications class="w-100" formControlName="allQualifications"
                     (feedbackClick)="onFeedbackButtonClicked($event, qualiCard, 'qualificationFeedbackCard')">
@@ -70,8 +71,8 @@
     </section>
 
     <section>
-        <app-cv-card-base cardTitle="Work Experience - QA" [canComment]="true" #workExpCard [showOpenButton]="false"
-            formControlName="workExperianceFeedbackCard">
+        <app-cv-card-base cardTitle="Work Experience - QA" [canComment]="canComment" #workExpCard
+            [showOpenButton]="false" formControlName="workExperianceFeedbackCard">
             <mat-card-content>
                 <app-work-experience class="w-100" formControlName="allWorkExperience"
                     (feedbackClick)="onFeedbackButtonClicked($event, workExpCard, 'workExperianceFeedbackCard')">
@@ -82,10 +83,10 @@
 
 
     <section>
-        <app-cv-card-base cardTitle="Work Experience - Other" [canComment]="true" #otherWorkExpCard [showOpenButton]="false"
-            formControlName="otherWorkExperianceFeedbackCard">
+        <app-cv-card-base cardTitle="Work Experience - Other" [canComment]="canComment" #otherWorkExpCard
+            [showOpenButton]="false" formControlName="otherWorkExperianceFeedbackCard">
             <mat-card-content>
-                <app-work-experience class="w-100" formControlName="otherWorkExperience"
+                <app-work-experience class="w-100" formControlName="otherWorkExperience" [disabled]="disabled"
                     (feedbackClick)="onFeedbackButtonClicked($event, otherWorkExpCard, 'otherWorkExperianceFeedbackCard')">
                 </app-work-experience>
             </mat-card-content>
@@ -93,54 +94,56 @@
     </section>
 
     <section formGroupName="hobbies">
-            <app-cv-card-base cardTitle="Hobbies" [canComment]="true" formControlName="hobbiesFeedback">
-                <mat-card-content>
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>&nbsp;</mat-label>
-                        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="hobbiesDetails"
-                            name="hobbies-input" required></textarea>
-                    </mat-form-field>
-                </mat-card-content>
-    
-            </app-cv-card-base>
-        </section>
+        <app-cv-card-base cardTitle="Hobbies" [canComment]="canComment" formControlName="hobbiesFeedback">
+            <mat-card-content>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>&nbsp;</mat-label>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="hobbiesDetails"
+                        name="hobbies-input" [readonly]="!canEdit" required></textarea>
+                </mat-form-field>
+            </mat-card-content>
 
-<!-- All User Buttons -->
-<div class="action-buttons">
-    <div class="inline">
-        <button mat-flat-button color="accent" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
-            [disabled]="cvForm?.invalid" name="generate-cv-button">
-            <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
-        </button>
-        <button mat-flat-button color="accent" class="submit-button w-100" (click)="onDownloadCvButtonClicked()"
-            [disabled]="cvForm?.invalid" name="download-cv-button">
-            <mat-icon>get_app</mat-icon>&nbsp;Download CV
-        </button>
-    </div>
-    <!-- Trainee Buttons -->
-    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
-        [disabled]="cvForm?.invalid" name="save-cv-button">
-        <mat-icon>save</mat-icon>&nbsp;Save CV
-    </button>
-    <div *ngIf="isTraineeView && origCv?.status !== 'Approved'">
-        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
-            [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Submit
-        </button>
-        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
-            [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;New CV
-        </button>
-    </div>
-    <!-- Admin Buttons -->
-    <div *ngIf="!isTraineeView">
-        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onApproveCvButtonClicked()"
-            [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Approve Review
-        </button>
-        <button mat-flat-button color="primary" class="submit-button w-100" (click)="onFailCvButtonClicked()"
-            [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Fail Review
-        </button>
-    </div>
-</div>
+        </app-cv-card-base>
+    </section>
 
-<div class="loading-overlay" *ngIf="isLoading">
-    <mat-spinner class="loading-spinner"></mat-spinner>
-</div>
+    <!-- All User Buttons -->
+    <div class="action-buttons">
+        <div class="inline">
+            <button mat-flat-button color="accent" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="generate-cv-button">
+                <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
+            </button>
+            <button mat-flat-button color="accent" class="submit-button w-100" (click)="onDownloadCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="download-cv-button">
+                <mat-icon>get_app</mat-icon>&nbsp;Download CV
+            </button>
+        </div>
+        <!-- Trainee Buttons -->
+        <div *ngIf="isTraineeView">
+            <button mat-flat-button *ngIf="isTraineeView" color="primary" class="submit-button w-100"
+                (click)="onSaveCvButtonClicked()" [disabled]="cvForm?.invalid" name="save-cv-button">
+                <mat-icon>save</mat-icon>&nbsp;Save CV
+            </button>
+
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button" *ngIf="origCv?.status === 'In Progress' || origCv?.status === 'Failed Review'">
+                &nbsp;Submit
+            </button>
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button" *ngIf="origCv?.status === 'Approved' "> &nbsp;New CV
+            </button>
+        </div>
+        <!-- Admin Buttons -->
+        <div *ngIf="!isTraineeView && origCv?.status === 'For Review'">
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onApproveCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Approve Review
+            </button>
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onFailCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Fail Review
+            </button>
+        </div>
+    </div>
+
+    <div class="loading-overlay" *ngIf="isLoading">
+        <mat-spinner class="loading-spinner"></mat-spinner>
+    </div>
