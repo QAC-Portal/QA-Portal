@@ -14,7 +14,6 @@ import org.mockito.ArgumentMatchers;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -111,11 +110,7 @@ public class CvManagementControllerTest {
     @Test
     public void cvSearchTest() {
         Mockito.when(this.cvManagementService.cvSearch(ArgumentMatchers.any(CvSearchCriteria.class))).thenReturn(cvs);
-        assertEquals(cvs, this.cvManagementController.cvSearch("", "", "", "Steve Roddy").getBody());
+        assertEquals(cvs, this.cvManagementController.cvSearch("cohort", "tech", "status", "Steve Roddy").getBody());
     }
 
-    @Test
-    public void saveGeneratedCvTest() throws IOException {
-        this.cvManagementController.saveGeneratedCV(cv1);
-    }
 }
