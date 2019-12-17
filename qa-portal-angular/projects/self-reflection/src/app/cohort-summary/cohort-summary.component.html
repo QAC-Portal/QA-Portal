@@ -7,12 +7,13 @@
 </div>
 
 <div *ngIf="!loadingData">
-  <h2 style="color: #0060B9;">
+  <mat-card-subtitle style="color: #0060B9; margin-top: 20px;">
     Ratings by Cohort Table
-  </h2>
+  </mat-card-subtitle>
 
   <div>
-    <app-cohort-table (shownCohortsChange)="cohortsToShow($event)" [cohortSummaryData]="(cohortSummary$ | async)"></app-cohort-table>
+    <app-cohort-table (shownCohortsChange)="cohortsToShow($event)" [cohortSummaryData]="(cohortSummary$ | async)">
+    </app-cohort-table>
   </div>
 
   <div class="row">
@@ -20,19 +21,26 @@
       Ratings by Cohort Chart
     </mat-card-subtitle>
 
-    <button mat-button [matMenuTriggerFor]="menu">Pathway</button>
-    <mat-menu #menu="matMenu">
-      <ng-container *ngFor>
-        <button mat-menu-item></button>
-        <button mat-menu-item>Item 2</button>
-      </ng-container>
-    </mat-menu>
+    <mat-form-field>
+      <mat-label>Pathway</mat-label>
+      <mat-select [formControl]="deleteThis" multiple>
+        <!-- <mat-option *ngFor="let pathway of (insert data source)" [value]="pathway">{{pathway}}</mat-option> -->
+        <mat-option [value]="deleteThis">deleteThis</mat-option>
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          eeeeeeeee
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <button mat-button [matMenuTriggerFor]="menu">Version</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
+    <mat-form-field>
+      <mat-label>Version</mat-label>
+      <mat-select [formControl]="deleteThis" multiple>
+        <!-- <mat-option *ngFor="let pathwayVersion of (insert data source)" [value]="pathwayVersion">{{pathwayVersion}}</mat-option> -->
+        <mat-option [value]="deleteThis">deleteThis</mat-option>
+        <button mat-menu-item>Item 2</button>
+      </mat-select>
+    </mat-form-field>
+
   </div>
 
   <div>
