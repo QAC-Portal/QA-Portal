@@ -6,14 +6,15 @@
   <mat-spinner [diameter]="70" *ngIf="loadingData"></mat-spinner>
 </div>
 
-<mat-card *ngIf="!loadingData">
-  <mat-card-subtitle style="color: #0060B9;">
+<div *ngIf="!loadingData">
+  <h2 style="color: #0060B9;">
     Ratings by Cohort Table
-  </mat-card-subtitle>
+  </h2>
 
-  <mat-card-content>
-    <app-cohort-table [cohortSummaryData]="(cohortSummary$ | async)"></app-cohort-table>
-  </mat-card-content>
+  <div>
+    <app-cohort-table (shownCohortsChange)="cohortsToShow($event)" [cohortSummaryData]="(cohortSummary$ | async)"></app-cohort-table>
+  </div>
+
   <div class="row">
     <mat-card-subtitle style="color: #0060B9; margin-top: 20px;">
       Ratings by Cohort Chart
@@ -34,8 +35,7 @@
     </mat-menu>
   </div>
 
-
-  <mat-card-content>
-    <app-cohort-chart [cohortSummaryData]="(cohortSummary$ | async)"></app-cohort-chart>
-  </mat-card-content>
-</mat-card>
+  <div>
+    <app-cohort-chart [cohortsForGraph]="cohortsForGraph"></app-cohort-chart>
+  </div>
+</div>
