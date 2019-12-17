@@ -3,15 +3,6 @@ import { CvRemoteService } from './cv-remote.service';
 import { CvModel } from '../models/cv.model';
 import { of, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import * as mom from 'moment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {
-  APPLICATION_PDF_CONTENT_TYPE, GENERATE_CV_URL,
-  GET_CURRENT_CV_URL,
-  GET_CV_FOR_ID_URL,
-  GET_SKILLS_FOR_TRAINEE_URL,
-  SAVE_CV_DATA_URL
-} from '../../_common/models/cv.constants';
 import { take } from 'rxjs/operators';
 import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
@@ -20,11 +11,7 @@ import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-
 })
 export class CvService {
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
-  constructor(private cvRemote: CvRemoteService, private qahttp: QaHttpService) { }
+  constructor(private cvRemote: CvRemoteService, private QaHttp: QaHttpService) { }
 
   public displayCvPdf(cv: CvModel): Observable<boolean> {
     return this.cvRemote.getCvPdf(cv).pipe(switchMap(pdf => {
@@ -60,27 +47,27 @@ export class CvService {
   }
   // /** POST: add a new cv to the server */
   createCv(cv: CvModel): Observable<CvModel> {
-    return this.qahttp.post<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
+    return this.QaHttp.post<CvModel>({ref: "SAVE_CV_DATA"}, cv, ).pipe(
       take(1)
     );
   }
   /** PUT: update the cv on the server */
   updateCv(cv: CvModel): Observable<CvModel> {
-    return this.qahttp.put<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
+    return this.QaHttp.put<CvModel>({ref:"SAVE_CV_DATA"}, cv ).pipe(
       take(1)
     );
   }
 
   //load trainee's own cv
   getCurrentCvForTrainee(): Observable<CvModel> {
-    return this.qahttp.get<CvModel>(GET_CURRENT_CV_URL).pipe(
+    return this.QaHttp.get<CvModel>({ref: "GET_CURRENT_CV"}).pipe(
       take(1)
     );
   }
 
     /** GET cv by id. Will 404 if id not found (for admin) */
     getCvForId(id: string): Observable<CvModel> {
-      return this.qahttp.get<CvModel>(GET_CV_FOR_ID_URL + id).pipe(
+      return this.QaHttp.get<CvModel>({ref: "GET_CV_FOR_ID", params: {id}}).pipe(
         take(1)
       );
     }

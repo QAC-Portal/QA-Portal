@@ -23,8 +23,9 @@
       </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="atLeastOneRowSelected ? ['select', 'bulkActions'] : actualDisplayedColumns"
-        class="header-row" [class.bulk-actions-row]="atLeastOneRowSelected">
+      <tr mat-header-row class="header-row"
+        *matHeaderRowDef="atLeastOneRowSelected && actionsEnabled ? ['select', 'bulkActions'] : actualDisplayedColumns"
+        [class.bulk-actions-row]="atLeastOneRowSelected && actionsEnabled">
       </tr>
       <tr mat-row *matRowDef="let row; columns: actualDisplayedColumns; let i = index"
         (click)="onRowClicked(i, row, $event)" class="selectable"></tr>
