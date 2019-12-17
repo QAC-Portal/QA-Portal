@@ -15,6 +15,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
 import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
 import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
+import { TRAINING_ADMIN_ROLE } from 'projects/portal-core/src/app/_common/models/portal-constants';
 
 @Component({
   selector: 'app-generate-cv',
@@ -327,22 +328,6 @@ export class GenerateCvComponent implements OnInit {
     );
   }
 
-  //Checking status for casnEdit boolean
-  // isDisabled() {
-  //   return !this.canEdit;
-  // }
-
-  // STATUS UPDATE FUNCTIONS
-  // private checkEditable(cv: CvModel) {
-  //   if(this.isTraineeView && this.origCv.status === "In Progress") {
-  //     this.canEdit = false;
-  //   } else {
-  //     this.canEdit = true;
-  //   }
-
-
-  // }
-
   private refreshPageStatus() {
     this.setPageEditStatus();
     this.setCommentStatus();
@@ -354,8 +339,8 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setCommentStatus() {
-    // if (SubmitConfirmDialogComponent) {
-    //   this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.origCv.status === FOR_REVIEW_STATUS;
-    // }
+    if (SubmitConfirmDialogComponent) {
+      this.canComment = this.activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE && this.origCv.status === FOR_REVIEW_STATUS;
+    }
   }
 }
