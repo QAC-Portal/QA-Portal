@@ -13,6 +13,7 @@ import {
   SAVE_CV_DATA_URL
 } from '../../_common/models/cv.constants';
 import { take } from 'rxjs/operators';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class CvService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private cvRemote: CvRemoteService, private http: HttpClient) { }
+  constructor(private cvRemote: CvRemoteService, private qahttp: QaHttpService) { }
 
   public displayCvPdf(cv: CvModel): Observable<boolean> {
     return this.cvRemote.getCvPdf(cv).pipe(switchMap(pdf => {
@@ -59,27 +60,27 @@ export class CvService {
   }
   // /** POST: add a new cv to the server */
   createCv(cv: CvModel): Observable<CvModel> {
-    return this.http.post<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
+    return this.qahttp.post<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
       take(1)
     );
   }
   /** PUT: update the cv on the server */
   updateCv(cv: CvModel): Observable<CvModel> {
-    return this.http.put<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
+    return this.qahttp.put<CvModel>(SAVE_CV_DATA_URL, cv, this.httpOptions).pipe(
       take(1)
     );
   }
 
   //load trainee's own cv
   getCurrentCvForTrainee(): Observable<CvModel> {
-    return this.http.get<CvModel>(GET_CURRENT_CV_URL).pipe(
+    return this.qahttp.get<CvModel>(GET_CURRENT_CV_URL).pipe(
       take(1)
     );
   }
 
     /** GET cv by id. Will 404 if id not found (for admin) */
     getCvForId(id: string): Observable<CvModel> {
-      return this.http.get<CvModel>(GET_CV_FOR_ID_URL + id).pipe(
+      return this.qahttp.get<CvModel>(GET_CV_FOR_ID_URL + id).pipe(
         take(1)
       );
     }
