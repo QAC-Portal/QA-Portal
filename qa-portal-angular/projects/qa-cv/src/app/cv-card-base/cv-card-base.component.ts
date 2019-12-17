@@ -51,6 +51,15 @@ export class CvCardBaseComponent implements ControlValueAccessor {
     SimpleBar.getScrollElement().scrollTo(0, SimpleBar.contentEl.clientHeight);
   }
 
+  onCommentCheckboxClicked(comment: Feedback, index: any){
+    event.preventDefault(); // Stop default checkbox behaviour
+    event.stopPropagation(); // Stop the row from clicking when using a checkbox
+    if (comment) {
+      this.feedback[index].resolved = this.feedback[index] === undefined ? false : !this.feedback[index].resolved;
+      //this.feedbackChange.emit(this.feedback);
+    }
+  }
+
 
   addFeedbackItem(): void {
     if (this.commentInput.valid) {

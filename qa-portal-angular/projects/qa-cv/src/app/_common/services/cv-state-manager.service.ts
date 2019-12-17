@@ -36,12 +36,12 @@ export class CvStateManagerService {
     return true;
   }
 
-  // public isMandatoryCvDetailsEntered(cvData: ICvModel): boolean {
-  //   return !!this.allQualificationsCompleted(cvData.allQualifications) &&
-  //     !!this.allWorkExperienceCompleted(cvData.allWorkExperience) &&
-  //     !!cvData.hobbies && !!cvData.hobbies.hobbiesDetails &&
-  //     !!cvData.profile && !!cvData.profile.profileDetails;
-  // }
+  public isMandatoryCvDetailsEntered(cvData: CvModel): boolean {
+    return !!this.allQualificationsCompleted(cvData.allQualifications) &&
+      !!this.allWorkExperienceCompleted(cvData.allWorkExperience) &&
+      !!cvData.hobbies && !!cvData.hobbies.hobbiesDetails &&
+      !!cvData.profile && !!cvData.profile.profileDetails;
+  }
 
   private allQualificationsCompleted(qualifications: QualificationModel[]): boolean {
     return !!qualifications &&
@@ -54,21 +54,15 @@ export class CvStateManagerService {
       !!qualifiation.qualificationDetails;
   }
 
-  // private qualificationCompleted(qualifiation: IQualification): boolean {
-  //   return !!qualifiation &&
-  //     !!qualifiation.qualificationDetails;
-  // }
+  private allWorkExperienceCompleted(workExperiences: WorkExperienceModel[]): boolean {
+    return !!workExperiences &&
+      workExperiences.length > 0 &&
+      !workExperiences.find(w => !this.workExperienceCompleted(w));
+  }
 
-  // private allWorkExperienceCompleted(workExperiences: IWorkExperience[]): boolean {
-  //   return !!workExperiences &&
-  //     workExperiences.length > 0 &&
-  //     !workExperiences.find(w => !this.workExperienceCompleted(w));
-  // }
-
-//   private workExperienceCompleted(workExperience: IWorkExperience): boolean {
-//     return !!workExperience &&
-//       !!workExperience.start &&
-//       !!workExperience.jobTitle &&
-//       !!workExperience.workExperienceDetails;
-//   }
+  private workExperienceCompleted(workExperience: WorkExperienceModel): boolean {
+    return !!workExperience &&
+      !!workExperience.jobTitle &&
+      !!workExperience.workExperienceDetails;
+  }
 }

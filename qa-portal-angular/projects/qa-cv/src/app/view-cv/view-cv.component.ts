@@ -9,7 +9,7 @@ import {SubmitConfirmDialogComponent} from '../generate-cv/submit-confirm-dialog
 import {QaErrorHandlerService} from '../../../../portal-core/src/app/_common/services/qa-error-handler.service';
 // import {UserSkillsModel} from '../_common/models/user-skills.model';
 import {TRAINING_ADMIN_ROLE} from '../../../../portal-core/src/app/_common/models/portal-constants';
-import {ADMIN_CV_SEARCH_URL} from '../_common/models/cv.constants';
+import {ADMIN_CV_SEARCH} from '../_common/models/cv.constants';
 import {
   CvStateManagerService
 } from '../_common/services/cv-state-manager.service';
@@ -191,6 +191,9 @@ export class ViewCvComponent {
   //   this.processCvServiceResponse(this.cvService.updateCv(this.cvData));
   // }
 
+  // private navigateToAdminSearch() {
+  //   this.router.navigateByUrl(ADMIN_CV_SEARCH);
+  // }
   // private processCvServiceResponse(obs: Observable<ICvModel>) {
   //   obs.subscribe(
   //     (response) => {

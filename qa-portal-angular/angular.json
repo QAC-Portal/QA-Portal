@@ -85,7 +85,8 @@
               "projects/qa-common/src/assets"
             ],
             "styles": [
-              "projects/qa-common/src/styles.scss"
+              "projects/portal-core/src/style/_main.scss",
+              "projects/portal-core/src/styles.scss"
             ],
             "scripts": []
           }
@@ -765,7 +766,8 @@
               "projects/qa-forms/src/assets"
             ],
             "styles": [
-              "projects/qa-forms/src/styles.scss"
+              "projects/portal-core/src/style/_main.scss",
+              "projects/portal-core/src/styles.scss"
             ],
             "scripts": []
           }

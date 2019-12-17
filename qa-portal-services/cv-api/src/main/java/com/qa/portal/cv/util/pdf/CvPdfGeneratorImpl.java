@@ -11,6 +11,7 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -45,6 +46,12 @@ public class CvPdfGeneratorImpl implements CvPdfGenerator {
     private TrueTypeFont montserratBoldTTF;
 
     private TrueTypeFont kranaFatBTTF;
+    
+	@Value("${cv.paths.logopath}")
+	private String logoPath;
+	
+	@Value("${cv.paths.arrowpath}")
+	private String arrowPath;
 
     @PostConstruct
     public void init() {
@@ -92,16 +99,16 @@ public class CvPdfGeneratorImpl implements CvPdfGenerator {
     }
     
     private ImageElement generateLogo() throws IOException {
-    	ImageElement logo = loadImages(Images.LOGO.filePath, Images.LOGO.resizeFactor);
+    	ImageElement logo = loadImages(logoPath, LogoImage.LOGO.resizeFactor);
     	logo.setAbsolutePosition(
-    			new Position(Images.LOGO.xPosition - logo.getWidth(), Images.LOGO.yPosition + logo.getHeight()));
+    			new Position(LogoImage.LOGO.xPosition - logo.getWidth(), LogoImage.LOGO.yPosition + logo.getHeight()));
     	return logo;
     }
     
     private ImageElement generateArrow() throws IOException {
-    	ImageElement arrow = loadImages(Images.ARROW.filePath, Images.ARROW.resizeFactor);
+    	ImageElement arrow = loadImages(arrowPath, ArrowImage.ARROW.resizeFactor);
     	arrow.setAbsolutePosition(
-    			new Position(Images.ARROW.xPosition, Images.ARROW.yPosition + arrow.getHeight()));
+    			new Position(ArrowImage.ARROW.xPosition, ArrowImage.ARROW.yPosition + arrow.getHeight()));
     	return arrow;
     }
 

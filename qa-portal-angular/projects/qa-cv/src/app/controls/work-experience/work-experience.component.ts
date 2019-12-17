@@ -4,7 +4,6 @@ import { WorkExperienceModel, Feedback } from '../../_common/models/cv.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatTableDataSource } from '@angular/material';
 import * as moment from 'moment';
-//import { IWorkExperience } from '../../_common/models/work-experience.model';
 
 
 @Component({

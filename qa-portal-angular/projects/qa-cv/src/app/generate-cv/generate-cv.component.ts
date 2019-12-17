@@ -6,15 +6,15 @@ import * as _ from 'lodash';
 import { MatChipInputEvent, MatDialog } from '@angular/material';
 import { CvService } from '../_common/services/cv.service';
 import { finalize } from 'rxjs/operators';
-import { ViewCvService } from '../view-cv/services/view-cv.service';
 import { IN_PROGRESS_STATUS, FAILED_REVIEW_STATUS, APPROVED_STATUS, FOR_REVIEW_STATUS } from '../_common/models/cv-status.constants';
 import { Observable } from 'rxjs';
 import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/services/qa-error-handler.service';
 import { CvStateManagerService } from '../_common/services/cv-state-manager.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { CvCardBaseComponent } from '../cv-card-base/cv-card-base.component';
-import { ADMIN_CV_SEARCH_URL } from '../_common/models/cv.constants';
+import { ADMIN_CV_SEARCH } from '../_common/models/cv.constants';
 import { SubmitConfirmDialogComponent } from './submit-confirm-dialog/submit-confirm-dialog.component';
+import { CvPersistService } from '../_common/services/cv-persist.service'
 import { TRAINING_ADMIN_ROLE } from 'projects/portal-core/src/app/_common/models/portal-constants';
 
 @Component({
@@ -31,6 +31,12 @@ export class GenerateCvComponent implements OnInit {
   public canComment = false;
 
   public canEdit = false;
+
+  public cvForm: FormGroup;
+
+  public isTraineeView = true;
+
+  public origCv: CvModel;
 
   public skillCategories = [
     {
@@ -63,16 +69,13 @@ export class GenerateCvComponent implements OnInit {
     },
   ];
 
-  public cvForm: FormGroup;
-  public isTraineeView = true;
-  public origCv: CvModel;
 
 
   // Card selected feedback indexes
   private qualificationFeedbackIndex: number;
   private workExperianceFeedbackIndex: number;
   private otherWorkExperianceFeedbackIndex: number;
-  
+
 
   constructor(
     private router: Router,
@@ -80,7 +83,8 @@ export class GenerateCvComponent implements OnInit {
     private cvStateManagerService: CvStateManagerService,
     private cvService: CvService,
     private errorHandlerService: QaErrorHandlerService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cvPersistService: CvPersistService
   ) {
     const fb = new FormBuilder();
     this.cvForm = fb.group({
@@ -117,10 +121,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setRoleForPage();   // Is page being displayed for Trainee or Admin
-    // this.cvForm.patchValue(new CvModel());
-    // this.isTraineeView = this.viewCvStateManagerService.isPageDisplayForTrainee(this.activatedRoute);  // Is page being displayed for Trainee or Admin
-
+    this.setRoleForPage();   
     if (this.isTraineeView) {
       this.initialiseCvPageForTrainee();
     } else {
@@ -216,7 +217,9 @@ export class GenerateCvComponent implements OnInit {
       ...rest
     } as CvModel).build();
   }
+
   //Button Functions
+
   //All Users Buttons
   onGenerateCvButtonClicked() {
     this.cvForm.disable();
@@ -239,17 +242,19 @@ export class GenerateCvComponent implements OnInit {
       })
     ).subscribe(() => { });
   }
+
   //User Buttons
   onSaveCvButtonClicked() {
     const cvForm = this.getCvData();
     if (!cvForm.id) {
       cvForm.status = IN_PROGRESS_STATUS;
     }
-    this.persistCvForTrainee(cvForm);
+    this.processCvServiceResponse(this.cvPersistService.persistCvForTrainee(cvForm));
   }
+
   onSubmitCvButtonClicked() {
     const cvForm = this.getCvData();
-    this. openDialog(cvForm)
+    this.openDialog(cvForm)
     //This needs to disable any further edits to the CV, wich it curently doesn't
   }
   openDialog(cvForm): void {
@@ -267,47 +272,31 @@ export class GenerateCvComponent implements OnInit {
     });
   }
   onCvSubmitForReview(cvForm): void {
-    this.persistCvForTrainee(cvForm);
+    this.cvPersistService.persistCvForTrainee(cvForm);
   }
   onNewCvButtonClicked() {
     const cvForm = this.getCvData();
     cvForm.status = IN_PROGRESS_STATUS;
-    this.createCv(cvForm);
+    this.processCvServiceResponse(this.cvPersistService.createCv(cvForm));
   }
   //Admin Buttons
   onApproveCvButtonClicked() {
     const cvForm = this.getCvData();
     cvForm.status = APPROVED_STATUS;
-    this.updateCv(cvForm);
+    this.cvPersistService.updateCv(cvForm);
     this.navigateToAdminSearch();
   }
   onFailCvButtonClicked() {
     const cvForm = this.getCvData();
     cvForm.status = FAILED_REVIEW_STATUS;
-    this.updateCv(cvForm);
+    this.cvPersistService.updateCv(cvForm);
     this.navigateToAdminSearch();
   }
   private navigateToAdminSearch() {
-    this.router.navigateByUrl(ADMIN_CV_SEARCH_URL);
+    this.router.navigateByUrl(ADMIN_CV_SEARCH);
   }
 
-  // CV PERSIST FUNCTIONS
-  private persistCvForTrainee(cvForm: CvModel) {
-    if (!cvForm.id) {
-      this.createCv(cvForm);
-    } else {
-      this.updateCv(cvForm);
-    }
-  }
-
-  private createCv(cvForm: CvModel): void {
-    this.processCvServiceResponse(this.cvService.createCv(cvForm));
-  }
-
-  private updateCv(cvForm: CvModel): void {
-    this.processCvServiceResponse(this.cvService.updateCv(cvForm));
-  }
-
+  // CV PERSIST FUNCTIONS 
   private processCvServiceResponse(obs: Observable<CvModel>) {
     this.cvForm.disable();
     this.isLoading = true;
@@ -332,7 +321,7 @@ export class GenerateCvComponent implements OnInit {
   private refreshPageStatus() {
     this.setPageEditStatus();
     this.setCommentStatus();
-    // this.loadingData = false;
+    this.isLoading = false;
   }
 
   private setPageEditStatus(): void {
