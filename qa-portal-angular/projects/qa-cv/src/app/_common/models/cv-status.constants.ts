@@ -1,4 +1,3 @@
-
 export const IN_PROGRESS_STATUS = 'In Progress';
 
 export const FOR_REVIEW_STATUS = 'For Review';

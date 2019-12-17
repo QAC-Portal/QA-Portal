@@ -1,15 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 // import {ICvModel} from '../../_common/models/qac-cv-db.model';
 import {
-  APPLICATION_PDF_CONTENT_TYPE, GENERATE_CV_URL,
-  GET_CURRENT_CV_URL,
-  GET_CV_FOR_ID_URL,
-  GET_SKILLS_FOR_TRAINEE_URL,
-  SAVE_CV_DATA_URL
+  APPLICATION_PDF_CONTENT_TYPE
 } from '../../_common/models/cv.constants';
 import {take} from 'rxjs/operators';
+import { QaHttpService } from 'projects/portal-core/src/app/_common/services/qa-http.service';
 
 @Injectable()
 export class ViewCvService {
