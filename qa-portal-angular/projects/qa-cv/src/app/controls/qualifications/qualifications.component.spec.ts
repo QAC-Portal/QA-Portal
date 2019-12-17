@@ -5,7 +5,7 @@ import { MatTableModule, MatIconModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { QualificationModel } from '../../_common/models/cv.model';
 
-fdescribe('QualificationsComponent', () => {
+describe('QualificationsComponent', () => {
   let component: QualificationsComponent;
   let fixture: ComponentFixture<QualificationsComponent>;
 
