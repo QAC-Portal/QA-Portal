@@ -24,6 +24,7 @@ public class GetRoleByNameOperation {
     public <Optional>RoleDto getRoleByName(String roleName) {
         RoleDto rDto = new RoleDto();
         if (roleRepository.findByName(roleName).isPresent()){
+        	System.out.println(roleRepository);
             return roleRepository.findByName(roleName)
                     .map(r -> baseMapper.mapObject(r, RoleDto.class))
                     .get();

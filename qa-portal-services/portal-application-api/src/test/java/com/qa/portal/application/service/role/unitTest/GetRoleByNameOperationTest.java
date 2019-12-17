@@ -46,11 +46,11 @@ public class GetRoleByNameOperationTest {
 		re.setId(1);
 		re.setName("User");
 		re.setPortalApplication(pae);
+
+		RoleDto rd = baseMapper.mapObject(Optional.of(re), RoleDto.class);
 		
-		Optional<RoleEntity> ore = Optional.of(re);
-		RoleDto rd = baseMapper.mapObject(ore, RoleDto.class);
-		
-		Mockito.when(roleRepository.findByName(roleName)).thenReturn(ore);
+		Mockito.when(this.roleRepository.findByName(roleName)).thenReturn(Optional.of(re));
+		Mockito.when(this.baseMapper.mapObject(Optional.of(re), RoleDto.class)).thenReturn(rd);
 		
 		assertThat(this.getRoleByNameOperation.getRoleByName(roleName)).isEqualTo(rd);
 	}
