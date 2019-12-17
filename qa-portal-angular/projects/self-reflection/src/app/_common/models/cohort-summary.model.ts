@@ -3,7 +3,7 @@ export class CohortSummaryModel {
 
   pathway: String;
 
-  courseVersion: String;
+  pathwayVersion: String;
 
   averageRatings: number[];
 }

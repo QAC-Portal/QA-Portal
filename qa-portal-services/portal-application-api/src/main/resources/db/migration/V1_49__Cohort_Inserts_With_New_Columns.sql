@@ -19,20 +19,20 @@ alter table training.qa_cohort owner to postgres;
 
 INSERT INTO training.qa_cohort(
     id, cohort_name, training_pathway, pathway_version, trainer_id, last_updated_timestamp, last_updated_by, start_date, version)
-VALUES (1, 'CI Intake 1', 'Continuous Integration','CI_version_1', 1,current_timestamp , 'admin','2019-03-04', 1);
+VALUES (1, 'Aug 2019', 'CI','CI_v1', 1,current_timestamp , 'admin','2019-03-04', 1);
 
 INSERT INTO training.qa_cohort(
     id, cohort_name, training_pathway, pathway_version, trainer_id, last_updated_timestamp, last_updated_by, start_date, version)
-VALUES (2, 'CI Intake 2', 'Continuous Integration','CI_version_2', 1, current_timestamp , 'admin', '2019-06-17', 1);
+VALUES (2, 'Sep 2019', 'CI','CI_v2', 1, current_timestamp , 'admin', '2019-06-17', 1);
 
 INSERT INTO training.qa_cohort(
     id, cohort_name, training_pathway, pathway_version, trainer_id, last_updated_timestamp, last_updated_by, start_date, version)
-VALUES (3, 'Java Intake 1', 'Development', 'Java_Dev_version_1', 2, current_timestamp , 'admin', '2019-04-15', 1);
+VALUES (3, 'Oct 2019', 'Dev', 'No_Plan', 2, current_timestamp , 'admin', '2019-04-15', 1);
 
 INSERT INTO training.qa_cohort(
     id, cohort_name, training_pathway, pathway_version, trainer_id, last_updated_timestamp, last_updated_by, start_date, version)
-VALUES (4, 'Java Intake 2', 'Dev-Ops', 'Java_Dev-Ops_version_1', 2, current_timestamp , 'admin', '2019-07-08', 1);
+VALUES (4, 'Nov 2019', 'Dev-Ops', 'Java_Dev-Ops_v1', 2, current_timestamp , 'admin', '2019-07-08', 1);
 
 INSERT INTO training.qa_cohort(
     id, cohort_name, training_pathway, pathway_version, trainer_id, last_updated_timestamp, last_updated_by, start_date, version)
-VALUES (5, 'Scala Intake 1', 'Development', 'Scala_Dev_version_1', 3, current_timestamp, 'admin', '2019-06-03', 1);
+VALUES (5, 'Dec 2019', 'Dev', 'Scala_Dev_v1', 3, current_timestamp, 'admin', '2019-06-03', 1);

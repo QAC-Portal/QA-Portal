@@ -8,14 +8,14 @@
     </ng-container>
 
     <ng-container matColumnDef="pathway">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pathway</th>
-      <td mat-cell *matCellDef="let row">Placeholder</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Training Pathway</th>
+      <td mat-cell *matCellDef="let row">{{row.pathway}}</td>
       <!-- <td mat-cell *matCellDef="let row">{{row.trainingPathway}}</td> -->
     </ng-container>
 
-    <ng-container matColumnDef="courseVersion">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Course Version</th>
-      <td mat-cell *matCellDef="let row">Placeholder</td>
+    <ng-container matColumnDef="pathwayVersion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pathway Version</th>
+      <td mat-cell *matCellDef="let row">{{row.pathwayVersion}}</td>
       <!-- <td mat-cell *matCellDef="let row">{{row.courseVersion}}</td> -->
     </ng-container>
 

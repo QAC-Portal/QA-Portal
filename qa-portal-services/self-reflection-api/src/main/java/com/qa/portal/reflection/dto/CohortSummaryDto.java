@@ -21,9 +21,9 @@ public class CohortSummaryDto extends QaBaseDto {
 
     public void setPathway(String pathway) { this.pathway = pathway; }
 
-    public String getCourseVersion() { return courseVersion; }
+    public String getPathwayVersion() { return pathwayVersion; }
 
-    public void setCourseVersion(String courseVersion) { this.courseVersion = courseVersion; }
+    public void setPathwayVersion(String pathwayVersion) { this.pathwayVersion = pathwayVersion; }
 
     public String getCohortName() {
         return cohortName;

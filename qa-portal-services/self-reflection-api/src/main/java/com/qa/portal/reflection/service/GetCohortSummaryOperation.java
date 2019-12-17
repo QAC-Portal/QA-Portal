@@ -87,6 +87,8 @@ public class GetCohortSummaryOperation {
         DecimalFormat df = new DecimalFormat("#.#");
         CohortSummaryDto cohortSummaryDto = new CohortSummaryDto();
         cohortSummaryDto.setCohortName(qaCohortEntity.getName());
+        cohortSummaryDto.setPathway(qaCohortEntity.getPathway());
+        cohortSummaryDto.setPathwayVersion(qaCohortEntity.getPathwayVersion());
         cohortSummaryDto.setAverageRatings(cohortWeeklyAverages.stream()
                 .map(d -> Double.valueOf(df.format(d)))
                 .collect(Collectors.toList()));
