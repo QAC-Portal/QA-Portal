@@ -1,22 +1,31 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, forwardRef } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup, Validators, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { KeycloakService } from 'keycloak-angular';
-import { IFeedback } from '../_common/models/feedback.model';
+import { Feedback } from '../_common/models/cv.model';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-cv-card-base',
   templateUrl: './cv-card-base.component.html',
-  styleUrls: ['./cv-card-base.component.scss']
+  styleUrls: ['./cv-card-base.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => CvCardBaseComponent),
+    multi: true
+  }]
 })
-export class CvCardBaseComponent {
+export class CvCardBaseComponent implements ControlValueAccessor {
   @Input() cardTitle: string;
   @Input() canComment: boolean;
   @Input() canEdit: boolean;
-  @Input() feedback: IFeedback[];
-  @Output() feedbackChange = new EventEmitter<IFeedback[]>();
   @Input() showOpenButton: boolean = true;
+  
+  public feedback: Feedback[];
+
+  public onChange = (v: Feedback[]) => { };
+  public onTouch = () => { };
+
   @ViewChild('commentContainer', { static: true }) commentContainer: ElementRef;
   @ViewChild('drawer', { static: true }) public drawer: MatDrawer;
 
@@ -45,14 +54,15 @@ export class CvCardBaseComponent {
 
   addFeedbackItem(): void {
     if (this.commentInput.valid) {
-      const fb: IFeedback = {
+      const fb: Feedback = {
         comment: this.commentInput.value,
         date: moment().format(),
         reviewer: this.keycloak.getUsername(),
         resolved: false
       };
       this.feedback.push(fb);
-      this.feedbackChange.emit(this.feedback);
+      this.onChange(this.feedback);
+      this.onTouch();
       this.commentInput.reset();
       this.commentInput.markAsUntouched();
 
@@ -60,5 +70,20 @@ export class CvCardBaseComponent {
         this.scrollCommentsToBottom();
       }, 0);
     }
+  }
+
+  
+  // FormValueAccessor methods
+  writeValue(fb: Feedback[]): void {
+    this.feedback = fb;
+  }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.showOpenButton = !isDisabled;
   }
 }

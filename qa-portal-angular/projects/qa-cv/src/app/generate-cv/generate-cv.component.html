@@ -1,21 +1,18 @@
-<h1>Generate CV</h1>
+<h1>
+    Generate CV
+    <div style="margin-left: auto; color: #004050; padding-bottom: 1%; float: right; font-size: 18px;"><b>CV Status:</b>
+        {{origCv?.status}}</div>
+
+</h1>
 
 <form [formGroup]="cvForm">
     <mat-card>
         <mat-card-header>
             <mat-card-title>
-                About
+                Source Control
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName" name="first-name-input" required>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Surname</mat-label>
-                <input matInput formControlName="surname" name="surname-input" required>
-            </mat-form-field>
             <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Source Control Link - (GitHub, GitLab, BitBucket, etc. URL)</mat-label>
                 <input matInput formControlName="sourceControlLink" name="source-control-link-input">
@@ -23,20 +20,19 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card formGroupName="profile">
-        <mat-card-header>
-            <mat-card-title>
-                Profile
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>&nbsp;</mat-label>
-                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="profileDetails"
-                    name="profile-input" required></textarea>
-            </mat-form-field>
-        </mat-card-content>
-    </mat-card>
+    <section formGroupName="profile">
+        <app-cv-card-base cardTitle="Profile" [canComment]="true" formControlName="profileFeedback">
+            <mat-card-content>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>&nbsp;</mat-label>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="profileDetails"
+                        name="profile-input" required></textarea>
+                </mat-form-field>
+            </mat-card-content>
+
+        </app-cv-card-base>
+    </section>
+
 
     <mat-card formGroupName="skills">
         <mat-card-header>
@@ -62,72 +58,91 @@
     </mat-card>
 
 
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-                Qualifications
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-qualifications class="w-100" formControlName="allQualifications"></app-qualifications>
-        </mat-card-content>
-    </mat-card>
+    <section>
+        <app-cv-card-base class="cardBase" cardTitle="Qualifications" [canComment]="true" #qualiCard
+            [showOpenButton]="false" formControlName="qualificationFeedbackCard">
+            <mat-card-content>
+                <app-qualifications class="w-100" formControlName="allQualifications"
+                    (feedbackClick)="onFeedbackButtonClicked($event, qualiCard, 'qualificationFeedbackCard')">
+                </app-qualifications>
+            </mat-card-content>
+        </app-cv-card-base>
+    </section>
 
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-                Work Experience - QA
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-work-experience class="w-100" formControlName="allWorkExperience"></app-work-experience>
-        </mat-card-content>
-    </mat-card>
+    <section>
+        <app-cv-card-base cardTitle="Work Experience - QA" [canComment]="true" #workExpCard [showOpenButton]="false"
+            formControlName="workExperianceFeedbackCard">
+            <mat-card-content>
+                <app-work-experience class="w-100" formControlName="allWorkExperience"
+                    (feedbackClick)="onFeedbackButtonClicked($event, workExpCard, 'workExperianceFeedbackCard')">
+                </app-work-experience>
+            </mat-card-content>
+        </app-cv-card-base>
+    </section>
 
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>
-                Work Experience - Other
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <app-work-experience class="w-100" formControlName="otherWorkExperience"></app-work-experience>
-        </mat-card-content>
-    </mat-card>
 
-    <mat-card formGroupName="hobbies">
-        <mat-card-header>
-            <mat-card-title>
-                Hobbies / Interests
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-form-field appearance="outline" class="w-100">
+    <section>
+        <app-cv-card-base cardTitle="Work Experience - Other" [canComment]="true" #otherWorkExpCard
+            [showOpenButton]="false" formControlName="otherWorkExperianceFeedbackCard">
+            <mat-card-content>
+                <app-work-experience class="w-100" formControlName="otherWorkExperience"
+                    (feedbackClick)="onFeedbackButtonClicked($event, otherWorkExpCard, 'otherWorkExperianceFeedbackCard')">
+                </app-work-experience>
+            </mat-card-content>
+        </app-cv-card-base>
+    </section>
+
+    <section formGroupName="hobbies">
+        <app-cv-card-base cardTitle="Hobbies" [canComment]="true" formControlName="hobbiesFeedback">
+            <mat-card-content>
+                <mat-form-field appearance="outline" class="w-100">
                     <mat-label>&nbsp;</mat-label>
-                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="hobbiesDetails"
-                    name="hobbies-input" required></textarea>
-            </mat-form-field>
-        </mat-card-content>
-    </mat-card>
-</form>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="hobbiesDetails"
+                        name="hobbies-input" required></textarea>
+                </mat-form-field>
+            </mat-card-content>
 
+        </app-cv-card-base>
+    </section>
 
-<div class="action-buttons">
-    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
-        [disabled]="cvForm?.invalid" name="generate-cv-button">
-        <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
-    </button>
-    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onDownloadCvButtonClicked()"
-        [disabled]="cvForm?.invalid" name="download-cv-button">
-        <mat-icon>get_app</mat-icon>&nbsp;Download CV
-    </button>
-    <button mat-flat-button color="accent" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
-        [disabled]="cvForm?.invalid" name="save-cv-button">
-        <mat-icon>save</mat-icon>&nbsp;Save CV
-    </button>
+    <!-- All User Buttons -->
+    <div class="action-buttons">
+        <div class="inline">
+            <button mat-flat-button color="accent" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="generate-cv-button">
+                <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
+            </button>
+            <button mat-flat-button color="accent" class="submit-button w-100" (click)="onDownloadCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="download-cv-button">
+                <mat-icon>get_app</mat-icon>&nbsp;Download CV
+            </button>
+        </div>
+        <!-- Trainee Buttons -->
+        <div *ngIf="isTraineeView && origCv?.status !== 'Approved'">
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button">
+                <mat-icon>save</mat-icon>&nbsp;Save CV
+            </button>
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Submit
+            </button>
+        </div>
+        <div *ngIf="isTraineeView">
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;New CV
+            </button>
+        </div>
+        <!-- Admin Buttons -->
+        <div *ngIf="!isTraineeView">
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onApproveCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Approve Review
+            </button>
+            <button mat-flat-button color="primary" class="submit-button w-100" (click)="onFailCvButtonClicked()"
+                [disabled]="cvForm?.invalid" name="save-cv-button"> &nbsp;Fail Review
+            </button>
+        </div>
+    </div>
 
-</div>
-
-<div class="loading-overlay" *ngIf="isLoading">
-    <mat-spinner class="loading-spinner"></mat-spinner>
-</div>
+    <div class="loading-overlay" *ngIf="isLoading">
+        <mat-spinner class="loading-spinner"></mat-spinner>
+    </div>
