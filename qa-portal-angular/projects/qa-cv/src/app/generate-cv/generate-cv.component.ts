@@ -325,7 +325,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private setPageEditStatus(): void {
-     this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
+    this.canEdit = this.cvStateManagerService.isPageEditable(this.activatedRoute, this.origCv);
   }
 
   private setCommentStatus() {
