@@ -62,7 +62,7 @@ export class CvSearchComponent implements OnInit {
 
     // Update URL params
     this.router.navigate([], { relativeTo: this.activatedRoute, queryParams: { name, cohort, tech, status } });
-    this.cvSearchHistoryService.searchCVs(name, cohort, tech, status).subscribe(response => {
+    this.cvSearchHistoryService.searchCVs({name, cohort, tech, status}).subscribe(response => {
       this.searchResultsDataSource.data = response;
       this.isLoading = false;
     });

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeletePageConfirmDialogComponent } from './delete-page-confirm-dialog.component';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DeletePageConfirmDialogComponent', () => {
   let component: DeletePageConfirmDialogComponent;
@@ -8,9 +10,14 @@ describe('DeletePageConfirmDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeletePageConfirmDialogComponent ]
+      declarations: [DeletePageConfirmDialogComponent],
+      imports: [
+        MatButtonModule,
+        MatDialogModule,
+        BrowserAnimationsModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
