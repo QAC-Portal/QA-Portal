@@ -26,11 +26,10 @@ public class GetRoleByNameOperation {
         if (roleRepository.findByName(roleName).isPresent()){
             return roleRepository.findByName(roleName)
                     .map(r -> baseMapper.mapObject(r, RoleDto.class))
-//                    .orElseThrow(() -> new QaPortalBusinessException("No role found for the supplied name"));
-            .get();
+                    .get();
         } else {
-            rDto.setName("ERROR: ROLE \"" + roleName.toUpperCase() + "\" NOT FOUND IN DATABASE");
-            return rDto;
+            System.err.println("Could not find database record for keycloak role: " + roleName + ". Ignoring.");
+            return null;
         }
     }
  }
