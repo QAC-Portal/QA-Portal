@@ -126,7 +126,7 @@
             </button>
 
             <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
-                [disabled]="cvForm?.invalid" name="save-cv-button" *ngIf="origCv?.status === 'In Progress'">
+                [disabled]="cvForm?.invalid" name="save-cv-button" *ngIf="origCv?.status === 'In Progress' || origCv?.status === 'Failed Review'">
                 &nbsp;Submit
             </button>
             <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
