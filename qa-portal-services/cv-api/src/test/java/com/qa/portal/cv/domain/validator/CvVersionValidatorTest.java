@@ -1,31 +1,36 @@
 package com.qa.portal.cv.domain.validator;
 
-import com.qa.portal.cv.domain.CvVersion;
-import com.qa.portal.cv.services.CvManagementService;
+import com.qa.portal.common.exception.QaPortalBusinessException;
+import com.qa.portal.cv.mocks.MockCvs;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.io.IOException;
-
-import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CvVersionValidatorTest {
 
+    private MockCvs cvs = new MockCvs();
+
+    @Mock
+    private Environment environment;
+
     @InjectMocks
-    public CvVersionValidator cvVersionValidator;
+    private CvVersionValidator cvVersionValidator = new CvVersionValidator(environment);
 
     @Test
-    public void validateCvVersionTest() {
+    public void validateCvVersionTest2222() {
 
+
+    }
+
+    @Test(expected = QaPortalBusinessException.class)
+    public void validateCvVersionTest() {
+        cvVersionValidator.validateCvVersion(cvs.getCv2());
     }
 
 
