@@ -150,7 +150,7 @@ export class GenerateCvComponent implements OnInit {
     this.cvService.getCurrentCvForTrainee().subscribe(
       (cv: CvModel) => {
         if (this.noExistingCvForTrainee(cv)) {
-          //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
+          this.initialiseBlankCvForTrainee();
         } else {
           this.origCv = cv;
           this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
@@ -169,7 +169,7 @@ export class GenerateCvComponent implements OnInit {
         this.cvService.getCvForId(paramMap.get('id')).subscribe(
           (cv) => {
             if (this.noExistingCvForTrainee(cv)) {
-              //this.initialiseBlankCvForTrainee(); may not need to initialize new cv due to form format.
+              //should throw an error of some kind.
             } else {
               console.log(cv);
               this.origCv = cv;
@@ -181,6 +181,13 @@ export class GenerateCvComponent implements OnInit {
             this.processError(error);
           });
       });
+  }
+
+  private initialiseBlankCvForTrainee() {
+    const cvForm = this.getCvData();
+    cvForm.status = IN_PROGRESS_STATUS;
+    this.processCvServiceResponse(this.cvPersistService.createCv(cvForm));
+    this.refreshPageStatus();
   }
 
   private noExistingCvForTrainee(traineeCv: CvModel): boolean {
