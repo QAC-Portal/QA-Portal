@@ -168,4 +168,23 @@ fdescribe('QualificationsComponent', () => {
     });
 
   });
+  it('should emit feedback when button is clicked', done => {
+    const testIndex = 1;
+    let testQual: any 
+     testQual =  [{
+      qualificationDetails: 'abcdefg',
+      qualificationFeedback: {
+        reviewer: 'ace',
+        date: '10/05/2019',
+        comment: 'well done',
+        resolved: true
+    }
+  }];
+  component.feedbackClick.subscribe(data => {
+    expect(data.index).toEqual(testIndex);
+    expect(data.qualifications).toEqual(testQual);
+    done();    
+  });
+  component.onFeedbackButtonClicked(testIndex, testQual);
+  })
 });
