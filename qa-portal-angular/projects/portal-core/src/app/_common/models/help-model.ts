@@ -1,4 +1,4 @@
-export interface HelpModel {
+export interface helpModel {
     HelpInfo: string;
     Tag: string;
 }

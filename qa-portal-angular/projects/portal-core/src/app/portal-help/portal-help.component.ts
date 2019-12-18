@@ -8,7 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './portal-help.component.html',
   styleUrls: ['./portal-help.component.css']
 })
-export class PortalHelpComponent implements OnInit {
+export class PortalHelpComponent{
   panelOpenState = false;
   helptext = "Test";
   currentUrl = window.location.href;
@@ -17,13 +17,10 @@ export class PortalHelpComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd){
       this.userRole = this.keycloak.isUserInRole("training-user");
-   }
-  })
-}
-
-  ngOnInit() {
-  }
-}
+   };
+  });
+};
+};
 
 
 

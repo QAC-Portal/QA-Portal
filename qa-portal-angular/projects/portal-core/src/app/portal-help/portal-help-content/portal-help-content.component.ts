@@ -11,20 +11,22 @@ import { KeycloakService } from 'keycloak-angular';
 export class PortalHelpContentComponent implements OnInit {
   @Input() currentUrl: string;
   message: string;
-  
+  file = this.helpService.accessFile();
 
   constructor(private helpService: QaHelpService, private router: Router){
     this.helpService.currentMessage.subscribe(message => this.message = message);
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd){
-        let file = this.helpService.accessFile();
-        this.helpService.changeMessage(file, this.router.url);
+        
+        this.helpService.changeMessage(this.file, this.router.url);
       }
     })
   }
 
   ngOnInit() {
     this.helpService.currentMessage.subscribe(message => this.message = message);
+    let file = this.helpService.accessFile();
+    this.helpService.changeMessage(this.file, this.router.url);
   }
 
 }
