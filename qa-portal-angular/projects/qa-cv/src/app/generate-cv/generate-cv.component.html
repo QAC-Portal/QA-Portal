@@ -21,7 +21,7 @@
     </mat-card>
 
     <section formGroupName="profile">
-        <app-cv-card-base cardTitle="Profile" [canComment]="canComment" formControlName="profileFeedback">
+        <app-cv-card-base cardTitle="Profile" [canComment]="canComment" formControlName="profileFeedback" [showOpenButton]="true">
             <mat-card-content>
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>&nbsp;</mat-label>
@@ -94,7 +94,7 @@
     </section>
 
     <section formGroupName="hobbies">
-        <app-cv-card-base cardTitle="Hobbies" [canComment]="canComment" formControlName="hobbiesFeedback">
+        <app-cv-card-base cardTitle="Hobbies" [canComment]="canComment" formControlName="hobbiesFeedback"  [showOpenButton]="true">
             <mat-card-content>
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label>&nbsp;</mat-label>
@@ -119,8 +119,8 @@
             </button>
         </div>
         <!-- Trainee Buttons -->
-        <div *ngIf="true">
-            <button mat-flat-button *ngIf="true" color="primary" class="submit-button w-100"
+        <div *ngIf="isTraineeView">
+            <button mat-flat-button *ngIf="isTraineeView" color="primary" class="submit-button w-100"
                 (click)="onSaveCvButtonClicked()" [disabled]="cvForm?.invalid" name="save-cv-button">
                 <mat-icon>save</mat-icon>&nbsp;Save CV
             </button>
