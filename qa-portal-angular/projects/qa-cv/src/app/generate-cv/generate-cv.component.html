@@ -86,7 +86,7 @@
         <app-cv-card-base cardTitle="Work Experience - Other" [canComment]="canComment" #otherWorkExpCard
             [showOpenButton]="false" formControlName="otherWorkExperianceFeedbackCard">
             <mat-card-content>
-                <app-work-experience class="w-100" formControlName="otherWorkExperience" [disabled]="disabled"
+                <app-work-experience class="w-100" formControlName="otherWorkExperience" 
                     (feedbackClick)="onFeedbackButtonClicked($event, otherWorkExpCard, 'otherWorkExperianceFeedbackCard')">
                 </app-work-experience>
             </mat-card-content>
@@ -119,8 +119,8 @@
             </button>
         </div>
         <!-- Trainee Buttons -->
-        <div *ngIf="isTraineeView">
-            <button mat-flat-button *ngIf="isTraineeView" color="primary" class="submit-button w-100"
+        <div *ngIf="true">
+            <button mat-flat-button *ngIf="true" color="primary" class="submit-button w-100"
                 (click)="onSaveCvButtonClicked()" [disabled]="cvForm?.invalid" name="save-cv-button">
                 <mat-icon>save</mat-icon>&nbsp;Save CV
             </button>
