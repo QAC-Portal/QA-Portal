@@ -191,6 +191,9 @@ export class ViewCvComponent {
   //   this.processCvServiceResponse(this.cvService.updateCv(this.cvData));
   // }
 
+  // private navigateToAdminSearch() {
+  //   this.router.navigateByUrl(ADMIN_CV_SEARCH);
+  // }
   // private processCvServiceResponse(obs: Observable<ICvModel>) {
   //   obs.subscribe(
   //     (response) => {
