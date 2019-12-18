@@ -51,7 +51,7 @@
                         {{skill}}
                         <mat-icon matChipRemove>cancel</mat-icon>
                     </mat-chip>
-                    <input placeholder="add more..." [matChipInputFor]="chipList"
+                    <input placeholder="add more..." [matChipInputFor]="chipList" [readonly]="!canEdit"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
                         (matChipInputTokenEnd)="addSkill(cat.key, $event)" [name]="cat.key+'-skill-input'">
                 </mat-chip-list>
@@ -64,7 +64,7 @@
         <app-cv-card-base class="cardBase" cardTitle="Qualifications" [canComment]="canComment" #qualiCard
             [showOpenButton]="false" formControlName="qualificationFeedbackCard">
             <mat-card-content>
-                <app-qualifications class="w-100" formControlName="allQualifications"
+                <app-qualifications class="w-100" formControlName="allQualifications" [canEdit]="canEdit"
                     (feedbackClick)="onFeedbackButtonClicked($event, qualiCard, 'qualificationFeedbackCard')">
                 </app-qualifications>
             </mat-card-content>
@@ -75,7 +75,7 @@
         <app-cv-card-base cardTitle="Work Experience - QA" [canComment]="canComment" #workExpCard
             [showOpenButton]="false" formControlName="workExperianceFeedbackCard">
             <mat-card-content>
-                <app-work-experience class="w-100" formControlName="allWorkExperience"
+                <app-work-experience class="w-100" formControlName="allWorkExperience" [canEdit]="canEdit"
                     (feedbackClick)="onFeedbackButtonClicked($event, workExpCard, 'workExperianceFeedbackCard')">
                 </app-work-experience>
             </mat-card-content>
@@ -87,7 +87,7 @@
         <app-cv-card-base cardTitle="Work Experience - Other" [canComment]="canComment" #otherWorkExpCard
             [showOpenButton]="false" formControlName="otherWorkExperianceFeedbackCard">
             <mat-card-content>
-                <app-work-experience class="w-100" formControlName="otherWorkExperience" 
+                <app-work-experience class="w-100" formControlName="otherWorkExperience"  [canEdit]="canEdit"
                     (feedbackClick)="onFeedbackButtonClicked($event, otherWorkExpCard, 'otherWorkExperianceFeedbackCard')">
                 </app-work-experience>
             </mat-card-content>
