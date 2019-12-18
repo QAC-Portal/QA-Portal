@@ -61,12 +61,12 @@ public class PortalProjectEntityJavaUnitTest {
 	List<ProjectPageEntity> projectPageList3 = new ArrayList<ProjectPageEntity>();
 	projectPageList3.add(projectPageEntity3);
 	this.portalProjectEntityDiffProjectPages.setProjectPages(projectPageList3);
-	
 	}
 	
 	@Test
 	public void getIdTest() {
 		assertThat(this.portalProjectEntity.getId()).isEqualTo(1); 
+		
 	}
 	
 	@Test
@@ -99,15 +99,4 @@ public class PortalProjectEntityJavaUnitTest {
 		assertThat(String.valueOf(this.portalProjectEntity.toString())).isEqualTo("ApplicationEntity{id=1, name=\'test name\', menuItems=[ProjectPageEntity{id=1, name=\'null\', url=\'null\', tooltip=\'null\', icon=\'null\', portalProject=null, displayOnMenu=null}]}");
 	}
 	
-	@Test
-	public void addProjectPageTest() {
-		System.out.println(this.portalProjectEntity.getProjectPages());
-		ProjectPageEntity projectPageEntity = new ProjectPageEntity();
-		this.portalProjectEntity.addProjectPage(projectPageEntity);
-		projectPageEntity.setId(2);
-		List<ProjectPageEntity> projectPageList = new ArrayList<ProjectPageEntity>();
-		projectPageList.add(projectPageEntity);
-		this.portalProjectEntityDiffProjectPages.setProjectPages(projectPageList);
-//		System.out.println(this.portalProjectEntity.getProjectPages());
-	}
 }

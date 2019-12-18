@@ -33,8 +33,6 @@ public class ProjectPageEntityJavaUnitTest {
 	ProjectPageEntity projectPageEntityDiffDisplayOnMenu = new ProjectPageEntity();
 	ProjectPageEntity projectPageEntityDiffPortalProject = new ProjectPageEntity();
 	ProjectPageEntity projectPageEntityDiffRoleProjectPages = new ProjectPageEntity();
-	ProjectPageEntity projectPageEntityRoleProjectNull = new ProjectPageEntity();
-	ProjectPageEntity projectPageEntityRoleProjectAdd = new ProjectPageEntity();
 	
 
 	
@@ -201,35 +199,7 @@ public class ProjectPageEntityJavaUnitTest {
 	roleProjectList8.add(roleProjectPageEntity17);
 	roleProjectList8.add(roleProjectPageEntity18);
 	this.projectPageEntityDiffRoleProjectPages.setRoleProjectPageEntities(roleProjectList8);
-	
-//	this.projectPageEntityRoleProjectNull.setId(1);
-//	this.projectPageEntityRoleProjectNull.setName("test name");
-//	this.projectPageEntityRoleProjectNull.setUrl("test url");
-//	this.projectPageEntityRoleProjectNull.setTooltip("test tooltip");
-//	this.projectPageEntityRoleProjectNull.setIcon("test icon");
-//	this.projectPageEntityRoleProjectNull.setDisplayOnMenu(true);
-//	PortalProjectEntity portalProjectEntity0 = new PortalProjectEntity();
-//	portalProjectEntity0.setId(1);
-//	this.projectPageEntityRoleProjectNull.setPortalProject(portalProjectEntity0);
-//	RoleProjectPageEntity roleProjectPageEntity0 = null;
-//	List<RoleProjectPageEntity> roleProjectList0 = new ArrayList<>();
-//	roleProjectList0.add(roleProjectPageEntity0);
-//	this.projectPageEntityRoleProjectNull.setRoleProjectPageEntities(roleProjectList0);
-//	
-//	this.projectPageEntityRoleProjectAdd.setId(1);
-//	this.projectPageEntityRoleProjectAdd.setName("test name");
-//	this.projectPageEntityRoleProjectAdd.setUrl("test url");
-//	this.projectPageEntityRoleProjectAdd.setTooltip("test tooltip");
-//	this.projectPageEntityRoleProjectAdd.setIcon("test icon");
-//	this.projectPageEntityRoleProjectAdd.setDisplayOnMenu(true);
-//	PortalProjectEntity portalProjectEntity01 = new PortalProjectEntity();
-//	portalProjectEntity01.setId(1);
-//	this.projectPageEntityRoleProjectAdd.setPortalProject(portalProjectEntity01);
-//	RoleProjectPageEntity roleProjectPageEntity01 = new RoleProjectPageEntity();
-//	List<RoleProjectPageEntity> roleProjectList01 = new ArrayList<>();
-//	roleProjectList01.add(roleProjectPageEntity01);
-//	this.projectPageEntityRoleProjectAdd.setRoleProjectPageEntities(roleProjectList01);
-}
+	}
 	
 	@Test
 	public void getIdTest() {
@@ -294,13 +264,5 @@ public class ProjectPageEntityJavaUnitTest {
 	@Test
 	public void toStringTest() {
 		assertThat(this.projectPageEntity.toString()).isEqualTo("ProjectPageEntity{id=1, name=\'test name\', url=\'test url\', tooltip=\'test tooltip\', icon=\'test icon\', portalProject=ApplicationEntity{id=1, name=\'null\', menuItems=null}, displayOnMenu=true}");
-	}
-	
-	@Test
-	public void addRoleProjectPageEntityTest() {
-		
-//		Mockito.when(this.roleProjectPageEntities.add(roleProjectPageEntity)).thenReturn(null);
-		
-//		assertThat(this.projectPageEntity.addRoleProjectPageEntity(null)).isEqualTo(null);
 	}
 }
