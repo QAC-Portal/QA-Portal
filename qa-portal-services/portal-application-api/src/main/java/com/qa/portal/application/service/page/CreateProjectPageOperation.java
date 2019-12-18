@@ -13,15 +13,12 @@ public class CreateProjectPageOperation {
 
     private ProjectPageRepository projectPageRepository;
 
-    private PortalProjectRepository portalProjectRepository;
-
     private ProjectPageMapper projectPageMapper;
 
     public CreateProjectPageOperation(ProjectPageRepository projectPageRepository,
                                       PortalProjectRepository portalProjectRepository,
                                       ProjectPageMapper projectPageMapper) {
         this.projectPageRepository = projectPageRepository;
-        this.portalProjectRepository = portalProjectRepository;
         this.projectPageMapper = projectPageMapper;
     }
 
@@ -29,7 +26,7 @@ public class CreateProjectPageOperation {
         if (projectPageExists(projectPageDto)) {
             throw new QaPortalBusinessException("Portal Page already exists with the same name");
         }
-        return persistProjectPage(projectPageDto);
+        return persistProjectPage(projectPageDto); 
     }
 
     private ProjectPageDto persistProjectPage(ProjectPageDto projectPageDto) {

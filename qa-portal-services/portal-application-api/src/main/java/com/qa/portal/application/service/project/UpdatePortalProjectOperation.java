@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class UpdatePortalProjectOperation {
 
     private PortalProjectRepository portalProjectRepository;
-
+    
     private PortalProjectMapper portalProjectMapper;
 
     public UpdatePortalProjectOperation(PortalProjectRepository portalProjectRepository,

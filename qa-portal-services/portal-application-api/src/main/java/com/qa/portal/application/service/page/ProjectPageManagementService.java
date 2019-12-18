@@ -19,7 +19,7 @@ public class ProjectPageManagementService {
 
     @Transactional
     public ProjectPageDto createProjectPage(ProjectPageDto projectPageDto) {
-        return createProjectPageOperation.createProjectPage(projectPageDto);
+        return createProjectPageOperation.createProjectPage(projectPageDto); 
     }
 
     @Transactional
