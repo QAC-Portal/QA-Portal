@@ -36,7 +36,7 @@ public class ProjectPageServiceTest {
 
 	@Mock
 	public ProjectPageMapper projectPageMapper;
-	
+
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
@@ -63,13 +63,13 @@ public class ProjectPageServiceTest {
 		portalProjectEntity.setId(1);
 		portalProjectEntity.setName("ppname");
 		List<ProjectPageEntity> projectPageEntityList = new ArrayList<ProjectPageEntity>();
-		projectPageEntityList.add(projectPageEntity2);
+		projectPageEntityList.add(projectPageEntity2); 
 		portalProjectEntity.setProjectPages(projectPageEntityList);
 
 		RoleProjectPageEntity roleProjectPageEntity = new RoleProjectPageEntity();
 
 		ProjectPageEntity projectPageEntity = new ProjectPageEntity();
-		projectPageEntity.setId(1);
+		projectPageEntity.setId(1); 
 		projectPageEntity.setName("pename");
 		projectPageEntity.setUrl("www.url.com");
 		projectPageEntity.setTooltip("tooltip two");
