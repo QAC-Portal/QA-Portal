@@ -245,8 +245,9 @@ export class GenerateCvComponent implements OnInit {
 
   //User Buttons
   onSaveCvButtonClicked() {
+    
     const cvForm = this.getCvData();
-    if (!cvForm.id) {
+    if (!cvForm.id || cvForm.status === FAILED_REVIEW_STATUS ){
       cvForm.status = IN_PROGRESS_STATUS;
     }
     this.processCvServiceResponse(this.cvPersistService.persistCvForTrainee(cvForm));
@@ -281,6 +282,7 @@ export class GenerateCvComponent implements OnInit {
   }
   //Admin Buttons
   onApproveCvButtonClicked() {
+    debugger
     const cvForm = this.getCvData();
     cvForm.status = APPROVED_STATUS;
     this.cvPersistService.updateCv(cvForm);
@@ -309,7 +311,6 @@ export class GenerateCvComponent implements OnInit {
       (response) => {
         this.origCv = response;
         this.cvForm.patchValue({ ...response, skills: _.get(response, ['allSkills', '0'], {}) });
-        
         this.setPageEditStatus();
       },
       (error) => {
