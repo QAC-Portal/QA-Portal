@@ -3,8 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { QualificationsComponent } from './qualifications.component';
 import { MatTableModule, MatIconModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { QualificationModel } from '../../_common/models/cv.model';
 
-describe('QualificationsComponent', () => {
+fdescribe('QualificationsComponent', () => {
   let component: QualificationsComponent;
   let fixture: ComponentFixture<QualificationsComponent>;
 
@@ -59,16 +60,16 @@ describe('QualificationsComponent', () => {
 
   describe('ControlValueAccessor methods', () => {
     it('should store the onChange callback when called', () => {
-      const spy = jasmine.createSpy('onChangeSpy', (v) => { });
+      const spy = jasmine.createSpy('onChangeSpy', (v: QualificationModel[]) => { });
       component.onChange = null;
-      component.registerOnChange(spy);
+      (component as any).registerOnChange(spy);
       component.onChange(null);
       expect(spy).toHaveBeenCalledTimes(1);
     });
     it('should store the onTouch callback when called', () => {
       const spy = jasmine.createSpy('onTouchSpy', () => { });
       component.onTouch = null;
-      component.registerOnTouched(spy);
+      (component as any).registerOnTouched(spy);
       component.onTouch();
       expect(spy).toHaveBeenCalledTimes(1);
     });
