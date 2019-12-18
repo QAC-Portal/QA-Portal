@@ -28,5 +28,12 @@ public class ProfileTest {
                 profiles.getProfile1().getProfileFeedback().size());
     }
 
+    @Test
+    public void toStringTest() {
+        assertEquals("toString() is returning an unexpected result",
+                "Profile [profileDetails=some details about profile, profileFeedback={Feedback [reviewer=Dan Ryan, date=2019-11-12, comment=feedback 1],Feedback [reviewer=Steve Roddy, date=1972-06-30, comment=feedback 2],Feedback [reviewer=Tom Bennett, date=2011-06-31, comment=feedback 3]}]",
+                profiles.getProfile1().toString());
+    }
+
 
 }

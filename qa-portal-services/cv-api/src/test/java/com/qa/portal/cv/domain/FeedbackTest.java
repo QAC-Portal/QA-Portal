@@ -36,4 +36,11 @@ public class FeedbackTest {
                 "feedback 3",
                 feedback.getFeedbackList().get(2).getComment());
     }
+
+    @Test
+    public void toStringTest() {
+        assertEquals("toString() returning unexpected result",
+                "Feedback [reviewer=Steve Roddy, date=1972-06-30, comment=feedback 2]",
+                feedback.getFeedbackList().get(1).toString());
+    }
 }
