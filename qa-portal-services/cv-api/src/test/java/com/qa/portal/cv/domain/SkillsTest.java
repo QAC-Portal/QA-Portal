@@ -1,5 +1,6 @@
 package com.qa.portal.cv.domain;
 
+import com.qa.portal.cv.mocks.MockSkills;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,96 +17,76 @@ import static org.junit.Assert.assertEquals;
 public class SkillsTest {
 
 
-    private List<String> programmingLanguages = Arrays.asList("Java", "Go", "Python");
-    private List<String> ides = Arrays.asList("IntelliJ", "VS Code");
-    private List<String> operatingSystems = Arrays.asList("Ubuntu", "Debian", "Windows 10");
-    private List<String> devops = Arrays.asList("Docker", "Maven", "Git");
-    private List<String> databases = Arrays.asList("MySQL", "SQLite", "Redis", "PostgreSQL");
-    private List<String> platforms = Arrays.asList("Windows", "Mac", "Android");
-    private List<String> other = Arrays.asList("Photoshop", "Vegas Pro");
-
-    @InjectMocks
-    public Skills skills;
-
-    @Before
-    public void setVariables() {
-        skills.setProgrammingLanguages(programmingLanguages);
-        skills.setIdes(ides);
-        skills.setOperatingSystems(operatingSystems);
-        skills.setDevops(devops);
-        skills.setDatabases(databases);
-        skills.setPlatforms(platforms);
-        skills.setOther(other);
-    }
+    private MockSkills skills = new MockSkills();
 
     @Test
     public void getProgrammingLanguagesTest() {
         assertEquals("getProgrammingLanguages() returning an unexpected value",
-                programmingLanguages,
-                skills.getProgrammingLanguages());
+                Arrays.asList("Java", "Go", "Python"),
+                skills.getSkills1().getProgrammingLanguages());
         assertEquals("Programming language list incorrectly sized",
                 3,
-                skills.getProgrammingLanguages().size());
+                skills.getSkills1().getProgrammingLanguages().size());
     }
 
     @Test
     public void getIdesTest() {
         assertEquals("getIdes() returning an unexpected value",
-                ides,
-                skills.getIdes());
+                Arrays.asList("IntelliJ", "VS Code"),
+                skills.getSkills1().getIdes());
         assertEquals("IDE list incorrectly sized",
                 2,
-                skills.getIdes().size());
+                skills.getSkills1().getIdes().size());
     }
 
     @Test
     public void getOperatingSystemsTest() {
         assertEquals("getOperatingSystems() returning an unexpected value",
-                operatingSystems,
-                skills.getOperatingSystems());
+                Arrays.asList("Ubuntu", "Debian", "Windows 10"),
+                skills.getSkills1().getOperatingSystems());
         assertEquals("OS list incorrectly sized",
                 3,
-                skills.getOperatingSystems().size());
+                skills.getSkills1().getOperatingSystems().size());
     }
 
     @Test
     public void getDevopsTest() {
         assertEquals("getDevops() returning an unexpected value",
-                devops,
-                skills.getDevops());
+                Arrays.asList("Docker", "Maven", "Git"),
+                skills.getSkills1().getDevops());
         assertEquals("DevOps list incorrectly sized",
                 3,
-                skills.getDevops().size());
+                skills.getSkills1().getDevops().size());
     }
 
     @Test
     public void getDatabasesTest() {
         assertEquals("getDatabases returning an unexpected value",
-                databases,
-                skills.getDatabases());
+                Arrays.asList("MySQL", "SQLite", "Redis", "PostgreSQL"),
+                skills.getSkills1().getDatabases());
         assertEquals("Databases list incorrectly sized",
                 4,
-                skills.getDatabases().size());
+                skills.getSkills1().getDatabases().size());
     }
 
     @Test
     public void getPlatformsTest() {
         assertEquals("getPlatforms() returning an unexpected value",
-                platforms,
-                skills.getPlatforms());
+                Arrays.asList("Windows", "Mac", "Android"),
+                skills.getSkills1().getPlatforms());
         assertEquals("Platforms list incorrectly sized",
                 3,
-                skills.getPlatforms().size());
+                skills.getSkills1().getPlatforms().size());
     }
 
     @Test
     public void getOtherTest() {
         assertEquals("getOther() returning an unexpected value",
-                other,
-                skills.getOther());
+                Arrays.asList("Photoshop", "Vegas Pro"),
+                skills.getSkills1().getOther());
         assertEquals("Other list incorrectly sized",
                 2,
-                skills.getOther().size());
+                skills.getSkills1().getOther().size());
     }
 
 }

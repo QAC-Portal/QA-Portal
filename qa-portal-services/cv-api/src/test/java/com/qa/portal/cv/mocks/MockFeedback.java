@@ -1,12 +1,14 @@
-package com.qa.portal.cv.domain;
+package com.qa.portal.cv.mocks;
+
+import com.qa.portal.cv.domain.Feedback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MockFeedbackList {
+public class MockFeedback {
     private List<Feedback> feedbackList = new ArrayList<>();
 
-    public MockFeedbackList() {
+    public MockFeedback() {
         Feedback f1 = new Feedback();
         f1.setReviewer("Dan Ryan");
         f1.setDate("2019-11-12");

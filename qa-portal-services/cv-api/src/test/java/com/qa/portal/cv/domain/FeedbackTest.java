@@ -1,6 +1,6 @@
 package com.qa.portal.cv.domain;
 
-import org.junit.Before;
+import com.qa.portal.cv.mocks.MockFeedback;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class FeedbackTest {
 
     @InjectMocks
-    public MockFeedbackList feedback = new MockFeedbackList();
+    public MockFeedback feedback = new MockFeedback();
 
     @Test
     public void getReviewerTest() {

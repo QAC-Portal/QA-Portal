@@ -1,52 +1,38 @@
 package com.qa.portal.cv.domain;
 
-import org.junit.Before;
+import com.qa.portal.cv.mocks.MockQualifications;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class QualificationTest {
 
-    private MockFeedbackList feedback = new MockFeedbackList();
-
-    @InjectMocks
-    public Qualification qualification;
-
-    @Before
-    public void setVariables() {
-        qualification.setQualificationFeedback(feedback.getFeedbackList());
-        qualification.setQualificationDetails("some qualification details");
-    }
+    private MockQualifications qualifications = new MockQualifications();
 
     @Test
     public void getQualificationFeedbackTest() {
-        assertEquals("getQualificationFeedback() returning an unexpected value",
-                feedback.getFeedbackList(),
-                qualification.getQualificationFeedback());
         assertEquals("Feedback list incorrectly sized",
                 3,
-                qualification.getQualificationFeedback().size());
+                qualifications.getQualifications1().get(0).getQualificationFeedback().size());
     }
 
     @Test
     public void getQualificationDetailsTest() {
         assertEquals("getQualificationDetails() returning unexpected value",
                 "some qualification details",
-                qualification.getQualificationDetails());
+                qualifications.getQualifications1().get(0).getQualificationDetails());
     }
 
     @Test
     public void toStringTest() {
         assertEquals("toString() returning an unexpected result",
-                "Qualification [qualificationDetails=some qualification details, qualificationFeedback=" + feedback.getFeedbackList() + "]",
-                qualification.toString());
+                "Qualification [qualificationDetails=some qualification details, qualificationFeedback=" + qualifications.getQualifications1().get(0).getQualificationFeedback() + "]",
+                qualifications.getQualifications1().get(0).toString());
     }
 
 }

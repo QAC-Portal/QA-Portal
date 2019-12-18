@@ -1,9 +1,8 @@
 package com.qa.portal.cv.domain;
 
-import org.junit.Before;
+import com.qa.portal.cv.mocks.MockHobbies;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -13,33 +12,22 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class HobbiesTest {
 
-    private MockFeedbackList feedback = new MockFeedbackList();
+    private MockHobbies hobbies = new MockHobbies();
 
-    @InjectMocks
-    public Hobbies hobbies;
-
-    @Before
-    public void setVariables() {
-        hobbies.setHobbiesFeedback(feedback.getFeedbackList());
-
-        hobbies.setHobbiesDetails("some data about hobbies");
-
-    }
 
     @Test
     public void getHobbiesFeedbackTest() {
-        assertEquals("getHobbiesFeedback() returning an unexpected result",
-                feedback.getFeedbackList(),
-                hobbies.getHobbiesFeedback());
         assertEquals("Feedback list incorrectly sized",
                 3,
-                hobbies.getHobbiesFeedback().size());
+                hobbies.getHobbies1().getHobbiesFeedback().size());
     }
 
     @Test
     public void getHobbiesDetailsTest() {
-        assertEquals("getHobbiesDetails() returning unexpected result", "some data about hobbies", hobbies.getHobbiesDetails());
+        assertEquals("getHobbiesDetails() returning unexpected result", "some details about hobbies", hobbies.getHobbies1().getHobbiesDetails());
+
     }
+
 
 
 }

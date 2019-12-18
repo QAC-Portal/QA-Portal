@@ -3,8 +3,8 @@ package com.qa.portal.cv.rest;
 import com.qa.portal.common.security.QaSecurityContext;
 import com.qa.portal.cv.domain.CvSearchCriteria;
 import com.qa.portal.cv.domain.CvVersion;
+import com.qa.portal.cv.mocks.MockCvs;
 import com.qa.portal.cv.services.CvManagementService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -25,23 +25,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 public class CvManagementControllerTest {
 
-    private CvVersion cv1 = new CvVersion();
-    private CvVersion cv2 = new CvVersion();
-    private List<CvVersion> cvs = new ArrayList<>();
-
-    @Before
-    public void initialiseCv() {
-        cv1.setFullName("Steve Roddy");
-        cv1.setId("1234567890");
-
-        cv2.setFullName("John Smith");
-        cv2.setId("0987654321");
-
-        cvs.add(cv1);
-        cvs.add(cv2);
-
-
-    }
+    private MockCvs mockCvs = new MockCvs();
 
     @InjectMocks
     public CvManagementController cvManagementController;
@@ -55,62 +39,62 @@ public class CvManagementControllerTest {
 
     @Test
     public void createCvTest() {
-        Mockito.when(this.cvManagementService.createCv(cv1, qaSecurityContext)).thenReturn(cv1);
-        assertEquals(this.cvManagementController.createCv(cv1).getBody(), cv1);
-        assertEquals(200, this.cvManagementController.createCv(cv1).getStatusCodeValue());
+        Mockito.when(this.cvManagementService.createCv(mockCvs.getCv1(), qaSecurityContext)).thenReturn(mockCvs.getCv1());
+        assertEquals(this.cvManagementController.createCv(mockCvs.getCv1()).getBody(), mockCvs.getCv1());
+        assertEquals(200, this.cvManagementController.createCv(mockCvs.getCv1()).getStatusCodeValue());
     }
 
     @Test
     public void updateCvTest() {
-        Mockito.when(this.cvManagementService.updateCv(cv1)).thenReturn(cv1);
-        assertEquals(this.cvManagementController.updateCv(cv1).getBody(), cv1);
-        assertEquals(200, this.cvManagementController.updateCv(cv1).getStatusCodeValue());
+        Mockito.when(this.cvManagementService.updateCv(mockCvs.getCv1())).thenReturn(mockCvs.getCv1());
+        assertEquals(this.cvManagementController.updateCv(mockCvs.getCv1()).getBody(), mockCvs.getCv1());
+        assertEquals(200, this.cvManagementController.updateCv(mockCvs.getCv1()).getStatusCodeValue());
     }
 
     @Test
     public void getCvByIdTest() {
-        Mockito.when(this.cvManagementService.findById("1234567890")).thenReturn(cv1);
-        assertEquals(this.cvManagementController.getCvById("1234567890").getBody(), cv1);
+        Mockito.when(this.cvManagementService.findById("1234567890")).thenReturn(mockCvs.getCv1());
+        assertEquals(this.cvManagementController.getCvById("1234567890").getBody(), mockCvs.getCv1());
         assertEquals(200, this.cvManagementController.getCvById("1234567890").getStatusCodeValue());
     }
 
     @Test
     public void getAllTest() {
-        Mockito.when(this.cvManagementService.getAll()).thenReturn(cvs);
-        assertEquals(this.cvManagementController.getAll().getBody(), cvs);
+        Mockito.when(this.cvManagementService.getAll()).thenReturn(mockCvs.getCvs());
+        assertEquals(this.cvManagementController.getAll().getBody(), mockCvs.getCvs());
         assertEquals(200, this.cvManagementController.getAll().getStatusCodeValue());
     }
 
     @Test
     public void findByFullNameIgnoreCaseTest() {
         List<CvVersion> matches = new ArrayList<>();
-        matches.add(cv1);
+        matches.add(mockCvs.getCv1());
         Mockito.when(this.cvManagementService.findByFullNameIgnoreCase("Steve Roddy"))
                 .thenReturn(matches);
-        assertTrue(Objects.requireNonNull(this.cvManagementController.findByFullNameIgnoreCase("Steve Roddy").getBody()).contains(cv1));
+        assertTrue(Objects.requireNonNull(this.cvManagementController.findByFullNameIgnoreCase("Steve Roddy").getBody()).contains(mockCvs.getCv1()));
         assertEquals(200, this.cvManagementController.findByFullNameIgnoreCase("Steve Roddy").getStatusCodeValue());
     }
 
     @Test
     public void findCvVersionsForTraineeTest() {
         Mockito.when(this.cvManagementService.findByUserNameIgnoreCase(null))
-                .thenReturn(cvs);
-        assertTrue(Objects.requireNonNull(this.cvManagementController.findCvVersionsForTrainee().getBody()).contains(cv1));
+                .thenReturn(mockCvs.getCvs());
+        assertTrue(Objects.requireNonNull(this.cvManagementController.findCvVersionsForTrainee().getBody()).contains(mockCvs.getCv1()));
         assertEquals(200, this.cvManagementController.findCvVersionsForTrainee().getStatusCodeValue());
     }
 
     @Test
     public void findCurrentCvVersionForTraineeTest() {
         Mockito.when(this.cvManagementService.getCurrentCvVersionForUser(ArgumentMatchers.any()))
-                .thenReturn(cv1);
-        assertEquals(this.cvManagementController.findCurrentCvVersionForTrainee().getBody(), cv1);
+                .thenReturn(mockCvs.getCv1());
+        assertEquals(this.cvManagementController.findCurrentCvVersionForTrainee().getBody(), mockCvs.getCv1());
         assertEquals(200, this.cvManagementController.findCurrentCvVersionForTrainee().getStatusCodeValue());
     }
 
     @Test
     public void cvSearchTest() {
-        Mockito.when(this.cvManagementService.cvSearch(ArgumentMatchers.any(CvSearchCriteria.class))).thenReturn(cvs);
-        assertEquals(cvs, this.cvManagementController.cvSearch("cohort", "tech", "status", "Steve Roddy").getBody());
+        Mockito.when(this.cvManagementService.cvSearch(ArgumentMatchers.any(CvSearchCriteria.class))).thenReturn(mockCvs.getCvs());
+        assertEquals(mockCvs.getCvs(), this.cvManagementController.cvSearch("cohort", "tech", "status", "Steve Roddy").getBody());
     }
 
 }
