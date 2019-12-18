@@ -31,7 +31,7 @@ public class CreateRoleOperation {
         if (roleExists(roleDto)) {
             throw new QaPortalBusinessException("Role exists for supplied name");
         }
-
+        
         RoleEntity roleEntity = baseMapper.mapObject(roleDto, RoleEntity.class);
         portalApplicationRepository.findByName(roleDto.getPortalApplication().getName())
                 .ifPresent(pa -> roleEntity.setPortalApplication(pa));

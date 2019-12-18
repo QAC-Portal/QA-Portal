@@ -15,11 +15,6 @@ export class FormComponent implements OnInit {
 
   onCategoryChange(categoryResponse: ICategoryResponse, index: number): void {
     this.model.categoryResponses[index] = categoryResponse;
-    // this.modelChange.emit(this.model);
-
-    // console.log(`FormComponent::onCategoryChange`,
-    //   `\n\t model:`, this.model,
-    //   `\n\t category response changed:`, categoryResponse
-    // );
+    
   }
 }
