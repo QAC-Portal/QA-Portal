@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckBoxComponent } from './check-box.component';
-import { MatCheckboxModule, MatGridListModule, MatCardModule, MatInput, MatFormFieldModule } from '@angular/material';
+import { MatCheckboxModule, MatGridListModule, MatCardModule, MatInput, MatFormFieldModule, MatCheckboxChange } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { IQuestion, IQuestionResponse } from '../../_common/models';
 
@@ -55,4 +55,28 @@ describe('CheckBoxComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should test setCheckResponse, checked true ', () => {
+    let checked = true;
+    let value = "heyo";
+    let input: any = {
+      checked, source: {value}
+    }
+    let data = component.questionResponse.responseValues;
+    data.push(input);
+    component.setCheckResponse(input)
+    expect(component.questionResponse.responseValues).toEqual(data);
+  });
+
+  it('should test setCheckResponse, checked false', () => {
+
+    const testInput = {
+      checked: false, source: {value: 'toBeRemoved'}
+    };
+
+    component.questionResponse.responseValues = ['itemA', 'itemB', testInput.source.value, 'itemC'];
+    component.setCheckResponse(testInput as MatCheckboxChange);
+    expect(component.questionResponse.responseValues).toEqual(['itemA', 'itemB', 'itemC']);
+  });
+
 });

@@ -20,7 +20,7 @@ export class CvCardBaseComponent implements ControlValueAccessor {
   @Input() canComment: boolean;
   @Input() canEdit: boolean;
   @Input() showOpenButton: boolean = true;
-  
+
   public feedback: Feedback[];
 
   public onChange = (v: Feedback[]) => { };
@@ -51,13 +51,15 @@ export class CvCardBaseComponent implements ControlValueAccessor {
     SimpleBar.getScrollElement().scrollTo(0, SimpleBar.contentEl.clientHeight);
   }
 
-  onCommentCheckboxClicked(comment: Feedback, index: any){
+  onCommentCheckboxClicked(comment: Feedback, index: any) {
     event.preventDefault(); // Stop default checkbox behaviour
     event.stopPropagation(); // Stop the row from clicking when using a checkbox
     if (comment) {
       this.feedback[index].resolved = this.feedback[index] === undefined ? false : !this.feedback[index].resolved;
       //this.feedbackChange.emit(this.feedback);
     }
+    this.onChange(this.feedback);
+    this.onTouch();
   }
 
 
@@ -81,7 +83,7 @@ export class CvCardBaseComponent implements ControlValueAccessor {
     }
   }
 
-  
+
   // FormValueAccessor methods
   writeValue(fb: Feedback[]): void {
     this.feedback = fb;
