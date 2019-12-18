@@ -1,4 +1,4 @@
-import { Component, forwardRef, Output, EventEmitter } from '@angular/core';
+import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS } from '@angular/forms';
 import { QualificationModel, Feedback } from '../../_common/models/cv.model';
 import { MatTableDataSource } from '@angular/material';
@@ -30,6 +30,7 @@ export class QualificationsComponent implements ControlValueAccessor {
   public onChange = (v: QualificationModel[]) => { };
   public onTouch = () => { };
 
+  @Input() canEdit: boolean; 
   @Output() feedbackClick = new EventEmitter<{ index: number, qualifications: QualificationModel, feedback: Feedback[] }>();
 
   constructor() {
