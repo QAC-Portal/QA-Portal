@@ -93,7 +93,7 @@ public class CvManagementControllerTest {
 
     @Test
     public void cvSearchTest() {
-        Mockito.when(this.cvManagementService.cvSearch("", "", "", "")).thenReturn(mockCvs.getCvs());
+        Mockito.when(this.cvManagementService.cvSearch("cohort", "tech", "status", "Steve Roddy")).thenReturn(mockCvs.getCvs());
         assertEquals(mockCvs.getCvs(), this.cvManagementController.cvSearch("cohort", "tech", "status", "Steve Roddy").getBody());
     }
 
