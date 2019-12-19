@@ -10,6 +10,5 @@ export class AppComponent {
   constructor(appServ: ApplicationService) {
     appServ.onApplicationLoaded();
   }
-
 }
 

@@ -18,6 +18,9 @@ import { ApplicationService } from './_common/services/application.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PortalHomeComponent } from './portal-home/portal-home.component';
+import { PortalHelpComponent } from './portal-help/portal-help.component';
+import { PortalHelpContentComponent } from './portal-help/portal-help-content/portal-help-content.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { PortalHomeComponent } from './portal-home/portal-home.component';
     HeaderLinkComponent,
     PortalApplicationHomeComponent,
     PortalHomeComponent,
+    PortalHelpComponent,
+    PortalHelpContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,8 @@ import { PortalHomeComponent } from './portal-home/portal-home.component';
     QaCommonModule,
     AppRoutingModule,
     HttpClientModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    MatTooltipModule,
   ],
   providers: [
     ApplicationService,

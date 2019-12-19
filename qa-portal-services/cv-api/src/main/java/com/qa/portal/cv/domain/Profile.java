@@ -30,6 +30,21 @@ public class Profile {
 
 	@Override
 	public String toString() {
-		return "Profile [profileDetails=" + profileDetails + ", profileFeedback=" + profileFeedback + "]";
+		return "Profile [profileDetails=" + profileDetails + ", profileFeedback={" + feedbackListToString() + "}]";
+	}
+
+	private String feedbackListToString() {
+		String result = "";
+
+		if (this.getProfileFeedback().size() > 0) {
+			StringBuilder sb = new StringBuilder();
+
+			for (Feedback feedback : this.getProfileFeedback()) {
+				sb.append(feedback.toString()).append(",");
+			}
+
+			result = sb.deleteCharAt(sb.length() - 1).toString();
+		}
+		return result;
 	}
 }

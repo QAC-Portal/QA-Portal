@@ -74,21 +74,8 @@ public class CvManagementController {
                                                     @RequestParam(required = false) String tech,
                                                     @RequestParam(required = false) String status,
                                                     @RequestParam(required = false) String name) {
-    CvSearchCriteria c = new CvSearchCriteria("","","","");
-        // decode the query string
-        if (cohort != null && !cohort.isEmpty()) {
-            c.setCohort(cohort);
-        }
-        if (status != null && !status.isEmpty()) {
-            c.setCvStatus(status);
-        }
-        if (tech != null && !tech.isEmpty()) {
-            c.setTechnology(tech);
-        }
-        if (name != null && !name.isEmpty()) {
-            c.setFullName(name);
-        }
-        return ResponseEntity.ok(this.service.cvSearch(c));
+    
+        return ResponseEntity.ok(this.service.cvSearch(cohort, tech, status,name));
     }
 
 
