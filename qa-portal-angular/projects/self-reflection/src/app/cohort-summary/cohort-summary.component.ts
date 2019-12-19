@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input, Optional } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, Optional, Output } from '@angular/core';
 import { SummaryService } from './services/summary.service';
 import { Observable, Subscription } from 'rxjs';
 import { CohortSummaryModel } from '../_common/models/cohort-summary.model';
@@ -35,6 +35,7 @@ export class CohortSummaryComponent implements OnInit, OnDestroy {
       this.loadingData = false;
 
       this.uniqueTrainingPathways = lodash.uniq(summaries.map(s => s.pathway));
+      this.uniqueTrainingPathwayVersions = lodash.uniq(summaries.map(s => s.pathwayVersion));
     },
       (error) => {
         this.loadingData = false;
@@ -47,6 +48,8 @@ export class CohortSummaryComponent implements OnInit, OnDestroy {
     this.summarySubscription = this.cohortSummary$.subscribe((summaries) => {
       if (!this.value) {
         this.uniqueTrainingPathwayVersions = lodash.uniq(summaries.map(s => s.pathwayVersion));
+      } if(this.value){
+
       } else {
         this.uniqueTrainingPathwayVersions = lodash.uniq(summaries.filter(s => s.pathway === this.value)
           .map(s => s.pathwayVersion));
