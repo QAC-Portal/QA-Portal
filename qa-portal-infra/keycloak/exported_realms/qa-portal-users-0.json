@@ -89,60 +89,40 @@
     "notBefore" : 0,
     "groups" : [ ]
   }, {
-    "id" : "20ee9731-1bea-4458-b8fa-1d2bb741444b",
-    "createdTimestamp" : 1569860770249,
-    "username" : "service-account-qa-portal-services-core",
-    "enabled" : true,
-    "totp" : false,
-    "emailVerified" : false,
-    "email" : "service-account-qa-portal-services-core@placeholder.org",
-    "serviceAccountClientId" : "qa-portal-services-core",
-    "credentials" : [ ],
-    "disableableCredentialTypes" : [ ],
-    "requiredActions" : [ ],
-    "clientRoles" : {
-      "qa-portal-services-core" : [ "uma_protection" ],
-      "scott-client" : [ "uma_protection" ],
-      "qa-portal-ui" : [ "uma_protection" ],
-      "account" : [ "view-profile", "manage-account" ]
-    },
-    "notBefore" : 0,
-    "groups" : [ ]
-  }, {
     "id" : "c1576e67-c14e-44bb-82a9-a22af912d27d",
     "createdTimestamp" : 1569915433399,
-    "username" : "service-account-qa-portal-ui",
+    "username" : "sacc-qa-portal-ui",
     "enabled" : true,
     "totp" : false,
     "emailVerified" : false,
-    "email" : "service-account-qa-portal-ui@placeholder.org",
+    "email" : "sacc-qa-portal-ui@qa.com",
     "serviceAccountClientId" : "qa-portal-ui",
     "credentials" : [ ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
     "realmRoles" : [ "offline_access", "uma_authorization" ],
     "clientRoles" : {
+	  "qa-portal-services-core" : [ "uma_protection" ],
       "qa-portal-ui" : [ "uma_protection" ],
       "account" : [ "view-profile", "manage-account" ]
     },
     "notBefore" : 0,
     "groups" : [ ]
-  }, {
-    "id" : "b36342bb-bdb5-4b78-b5c8-d709d9bdae5f",
-    "createdTimestamp" : 1569931221137,
-    "username" : "service-account-scott-client",
+  },{
+    "id" : "20ee9731-1bea-4458-b8fa-1d2bb741444b",
+    "createdTimestamp" : 1569860770249,
+    "username" : "sacc-qa-portal-services-core",
     "enabled" : true,
     "totp" : false,
     "emailVerified" : false,
-    "email" : "service-account-scott-client@placeholder.org",
-    "serviceAccountClientId" : "scott-client",
+    "email" : "sacc-qa-portal-services-core@qa.com",
+    "serviceAccountClientId" : "qa-portal-services-core",
     "credentials" : [ ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "offline_access", "uma_authorization" ],
+	"realmRoles" : [ "offline_access", "uma_authorization" ],
     "clientRoles" : {
       "qa-portal-services-core" : [ "uma_protection" ],
-      "scott-client" : [ "uma_protection" ],
       "qa-portal-ui" : [ "uma_protection" ],
       "account" : [ "view-profile", "manage-account" ]
     },
