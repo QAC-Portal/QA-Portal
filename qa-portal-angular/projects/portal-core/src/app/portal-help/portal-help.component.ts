@@ -6,7 +6,7 @@ import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-portal-help',
   templateUrl: './portal-help.component.html',
-  styleUrls: ['./portal-help.component.css']
+  styleUrls: ['./portal-help.component.scss']
 })
 export class PortalHelpComponent{
   panelOpenState = false;
