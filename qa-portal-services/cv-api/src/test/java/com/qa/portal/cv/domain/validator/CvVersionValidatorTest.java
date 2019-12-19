@@ -63,7 +63,7 @@ public class CvVersionValidatorTest {
 
     @Test(expected = QaPortalBusinessException.class)
     public void validateQualificationEntriesTest() {
-        Mockito.when(environment.getProperty("cv.qualification.entries.max")).thenReturn("-1");
+        Mockito.when(environment.getProperty("cv.qualification.entries.max")).thenReturn("1");
         cvVersionValidator.validateCvVersion(cvs.getCv2());
     }
 
