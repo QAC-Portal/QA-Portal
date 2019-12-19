@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, forwardRef, EventEmitter, Output, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS } from '@angular/forms';
 import { WorkExperienceModel, Feedback } from '../../_common/models/cv.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -39,6 +39,7 @@ export class WorkExperienceComponent implements ControlValueAccessor {
   public onChange = (v: WorkExperienceModel[]) => {};
   public onTouch = () => {};
 
+  @Input() canEdit: boolean; 
   @Output() feedbackClick = new EventEmitter<{ index: number, workExperiance: WorkExperienceModel, feedback: Feedback[] }>();
 
   constructor() {
