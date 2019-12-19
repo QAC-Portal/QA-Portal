@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseEvaluationComponent } from './course-evaluation.component';
-import { MockComponents } from 'ng-mocks';
+// import { MockComponents } from 'ng-mocks';
 import { EvaluationTableComponent } from '../evaluation-table/evaluation-table.component';
 
 describe('CourseEvaluationComponent', () => {
@@ -12,7 +12,7 @@ describe('CourseEvaluationComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         CourseEvaluationComponent,
-        MockComponents(EvaluationTableComponent)
+        // MockComponents(EvaluationTableComponent)
       ]
     })
       .compileComponents();
