@@ -19,7 +19,7 @@ export class CvCardBaseComponent implements ControlValueAccessor {
   @Input() cardTitle: string;
   @Input() canComment: boolean;
   @Input() canEdit: boolean;
-  @Input() showOpenButton: boolean = true;
+  @Input() showOpenButton: boolean;
 
   public feedback: Feedback[];
 

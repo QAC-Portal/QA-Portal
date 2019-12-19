@@ -280,7 +280,7 @@ export class GenerateCvComponent implements OnInit {
     });
   }
   onCvSubmitForReview(cvForm): void {
-    this.cvPersistService.persistCvForTrainee(cvForm);
+    this.processCvServiceResponse(this.cvPersistService.persistCvForTrainee(cvForm));
   }
   onNewCvButtonClicked() {
     const cvForm = this.getCvData();
@@ -289,16 +289,15 @@ export class GenerateCvComponent implements OnInit {
   }
   //Admin Buttons
   onApproveCvButtonClicked() {
-    debugger
     const cvForm = this.getCvData();
     cvForm.status = APPROVED_STATUS;
-    this.cvPersistService.updateCv(cvForm);
+    this.processCvServiceResponse(this.cvPersistService.updateCv(cvForm));
     this.navigateToAdminSearch();
   }
   onFailCvButtonClicked() {
     const cvForm = this.getCvData();
     cvForm.status = FAILED_REVIEW_STATUS;
-    this.cvPersistService.updateCv(cvForm);
+    this.processCvServiceResponse(this.cvPersistService.updateCv(cvForm));
     this.navigateToAdminSearch();
   }
   private navigateToAdminSearch() {
