@@ -36,4 +36,9 @@ public class Feedback {
         this.comment = comment;
     }
 
+    @Override
+    public String toString() {
+        return "Feedback [reviewer=" + reviewer + ", date=" + date + ", comment=" + comment + "]";
+    }
+
 }

@@ -10,7 +10,7 @@ import { QaErrorHandlerService } from 'projects/portal-core/src/app/_common/serv
 import { MockQaErrorHandlerService } from 'projects/portal-core/src/app/_mocks/qa-error-handler.service.mock';
 import { RouterTestingModule } from '@angular/router/testing';
 
-fdescribe('TrainerFeedbackPageComponent', () => {
+describe('TrainerFeedbackPageComponent', () => {
   let component: TrainerFeedbackPageComponent;
   let fixture: ComponentFixture<TrainerFeedbackPageComponent>;
 
