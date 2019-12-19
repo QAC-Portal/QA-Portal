@@ -8,18 +8,18 @@ import { NavigationEnd, Router } from '@angular/router';
   templateUrl: './portal-help.component.html',
   styleUrls: ['./portal-help.component.css']
 })
-export class PortalHelpComponent{
+export class PortalHelpComponent {
   panelOpenState = false;
   helptext = "Test";
   currentUrl = window.location.href;
   userRole: boolean;
   constructor(private keycloak: KeycloakService, public helpService: QaHelpService, private router: Router) {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd){
-      this.userRole = this.keycloak.isUserInRole("training-user");
-   };
-  });
-};
+      if (event instanceof NavigationEnd) {
+        this.userRole = this.keycloak.isUserInRole("training-user");
+      };
+    });
+  };
 };
 
 

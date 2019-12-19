@@ -15,7 +15,8 @@ describe('PortalHelpContentComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule]
+        HttpClientTestingModule
+      ]
     })
       .compileComponents();
   }));

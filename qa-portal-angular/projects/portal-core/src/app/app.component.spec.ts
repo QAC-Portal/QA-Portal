@@ -8,6 +8,7 @@ import { MockComponents } from 'ng-mocks';
 import { PortalSideMenuComponent } from '../app/portal-side-menu/portal-side-menu.component';
 import { KeycloakService } from 'keycloak-angular';
 import { MockKeycloakService } from './_mocks/keycloak.service.mock';
+import { PortalHelpComponent } from './portal-help/portal-help.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -22,7 +23,11 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        MockComponents(PortalSideMenuComponent, PortalHeaderComponent)
+        MockComponents(
+          PortalSideMenuComponent,
+          PortalHeaderComponent,
+          PortalHelpComponent
+        )
       ],
       providers: [
         { provide: ApplicationService, useClass: MockApplicationService },

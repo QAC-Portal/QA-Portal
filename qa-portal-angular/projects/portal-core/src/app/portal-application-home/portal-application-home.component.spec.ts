@@ -9,13 +9,13 @@ import { MockComponents } from 'ng-mocks';
 
 import { MatDividerModule } from '@angular/material/divider';
 import { HeaderLinkComponent } from '../header-link/header-link.component';
-import { MatCardModule, MatListModule, MatIconModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
+import { MatCardModule, MatListModule, MatIconModule, MatTooltipModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('PortalApplicationHomeComponent', () => {
   let component: PortalApplicationHomeComponent;
   let fixture: ComponentFixture<PortalApplicationHomeComponent>;
-  let applicationService: ApplicationService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,7 +24,9 @@ describe('PortalApplicationHomeComponent', () => {
         MatCardModule,
         MatListModule,
         MatIconModule,
-        RouterModule
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatTooltipModule
       ],
       declarations: [ PortalApplicationHomeComponent, MockComponents(HeaderLinkComponent) ],
       providers: [

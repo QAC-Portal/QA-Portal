@@ -2,9 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ApplicationService } from '../../_common/services/application.service';
 import { MockApplicationService } from '../../_mocks/application.service.mock';
 import { PortalSideMenuContentComponent } from './portal-side-menu-content.component';
-import { RouterModule } from '@angular/router';
 import { MatTooltipModule, MatIconModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PortalSideMenuContentComponent', () => {
   let component: PortalSideMenuContentComponent;
@@ -12,12 +12,19 @@ describe('PortalSideMenuContentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PortalSideMenuContentComponent ],
-      imports: [ RouterModule, MatTooltipModule, MatIconModule, HttpClientModule ],
+      declarations: [
+        PortalSideMenuContentComponent
+      ],
+      imports: [
+        RouterTestingModule,
+        MatTooltipModule,
+        MatIconModule,
+        HttpClientModule
+      ],
       providers: [
         { provide: ApplicationService, useClass: MockApplicationService }],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

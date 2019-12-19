@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatIconModule, MatMenuModule, MatToolbarModule } from '@angular/material';
+import { MatIconModule, MatMenuModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { PortalHeaderComponent } from './portal-header.component';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,9 +11,10 @@ import { ApplicationService } from '../_common/services/application.service';
 import { MockApplicationService } from '../_mocks/application.service.mock';
 import { KeycloakService } from 'keycloak-angular';
 import { MockKeycloakService } from '../_mocks/keycloak.service.mock';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
-describe('Portal Header Component Tests', () => {
+describe('PortalHeaderComponent', () => {
   let component: PortalHeaderComponent;
   let keycloakService: KeycloakService;
   let fixture: ComponentFixture<PortalHeaderComponent>;
@@ -26,11 +27,14 @@ describe('Portal Header Component Tests', () => {
         MatIconModule,
         MatToolbarModule,
         BrowserAnimationsModule,
-        RouterTestingModule
-        
-        
+        RouterTestingModule,
+        MatTooltipModule,
+        HttpClientTestingModule
       ],
-      declarations: [PortalHeaderComponent, MockComponents(HeaderLinkComponent)],
+      declarations: [
+        PortalHeaderComponent,
+        MockComponents(HeaderLinkComponent)
+      ],
       providers: [
         { provide: ApplicationService, useClass: MockApplicationService },
         { provide: KeycloakService, useClass: MockKeycloakService }
@@ -42,13 +46,13 @@ describe('Portal Header Component Tests', () => {
     fixture = TestBed.createComponent(PortalHeaderComponent);
     keycloakService = TestBed.get(KeycloakService);
     component = fixture.componentInstance;
-    
+
 
     spyOn(keycloakService, 'getUsername').and.callThrough();
 
     fixture.detectChanges();
 
-    
+
   });
 
   it('should be created', () => {
@@ -68,7 +72,7 @@ describe('Portal Header Component Tests', () => {
       expect(url).toContain('/portal/home');
 
 
-      
+
       done();
       return new Promise<void>(res => res());
     })

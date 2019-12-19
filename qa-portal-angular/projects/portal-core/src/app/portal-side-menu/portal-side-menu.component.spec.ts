@@ -5,6 +5,7 @@ import { MockComponents } from 'ng-mocks';
 import { PortalSideMenuContentComponent } from './portal-side-menu-content/portal-side-menu-content.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('PortalSideMenuComponent', () => {
   let component: PortalSideMenuComponent;
@@ -20,7 +21,8 @@ describe('PortalSideMenuComponent', () => {
         MatSidenavModule,
         MatIconModule,
         RouterTestingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HttpClientTestingModule
       ]
     })
       .compileComponents();
