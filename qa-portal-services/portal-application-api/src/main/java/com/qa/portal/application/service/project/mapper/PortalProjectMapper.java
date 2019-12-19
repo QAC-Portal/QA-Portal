@@ -82,11 +82,11 @@ public class PortalProjectMapper {
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> getExistingProjectPages(PortalProjectEntity portalProjectEntity) {
-        return portalProjectEntity.getProjectPages().stream()
-                .map(pp -> pp.getId())
-                .collect(Collectors.toList());
-    }
+//    private List<Integer> getExistingProjectPages(PortalProjectEntity portalProjectEntity) {
+//        return portalProjectEntity.getProjectPages().stream()
+//                .map(pp -> pp.getId())
+//                .collect(Collectors.toList());
+//    }
 
     private PortalProjectEntity getExistingPortalProject(PortalProjectDto portalProjectDto) {
         return portalProjectRepository.findById(portalProjectDto.getId())
