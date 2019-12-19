@@ -10,7 +10,7 @@ class MockHttpClient {
   }
 }
 
-fdescribe('RetrieveTrainerEvaluationHistoryService', () => {
+describe('RetrieveTrainerEvaluationHistoryService', () => {
   let service: RetrieveTrainerEvaluationHistoryService;
   let httpClient: HttpClient;
 
