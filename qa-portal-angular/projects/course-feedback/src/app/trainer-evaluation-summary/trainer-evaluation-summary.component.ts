@@ -7,7 +7,7 @@ import {TrainerEvaluationSummaryModel} from './models/trainer-evaluation-summary
 @Component({
   selector: 'app-trainer-evaluation-summary',
   templateUrl: './trainer-evaluation-summary.component.html',
-  styleUrls: ['./trainer-evaluation-summary.component.css']
+  styleUrls: ['./trainer-evaluation-summary.component.scss']
 })
 export class TrainerEvaluationSummaryComponent implements OnInit {
    viewModel: TrainerEvaluationSummaryModel;

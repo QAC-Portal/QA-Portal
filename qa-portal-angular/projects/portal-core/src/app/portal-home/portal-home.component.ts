@@ -5,7 +5,7 @@ import { SideMenuService } from '../_common/services/side-menu.service';
 @Component({
   selector: 'app-portal-home',
   templateUrl: './portal-home.component.html',
-  styleUrls: ['./portal-home.component.css']
+  styleUrls: ['./portal-home.component.scss']
 })
 export class PortalHomeComponent{
 
