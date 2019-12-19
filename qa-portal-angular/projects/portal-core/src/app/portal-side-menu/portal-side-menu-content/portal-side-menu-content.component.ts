@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SideMenuService } from '../../_common/services/side-menu.service';
 import { ApplicationService } from '../../_common/services/application.service';
+import { QaHelpService } from '../../_common/services/qa-help.service';
 
 @Component({
   selector: 'app-portal-side-menu-content',
@@ -13,7 +14,8 @@ export class PortalSideMenuContentComponent {
 
   constructor(
     public appService: ApplicationService,
-    public sideMenuService: SideMenuService) { }
+    public sideMenuService: SideMenuService,
+    public QaHelpService: QaHelpService) { }
 
   toggleDrawer() {
     this.opened = !this.opened;
