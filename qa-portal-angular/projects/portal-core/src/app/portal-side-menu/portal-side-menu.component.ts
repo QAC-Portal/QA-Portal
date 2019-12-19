@@ -7,6 +7,7 @@ import {
   transition
 } from '@angular/animations';
 import { SideMenuService } from '../_common/services/side-menu.service';
+import { QaHelpService } from '../_common/services/qa-help.service';
 
 @Component({
   selector: 'app-portal-side-menu',
@@ -24,7 +25,7 @@ import { SideMenuService } from '../_common/services/side-menu.service';
   ]
 })
 export class PortalSideMenuComponent {
-  constructor(public sideMenuService: SideMenuService) { }
+  constructor(public sideMenuService: SideMenuService, private helpService: QaHelpService) { }
 
   animating = false;
 

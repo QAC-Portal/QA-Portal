@@ -18,9 +18,10 @@
                   [routerLinkActiveOptions]="{exact: false}" class="menu-item"
                   [matTooltip]="!sideMenuService.sideMenuOpen ? projectPage.name : ''"
                   matTooltipPosition="after"
-                  matTooltipClass="menu-item-tooltip">
+                  matTooltipClass="menu-item-tooltip"
+                  >
 
-            <div class="menu-item-content">
+            <div class="menu-item-content" [matTooltip]="sideMenuService.sideMenuOpen ? QaHelpService.tooltipMaker(projectPage.name) : ''">
               <div class="menu-item-icon">
                 <mat-icon [svgIcon]="projectPage.icon">{{projectPage.icon || 'bookmark'}}</mat-icon>
               </div>

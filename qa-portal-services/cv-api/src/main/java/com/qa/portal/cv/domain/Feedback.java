@@ -45,7 +45,14 @@ public class Feedback {
 	public void setResolved(Boolean resolved) {
 		this.resolved = resolved;
 	}
-    
+
+     @Override
+    public String toString() {
+        return "Feedback [reviewer=" + reviewer + ", date=" + date + ", comment=" + comment + "]";
+    }
     
 
 }
+   
+
+
