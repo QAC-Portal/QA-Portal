@@ -155,7 +155,6 @@ export class GenerateCvComponent implements OnInit {
           this.origCv = cv;
           this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
           this.refreshPageStatus();
-          console.log(cv);
         }
       },
       (error) => {
@@ -171,7 +170,6 @@ export class GenerateCvComponent implements OnInit {
             if (this.noExistingCvForTrainee(cv)) {
               //should throw an error of some kind.
             } else {
-              console.log(cv);
               this.origCv = cv;
               this.cvForm.patchValue({ ...cv, skills: _.get(cv, ['allSkills', '0'], {}) });
               this.refreshPageStatus();
@@ -195,7 +193,7 @@ export class GenerateCvComponent implements OnInit {
   }
 
   private processError(error: any) {
-    //this.loadingData = false;
+    this.isLoading = false;
     this.errorHandlerService.handleError(error);
   }
 
@@ -263,7 +261,6 @@ export class GenerateCvComponent implements OnInit {
   onSubmitCvButtonClicked() {
     const cvForm = this.getCvData();
     this.openDialog(cvForm)
-    //This needs to disable any further edits to the CV, wich it curently doesn't
   }
   openDialog(cvForm): void {
     const dialogRef = this.dialog.open(SubmitConfirmDialogComponent, {

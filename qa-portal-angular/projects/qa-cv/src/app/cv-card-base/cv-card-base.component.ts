@@ -56,7 +56,6 @@ export class CvCardBaseComponent implements ControlValueAccessor {
     event.stopPropagation(); // Stop the row from clicking when using a checkbox
     if (comment) {
       this.feedback[index].resolved = this.feedback[index] === undefined ? false : !this.feedback[index].resolved;
-      //this.feedbackChange.emit(this.feedback);
     }
     this.onChange(this.feedback);
     this.onTouch();

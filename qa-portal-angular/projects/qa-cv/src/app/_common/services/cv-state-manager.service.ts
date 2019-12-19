@@ -14,11 +14,11 @@ export class CvStateManagerService {
 
   public isPageEditable(activatedRoute: ActivatedRoute, cvData: CvModel): boolean {
     let isEditable = false;
-    // if (activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE) {
-    //   if (ADMIN_USER_EDIT_STATES.includes(cvData.status)) {
-    //     isEditable = true;
-    //   }
-    // }
+    if (activatedRoute.snapshot.data.roles[0] === TRAINING_ADMIN_ROLE) {
+      if (ADMIN_USER_EDIT_STATES.includes(cvData.status)) {
+        isEditable = true;
+      }
+    }
 
 
     if (activatedRoute.snapshot.data.roles[0] === TRAINEE_ROLE) {

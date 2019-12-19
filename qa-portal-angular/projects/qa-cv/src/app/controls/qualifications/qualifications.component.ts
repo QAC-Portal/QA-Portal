@@ -2,7 +2,6 @@ import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/cor
 import { NG_VALUE_ACCESSOR, ControlValueAccessor, NG_VALIDATORS } from '@angular/forms';
 import { QualificationModel, Feedback } from '../../_common/models/cv.model';
 import { MatTableDataSource } from '@angular/material';
-//import { IQualification } from '../../_common/models/qualification.model';
 
 @Component({
   selector: 'app-qualifications',
