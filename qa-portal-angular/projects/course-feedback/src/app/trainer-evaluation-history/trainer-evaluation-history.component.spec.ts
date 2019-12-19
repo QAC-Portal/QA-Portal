@@ -75,11 +75,6 @@ fdescribe('TrainerEvaluationHistoryComponent', () => {
 
   it('should respond with the approproate error when data is not returned from api', inject([QaErrorHandlerService], (service: QaErrorHandlerService) => {
 
-    // const spy = spyOn(console, 'log');;
-    // const error: HttpErrorResponse = new HttpErrorResponse({ error: 'Error', status: 400 });
-    // service.handleError(error);
-    // expect(spy).toHaveBeenCalledWith(error);
-
     spyOn(retTrainerEvalHistService, 'getEvalHistory').and.returnValue(throwError('some error'));
 
     component.ngOnInit();
