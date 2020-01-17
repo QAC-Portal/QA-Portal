@@ -52,7 +52,7 @@ cv:
     detail:
       max: 750
 
-  enable_public_endpoints: false
+  enable_public_endpoints: true
 
   paths:
     logopath: target/classes/QA_Logo.png
