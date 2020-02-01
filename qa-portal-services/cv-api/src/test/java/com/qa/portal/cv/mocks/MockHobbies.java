@@ -17,6 +17,7 @@ public class MockHobbies {
 
 
         hobbies2.setHobbiesDetails(setLimitExceedingHobbies());
+        hobbies2.setHobbiesFeedback(mockFeedback.getFeedbackList());
     }
 
     private String setLimitExceedingHobbies() {

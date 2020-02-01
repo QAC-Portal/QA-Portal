@@ -29,6 +29,8 @@ public class MockQualifications {
         q3.setQualificationDetails("English 2:2 at University of Sheffield");
         q3.setQualificationFeedback(mockFeedback.getFeedbackList());
         qualifications2.add(q3);
+        qualifications2.add(q3);
+        qualifications2.add(q3);
     }
 
     public List<Qualification> getQualifications1() {

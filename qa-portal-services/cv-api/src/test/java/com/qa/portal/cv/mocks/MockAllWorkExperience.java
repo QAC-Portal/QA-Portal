@@ -19,6 +19,8 @@ public class MockAllWorkExperience {
         w1.setWorkExperienceFeedback(feedback.getFeedbackList());
         work1.add(w1);
         work2.add(w1);
+        work2.add(w1);
+
 
         WorkExperience w2 = new WorkExperience();
         w2.setJobTitle("Lab assistant");
@@ -28,9 +30,18 @@ public class MockAllWorkExperience {
 
         WorkExperience w3 = new WorkExperience();
         w3.setJobTitle("Sandwich architect");
-        w3.setWorkExperienceDetails("some details about work experience");
+        w3.setWorkExperienceDetails(setLimitExceedingWorkExperience());
         w3.setWorkExperienceFeedback(feedback.getFeedbackList());
         work2.add(w3);
+        work2.add(w3);
+    }
+
+    private String setLimitExceedingWorkExperience() {
+        StringBuilder details = new StringBuilder("a");
+        while (details.length() < 1000000) {
+            details.append("a");
+        }
+        return details.toString();
     }
 
     public List<WorkExperience> getWork1() {
