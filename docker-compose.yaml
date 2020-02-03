@@ -11,6 +11,7 @@ services:
     ports:
       - target: 5432
         published: 5432
+        protocol: tcp
 
   adminer:
     image: adminer
