@@ -8,10 +8,6 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
-    ports:
-      - target: 5432
-        published: 5432
-        protocol: tcp
 
   adminer:
     image: adminer
@@ -25,10 +21,6 @@ services:
     build: ./qa-portal-infra
     depends_on:
       - database
-    environment:
-      - DB_VENDOR=postgres
-      - DB_ADDR=database
-      - DB_PORT=5432
-      - DB_DATABASE=keycloak
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+    ports:
+      - 8070:8080
+~                    
