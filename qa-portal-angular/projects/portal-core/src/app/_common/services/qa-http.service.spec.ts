@@ -4,9 +4,6 @@ import { QaHttpService } from './qa-http.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('QaHttpService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
-
-
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
       HttpClientTestingModule

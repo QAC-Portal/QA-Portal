@@ -13,11 +13,21 @@
           </button>
         </div>
         <div #commentContainer class="middle" data-simplebar>
-          <div class="comment-bubble" *ngFor="let comment of feedback">
+          <div class="comment-bubble" *ngFor="let comment of feedback; let i = index">
 
-            <div class="comment-body">
-              {{comment.comment}}
+            <div class="checkbox-row">
+              <div class="comment-body">
+                {{comment.comment}}
+              </div>
+              <div class="checkbox-div">
+                <mat-checkbox *ngIf="canComment" [checked]="comment.resolved"
+                  (click)="onCommentCheckboxClicked(comment, i);">Resolved</mat-checkbox>
+
+                <mat-icon *ngIf="comment.resolved && !canComment">done_outline</mat-icon>
+                <mat-icon *ngIf="!comment.resolved && !canComment">highlight_off</mat-icon>
+              </div>
             </div>
+
             <div class="comment-details mat-caption">
               <div class="reviewer">
                 {{comment.reviewer}}
@@ -36,7 +46,7 @@
         <div class="bottom" *ngIf="canComment">
           <form class="comment-form" (ngSubmit)="addFeedbackItem()">
             <mat-form-field class="comment-form-field" class="comment-field"
-                            [hideRequiredMarker]="options.value.hideRequired" floatLabel="never">
+              [hideRequiredMarker]="options.value.hideRequired" floatLabel="never">
               <input [formControl]="commentInput" type="text" matInput placeholder="Write a comment" autocomplete="off">
               <mat-icon matSuffix (click)="addFeedbackItem()">send
               </mat-icon>
@@ -46,10 +56,10 @@
       </div>
     </mat-drawer>
     <mat-card-header>
-        <mat-card-title>{{cardTitle || ''}}</mat-card-title>
-        <button mat-icon-button *ngIf="showOpenButton && !drawer.opened" (click)="drawer.open()" title="Show comments">
-          <mat-icon>feedback</mat-icon>
-        </button>
+      <mat-card-title>{{cardTitle || ''}}</mat-card-title>
+      <button mat-icon-button *ngIf="showOpenButton && !drawer.opened" (click)="drawer.open()" title="Show comments">
+        <mat-icon>feedback</mat-icon>
+      </button>
     </mat-card-header>
     <mat-card-content>
       <div class="card-base-content-wrapper">

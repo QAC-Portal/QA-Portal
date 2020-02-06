@@ -27,7 +27,13 @@ export class CVSearchHistoryService {
 
     /* GET cvs whose name contains search term */
     searchCVs(params: { name: string, cohort: string, tech: string, status: string }): Observable<CVSearchModel[]> {
-        return this.qahttp.get<CVSearchModel[]>({ ref: 'CV_SEARCH' }, { params }).pipe(
+        const cleanParams = {};
+        Object.keys(params).forEach(k => {
+            if(params[k]) {
+                cleanParams[k] = params[k];
+            }
+        });
+        return this.qahttp.get<CVSearchModel[]>({ ref: 'CV_SEARCH' }, { params: cleanParams }).pipe(
             catchError(this.handleError<CVSearchModel[]>('searchCVs', []))
         );
     }
