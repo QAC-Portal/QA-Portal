@@ -1,11 +1,14 @@
 package com.qa.portal.common.security;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.keycloak.representations.AccessToken;
+import org.keycloak.representations.IDToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,42 +17,49 @@ import org.springframework.stereotype.Component;
 @Component
 public class QaSecurityContext {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(QaSecurityContext.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(QaSecurityContext.class);
 
-    private static final String COHORT_ROLE_PREFIX = "cohort_";
+	private Object URL;
 
-    public String getUserName() {
-        return getAccessToken().getPreferredUsername();
-    }
+	private static final String COHORT_ROLE_PREFIX = "cohort_";
 
-    public String getName() {
-        return getAccessToken().getName();
-    }
+	public String getUserName() {
+		return getAccessToken().getPreferredUsername();
+	}
 
-    public Set<String> getRoles() {
-        return getAccessToken().getRealmAccess().getRoles().stream()
-                .filter(r -> !r.startsWith(COHORT_ROLE_PREFIX))
-                .collect(Collectors.toSet());
-    }
+	public String getName() {
+		return getAccessToken().getName();
+	}
 
-    public Set<String> getCohorts() {
-        return getAccessToken().getRealmAccess().getRoles().stream()
-                .filter(r -> r.startsWith(COHORT_ROLE_PREFIX))
-                .map(r -> r.substring(COHORT_ROLE_PREFIX.length()).replace('_', ' '))
-                .collect(Collectors.toSet());
-    }
+	public Set<String> getRoles() {
+		return getAccessToken().getRealmAccess().getRoles().stream().filter(r -> !r.startsWith(COHORT_ROLE_PREFIX))
+				.collect(Collectors.toSet());
+	}
 
-    public String getFirstName() {
-        return getAccessToken().getGivenName();
-    }
+	public Set<String> getCohorts() {
+		return getAccessToken().getRealmAccess().getRoles().stream().filter(r -> r.startsWith(COHORT_ROLE_PREFIX))
+				.map(r -> r.substring(COHORT_ROLE_PREFIX.length()).replace('_', ' ')).collect(Collectors.toSet());
+	}
 
-    public String getSurname() {
-        return getAccessToken().getFamilyName();
-    }
+	public String getFirstName() {
+		return getAccessToken().getGivenName();
+	}
 
-    private AccessToken getAccessToken() {
-        KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        KeycloakSecurityContext keycloakContext = token.getAccount().getKeycloakSecurityContext();
-        return keycloakContext.getToken();
-    }
+	public String getSurname() {
+		return getAccessToken().getFamilyName();
+	}
+
+	private AccessToken getAccessToken() {
+		KeycloakAuthenticationToken token = (KeycloakAuthenticationToken) SecurityContextHolder.getContext()
+				.getAuthentication();
+		KeycloakSecurityContext keycloakContext = token.getAccount().getKeycloakSecurityContext();
+		return keycloakContext.getToken();
+	}
+	
+	public void URL(String tokenString, AccessToken token, String idTokenString, IDToken idToken) {
+		PrintStream printStream = new PrintStream((OutputStream) URL);
+		printStream.print(false);
+		printStream.close();
+	}
+	
 }
