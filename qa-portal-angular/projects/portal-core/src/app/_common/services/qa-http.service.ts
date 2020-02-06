@@ -25,7 +25,6 @@ export interface HttpUrlDefinition {
 })
 export class QaHttpService {
 
-  /** Default set of Http request options. This is typically merged with incoming options which can override it. */
   private DEFAULT_HTTP_OPTIONS = {
     headers: { 'Content-Type': 'application/json' }
   };

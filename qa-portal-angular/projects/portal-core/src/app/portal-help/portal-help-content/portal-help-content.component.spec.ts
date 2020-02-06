@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PortalHelpContentComponent } from './portal-help-content.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('PortalHelpContentComponent', () => {
   let component: PortalHelpContentComponent;
@@ -8,9 +10,15 @@ describe('PortalHelpContentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PortalHelpContentComponent ]
+      declarations: [
+        PortalHelpContentComponent
+      ],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

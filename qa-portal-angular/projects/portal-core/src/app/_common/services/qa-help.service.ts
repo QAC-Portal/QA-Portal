@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { helpModel } from '../models/help-model';
-import { filter, map } from 'rxjs/operators';
 
 
 @Injectable({
