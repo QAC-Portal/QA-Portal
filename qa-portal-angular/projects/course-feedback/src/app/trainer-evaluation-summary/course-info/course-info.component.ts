@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-course-info',
   templateUrl: './course-info.component.html',
-  styleUrls: ['./course-info.component.scss']
+  styleUrls: ['./course-info.component.css']
 })
 export class CourseInfoComponent implements OnInit {
   @Input() courseName;

@@ -18,7 +18,7 @@ const ELEMENT_DATA: CourseEvaluation[] = [
 @Component({
   selector: 'app-evaluation-table',
   templateUrl: './evaluation-table.component.html',
-  styleUrls: ['./evaluation-table.component.scss']
+  styleUrls: ['./evaluation-table.component.css']
 })
 export class EvaluationTableComponent implements OnInit {
 

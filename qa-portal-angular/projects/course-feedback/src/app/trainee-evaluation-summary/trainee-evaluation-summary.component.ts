@@ -9,7 +9,7 @@ import {TraineeEvaluationSummaryRowModel} from './models/trainee-evaluation-summ
 @Component({
   selector: 'app-trainee-evaluation-summary',
   templateUrl: './trainee-evaluation-summary.component.html',
-  styleUrls: ['./trainee-evaluation-summary.component.scss']
+  styleUrls: ['./trainee-evaluation-summary.component.css']
 })
 export class TraineeEvaluationSummaryComponent implements OnInit, OnDestroy {
 

@@ -3,8 +3,7 @@ import { TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
 import { QaHttpService } from './qa-http.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-describe('QaHttpService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+fdescribe('QaHttpService', () => {
 
 
   beforeEach(() => TestBed.configureTestingModule({

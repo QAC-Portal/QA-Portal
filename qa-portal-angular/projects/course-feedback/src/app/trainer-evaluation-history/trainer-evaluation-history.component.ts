@@ -9,7 +9,7 @@ import {CohortCourseModel} from '../../../../portal-core/src/app/_common/models/
 @Component({
   selector: 'app-trainer-evaluation-history',
   templateUrl: './trainer-evaluation-history.component.html',
-  styleUrls: ['./trainer-evaluation-history.component.scss']
+  styleUrls: ['./trainer-evaluation-history.component.css']
 })
 export class TrainerEvaluationHistoryComponent implements OnInit {
 
