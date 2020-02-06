@@ -2,7 +2,7 @@ import {Component, OnInit, Output} from '@angular/core';
 import {DEFAULT_CV, ICvModel} from '../_common/models/qac-cv-db.model';
 import {ViewCvService} from './services/view-cv.service';
 import {CvCardBaseComponent} from '../cv-card-base/cv-card-base.component';
-import {IFeedback} from '../_common/models/feedback.model';
+import {IFeedback} from '../_common/models/iFeedback.model';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MAT_DATE_LOCALE, MatDialog} from '@angular/material';
 import {SubmitConfirmDialogComponent} from './submit-confirm-dialog/submit-confirm-dialog.component';
@@ -25,7 +25,7 @@ import {APPROVED_STATUS, FAILED_REVIEW_STATUS, FOR_REVIEW_STATUS, IN_PROGRESS_ST
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ]
 })
-export class ViewCvComponent implements OnInit {
+export class ViewCvComponent {
 
   @Output() public canComment = false;
 
@@ -57,14 +57,14 @@ export class ViewCvComponent implements OnInit {
     public dialog: MatDialog) {
   }
 
-  ngOnInit() {
-    this.setRoleForPage();   // Is page being displayed for Trainee or Admin
-    if (this.isTraineeView) {
-      this.initialiseCvPageForTrainee();
-    } else {
-      this.initialiseCvPageForAdmin();
-    }
-  }
+  // ngOnInit() {
+  //   this.setRoleForPage();   // Is page being displayed for Trainee or Admin
+  //   if (this.isTraineeView) {
+  //     this.initialiseCvPageForTrainee();
+  //   } else {
+  //     this.initialiseCvPageForAdmin();
+  //   }
+  // }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(SubmitConfirmDialogComponent, {
@@ -84,11 +84,11 @@ export class ViewCvComponent implements OnInit {
     this.cvService.displayPdf(this.cvData);
   }
 
-  onInitialiseNewCv() {
-    this.cvData = this.viewCvPageDataService.initialiseNewCv(this.cvData, this.useExistingCvAsTemplate);
-    this.initialiseBlankCvForTrainee();
-    this.refreshPageStatus();
-  }
+  // onInitialiseNewCv() {
+  //   this.cvData = this.viewCvPageDataService.initialiseNewCv(this.cvData, this.useExistingCvAsTemplate);
+  //   this.initialiseBlankCvForTrainee();
+  //   this.refreshPageStatus();
+  // }
 
   onCvSave(): void {
     if (!this.cvData.id) {
@@ -134,32 +134,32 @@ export class ViewCvComponent implements OnInit {
     this.useExistingCvAsTemplate = !this.useExistingCvAsTemplate;
   }
 
-  private initialiseCvPageForTrainee() {
-    this.cvService.getCurrentCvForTrainee().subscribe(
-      (cv) => {
-        this.cvData = {...DEFAULT_CV, ...cv};    // use spread operator to merge blank default Cv with returned CV
-        if (this.noExistingCvForTrainee(cv)) {
-          this.initialiseBlankCvForTrainee();
-        } else {
-          this.refreshPageStatus();
-        }
-      },
-      (error) => {
-        this.processError(error);
-      });
-  }
+  // private initialiseCvPageForTrainee() {
+  //   this.cvService.getCurrentCvForTrainee().subscribe(
+  //     (cv) => {
+  //       this.cvData = {...DEFAULT_CV, ...cv};    // use spread operator to merge blank default Cv with returned CV
+  //       if (this.noExistingCvForTrainee(cv)) {
+  //         this.initialiseBlankCvForTrainee();
+  //       } else {
+  //         this.refreshPageStatus();
+  //       }
+  //     },
+  //     (error) => {
+  //       this.processError(error);
+  //     });
+  // }
 
   private noExistingCvForTrainee(traineeCv: ICvModel): boolean {
     return !traineeCv;
   }
 
-  private initialiseBlankCvForTrainee() {
-    this.cvService.getSkillsForTrainee().subscribe((userSkillsModel: UserSkillsModel) => {
-      this.viewCvPageDataService.populateCvUserDetails(this.cvData, userSkillsModel);
-      this.viewCvPageDataService.populateCvSkills(this.cvData, userSkillsModel);
-      this.refreshPageStatus();
-    });
-  }
+  // private initialiseBlankCvForTrainee() {
+  //   this.cvService.getSkillsForTrainee().subscribe((userSkillsModel: UserSkillsModel) => {
+  //     this.viewCvPageDataService.populateCvUserDetails(this.cvData, userSkillsModel);
+  //     this.viewCvPageDataService.populateCvSkills(this.cvData, userSkillsModel);
+  //     this.refreshPageStatus();
+  //   });
+  // }
 
   private initialiseCvPageForAdmin() {
     this.activatedRoute.paramMap.subscribe(

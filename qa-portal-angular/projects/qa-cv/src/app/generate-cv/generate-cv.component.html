@@ -1,0 +1,142 @@
+<h1>Generate CV</h1>
+
+<form [formGroup]="cvForm">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Source Control
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Source Control Link - (GitHub, GitLab, BitBucket, etc. URL)</mat-label>
+                <input matInput formControlName="sourceControlLink" name="source-control-link-input">
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+
+
+    <section formGroupName="profile">
+        <app-cv-card-base cardTitle="Profile" [canComment]="true" formControlName="profileFeedback">
+            <mat-card-content>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>&nbsp;</mat-label>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="profileDetails"
+                        name="profile-input" required></textarea>
+                </mat-form-field>
+            </mat-card-content>
+
+        </app-cv-card-base>
+    </section>
+
+
+
+    <mat-card formGroupName="skills">
+        <mat-card-header>
+            <mat-card-title>
+                Skills
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field appearance="outline" class="w-100" *ngFor="let cat of skillCategories">
+                <mat-label>{{cat.label}}</mat-label>
+                <mat-chip-list #chipList [attr.aria-label]="cat.label" [attr.name]="cat.key+'-chip-list'">
+                    <mat-chip *ngFor="let skill of cvForm.value.skills[cat.key]" [removable]="true"
+                        (removed)="removeSkill(cat.key, skill)">
+                        {{skill}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="add more..." [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
+                        (matChipInputTokenEnd)="addSkill(cat.key, $event)" [name]="cat.key+'-skill-input'">
+                </mat-chip-list>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Qualifications
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <app-qualifications class="w-100" formControlName="allQualifications"></app-qualifications>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Work Experience - QA
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <app-work-experience class="w-100" formControlName="allWorkExperience"></app-work-experience>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Work Experience - Other
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <app-work-experience class="w-100" formControlName="otherWorkExperience"></app-work-experience>
+        </mat-card-content>
+    </mat-card>
+
+    <section formGroupName="hobbies">
+        <app-cv-card-base cardTitle="Hobbies / Interests" [canComment]="true" formControlName="hobbiesFeedback">
+            <mat-card-content>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>&nbsp;</mat-label>
+                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="5" formControlName="hobbiesDetails"
+                        name="hobbies-input" required></textarea>
+                </mat-form-field>
+            </mat-card-content>
+
+        </app-cv-card-base>
+    </section>
+</form>
+
+<!-- All User Buttons -->
+<div class="action-buttons">
+    <button mat-flat-button color="accent" class="submit-button w-100" (click)="onGenerateCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="generate-cv-button">
+        <mat-icon>open_in_new</mat-icon>&nbsp;Preview CV
+    </button>
+    <button mat-flat-button color="accent" class="submit-button w-100" (click)="onDownloadCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="download-cv-button">
+        <mat-icon>get_app</mat-icon>&nbsp;Download CV
+    </button>
+    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSaveCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="save-cv-button">
+        <mat-icon>save</mat-icon>&nbsp;Save CV
+    </button>
+    <!-- Trainee Button -->
+    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onSubmitCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="save-cv-button">
+        <mat-icon>Submit</mat-icon>&nbsp;Submit
+    </button>
+    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onNewCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="save-cv-button">
+        <mat-icon>New</mat-icon>&nbsp;New CV
+    </button>
+    <!-- Admin Approve/Fail Buttons -->
+    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onApproveCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="save-cv-button">
+        <mat-icon>Approve</mat-icon>&nbsp;Approve Review
+    </button>
+    <button mat-flat-button color="primary" class="submit-button w-100" (click)="onFailCvButtonClicked()"
+        [disabled]="cvForm?.invalid" name="save-cv-button">
+        <mat-icon>Fail</mat-icon>&nbsp;Fail Review
+    </button>
+
+</div>
+
+<div class="loading-overlay" *ngIf="isLoading">
+    <mat-spinner class="loading-spinner"></mat-spinner>
+</div>

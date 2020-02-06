@@ -5,11 +5,7 @@
   "projects": {
     "qa-common": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "styleext": "scss"
-        }
-      },
+      "schematics": {},
       "root": "projects/qa-common",
       "sourceRoot": "projects/qa-common/src",
       "prefix": "app",
@@ -29,6 +25,7 @@
             ],
             "styles": [
               "projects/qa-common/src/styles.scss"
+
             ],
             "scripts": []
           },
@@ -821,7 +818,7 @@
               "projects/qa-cv/src/assets"
             ],
             "styles": [
-              "projects/qa-cv/src/styles.scss"
+              "projects/portal-core/src/styles.scss"
             ],
             "scripts": []
           },
@@ -881,7 +878,7 @@
               "projects/qa-cv/src/assets"
             ],
             "styles": [
-              "projects/qa-cv/src/styles.scss"
+              "projects/portal-core/src/styles.scss"
             ],
             "scripts": []
           }
